@@ -49,6 +49,7 @@
     <Compile Include="i18n\AppResources.Designer.cs">
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ILoggerFacadeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -125,6 +126,9 @@
     <Folder Include="ViewModels\">
     </Folder>
     <Folder Include="i18n\">
+    </Folder>
+    <Folder Include="Extensions\">
+      <DependentUpon>Extensions</DependentUpon>
     </Folder>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

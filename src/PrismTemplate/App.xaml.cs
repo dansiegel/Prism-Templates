@@ -1,6 +1,15 @@
 ﻿using Xamarin.Forms;
+#if AutofacContainer
+#elif DryIocContainer
 using DryIoc;
 using Prism.DryIoc;
+#elif NinjectContainer
+#else
+using Microsoft.Practices.Unity;
+using Prism.Unity;
+#endif
+using Prism.Logging;
+using PrismTemplate.Extensions;
 using PrismTemplate.Views;
 
 namespace PrismTemplate
@@ -20,7 +29,7 @@ namespace PrismTemplate
             }
             catch (System.Exception ex)
             {
-                Logger.Log(ex.Message, Prism.Logging.Category.Exception, Prism.Logging.Priority.High);
+                Logger.Log(ex);
             }
         }
 
