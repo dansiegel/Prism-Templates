@@ -46,5 +46,11 @@ namespace PrismTemplate.i18n {
                 resourceCulture = value;
             }
         }
+        
+        internal static string MainPageTitle {
+            get {
+                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
     }
 }
