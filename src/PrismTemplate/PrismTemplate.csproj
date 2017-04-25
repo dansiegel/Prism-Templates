@@ -93,6 +93,12 @@
     </When>
     <When Condition=" 'Container' == 'Ninject' ">
       <ItemGroup>
+        <Reference Include="Ninject">
+          <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\portable-net4+sl5+wp8+win8+wpa81+monotouch+monoandroid+Xamarin.iOS\Ninject.dll</HintPath>
+        </Reference>
+        <Reference Include="Prism.Ninject.Forms">
+          <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.Ninject.Forms.dll</HintPath>
+        </Reference>
       </ItemGroup>
     </When>
     <Otherwise>
