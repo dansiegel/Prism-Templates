@@ -83,6 +83,12 @@
     </When>
     <When Condition=" 'Container' == 'DryIoc' ">
       <ItemGroup>
+        <Reference Include="Prism.DryIoc.Forms">
+          <HintPath>..\..\packages\Prism.DryIoc.Forms.6.3.0.1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.DryIoc.Forms.dll</HintPath>
+        </Reference>
+        <Reference Include="DryIoc">
+          <HintPath>..\..\packages\DryIoc.dll.2.10.6\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+        </Reference>
       </ItemGroup>
     </When>
     <When Condition=" 'Container' == 'Ninject' ">
