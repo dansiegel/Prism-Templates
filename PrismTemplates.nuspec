@@ -1,0 +1,20 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Prism.Forms.Templates</id>
+    <version>1.0.0-alpha1</version>
+    <authors>Dan Siegel</authors>
+    <description>Prism Library Templates</description>
+    <language>en-US</language>
+    <projectUrl>https://github.com/PrismLibrary/Prism.Templates</projectUrl>
+    <licenseUrl>https://github.com/PrismLibrary/Prism/blob/master/LICENSE</licenseUrl>
+    
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file src="content/**" target="" />
+  </files>
+</package>
