@@ -15,10 +15,11 @@ namespace MobileApp.iOS
             global::Xamarin.Forms.Forms.Init();
 
             // Code for starting up the Xamarin Test Cloud Agent
+//-:cnd
 #if DEBUG
             Xamarin.Calabash.Start();
 #endif
-
+//+:cnd
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

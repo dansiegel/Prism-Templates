@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="6.3.0.1" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="6.3.0" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="6.3.0.1" />
+    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="6.3.0" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="6.3.0" />
+    <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.2.2" />
   </ItemGroup>
 
   <ItemGroup>
