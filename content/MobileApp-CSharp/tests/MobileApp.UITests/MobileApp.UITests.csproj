@@ -38,13 +38,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MobileApp.iOS\MobileApp.iOS.csproj">
+    <ProjectReference Include="..\..\src\MobileApp.iOS\MobileApp.iOS.csproj" Condition=" $(IncludeiOS) ">
       <Project>{8243B963-ED5B-46BE-B877-57CAB74C490F}</Project>
       <Name>MobileApp.iOS</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\MobileApp.Droid\MobileApp.Droid.csproj">
+    <ProjectReference Include="..\..\src\MobileApp.Droid\MobileApp.Droid.csproj" Condition=" $(IncludeAndroid) ">
       <Project>{4FEEE3AB-35C4-4FEA-9D37-5611F52B6AF2}</Project>
       <Name>MobileApp.Droid</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>

@@ -1,4 +1,8 @@
 {
+  "AppId": {
+    "longName": "app-id",
+    "shortName": "id"
+  },
   "IncludeiOS": {
     "longName": "include-ios",
     "shortName": "ios"

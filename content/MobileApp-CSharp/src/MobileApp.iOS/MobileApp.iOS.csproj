@@ -123,16 +123,38 @@
     <Reference Include="DryIoc" Condition=" '$(Container)' == 'DryIoc' ">
       <HintPath>..\..\packages\DryIoc.dll.2.10.6\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
     </Reference>
-    <Reference Include="Prism.Autofac.Forms" Condition=" '$(Container)' == 'Unity' ">
+    <Reference Include="Ninject" Condition=" '$(Container)' == 'Ninject' ">
+      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\Xamarin.iOS\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Ninject.Forms" Condition=" '$(Container)' == 'Ninject' ">
+      <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Ninject.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Forms" Condition=" '$(Container)' == 'Unity' ">
       <HintPath>..\..\packages\Prism.Unity.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Unity.Forms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation" Condition=" '$(Container)' == 'Unity' ">
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity" Condition=" '$(Container)' == 'Unity' ">
       <HintPath>..\..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
-      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.10.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.iOS.Bindings" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.10.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.iOS.Bindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Crashes" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.10.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Crashes.iOS.Bindings" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.10.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.iOS.Bindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Analytics" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.10.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Analytics.iOS.Bindings" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.10.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Analytics.iOS.Bindings.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="i18n" Condition=" '$(Localization)' "/>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -177,6 +200,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="iOSInitializer.cs" />
+    <Compile Include="i18n\Localize.cs" Condition=" '$(Localization)' "/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MobileApp\MobileApp.csproj">

@@ -24,73 +24,118 @@
     {
       "modifiers": [
         {
-          "condition": "(!Include-iOS)",
+          "condition": "(!IncludeiOS)",
           "exclude": [
             "src/MobileApp.iOS/*"
           ]
         },
         {
-          "condition": "(!Include-Android)",
+          "condition": "(!IncludeAndroid)",
           "exclude": [
             "src/MobileApp.Droid/*"
           ]
         },
+        // {
+        //   "condition": "(!IncludeUWP)",
+        //   "exclude": [
+        //     "src/MobileApp.UWP/*"
+        //   ]
+        // },
+        // {
+        //   "condition": "(!ConnectedApp)",
+        //   "exclude": [
+        //     "src/MobileApp.Backend/*"
+        //   ]
+        // },
         {
-          "condition": "(!Include-UWP)",
+          "condition": "(!IncludeUITest)",
           "exclude": [
-            "src/MobileApp.UWP/*"
+            "tests/MobileApp.UITests/*"
           ]
         },
         {
-          "condition": "(!ConnectedApp)",
+          "condition": "(!Localization)",
           "exclude": [
-            "src/MobileApp.Backend/*"
-          ]
-        },
-        {
-          "condition": "(!Include-UITest)",
-          "exclude": [
-            "test/MobileApp.UITest/*"
+            "src/MobileApp/i18n",
+            "src/MobileApp/Resx",
+            "src/MobileApp.iOS/i18n",
+            "src/MobileApp.Droid/i18n"
           ]
         }
       ]
     }
   ],
   "symbols":{
+    "AppId": {
+      "type": "parameter",
+      "dataType": "string",
+      "replaces": "com.prismtemplate.name",
+      "isRequired": "true",
+      "description": "Sets the iOS Bundle Id and the Android package Id"
+    },
     "IncludeiOS": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Determines whether to include the iOS project"
     },
     "IncludeAndroid": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Determines whether to include the Android project"
     },
-    "IncludeUWP": {
-      "type": "parameter",
-      "dataType": "bool",
-      "defaultValue": "false"
-    },
+    // "IncludeUWP": {
+    //   "type": "parameter",
+    //   "dataType": "bool",
+    //   "defaultValue": "false"
+    // },
     "IncludeUITest": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "false"
+      "defaultValue": "true",
+      "description": "Determines whether to include a UI Test project"
     },
-    "ConnectedApp": {
+    // "ConnectedApp": {
+    //   "type": "parameter",
+    //   "dataType": "bool",
+    //   "defaultValue": "false"
+    // },
+    "Localization": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "false"
+      "defaultValue": "true"
     },
     "UseMvvmHelpers": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "false"
+      "defaultValue": "true",
+      "description": "Determines whether to import the Mvvm Helpers from James Montemagno and use the ViewModelBase or BindableBase for your ViewModels"
+    },
+    "UseMobileCenter": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "Will setup Mobile Center for Crashes and Analytics"
+    },
+    "MobileCenter-iOS": {
+      "type": "parameter",
+      "dataType": "string",
+      "replaces": "MOBILECENTER-IOS-SECRET",
+      "default": "",
+      "description": "Application Secret from Mobile Center for iOS"
+    },
+    "MobileCenter-Android": {
+      "type": "parameter",
+      "dataType": "string",
+      "replaces": "MOBILECENTER-ANDROID-SECRET",
+      "default": "",
+      "description": "Application Secret from Mobile Center for Android"
     },
     "Container": {
       "type": "parameter",
       "dataType": "choice",
-      "defaultValue": "DryIoc",
+      "defaultValue": "Unity",
       "choices": [
         {
           "choice": "Autofac",
@@ -108,7 +153,8 @@
           "choice": "Unity",
           "description": "Uses Unity as the Dependency Injection Container"
         }
-      ]
+      ],
+      "description": "The Dependency Injection Container to use"
     },
     "AutofacContainer": {
       "type": "computed",
@@ -126,32 +172,27 @@
       "type": "computed",
       "value": "(Container == \"Unity\")"
     },
-    "copyrightYear": {
-      "type": "generated",
-      "generator": "now",
-      "replaces": "1975",
-      "parameters": {
-        "format": "yyyy"
-      }
-    },
     "skipRestore": {
       "type": "parameter",
       "datatype": "bool",
       "description": "If specified, skips the automatic restore of the project on create.",
-      "defaultValue": "true"
+      "defaultValue": "false"
     }
   },
   "primaryOutputs": [ 
-        { 
+        {
           "path": "src/MobileApp/MobileApp.csproj" 
         },
-        { 
-          "path": "src/MobileApp.Droid/MobileApp.Droid.csproj" 
+        {
+          "condition": "(IncludeAndroid)",
+          "path": "src/MobileApp.Droid/MobileApp.Droid.csproj"
         },
-        { 
+        {
+          "condition": "(IncludeiOS)",
           "path": "src/MobileApp.iOS/MobileApp.iOS.csproj" 
         },
-        { 
+        {
+          "condition": "(IncludeUITest)",
           "path": "tests/MobileApp.UITests/MobileApp.UITests.csproj" 
         }
   ],

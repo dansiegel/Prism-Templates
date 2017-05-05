@@ -14,8 +14,8 @@ namespace MobileApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            // Code for starting up the Xamarin Test Cloud Agent
 //-:cnd:noEmit
+            // Code for starting up the Xamarin Test Cloud Agent
 #if DEBUG
             Xamarin.Calabash.Start();
 #endif

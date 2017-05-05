@@ -12,21 +12,36 @@ using Prism.Ninject;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
+#if (Localization)
+using MobileApp.i18n;
+using MobileApp.Droid.i18n;
+#endif
 
 namespace MobileApp.Droid
 {
     public class AndroidInitializer : IPlatformInitializer
     {
-#if NinjectContainer
-        public void RegisterTypes(IKernel kernel)
-#elif UnityContainer
-        public void RegisterTypes(IUnityContainer container)
-#else
+#if (AutofacContainer || DryIocContainer)
         public void RegisterTypes(IContainer container)
+#elif (NinjectContainer)
+        public void RegisterTypes(IKernel kernel)
+#else
+        public void RegisterTypes(IUnityContainer container)
 #endif
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
+#if (AutofacContainer && Localization)
+            var builder = new ContainerBuilder();
+            builder.Register(ctx => new Localize()).As<ILocalize>().SingleInstance();
+            builder.Update(container);
+#elif (DryIocContainer && Localization)
+            container.Register<ILocalize, Localize>(Reuse.Singleton);
+#elif (NinjectContainer && Localization)
+            container.Bind<ILocalize>().To<Localize>().InSingletonScope();
+#elif (Localization)
+            container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
+#endif
         }
     }
 }

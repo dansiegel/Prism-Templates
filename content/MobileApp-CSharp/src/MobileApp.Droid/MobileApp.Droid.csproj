@@ -91,11 +91,50 @@
     <Reference Include="Prism.Forms">
       <HintPath>..\..\packages\Prism.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="Prism.DryIoc.Forms">
+    <Reference Include="Autofac" Condition=" '$(Container)' == 'Autofac' ">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Autofac.Forms" Condition=" '$(Container)' == 'Autofac' ">
+      <HintPath>..\..packages\Prism.Autofac.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Autofac.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.DryIoc.Forms" Condition=" '$(Container)' == 'DryIoc' ">
       <HintPath>..\..\packages\Prism.DryIoc.Forms.6.3.0.1\lib\MonoAndroid1.0\Prism.DryIoc.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="DryIoc">
-      <HintPath>..\..\packages\DryIoc.dll.2.10.6\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+    <Reference Include="DryIoc" Condition=" '$(Container)' == 'DryIoc' ">
+      <HintPath>..\..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Ninject.Forms" Condition=" '$(Container)' == 'Ninject' ">
+      <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Ninject.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject" Condition=" '$(Container)' == 'Ninject' ">
+      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\monoandroid\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Forms" Condition=" '$(Container)' == 'Unity' ">
+      <HintPath>..\..\pacakges\Prism.Unity.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Unity.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity" Condition=" '$(Container)' == 'Unity' ">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation" Condition=" '$(Container)' == 'Unity' ">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Android.Bindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Crashes.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.Android.Bindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Crashes" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Analytics.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.Android.Bindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Analytics" Condition=" '$(UseMobileCenter)' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +143,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AndroidInitializer.cs" />
     <Compile Include="SplashActivity.cs" />
+    <Compile Include="i18n\Localize.cs" Condition=" '$(Localization)' " />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -133,8 +173,8 @@
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\values-v19\">
-    </Folder>
+    <Folder Include="Resources\values-v19\" />
+    <Folder Include="i18n" Condition=" '$(Localization)' " />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MobileApp\MobileApp.csproj">
