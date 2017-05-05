@@ -1,0 +1,28 @@
+{
+  "IncludeiOS": {
+    "longName": "include-ios",
+    "shortName": "ios"
+  },
+  "IncludeAndroid": {
+    "longName": "include-android",
+    "shortName": "android"
+  },
+  "IncludeUWP": {
+    "isHidden": true
+  },
+  "IncludeUITest":{
+    "longName": "include-ui-test",
+    "shortName": "test"
+  },
+  "ConnectedApp": {
+    "isHidden": true
+  },
+  "Container": {
+    "longName": "di-container",
+    "shortName": "di"
+  },
+  "UsageExamples": [
+    "--android false",
+    "-di Unity -test false"
+  ]
+}
