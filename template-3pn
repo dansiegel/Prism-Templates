@@ -1,0 +1,6 @@
+These templates use several third party libraries
+
+ - Prism Library - https://github.com/PrismLibrary/Prism/blob/master/LICENSE
+ - Xamarin Forms - https://github.com/xamarin/Xamarin.Forms/blob/master/LICENSE
+ - Mvvm Helpers - https://github.com/jamesmontemagno/mvvm-helpers/blob/master/LICENSE.md
+ - Mobile Center - https://github.com/Microsoft/mobile-center-sdk-dotnet/blob/master/license.txt

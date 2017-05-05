@@ -2,12 +2,11 @@
   "author": "Dan Siegel",
   "classifications": ["Xamarin", "Prism"],
   "name": "Prism Forms Mobile App",
-  "generatorVersions": "[1.0.0.0-*)",
   "groupIdentity": "PrismLibrary.Xamarin.Forms",
   "precedence": "100",
   "identity": "PrismLibrary.Xamarin.Forms.CSharp",
   "shortName": "prismforms",
-  // "thirdPartyNotices": "https://aka.ms/template-3pn",
+  "thirdPartyNotices": "https://github.com/dansiegel/Prism-Templates/blob/master/template-3pn",
   "tags": {
     "language": "C#",
     "type": "project"
