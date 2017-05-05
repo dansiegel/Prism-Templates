@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <!--/-:cnd:noEmit -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <!--/+:cnd:noEmit -->
     <ProjectGuid>{377D4FFF-F64A-4F0B-AF08-2EAFFDA9CCDC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>MobileApp.UITests</RootNamespace>
     <AssemblyName>MobileApp.UITests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
+  <!--/-:cnd:noEmit -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -24,6 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <!--/+:cnd:noEmit -->
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
