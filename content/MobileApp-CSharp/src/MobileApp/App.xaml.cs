@@ -1,8 +1,19 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MobileApp.Views;
+#if (AutofacContainer)
+using Autofac;
+using Prism.Autofac;
+#elif (DryIocContainer)
 using DryIoc;
 using Prism.DryIoc;
+#elif (NinjectContainer)
+using Ninject;
+using Prism.Ninject;
+#else
+using Microsoft.Practices.Unity;
+using Prism.Unity;
+#endif
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileApp
