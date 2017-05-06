@@ -104,6 +104,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UWPInitializer.cs" />
+    <Compile Include="i18n\Localize.cs" Condition=" '$(Localization)' " />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
