@@ -27,9 +27,9 @@
       "longName": "di-container",
       "shortName": "di"
     },
-    "GitInitialize": {
-      "isHidden": true
-    },
+    // "GitInitialize": {
+    //   "isHidden": true
+    // },
     "UseMobileCenter": {
       "longName": "use-mobileCenter",
       "shortName": "mc"
