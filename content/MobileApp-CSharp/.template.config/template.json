@@ -25,21 +25,21 @@
         {
           "condition": "(!IncludeiOS)",
           "exclude": [
-            "src/MobileApp.iOS/*"
+            "src/MobileApp.iOS/**"
           ]
         },
         {
           "condition": "(!IncludeAndroid)",
           "exclude": [
-            "src/MobileApp.Droid/*"
+            "src/MobileApp.Droid/**"
           ]
         },
-        // {
-        //   "condition": "(!IncludeUWP)",
-        //   "exclude": [
-        //     "src/MobileApp.UWP/*"
-        //   ]
-        // },
+        {
+          "condition": "(!IncludeUWP)",
+          "exclude": [
+            "src/MobileApp.UWP/**"
+          ]
+        },
         // {
         //   "condition": "(!ConnectedApp)",
         //   "exclude": [
@@ -49,16 +49,17 @@
         {
           "condition": "(!IncludeUITest)",
           "exclude": [
-            "tests/MobileApp.UITests/*"
+            "tests/MobileApp.UITests/**"
           ]
         },
         {
           "condition": "(!Localization)",
           "exclude": [
-            "src/MobileApp/i18n",
-            "src/MobileApp/Resx",
-            "src/MobileApp.iOS/i18n",
-            "src/MobileApp.Droid/i18n"
+            "src/MobileApp/i18n/**",
+            "src/MobileApp/Resx/**",
+            "src/MobileApp.iOS/i18n/**",
+            "src/MobileApp.Droid/i18n/**",
+            "src/MobileApp.UWP/i18n/**"
           ]
         },
         {
@@ -93,11 +94,11 @@
       "defaultValue": "true",
       "description": "Determines whether to include the Android project"
     },
-    // "IncludeUWP": {
-    //   "type": "parameter",
-    //   "dataType": "bool",
-    //   "defaultValue": "false"
-    // },
+    "IncludeUWP": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "false"
+    },
     "IncludeUITest": {
       "type": "parameter",
       "dataType": "bool",
