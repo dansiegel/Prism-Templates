@@ -2,13 +2,16 @@
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
-#elif (DryIocContainer)
+#endif
+#if (DryIocContainer)
 using DryIoc;
 using Prism.DryIoc;
-#elif (NinjectContainer)
+#endif
+#if (NinjectContainer)
 using Ninject;
 using Prism.Ninject;
-#else
+#endif
+#if (UnityContainer)
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
@@ -23,23 +26,28 @@ namespace MobileApp.Droid
     {
 #if (AutofacContainer || DryIocContainer)
         public void RegisterTypes(IContainer container)
-#elif (NinjectContainer)
+#endif
+#if (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
-#else
+#endif
+#if (UnityContainer)
         public void RegisterTypes(IUnityContainer container)
 #endif
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
-#if (AutofacContainer && Localization)
+#if (Localization && AutofacContainer)
             var builder = new ContainerBuilder();
             builder.Register(ctx => new Localize()).As<ILocalize>().SingleInstance();
             builder.Update(container);
-#elif (DryIocContainer && Localization)
+#endif
+#if (Localization && DryIocContainer)
             container.Register<ILocalize, Localize>(Reuse.Singleton);
-#elif (NinjectContainer && Localization)
+#endif
+#if (Localization && NinjectContainer)
             container.Bind<ILocalize>().To<Localize>().InSingletonScope();
-#elif (Localization)
+#endif
+#if (Localization && UnityContainer)
             container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
 #endif
         }

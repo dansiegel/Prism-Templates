@@ -10,7 +10,7 @@ namespace MobileApp.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : FormsApplicationDelegate
     {
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
 
@@ -22,7 +22,7 @@ namespace MobileApp.iOS
 //+:cnd:noEmit
             LoadApplication(new App(new iOSInitializer()));
 
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }
 }

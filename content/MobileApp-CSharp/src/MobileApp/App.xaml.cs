@@ -4,18 +4,24 @@ using MobileApp.Views;
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
-#elif (DryIocContainer)
+#endif
+#if (DryIocContainer)
 using DryIoc;
 using Prism.DryIoc;
-#elif (NinjectContainer)
+#endif
+#if (NinjectContainer)
 using Ninject;
 using Prism.Ninject;
-#else
+#endif
+#if (UnityContainer)
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
 #if (UseMobileCenter)
 using MobileApp.Helpers;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 #endif
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]

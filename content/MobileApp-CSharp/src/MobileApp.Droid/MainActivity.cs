@@ -12,7 +12,7 @@ using Xamarin.Forms.Platform.Android;
 namespace MobileApp.Droid
 {
     [Activity(Label = "@string/ApplicationName",
-              //Name="com.avantipoint.mobileapp.MainActivity",
+              //Name="com.prismtemplate.name.MainActivity",
               //Exported = true,
               Icon = "@mipmap/ic_launcher",
               Theme = "@style/MyTheme",
