@@ -60,8 +60,17 @@
             "src/MobileApp.iOS/i18n",
             "src/MobileApp.Droid/i18n"
           ]
+        },
+        {
+          "condition": "(!GitInitialize)",
+          "exclude": [
+            ".gitignore"
+          ]
         }
-      ]
+      ],
+      "rename": {
+        "GitIgnore": ".gitignore"
+      }
     }
   ],
   "symbols":{
@@ -170,6 +179,11 @@
     "UnityContainer": {
       "type": "computed",
       "value": "(Container == \"Unity\")"
+    },
+    "GitInitialize": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true"
     },
     "skipRestore": {
       "type": "parameter",
