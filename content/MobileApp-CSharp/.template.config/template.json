@@ -17,7 +17,9 @@
     "8243B963-ED5B-46BE-B877-57CAB74C490F", // iOS Project Id
     "4FEEE3AB-35C4-4FEA-9D37-5611F52B6AF2", // Android Project Id
     "377D4FFF-F64A-4F0B-AF08-2EAFFDA9CCDC", // UI Test Project Id
-    "492AD228-B4CC-4485-A752-0F237A45B2E3"  // PCL Project Id
+    "492AD228-B4CC-4485-A752-0F237A45B2E3", // PCL Project Id
+    "783CE383-0A20-4D4F-92A7-44FA5934788E", // Src Folder 
+    "69AD18B0-4EBA-4D3C-BC6D-C5702F07D31C" // Tests Folder
   ],
   "sources": [
     {
@@ -102,7 +104,7 @@
     "IncludeUITest": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "true",
+      "defaultValue": "false",
       "description": "Determines whether to include a UI Test project"
     },
     // "ConnectedApp": {
@@ -184,13 +186,13 @@
     "GitInitialize": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "true"
+      "defaultValue": "false"
     },
     "skipRestore": {
       "type": "parameter",
       "datatype": "bool",
       "description": "If specified, skips the automatic restore of the project on create.",
-      "defaultValue": "false"
+      "defaultValue": "true"
     }
   },
   "primaryOutputs": [ 
@@ -204,6 +206,10 @@
         {
           "condition": "(IncludeiOS)",
           "path": "src/MobileApp.iOS/MobileApp.iOS.csproj" 
+        },
+        {
+          "condition": "(IncludeUWP)",
+          "path": "src/MobileApp.UWP/MobileApp.UWP.csproj" 
         },
         {
           "condition": "(IncludeUITest)",
