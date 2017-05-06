@@ -4,17 +4,20 @@ using System.Reflection;
 using System.Resources;
 #if (AutofacContainer)
 using Autofac;
-#elif (DryIocContainer)
+#endif
+#if (DryIocContainer)
 using DryIoc;
-#elif (NinjectContainer)
+#endif
+#if (NinjectContainer)
 using Ninject;
-#else
+#endif
+#if (UnityContainer)
 using Microsoft.Practices.Unity;
 #endif
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PrismApp4.i18n
+namespace MobileApp.i18n
 {
     // You exclude the 'Extension' suffix when using in Xaml markup
     [ContentProperty("Text")]

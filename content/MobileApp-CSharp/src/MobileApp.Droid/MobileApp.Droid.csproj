@@ -136,6 +136,9 @@
     <Reference Include="Microsoft.Azure.Mobile.Analytics" Condition=" '$(UseMobileCenter)' ">
       <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.10.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
     </Reference>
+    <Reference Include="MvvmHelpers" Condition=" '$(UseMvvmHelpers)' ">
+      <HintPath>..\..\packages\Refractored.MvvmHelpers.1.2.2\lib\portable-net45+wp80+win8+wpa81\MvvmHelpers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 #if (UseMvvmHelpers)
+using System.Linq;
 using MvvmHelpers;
+#else
+using System.Collections.ObjectModel;
 #endif
 using Prism.Commands;
 #if (!UseMvvmHelpers)
@@ -24,14 +26,20 @@ namespace MobileApp.ViewModels
         {
             _pageDialogService = pageDialogService;
 
-            #if (UseMvvmHelpers)
+#if (UseMvvmHelpers)
             Title = "Main Page";
-            #endif
+            TodoItems = new ObservableRangeCollection<TodoItem>();
+#else
             TodoItems = new ObservableCollection<TodoItem>();
+#endif
             TodoItemTappedCommand = new DelegateCommand<TodoItem>(OnTodoItemTappedCommandExecuted);
         }
 
+#if (UseMvvmHelpers)
+        public ObservableRangeCollection<TodoItem> TodoItems { get; set; }
+#else
         public ObservableCollection<TodoItem> TodoItems { get; set; }
+#endif
 
         public DelegateCommand<TodoItem> TodoItemTappedCommand { get; }
 
@@ -41,8 +49,13 @@ namespace MobileApp.ViewModels
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
+#if (UseMvvmHelpers)
+            TodoItems.AddRange(parameters.GetValues<string>("todo")
+                                         .Select(n => new TodoItem { Name = n }));
+#else
             foreach (var item in parameters.GetValues<string>("todo"))
                 TodoItems.Add(new TodoItem() { Name = item });
+#endif
         }
 
         private async void OnTodoItemTappedCommandExecuted(TodoItem item)

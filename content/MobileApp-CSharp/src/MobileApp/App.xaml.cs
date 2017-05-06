@@ -1,9 +1,9 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using System.Threading.Tasks;
 using MobileApp.Views;
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
+using Prism.Autofac.Forms;
 #endif
 #if (DryIocContainer)
 using DryIoc;
@@ -23,6 +23,9 @@ using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 #endif
+using Prism.Logging;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileApp
@@ -37,9 +40,19 @@ namespace MobileApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
+            // By default, PrismApplication sets the logger to use the included DebugLogger,
+            // which uses System.Diagnostics.Debug.WriteLine to print your message. If you have
+            // overridden the default DebugLogger, you will need to update the Logger here to
+            // ensure that any calls to your logger in the App.xaml.cs will use your logger rather
+            // than the default DebugLogger.
+#if (NinjectContainer)
+            Logger = Container.Get<ILoggerFacade>();
+#else
+            Logger = Container.Resolve<ILoggerFacade>();
+#endif
             TaskScheduler.UnobservedTaskException += ( sender, e ) =>
             {
-                Container.Resolve<ILoggerFacade>().Log(e.Exception.ToString());
+                Logger.Log(e.Exception.ToString(), Category.Exception, Priority.High);
             };
 
 #if (Localization)
