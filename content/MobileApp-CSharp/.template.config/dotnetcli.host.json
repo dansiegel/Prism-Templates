@@ -1,31 +1,57 @@
 {
-  "AppId": {
-    "longName": "app-id",
-    "shortName": "id"
+  "symbolInfo": {
+    "AppId": {
+      "longName": "app-id",
+      "shortName": "id"
+    },
+    "IncludeiOS": {
+      "longName": "include-ios",
+      "shortName": "ios"
+    },
+    "IncludeAndroid": {
+      "longName": "include-android",
+      "shortName": "android"
+    },
+    "IncludeUWP": {
+      "longName": "include-uwp",
+      "shortName": "uwp"
+    },
+    "IncludeUITest":{
+      "longName": "include-ui-test",
+      "shortName": "test"
+    },
+    "ConnectedApp": {
+      "isHidden": true
+    },
+    "Container": {
+      "longName": "di-container",
+      "shortName": "di"
+    },
+    "GitInitialize": {
+      "isHidden": true
+    },
+    "UseMobileCenter": {
+      "longName": "use-mobileCenter",
+      "shortName": "mc"
+    },
+    "MobileCenter-iOS": {
+      "longName": "mobilecenter-ios-secret",
+      "shortName": "ios-secret"
+    },
+    "MobileCenter-Android": {
+      "longName": "mobilecenter-android-secret",
+      "shortName": "android-secret"
+    },
+    "UseMvvmHelpers": {
+      "longName": "use-mvvmhelpers",
+      "sortName": "mvvmhelp"
+    },
+    "Localization": {
+      "longName": "use-localization",
+      "shortName": "localization"
+    }
   },
-  "IncludeiOS": {
-    "longName": "include-ios",
-    "shortName": "ios"
-  },
-  "IncludeAndroid": {
-    "longName": "include-android",
-    "shortName": "android"
-  },
-  "IncludeUWP": {
-    "isHidden": true
-  },
-  "IncludeUITest":{
-    "longName": "include-ui-test",
-    "shortName": "test"
-  },
-  "ConnectedApp": {
-    "isHidden": true
-  },
-  "Container": {
-    "longName": "di-container",
-    "shortName": "di"
-  },
-  "UsageExamples": [
+  "usageExamples": [
     "--android false",
     "-di Unity -test false"
   ]
