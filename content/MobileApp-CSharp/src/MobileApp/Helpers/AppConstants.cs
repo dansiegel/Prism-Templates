@@ -3,7 +3,7 @@ namespace MobileApp.Helpers
 {
     public static class AppConstants
     {
-        public const string BackendUri = "https://MobileApp.azurewebsites.net";
+        public const string BackendUri = "https://mobileapp.azurewebsites.net";
 #if (UseMobileCenter)
 
         public const string MobileCenter_iOS_Secret = "MOBILECENTER-IOS-SECRET";

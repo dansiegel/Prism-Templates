@@ -76,9 +76,19 @@ namespace MobileApp
         {
             // Handle when your app starts
 #if (UseMobileCenter)
+    #if (IncludeUWP)
+            if(Device.RuntimePlatform == Device.iOS 
+                || Device.RuntimePlatform == Device.Android)
+            {
+                MobileCenter.Start($"ios={AppConstants.MobileCenter_iOS_Secret};" +
+                                   $"android={AppConstants.MobileCenter_Android_Secret}",
+                                   typeof(Analytics), typeof(Crashes));
+            }
+    #else
             MobileCenter.Start($"ios={AppConstants.MobileCenter_iOS_Secret};" +
                                $"android={AppConstants.MobileCenter_Android_Secret}",
                                typeof(Analytics), typeof(Crashes));
+    #endif
 #endif
         }
 
