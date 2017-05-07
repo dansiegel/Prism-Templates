@@ -5,11 +5,14 @@
              <!--#if Localization -->
              xmlns:i18n="clr-namespace:MobileApp.i18n;assembly=MobileApp"
              <!--#endif -->
+             xmlns:xaml="clr-namespace:MobileApp.Xaml;assembly=MobileApp"
+             BindingContext="{xaml:ViewModelLocator {x:Reference view}}"
              <!--#if UseMvvmHelpers -->
              Title="{Binding Title}"
              <!--#else -->
              Title="Main Page"
              <!--#endif -->
+             x:Name="view"
              x:Class="MobileApp.Views.MainPage">
 
 <!--#if Localization -->
