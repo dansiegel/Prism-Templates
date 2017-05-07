@@ -2,9 +2,9 @@ using Xamarin.Forms;
 
 namespace MobileApp.Views
 {
-    public partial class Template : ContentPage
+    public partial class ItemTemplate : ContentPage
     {
-        public Template()
+        public ItemTemplate()
         {
             InitializeComponent();
         }

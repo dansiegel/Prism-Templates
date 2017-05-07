@@ -20,72 +20,72 @@ namespace MobileApp.ViewModels
 #if (UseMvvmHelpers)
     #if (IsIActiveAware && IsINavigationAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BaseViewModel, IActiveAware, INavigationAware, IDestructible
+    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigationAware, IDestructible
     #else
-    public class TemplateViewModel : BaseViewModel, IActiveAware, INavigationAware
+    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigationAware
     #endif
     #elseif (IsIActiveAware)
-    public class TemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware, IDestructible
+    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware, IDestructible
     #if (IsIDestructible)
     #else
-    public class TemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware
+    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware
     #endif
     #elseif (IsINavigatedAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BaseViewModel, INavigatedAware, IDestructible
+    public class ItemTemplateViewModel : BaseViewModel, INavigatedAware, IDestructible
     #else
-    public class TemplateViewModel : BaseViewModel, INavigatedAware
+    public class ItemTemplateViewModel : BaseViewModel, INavigatedAware
     #endif
     #elseif (IsINavigationAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BaseViewModel, INavigationAware, IDestructible
+    public class ItemTemplateViewModel : BaseViewModel, INavigationAware, IDestructible
     #else
-    public class TemplateViewModel : BaseViewModel, INavigationAware
+    public class ItemTemplateViewModel : BaseViewModel, INavigationAware
     #endif
     #else
     #if (IDestructible)
-    public class TemplateViewModel : BaseViewModel, IDestructible
+    public class ItemTemplateViewModel : BaseViewModel, IDestructible
     #else
-    public class TemplateViewModel : BaseViewModel
+    public class ItemTemplateViewModel : BaseViewModel
     #endif
     #endif
 #else
     #if (IsIActiveAware && IsINavigationAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BindableBase, IActiveAware, INavigationAware, IDestructible
+    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigationAware, IDestructible
     #else
-    public class TemplateViewModel : BindableBase, IActiveAware, INavigationAware
+    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigationAware
     #endif
     #elseif (IsIActiveAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BindableBase, IActiveAware, INavigatingAware, IDestructible
+    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigatingAware, IDestructible
     #else
-    public class TemplateViewModel : BindableBase, IActiveAware, INavigatingAware
+    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigatingAware
     #endif
     #elseif (IsINavigatedAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BindableBase, INavigatedAware, IDestructible
+    public class ItemTemplateViewModel : BindableBase, INavigatedAware, IDestructible
     #else
-    public class TemplateViewModel : BindableBase, INavigatedAware
+    public class ItemTemplateViewModel : BindableBase, INavigatedAware
     #endif
     #elseif (IsINavigationAware)
     #if (IsIDestructible)
-    public class TemplateViewModel : BindableBase, INavigationAware, IDestructible
+    public class ItemTemplateViewModel : BindableBase, INavigationAware, IDestructible
     #else
-    public class TemplateViewModel : BindableBase, INavigationAware
+    public class ItemTemplateViewModel : BindableBase, INavigationAware
     #endif
     #else
     #if (IDestructible)
-    public class TemplateViewModel : BindableBase, IDestructible
+    public class ItemTemplateViewModel : BindableBase, IDestructible
     #else
-    public class TemplateViewModel : BindableBase
+    public class ItemTemplateViewModel : BindableBase
     #endif
     #endif
 #endif
     {
         private INavigationService _navigationService { get; }
 
-        public TemplateViewModel(INavigationService navigationService)
+        public ItemTemplateViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             #if (UseMvvmHelpers)

@@ -9,6 +9,14 @@
             "longName": "use-mvvm-helpers",
             "shortName": "umh"
         },
+        "TemplateItemType": {
+            "longName": "item-type",
+            "shortName": "item"
+        },
+        "IncludeMocks": {
+            "longName": "include-mocks",
+            "shortName": "mocks"
+        },
         "PageType": {
             "longName": "page-type",
             "shortName": "page"

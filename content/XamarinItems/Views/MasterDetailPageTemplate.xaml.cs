@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace MobileApp.Views
 {
-    public partial class Template : MasterDetailPage, IMasterDetailPageOptions
+    public partial class ItemTemplate : MasterDetailPage, IMasterDetailPageOptions
     {
-        public Template()
+        public ItemTemplate()
         {
             InitializeComponent();
         }

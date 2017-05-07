@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace MobileApp.Views
 {
-    public partial class Template : TabbedPage, INavigatingAware
+    public partial class ItemTemplate : TabbedPage, INavigatingAware
     {
-        public Template()
+        public ItemTemplate()
         {
             InitializeComponent();
         }
@@ -14,7 +14,8 @@ namespace MobileApp.Views
         {
             foreach(var child in Children)
             {
-                (child as INavigatingAware)?.OnNavigatingTo(parameters);
+                // Uncomment this if you actually require a child page to also be INavigatingAware.
+                // (child as INavigatingAware)?.OnNavigatingTo(parameters);
                 (child.BindingContext as INavigatingAware)?.OnNavigatingTo(parameters);
             }
         }
