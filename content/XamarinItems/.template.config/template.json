@@ -1,0 +1,165 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Dan Siegel",
+    "identity": "prism.forms.item.templates",
+    "name": "Prism Forms Item Templates",
+    "shortName": "prismpage",
+    "classifications": [
+        "Prism",
+        "Xamarin Forms"
+    ],
+    "tags": {
+        "language": "C#",
+        "type": "item"
+    },
+    "sourceName": "Template",
+    "symbols": {
+        "BaseNamespace": {
+            "type": "parameter",
+            "datatype": "text",
+            "isRequired": "true",
+            "replaces": "MobileApp"
+        },
+        "UseMvvmHelpers": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "true"
+        },
+        "PageType": {
+            "type": "parameter",
+            "datatype": "choice",
+            "defaultValue": "ContentPage",
+            "choices": [
+                {
+                    "choice": "ContentPage",
+                    "description": "Creates a new Xamarin Forms ContentPage"
+                },
+                {
+                    "choice": "MasterDetailPage",
+                    "description": "Creates a new Xamarin Forms MasterDetailPage"
+                },
+                {
+                    "choice": "PopupPage",
+                    "description": "Creates a new Rg.Plugin.Popups PopupPage"
+                },
+                {
+                    "choice": "TabbedPage",
+                    "description": "Creates a new Xamarin Forms TabbedPage"
+                }
+            ]
+        },
+        "IsTabbedChild": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementIActiveAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementINavigatingAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementINavigatedAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementINavigationAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "true"
+        },
+        "IsIDestructible": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "IsIActiveAware": {
+            "type": "computed",
+            "value": "(IsTabbedChild || ImplementIActiveAware)"
+        },
+        "IsINavigatingAware": {
+            "type": "computed",
+            "value": "(IsIActiveAware || ImplementINavigatingAware)"
+        },
+        "IsINavigatedAware": {
+            "type": "computed",
+            "value": "(!IsTabbedChild && ImplementINavigatedAware)"
+        },
+        "IsINavigationAware": {
+            "type": "computed",
+            "value": "(!IsTabbedChild && ImplementINavigationAware)"
+        }
+    },
+    "sources": [
+        {
+            "condition": "(PageType == \"ContentPage\")",
+            "rename": {
+                "Views/ContentPageTemplate.xaml": "Views/Template.xaml",
+                "Views/ContentPageTemplate.xaml.cs": "Views/Template.xaml.cs"
+            },
+            "exclude": [
+                "**/MasterDetailPageTemplate.*",
+                "**/NavigationPageTemplate.*",
+                "**/PopupPageTemplate.*",
+                "**/TabbedPageTemplate.*"
+            ]
+        },
+        {
+            "condition": "(PageType == \"MasterDetailPage\")",
+            "rename": {
+                "Views/MasterDetailPageTemplate.xaml": "Views/Template.xaml",
+                "Views/MasterDetailPageTemplate.xaml.cs": "Views/Template.xaml.cs"
+            },
+            "exclude": [
+                "**/ContentPageTemplate.*",
+                "**/NavigationPageTemplate.*",
+                "**/PopupPageTemplate.*",
+                "**/TabbedPageTemplate.*"
+            ]
+        },
+        {
+            "condition": "(PageType == \"PopupPage\")",
+            "rename": {
+                "Views/PopupPageTemplate.xaml": "Views/Template.xaml",
+                "Views/PopupPageTemplate.xaml.cs": "Views/Template.xaml.cs"
+            },
+            "exclude": [
+                "**/MasterDetailPageTemplate.*",
+                "**/NavigationPageTemplate.*",
+                "**/ContentPageTemplate.*",
+                "**/TabbedPageTemplate.*"
+            ]
+        },
+        {
+            "condition": "(PageType == \"NavigationPage\")",
+            "rename": {
+                "Views/NavigationPageTemplate.xaml": "Views/Template.xaml",
+                "Views/NavigationPageTemplate.xaml.cs": "Views/Template.xaml.cs"
+            },
+            "exclude": [
+                "**/MasterDetailPageTemplate.*",
+                "**/PopupPageTemplate.*",
+                "**/ContentPageTemplate.*",
+                "**/TabbedPageTemplate.*"
+            ]
+        },
+        {
+            "condition": "(PageType == \"TabbedPage\")",
+            "rename": {
+                "Views/TabbedPageTemplate.xaml": "Views/Template.xaml",
+                "Views/TabbedPageTemplate.xaml.cs": "Views/Template.xaml.cs"
+            },
+            "exclude": [
+                "**/MasterDetailPageTemplate.*",
+                "**/NavigationPageTemplate.*",
+                "**/ContentPageTemplate.*",
+                "**/PopupPageTemplate.*"
+            ]
+        }
+    ]
+}
