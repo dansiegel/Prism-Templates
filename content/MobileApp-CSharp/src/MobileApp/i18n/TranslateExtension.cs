@@ -43,9 +43,11 @@ namespace MobileApp.i18n
 
             if (translation == null)
             {
+//-:cnd:noEmit
 #if DEBUG
                 System.Diagnostics.Debug.WriteLine($"Key '{Text}' was not found in resources for culture '{_ci.Name}'.");
 #endif
+//+:cnd:noEmit
                 translation = Text; // HACK: returns the key, which GETS DISPLAYED TO THE USER
             }
 
