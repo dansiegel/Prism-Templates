@@ -4,6 +4,7 @@
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              <!--#if Localization -->
              xmlns:i18n="clr-namespace:MobileApp.i18n;assembly=MobileApp"
+             <!--#endif -->
              <!--#if UseMvvmHelpers -->
              Title="{Binding Title}"
              <!--#else -->

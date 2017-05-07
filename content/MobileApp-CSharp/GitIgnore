@@ -38,6 +38,3 @@ Thumbs.db
 
 # dotCover
 *.dotCover
-
-# NuGet
-*.nupkg

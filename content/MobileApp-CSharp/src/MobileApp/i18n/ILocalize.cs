@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace MobileApp.i18n
 {
-    // Based on the Localization guid from Xamarin
+    // Based on the Localization guide from Xamarin
     // See https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/ for more information
     public interface ILocalize
     {
