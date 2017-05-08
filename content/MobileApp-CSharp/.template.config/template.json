@@ -80,7 +80,7 @@
   "symbols":{
     "AppId": {
       "type": "parameter",
-      "dataType": "string",
+      "dataType": "text",
       "replaces": "com.prismtemplate.name",
       "isRequired": "true",
       "description": "Sets the iOS Bundle Id and the Android package Id <com.company.appname>"
@@ -132,14 +132,14 @@
     },
     "MobileCenter-iOS": {
       "type": "parameter",
-      "dataType": "string",
+      "dataType": "text",
       "replaces": "MOBILECENTER-IOS-SECRET",
       "default": "",
       "description": "Application Secret from Mobile Center for iOS"
     },
     "MobileCenter-Android": {
       "type": "parameter",
-      "dataType": "string",
+      "dataType": "text",
       "replaces": "MOBILECENTER-ANDROID-SECRET",
       "default": "",
       "description": "Application Secret from Mobile Center for Android"
