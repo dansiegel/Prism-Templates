@@ -6,6 +6,12 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
 
+<!--/-:cnd:noEmit -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Mock' ">
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+  </PropertyGroup>
+<!--/+:cnd:noEmit -->
+
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
     <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="6.3.0" />
