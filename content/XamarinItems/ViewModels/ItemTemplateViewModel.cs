@@ -25,8 +25,8 @@ namespace MobileApp.ViewModels
     public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigationAware
     #endif
     #elseif (IsIActiveAware)
-    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware, IDestructible
     #if (IsIDestructible)
+    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware, IDestructible
     #else
     public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware
     #endif
