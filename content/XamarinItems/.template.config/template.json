@@ -1,0 +1,210 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Dan Siegel",
+    "identity": "prism.forms.item.templates",
+    "name": "Prism Forms Item Templates",
+    "shortName": "prismitem",
+    "classifications": [
+        "Prism",
+        "Xamarin Forms"
+    ],
+    "tags": {
+        "language": "C#",
+        "type": "item"
+    },
+    "sourceName": "ItemTemplate",
+    "symbols": {
+        "BaseNamespace": {
+            "type": "parameter",
+            "datatype": "text",
+            "isRequired": "true",
+            "replaces": "MobileApp"
+        },
+        "UseMvvmHelpers": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "true"
+        },
+        "TemplateItemType": {
+            "type": "parameter",
+            "datatype": "choice",
+            "defaultValue": "Page",
+            "choices": [
+                {
+                    "choice": "Page",
+                    "description": "Creates a new Page and ViewModel"
+                },
+                {
+                    "choice": "Service",
+                    "description": "Creates a new Service"
+                }
+            ]
+        },
+        "IncludeMocks": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "true",
+            "description": "If creating a Service, this will control whether or not to include a Mock Service"
+        },
+        "PageType": {
+            "type": "parameter",
+            "datatype": "choice",
+            "defaultValue": "ContentPage",
+            "choices": [
+                {
+                    "choice": "ContentPage",
+                    "description": "Creates a new Xamarin Forms ContentPage"
+                },
+                {
+                    "choice": "MasterDetailPage",
+                    "description": "Creates a new Xamarin Forms MasterDetailPage"
+                },
+                {
+                    "choice": "PopupPage",
+                    "description": "Creates a new Rg.Plugin.Popups PopupPage"
+                },
+                {
+                    "choice": "TabbedPage",
+                    "description": "Creates a new Xamarin Forms TabbedPage"
+                }
+            ]
+        },
+        "IsTabbedChild": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementIActiveAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementINavigatingAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementINavigatedAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "ImplementINavigationAware": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "true"
+        },
+        "IsIDestructible": {
+            "type": "parameter",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
+        "IsIActiveAware": {
+            "type": "computed",
+            "value": "(IsTabbedChild || ImplementIActiveAware)"
+        },
+        "IsINavigatingAware": {
+            "type": "computed",
+            "value": "(IsIActiveAware || ImplementINavigatingAware)"
+        },
+        "IsINavigatedAware": {
+            "type": "computed",
+            "value": "(!IsTabbedChild && ImplementINavigatedAware)"
+        },
+        "IsINavigationAware": {
+            "type": "computed",
+            "value": "(!IsTabbedChild && ImplementINavigationAware)"
+        }
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "condition": "(TemplateItemType == \"Service\" && IncludeMocks)",
+                    "exclude": [
+                        "Views/**",
+                        "ViewModels/**"
+                    ]
+                },
+                {
+                    "condition": "(TemplateItemType == \"Service\" && !IncludeMocks)",
+                    "exclude": [
+                        "Views/**",
+                        "ViewModels/**",
+                        "Services/Mock*"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"ContentPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/ContentPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/ContentPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"MasterDetailPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/MasterDetailPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/MasterDetailPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/ContentPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"PopupPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/PopupPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/PopupPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/ContentPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"NavigationPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/NavigationPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/NavigationPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "**/ContentPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"TabbedPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/TabbedPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/TabbedPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/ContentPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "Services/**"
+                    ]
+                }
+            ]
+        }
+    ]
+}

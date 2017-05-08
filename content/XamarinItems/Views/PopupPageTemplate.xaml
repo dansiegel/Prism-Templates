@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 <!--#if Localization -->
+                 xmlns:i18n="clr-namespace:MobileApp.i18n;assembly=MobileApp"
+                 <!--#endif -->
+                 xmlns:xaml="clr-namespace:MobileApp.Xaml;assembly=MobileApp"
+                 BindingContext="{xaml:ViewModelLocator {x:Reference view}}"
+                 <!--#if UseMvvmHelpers -->
+                 Title="{Binding Title}"
+                 <!--#else -->
+                 Title="Template"
+                 <!--#endif -->
+                 x:Name="view"
+                 x:Class="MobileApp.Views.ItemTemplate">
+
+    <!-- TODO: // Add Some Content -->
+</pages:PopupPage>
