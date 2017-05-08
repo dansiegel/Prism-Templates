@@ -118,107 +118,93 @@
     },
     "sources": [
         {
-            "condition": "(TemplateItemType == \"Service\" && IncludeMocks)",
-            "exclude": [
-                "Views/**",
-                "ViewModels/**"
+            "modifiers": [
+                {
+                    "condition": "(TemplateItemType == \"Service\" && IncludeMocks)",
+                    "exclude": [
+                        "Views/**",
+                        "ViewModels/**"
+                    ]
+                },
+                {
+                    "condition": "(TemplateItemType == \"Service\" && !IncludeMocks)",
+                    "exclude": [
+                        "Views/**",
+                        "ViewModels/**",
+                        "Services/Mock*"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"ContentPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/ContentPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/ContentPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"MasterDetailPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/MasterDetailPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/MasterDetailPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/ContentPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"PopupPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/PopupPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/PopupPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/ContentPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"NavigationPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/NavigationPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/NavigationPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "**/ContentPageTemplate.*",
+                        "**/TabbedPageTemplate.*",
+                        "Services/**"
+                    ]
+                },
+                {
+                    "condition": "(PageType == \"TabbedPage\" && TemplateItemType == \"Page\")",
+                    "rename": {
+                        "Views/TabbedPageTemplate.xaml": "Views/ItemTemplate.xaml",
+                        "Views/TabbedPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
+                    },
+                    "exclude": [
+                        "**/MasterDetailPageTemplate.*",
+                        "**/NavigationPageTemplate.*",
+                        "**/ContentPageTemplate.*",
+                        "**/PopupPageTemplate.*",
+                        "Services/**"
+                    ]
+                }
             ]
-        },
-        {
-            "condition": "(TemplateItemType == \"Service\" && !IncludeMocks)",
-            "exclude": [
-                "Views/**",
-                "ViewModels/**",
-                "Services/Mock*"
-            ]
-        },
-        {
-            "condition": "(PageType == \"ContentPage\" && TemplateItemType == \"Page\")",
-            "rename": {
-                "Views/ContentPageTemplate.xaml": "Views/ItemTemplate.xaml",
-                "Views/ContentPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
-            },
-            "exclude": [
-                "**/MasterDetailPageTemplate.*",
-                "**/NavigationPageTemplate.*",
-                "**/PopupPageTemplate.*",
-                "**/TabbedPageTemplate.*",
-                "Services/**"
-            ]
-        },
-        {
-            "condition": "(PageType == \"MasterDetailPage\" && TemplateItemType == \"Page\")",
-            "rename": {
-                "Views/MasterDetailPageTemplate.xaml": "Views/ItemTemplate.xaml",
-                "Views/MasterDetailPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
-            },
-            "exclude": [
-                "**/ContentPageTemplate.*",
-                "**/NavigationPageTemplate.*",
-                "**/PopupPageTemplate.*",
-                "**/TabbedPageTemplate.*",
-                "Services/**"
-            ]
-        },
-        {
-            "condition": "(PageType == \"PopupPage\" && TemplateItemType == \"Page\")",
-            "rename": {
-                "Views/PopupPageTemplate.xaml": "Views/ItemTemplate.xaml",
-                "Views/PopupPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
-            },
-            "exclude": [
-                "**/MasterDetailPageTemplate.*",
-                "**/NavigationPageTemplate.*",
-                "**/ContentPageTemplate.*",
-                "**/TabbedPageTemplate.*",
-                "Services/**"
-            ]
-        },
-        {
-            "condition": "(PageType == \"NavigationPage\" && TemplateItemType == \"Page\")",
-            "rename": {
-                "Views/NavigationPageTemplate.xaml": "Views/ItemTemplate.xaml",
-                "Views/NavigationPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
-            },
-            "exclude": [
-                "**/MasterDetailPageTemplate.*",
-                "**/PopupPageTemplate.*",
-                "**/ContentPageTemplate.*",
-                "**/TabbedPageTemplate.*",
-                "Services/**"
-            ]
-        },
-        {
-            "condition": "(PageType == \"TabbedPage\" && TemplateItemType == \"Page\")",
-            "rename": {
-                "Views/TabbedPageTemplate.xaml": "Views/ItemTemplate.xaml",
-                "Views/TabbedPageTemplate.xaml.cs": "Views/ItemTemplate.xaml.cs"
-            },
-            "exclude": [
-                "**/MasterDetailPageTemplate.*",
-                "**/NavigationPageTemplate.*",
-                "**/ContentPageTemplate.*",
-                "**/PopupPageTemplate.*",
-                "Services/**"
-            ]
-        }
-    ],
-    "primaryOutputs": [
-        {
-            "condition": "(TemplateItemType == \"Service\")",
-            "path": "Services/*.cs"
-        },
-        {
-            "condition": "(TemplateItemType ==\"Page\")",
-            "path": "Views/*.xaml"
-        },
-        {
-            "condition": "(TemplateItemType ==\"Page\")",
-            "path": "Views/*.xaml.cs"
-        },
-        {
-            "condition": "(TemplateItemType ==\"Page\")",
-            "path": "ViewModels/*.cs"
         }
     ]
 }
