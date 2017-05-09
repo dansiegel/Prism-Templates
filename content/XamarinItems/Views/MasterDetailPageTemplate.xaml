@@ -15,5 +15,19 @@
                   x:Name="view"
                   x:Class="MobileApp.Views.ItemTemplate">
 
-    <!-- TODO: // Add Some Content -->
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <ContentPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <OnPlatform.Platforms>
+                        <On Platform="iOS, Android, macOS" Value="hamburger.png" />
+                    </OnPlatform.Platforms>
+                </OnPlatform>
+            </ContentPage.Icon>
+            <StackLayout Padding="20">
+                <!-- TODO: // Update the Layout and add some real menu items  -->
+                <Button Text="ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
 </MasterDetailPage>

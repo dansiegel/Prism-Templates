@@ -114,6 +114,10 @@
         "IsINavigationAware": {
             "type": "computed",
             "value": "(!IsTabbedChild && ImplementINavigationAware)"
+        },
+        "IsMasterDetailPage": {
+            "type": "computed",
+            "value": "(PageType == \"MasterDetailPage\")"
         }
     },
     "sources": [

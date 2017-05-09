@@ -91,7 +91,14 @@ namespace MobileApp.ViewModels
             #if (UseMvvmHelpers)
             Title = "Template";
             #endif
+            #if (IsMasterDetailPage)
+            NavigateCommand = new DelegateCommand<string>(OnNavigateCommandExecuted);
+            #endif
         }
+#if (IsMasterDetailPage)
+
+        public DelegateCommand<string> NavigateCommand { get; }
+#endif
 #if (IsIActiveAware)
 
         public event EventHandler IsActiveChanged;
@@ -128,6 +135,11 @@ namespace MobileApp.ViewModels
         {
             // TODO: Dispose of any objects you need to for memory management
         }
+#endif
+#if (IsMasterDetailPage)
+
+        private async void OnNavigateCommandExecuted(string pageName) =>
+            await _navigationService.NavigateAsync($"NavigationPage/{pageName}");
 #endif
 #if (IsIActiveAware)
 

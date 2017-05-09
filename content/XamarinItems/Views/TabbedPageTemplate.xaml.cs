@@ -1,3 +1,4 @@
+using Prism.Common;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -14,9 +15,7 @@ namespace MobileApp.Views
         {
             foreach(var child in Children)
             {
-                // Uncomment this if you actually require a child page to also be INavigatingAware.
-                // (child as INavigatingAware)?.OnNavigatingTo(parameters);
-                (child.BindingContext as INavigatingAware)?.OnNavigatingTo(parameters);
+                PageUtilities.OnNavigatingTo(child, parameters);
             }
         }
     }
