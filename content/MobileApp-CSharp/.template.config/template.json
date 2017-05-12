@@ -171,6 +171,38 @@
       ],
       "description": "The Dependency Injection Container to use"
     },
+    "Framework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "netstandard1.4",
+      "choices": [
+        {
+          "choice": "netstandard1.0",
+          "description": "Uses netstandard1.0 core library"
+        },
+        {
+          "choice": "netstandard1.1",
+          "description": "Uses netstandard1.1 core library"
+        },
+        {
+          "choice": "netstandard1.2",
+          "description": "Uses netstandard1.2 core library"
+        },
+        {
+          "choice": "netstandard1.3",
+          "description": "Uses netstandard1.3 core library"
+        },
+        {
+          "choice": "netstandard1.4",
+          "description": "Uses netstandard1.4 core library"
+        },
+        {
+          "choice": "netstandard2.0",
+          "description": "Uses netstandard2.0 core library"
+        }
+      ],
+      "replaces": "NETSTANDARD_LIBRARY_VERSION"
+    },
     "AutofacContainer": {
       "type": "computed",
       "value": "(Container == \"Autofac\")"

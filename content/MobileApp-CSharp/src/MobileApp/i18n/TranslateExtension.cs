@@ -37,7 +37,7 @@ namespace MobileApp.i18n
             if (Text == null)
                 return "";
 
-            ResourceManager resmgr = new ResourceManager(typeof(Resx.Resources));
+            ResourceManager resmgr = new ResourceManager(typeof(Strings.Resources));
 
             var translation = resmgr.GetString(Text, _ci);
 

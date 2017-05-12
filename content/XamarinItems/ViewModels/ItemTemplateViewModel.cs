@@ -14,6 +14,8 @@ using Prism.Mvvm;
 #endif
 using Prism.Navigation;
 using Prism.Services;
+using MobileApp.i18n;
+using MobileApp.Models;
 
 namespace MobileApp.ViewModels
 {
@@ -89,7 +91,7 @@ namespace MobileApp.ViewModels
         {
             _navigationService = navigationService;
             #if (UseMvvmHelpers)
-            Title = "Template";
+            Title = "ItemTemplate";
             #endif
             #if (IsMasterDetailPage)
             NavigateCommand = new DelegateCommand<string>(OnNavigateCommandExecuted);

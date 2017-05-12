@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>NETSTANDARD_LIBRARY_VERSION</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
     <DebugType>full</DebugType>
   </PropertyGroup>
@@ -25,11 +25,11 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(Localization)' " Label="Localization">
-    <Compile Update="Resx\Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
-     <!--<Compile Include="Resx\Resources.es.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.es.resx" />-->
+    <Compile Update="Strings\Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
+     <!--<Compile Include="Strings\Resources.es.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.es.resx" />-->
 
      <!-- To generate Resources with public access update the generator to 'PublicResXFileCodeGenerator' -->
-    <EmbeddedResource Update="Resx\*.resx" Generator="ResXFileCodeGenerator" LastGenOutput="%(Filename).Designer.cs" />
+    <EmbeddedResource Update="Strings\*.resx" Generator="ResXFileCodeGenerator" LastGenOutput="%(Filename).Designer.cs" />
   </ItemGroup>
 
   <ItemGroup Label="XAML">
