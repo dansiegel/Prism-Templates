@@ -43,6 +43,10 @@
       "longName": "mobilecenter-android-secret",
       "shortName": "android-secret"
     },
+    "MobileCenter-UWP": {
+      "longName": "mobilecenter-uwp-secret",
+      "shortName": "uwp-secret"
+    },
     "UseMvvmHelpers": {
       "longName": "use-mvvmhelpers",
       "sortName": "mvvmhelp"
@@ -50,6 +54,14 @@
     "Localization": {
       "longName": "use-localization",
       "shortName": "localization"
+    },
+    "Framework": {
+      "longName": "framework",
+      "shortName": "fr"
+    },
+    "DataProvider": {
+      "longName": "data-provider",
+      "shortName": "data"
     },
     "skipRestore": {
       "isHidden": true

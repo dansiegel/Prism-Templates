@@ -12,9 +12,11 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using MobileApp.Models;
+using PropertyChanged;
 
 namespace MobileApp.ViewModels
 {
+    [ImplementPropertyChanged]
 #if (UseMvvmHelpers)
     public class MainPageViewModel : BaseViewModel, INavigatedAware
 #else

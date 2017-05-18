@@ -14,11 +14,13 @@ using Prism.Mvvm;
 #endif
 using Prism.Navigation;
 using Prism.Services;
+using PropertyChanged;
 using MobileApp.i18n;
 using MobileApp.Models;
 
 namespace MobileApp.ViewModels
 {
+    [ImplementPropertyChanged]
 #if (UseMvvmHelpers)
     #if (IsIActiveAware && IsINavigationAware)
     #if (IsIDestructible)
@@ -105,12 +107,7 @@ namespace MobileApp.ViewModels
 
         public event EventHandler IsActiveChanged;
 
-        private bool _isActive;
-        public bool IsActive
-        {
-            get { return _isActive; }
-            set { SetProperty(ref _isActive, value, OnIsActiveChanged); }
-        }
+        public bool IsActive { get; set; }
 #endif
 #if (IsINavigatingAware || IsIActiveAware || IsINavigationAware)
 
@@ -150,13 +147,14 @@ namespace MobileApp.ViewModels
             #if (UseMvvmHelpers)
             IsBusy = true;
             #endif
-            // Notify anything that might be listening to the Event
-            IsActiveChanged?.Invoke(this, EventArgs.Empty);
             // TODO: Implement your refresh logic
             #if (UseMvvmHelpers)
 
             IsBusy = false;
             #endif
+            
+            // Notify anything that might be listening to the Event
+            IsActiveChanged?.Invoke(this, EventArgs.Empty);
         }
 #endif
     }

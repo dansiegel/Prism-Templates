@@ -43,12 +43,6 @@
             "src/MobileApp.UWP/**"
           ]
         },
-        // {
-        //   "condition": "(!ConnectedApp)",
-        //   "exclude": [
-        //     "src/MobileApp.Backend/*"
-        //   ]
-        // },
         {
           "condition": "(!IncludeUITest)",
           "exclude": [
@@ -75,6 +69,30 @@
           "condition": "(!GitInitialize)",
           "exclude": [
             "GitIgnore"
+          ]
+        },
+        {
+          "condition": "(UseRealm)",
+          "exclude": [
+            "**/NormalFodyWeavers.xml"
+          ],
+          "rename": {
+            "**/RealmFodyWeavers.xml": "**/FodyWeavers.xml"
+          }
+        },
+        {
+          "condition": "(!UseRealm)",
+          "exclude": [
+            "**/RealmFodyWeavers.xml"
+          ],
+          "rename": {
+            "**/NormalFodyWeavers.xml": "**/FodyWeavers.xml"
+          }
+        },
+        {
+          "condition": "(DataProvider != \"AzureMobileClient\")",
+          "exclude": [
+            "src/MobileApp/Data/**"
           ]
         }
       ]
@@ -111,11 +129,6 @@
       "defaultValue": "true",
       "description": "Determines whether to include a UI Test project"
     },
-    // "ConnectedApp": {
-    //   "type": "parameter",
-    //   "dataType": "bool",
-    //   "defaultValue": "false"
-    // },
     "Localization": {
       "type": "parameter",
       "dataType": "bool",
@@ -137,15 +150,22 @@
       "type": "parameter",
       "dataType": "text",
       "replaces": "MOBILECENTER-IOS-SECRET",
-      "default": "",
+      "defaultValue": "",
       "description": "Application Secret from Mobile Center for iOS"
     },
     "MobileCenter-Android": {
       "type": "parameter",
       "dataType": "text",
       "replaces": "MOBILECENTER-ANDROID-SECRET",
-      "default": "",
+      "defaultValue": "",
       "description": "Application Secret from Mobile Center for Android"
+    },
+    "MobileCenter-UWP": {
+      "type": "parameter",
+      "datatype":"text",
+      "replaces": "MOBILECENTER-UWP-SECRET",
+      "defaultValue": "",
+      "description": "Application Secret from Mobile Center for UWP"
     },
     "Container": {
       "type": "parameter",
@@ -177,22 +197,6 @@
       "defaultValue": "netstandard1.4",
       "choices": [
         {
-          "choice": "netstandard1.0",
-          "description": "Uses netstandard1.0 core library"
-        },
-        {
-          "choice": "netstandard1.1",
-          "description": "Uses netstandard1.1 core library"
-        },
-        {
-          "choice": "netstandard1.2",
-          "description": "Uses netstandard1.2 core library"
-        },
-        {
-          "choice": "netstandard1.3",
-          "description": "Uses netstandard1.3 core library"
-        },
-        {
           "choice": "netstandard1.4",
           "description": "Uses netstandard1.4 core library"
         },
@@ -202,6 +206,33 @@
         }
       ],
       "replaces": "NETSTANDARD_LIBRARY_VERSION"
+    },
+    "DataProvider": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "None",
+      "choices": [
+        {
+          "choice": "None",
+          "description": "No data provider"
+        },
+        {
+          "choice": "AzureMobileClient",
+          "description": "Uses the Azure Mobile Client"
+        },
+        {
+          "choice": "Realm",
+          "description": "Uses a Realm Object Server"
+        }
+      ]
+    },
+    "UseRealm": {
+      "type": "computed",
+      "value": "(DataProvider == \"Realm\")"
+    },
+    "UseAzureMobileClient": {
+      "type": "computed",
+      "value": "(DataProvider == \"AzureMobileClient\")"
     },
     "AutofacContainer": {
       "type": "computed",
