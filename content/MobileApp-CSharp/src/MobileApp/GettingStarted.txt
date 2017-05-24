@@ -15,4 +15,4 @@ This template also comes setup with support for Material Design. You will see th
 You will also notice that a global style has been set in 'App.xaml' to use the color pallet for the NavigationPage's NavigationBar colors. You updating your design colors will automatically adjust these colors without the need for defining any custom NavigationPage. 
 
 -- UWP --
-Your new project created a UWP project. You will need to generate a pfx to sign the project. This is not currently supported from the
+Your new project created a UWP project. You will need to generate a pfx to sign the project. This is not currently supported from the dotnet Templating Engine.

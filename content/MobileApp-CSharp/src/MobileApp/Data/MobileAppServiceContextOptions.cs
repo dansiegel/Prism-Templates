@@ -8,8 +8,8 @@ namespace MobileApp.Data
     {
         public string AppServiceEndpoint => AppConstants.AppServiceEndpoint;
         
-        public string AlternateLoginHost { get; }
+        public string AlternateLoginHost => AppConstants.AlternateLoginHost;
 
-        public string LoginUriPrefix { get; }
+        public string LoginUriPrefix => AppConstants.LoginUriPrefix;
     }
 }

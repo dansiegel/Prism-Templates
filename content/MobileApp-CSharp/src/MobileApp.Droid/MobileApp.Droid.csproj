@@ -112,7 +112,8 @@
       <HintPath>..\..\packages\Prism.DryIoc.Forms.6.3.0.1\lib\MonoAndroid1.0\Prism.DryIoc.Forms.dll</HintPath>
     </Reference>
     <Reference Include="DryIoc" Condition=" '$(Container)' == 'DryIoc' ">
-      <HintPath>..\..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+      <HintPath Condition=" '$(DataProvider)' != 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+      <HintPath Condition=" '$(DataProvider)' == 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.10.7\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
     </Reference>
     <Reference Include="Prism.Ninject.Forms" Condition=" '$(Container)' == 'Ninject' ">
       <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Ninject.Forms.dll</HintPath>
@@ -130,28 +131,67 @@
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.11.1\lib\MonoAndroid403\Microsoft.Azure.Mobile.Android.Bindings.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Android.Bindings.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.11.1\lib\MonoAndroid403\Microsoft.Azure.Mobile.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Crashes.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.11.1\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.Android.Bindings.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.Android.Bindings.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Crashes" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.11.1\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Analytics.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.11.1\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.Android.Bindings.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.Android.Bindings.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Analytics" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.11.1\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="MvvmHelpers" Condition=" '$(UseMvvmHelpers)' ">
       <HintPath>..\..\packages\Refractored.MvvmHelpers.1.2.2\lib\portable-net45+wp80+win8+wpa81\MvvmHelpers.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged">
       <HintPath>..\..\packages\PropertyChanged.Fody.2.0.0-beta001\lib\netstandard1.3\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
+    <Reference Include="SQLitePCLRaw.core" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.2\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
+    <Reference Include="System.Net.Http" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
+    <Reference Include="Newtonsoft.Json" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Client" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.4.0.0-alpha-001\lib\MonoAndroid44\Microsoft.Azure.Mobile.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.SQLiteStore.4.0.0-alpha-001\lib\netstandard1.4\Microsoft.Azure.Mobile.Client.SQLiteStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="AzureMobileClient.Helpers" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
+      <HintPath>..\..\packages\AzureMobileClient.Helpers.4.0.0-pre3\lib\netstandard1.4\AzureMobileClient.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="AzureMobileClient.Helpers.DryIoc" Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' ">
+      <HintPath>..\..\packages\AzureMobileClient.Helpers.DryIoc.4.0.0-pre3\lib\netstandard1.4\AzureMobileClient.Helpers.DryIoc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

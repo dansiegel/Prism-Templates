@@ -4,15 +4,15 @@
     "Xamarin.Forms": "2.3.4.231",
     "PropertyChanged.Fody": "2.0.0-beta001",
 //#if (UseAzureMobileClient)
-//    "AzureMobileClient.Helpers": "4.0.0-pre1",
+//    "AzureMobileClient.Helpers": "4.0.0-pre3",
 //#endif
 //#if (UseRealm)
-//    "Realm": "1.3.0"
+//    "Realm": "1.4.0"
 //#endif
 //#if (UseMobileCenter)
-//    "Microsoft.Azure.Mobile": "0.11.1",
-//    "Microsoft.Azure.Mobile.Analytics": "0.11.1",
-//    "Microsoft.Azure.Mobile.Crashes": "0.11.1",
+//    "Microsoft.Azure.Mobile": "0.12.0",
+//    "Microsoft.Azure.Mobile.Analytics": "0.12.0",
+//    "Microsoft.Azure.Mobile.Crashes": "0.12.0",
 //#endif
 //#if (UseMvvmHelpers)
 //    "Refractored.MvvmHelpers": "1.2.2",

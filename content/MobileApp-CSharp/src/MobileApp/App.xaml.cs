@@ -17,8 +17,10 @@ using Prism.Ninject;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
-#if (UseMobileCenter)
+#if (UseMobileCenter || UseAzureMobileClient)
 using MobileApp.Helpers;
+#endif
+#if (UseMobileCenter)
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
@@ -61,20 +63,20 @@ namespace MobileApp
         {
 #if (UseAzureMobileClient)
             // ICloudTable is only needed for Online Only data
-            Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>);
+            Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>));
             Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>));
 
             // If you are not using Authentication
-            Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(AppSettings.AppServiceEndpoint));
+            Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(AppConstants.AppServiceEndpoint));
 
             // If you are using Authentication
             // If using Facebook or some other 3rd Party OAuth provider be sure to register ILoginProvider
             // in IPlatformServices in your Platform Project. If you are using a custom auth provider, you may
             // be able to author an ILoginProvider from shared code.
             // Container.Register<IAzureCloudServiceOptions, MobileAppServiceContextOptions>(Reuse.Singleton);
-            // var dataContext = new AppDataContext(Container);
-            // Container.RegisterInstance<ICloudService>(dataContext);
-            // Container.RegisterInstance<IAppDataContext>(dataContext);
+            var dataContext = new AppDataContext(Container);
+            // Container.UseInstance<ICloudService>(dataContext);
+            Container.UseInstance<IAppDataContext>(dataContext);
             // Container.Register<IMobileServiceClient>(reuse: Reuse.Singleton,
             //                                         made: Made.Of(() => Arg.Of<ICloudService>().Client));
 

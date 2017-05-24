@@ -2,7 +2,7 @@ using Rg.Plugins.Popup.Pages;
 
 namespace MobileApp.Views
 {
-    public class ItemTemplate : PopupPage
+    public partial class ItemTemplate : PopupPage
     {
         public ItemTemplate()
         {

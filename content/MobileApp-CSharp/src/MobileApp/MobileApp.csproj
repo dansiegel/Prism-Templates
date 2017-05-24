@@ -21,18 +21,18 @@
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="6.3.0" />
     <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.2.2" />
     <PackageReference Condition=" '$(Localization)' " Include="System.ComponentModel" Version="4.3.0" />
-    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Analytics" Version="0.11.1" />
-    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.11.1" />
-    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' " Include="AzureMobileClient.Helpers" Version="4.0.0-pre1" />
-    <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.3.0" />
+    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Analytics" Version="0.12.0" />
+    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.12.0" />
+    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' != 'DryIoc' " Include="AzureMobileClient.Helpers" Version="4.0.0-pre3" />
+    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.0-pre3" />
+    <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(Localization)' " Label="Localization">
-    <Compile Update="Strings\Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
-     <!--<Compile Include="Strings\Resources.es.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.es.resx" />-->
-
      <!-- To generate Resources with public access update the generator to 'PublicResXFileCodeGenerator' -->
     <EmbeddedResource Update="Strings\*.resx" Generator="ResXFileCodeGenerator" LastGenOutput="%(Filename).Designer.cs" />
+    <Compile Update="Strings\Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
+     <!--<Compile Include="Strings\Resources.es.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.es.resx" />-->
   </ItemGroup>
 
   <ItemGroup Label="XAML">
