@@ -73,29 +73,21 @@
         },
         {
           "condition": "(UseRealm)",
+          "rename": {
+            "**/RealmFodyWeavers.xml": "**/FodyWeavers.xml"
+          },
           "exclude": [
             "**/NormalFodyWeavers.xml"
-          ],
-          "rename": {
-            "src/MobileApp/RealmFodyWeavers.xml": "src/MobileApp/FodyWeavers.xml",
-            "src/MobileApp.Droid/RealmFodyWeavers.xml": "src/MobileApp.Droid/FodyWeavers.xml",
-            "src/MobileApp.iOS/RealmFodyWeavers.xml": "src/MobileApp.iOS/FodyWeavers.xml",
-            "src/MobileApp.UWP/RealmFodyWeavers.xml": "src/MobileApp.UWP/FodyWeavers.xml"
-            // "RealmFodyWeavers.xml": "FodyWeavers.xml"
-          }
+          ]
         },
         {
           "condition": "(!UseRealm)",
+          "rename": {
+            "**/NormalFodyWeavers.xml": "**/FodyWeavers.xml"
+          },
           "exclude": [
             "**/RealmFodyWeavers.xml"
-          ],
-          "rename": {
-            "src/MobileApp/NormalFodyWeavers.xml": "src/MobileApp/FodyWeavers.xml",
-            "src/MobileApp.Droid/NormalFodyWeavers.xml": "src/MobileApp.Droid/FodyWeavers.xml",
-            "src/MobileApp.iOS/NormalFodyWeavers.xml": "src/MobileApp.iOS/FodyWeavers.xml",
-            "src/MobileApp.UWP/NormalFodyWeavers.xml": "src/MobileApp.UWP/FodyWeavers.xml"
-            // "NormalFodyWeavers.xml": "FodyWeavers.xml"
-          }
+          ]
         },
         {
           "condition": "(DataProvider != \"AzureMobileClient\")",

@@ -63,8 +63,8 @@ namespace MobileApp
         {
 #if (UseAzureMobileClient)
             // ICloudTable is only needed for Online Only data
-            Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>));
-            Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>));
+            Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
+            Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
 
             // If you are not using Authentication
             Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(AppConstants.AppServiceEndpoint));
@@ -74,11 +74,13 @@ namespace MobileApp
             // in IPlatformServices in your Platform Project. If you are using a custom auth provider, you may
             // be able to author an ILoginProvider from shared code.
             // Container.Register<IAzureCloudServiceOptions, MobileAppServiceContextOptions>(Reuse.Singleton);
-            var dataContext = new AppDataContext(Container);
-            // Container.UseInstance<ICloudService>(dataContext);
-            Container.UseInstance<IAppDataContext>(dataContext);
+            Container.Register<AppDataContext>(Reuse.Singleton);
+            // Container.Register<ICloudService>(reuse: Reuse.Singleton,
+            //                                   made: Made.Of(() => Arg.Of<AppDataContext>()));
+            Container.Register<IAppDataContext>(reuse: Reuse.Singleton,
+                                                made: Made.Of(() => Arg.Of<AppDataContext>()));
             // Container.Register<IMobileServiceClient>(reuse: Reuse.Singleton,
-            //                                         made: Made.Of(() => Arg.Of<ICloudService>().Client));
+            //                                          made: Made.Of(() => Arg.Of<AppDataContext>().Client));
 
 #endif
             Container.RegisterTypeForNavigation<NavigationPage>();
@@ -89,9 +91,7 @@ namespace MobileApp
         {
             // Handle when your app starts
 #if (UseMobileCenter)
-            MobileCenter.Start($"ios={AppConstants.MobileCenter_iOS_Secret};" +
-                                $"android={AppConstants.MobileCenter_Android_Secret};" +
-                                $"uwp={AppConstants.MobileCenter_UWP_Secret}",
+            MobileCenter.Start(AppConstants.MobileCenterStart,
                                 typeof(Analytics), typeof(Crashes));
 #endif
         }

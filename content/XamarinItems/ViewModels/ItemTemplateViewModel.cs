@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 #if (UseMvvmHelpers)
 using MvvmHelpers;
@@ -14,13 +15,11 @@ using Prism.Mvvm;
 #endif
 using Prism.Navigation;
 using Prism.Services;
-using PropertyChanged;
-using MobileApp.i18n;
+using MobileApp.Strings;
 using MobileApp.Models;
 
 namespace MobileApp.ViewModels
 {
-    [ImplementPropertyChanged]
 #if (UseMvvmHelpers)
     #if (IsIActiveAware && IsINavigationAware)
     #if (IsIDestructible)
@@ -93,7 +92,7 @@ namespace MobileApp.ViewModels
         {
             _navigationService = navigationService;
             #if (UseMvvmHelpers)
-            Title = "ItemTemplate";
+            Title = Resources.ItemTemplateTitle;
             #endif
             #if (IsMasterDetailPage)
             NavigateCommand = new DelegateCommand<string>(OnNavigateCommandExecuted);

@@ -113,7 +113,7 @@
     </Reference>
     <Reference Include="DryIoc" Condition=" '$(Container)' == 'DryIoc' ">
       <HintPath Condition=" '$(DataProvider)' != 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
-      <HintPath Condition=" '$(DataProvider)' == 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.10.7\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+      <HintPath Condition=" '$(DataProvider)' == 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.11.3\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
     </Reference>
     <Reference Include="Prism.Ninject.Forms" Condition=" '$(Container)' == 'Ninject' ">
       <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Ninject.Forms.dll</HintPath>
@@ -152,7 +152,7 @@
       <HintPath>..\..\packages\Refractored.MvvmHelpers.1.2.2\lib\portable-net45+wp80+win8+wpa81\MvvmHelpers.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged">
-      <HintPath>..\..\packages\PropertyChanged.Fody.2.0.0-beta001\lib\netstandard1.3\PropertyChanged.dll</HintPath>
+      <HintPath>..\..\packages\PropertyChanged.Fody.2.1.2\lib\netstandard1.3\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
     <Reference Include="SQLitePCLRaw.core" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
@@ -176,10 +176,10 @@
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Client" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.4.0.0-alpha-001\lib\MonoAndroid44\Microsoft.Azure.Mobile.Client.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.4.0.0\lib\MonoAndroid44\Microsoft.Azure.Mobile.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.SQLiteStore.4.0.0-alpha-001\lib\netstandard1.4\Microsoft.Azure.Mobile.Client.SQLiteStore.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.SQLiteStore.4.0.0\lib\netstandard1.4\Microsoft.Azure.Mobile.Client.SQLiteStore.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Connectivity.Abstractions" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
@@ -188,10 +188,10 @@
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
     </Reference>
     <Reference Include="AzureMobileClient.Helpers" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\AzureMobileClient.Helpers.4.0.0-pre3\lib\netstandard1.4\AzureMobileClient.Helpers.dll</HintPath>
+      <HintPath>..\..\packages\AzureMobileClient.Helpers.4.0.0\lib\netstandard1.4\AzureMobileClient.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="AzureMobileClient.Helpers.DryIoc" Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' ">
-      <HintPath>..\..\packages\AzureMobileClient.Helpers.DryIoc.4.0.0-pre3\lib\netstandard1.4\AzureMobileClient.Helpers.DryIoc.dll</HintPath>
+      <HintPath>..\..\packages\AzureMobileClient.Helpers.DryIoc.4.0.0\lib\netstandard1.4\AzureMobileClient.Helpers.DryIoc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -243,5 +243,5 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
-  <Import Project="..\..\packages\Fody.2.0.6\build\netstandard1.4\Fody.targets" Condition="Exists('..\..\packages\Fody.2.0.6\build\netstandard1.4\Fody.targets')" />
+  <Import Project="..\..\packages\Fody.2.1.0\build\netstandard1.4\Fody.targets" Condition="Exists('..\..\packages\Fody.2.1.0\build\netstandard1.4\Fody.targets')" />
 </Project>
