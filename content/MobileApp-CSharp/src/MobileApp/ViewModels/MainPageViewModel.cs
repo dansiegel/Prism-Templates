@@ -12,11 +12,12 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using MobileApp.Models;
-using PropertyChanged;
+#if (Localization)
+using MobileApp.Strings;
+#endif
 
 namespace MobileApp.ViewModels
 {
-    [ImplementPropertyChanged]
 #if (UseMvvmHelpers)
     public class MainPageViewModel : BaseViewModel, INavigatedAware
 #else
@@ -29,7 +30,11 @@ namespace MobileApp.ViewModels
             _pageDialogService = pageDialogService;
 
 #if (UseMvvmHelpers)
+    #if (Localization)
+            Title = Resources.MainPageTitle;
+    #else
             Title = "Main Page";
+    #endif
             TodoItems = new ObservableRangeCollection<TodoItem>();
 #else
             TodoItems = new ObservableCollection<TodoItem>();

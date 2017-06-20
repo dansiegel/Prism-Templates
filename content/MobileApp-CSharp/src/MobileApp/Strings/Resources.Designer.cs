@@ -56,6 +56,14 @@ namespace MobileApp.Strings
             }
         }
 
+        internal static string MainPageTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
+
         internal static string HelloWorld
         {
             get

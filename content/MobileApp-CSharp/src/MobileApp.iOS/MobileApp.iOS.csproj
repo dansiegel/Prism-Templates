@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 <!--/-:cnd:noEmit -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
 <!--/+:cnd:noEmit -->
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8243B963-ED5B-46BE-B877-57CAB74C490F}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <RootNamespace>MobileApp.iOS</RootNamespace>
     <AssemblyName>MobileApp.iOS</AssemblyName>
-    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
 <!--/-:cnd:noEmit -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -18,71 +22,73 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
-    <IOSDebuggerPort>47596</IOSDebuggerPort>
-    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\iPhone\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchFloat32>true</MtouchFloat32>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
-    <MtouchFloat32>true</MtouchFloat32>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <IOSDebuggerPort>14666</IOSDebuggerPort>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
-    <BuildIpa>true</BuildIpa>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <BuildIpa>True</BuildIpa>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mock|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -92,20 +98,12 @@
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG;ENABLE_TEST_CLOUD;MOCK;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
-    <MtouchFloat32>true</MtouchFloat32>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <IOSDebuggerPort>14666</IOSDebuggerPort>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
-    <BuildIpa>true</BuildIpa>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mock|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -115,133 +113,19 @@
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG;ENABLE_TEST_CLOUD;MOCK;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
-    <IOSDebuggerPort>47596</IOSDebuggerPort>
-    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
-<!--/+:cnd:noEmit -->
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.IO.Compression" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="Calabash">
-      <HintPath>..\..\packages\Xamarin.TestCloud.Agent.0.20.3\lib\Xamarin.iOS10\Calabash.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism">
-      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\Xamarin.iOS10\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Forms">
-      <HintPath>..\..\packages\Prism.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Autofac.Forms" Condition=" '$(Container)' == 'Autofac' ">
-      <HintPath>..\..\packages\Prism.Autofac.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Autofac.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac" Condition=" '$(Container)' == 'Autofac' ">
-      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.DryIoc.Forms" Condition=" '$(Container)' == 'DryIoc' ">
-      <HintPath>..\..\packages\Prism.DryIoc.Forms.6.3.0.1\lib\Xamarin.iOS1.0\Prism.DryIoc.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="DryIoc" Condition=" '$(Container)' == 'DryIoc' ">
-      <HintPath Condition=" '$(DataProvider)' != 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
-      <HintPath Condition=" '$(DataProvider)' == 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.11.3\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject" Condition=" '$(Container)' == 'Ninject' ">
-      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\Xamarin.iOS\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Ninject.Forms" Condition=" '$(Container)' == 'Ninject' ">
-      <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Ninject.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Unity.Forms" Condition=" '$(Container)' == 'Unity' ">
-      <HintPath>..\..\packages\Prism.Unity.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Unity.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation" Condition=" '$(Container)' == 'Unity' ">
-      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity" Condition=" '$(Container)' == 'Unity' ">
-      <HintPath>..\..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.12.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.iOS.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.12.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.iOS.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Crashes" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.12.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Crashes.iOS.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.12.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.iOS.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Analytics" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.12.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Analytics.iOS.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.12.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Analytics.iOS.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmHelpers" Condition=" '$(UseMvvmHelpers)' ">
-      <HintPath>..\..\packages\Refractored.MvvmHelpers.1.2.2\lib\portable-net45+wp80+win8+wpa81\MvvmHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="PropertyChanged">
-      <HintPath>..\..\packages\PropertyChanged.Fody.2.1.2\lib\netstandard1.3\PropertyChanged.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.core" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.2\lib\Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.provider.sqlite3" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.provider.sqlite3.ios_unified.1.1.2\lib\Xamarin.iOS10\SQLitePCLRaw.provider.sqlite3.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_green" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_v2" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Client" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.4.0.0\lib\Xamarin.iOS10\Microsoft.Azure.Mobile.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.SQLiteStore.4.0.0\lib\netstandard1.4\Microsoft.Azure.Mobile.Client.SQLiteStore.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity.Abstractions" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
-    </Reference>
-    <Reference Include="AzureMobileClient.Helpers" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\AzureMobileClient.Helpers.4.0.0\lib\netstandard1.4\AzureMobileClient.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="AzureMobileClient.Helpers.DryIoc" Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' ">
-      <HintPath>..\..\packages\AzureMobileClient.Helpers.DryIoc.4.0.0\lib\netstandard1.4\AzureMobileClient.Helpers.DryIoc.dll</HintPath>
-    </Reference>
   </ItemGroup>
+<!--/+:cnd:noEmit -->
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -269,16 +153,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small-50x50@2x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
-    <Folder Include="i18n" Condition=" '$(Localization)' "/>
-  </ItemGroup>
-  <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
+    <None Include="project.json" />
     <None Include="Resources\iTunesArtwork@3x.png" />
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
@@ -290,7 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MobileApp\MobileApp.csproj">
-      <Project>{492AD228-B4CC-4485-A752-0F237A45B2E3}</Project>
       <Name>MobileApp</Name>
     </ProjectReference>
   </ItemGroup>
@@ -306,6 +185,4 @@
     <ITunesArtwork Include="Resources\iTunesArtwork@2x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
-  <Import Project="..\..\packages\Fody.2.1.0\build\netstandard1.4\Fody.targets" Condition="Exists('..\..\packages\Fody.2.1.0\build\netstandard1.4\Fody.targets')" />
 </Project>

@@ -1,198 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!--/-:cnd:noEmit -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <!--/+:cnd:noEmit -->
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4FEEE3AB-35C4-4FEA-9D37-5611F52B6AF2}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MobileApp.Droid</RootNamespace>
     <AssemblyName>MobileApp.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
-    <AndroidApplication>True</AndroidApplication>
-    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
-    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
-    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <JavaMaximumHeapSize />
+    <JavaOptions />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
-  <!--/-:cnd:noEmit -->
+<!--/-:cnd:noEmit -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mock|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Mock</OutputPath>
-    <DefineConstants>DEBUG;MOCK;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;MOCK;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
   </PropertyGroup>
-  <!--/+:cnd:noEmit -->
+<!--/+:cnd:noEmit -->
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.Vector.Drawable">
-      <HintPath>..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable">
-      <HintPath>..\..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v7.AppCompat.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.Design">
-      <HintPath>..\..\packages\Xamarin.Android.Support.Design.23.3.0\lib\MonoAndroid43\Xamarin.Android.Support.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.CardView">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v7.MediaRouter.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
-    </Reference>
-    <Reference Include="FormsViewGroup">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform.Android">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism">
-      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\MonoAndroid10\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Forms">
-      <HintPath>..\..\packages\Prism.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac" Condition=" '$(Container)' == 'Autofac' ">
-      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Autofac.Forms" Condition=" '$(Container)' == 'Autofac' ">
-      <HintPath>..\..packages\Prism.Autofac.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Autofac.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.DryIoc.Forms" Condition=" '$(Container)' == 'DryIoc' ">
-      <HintPath>..\..\packages\Prism.DryIoc.Forms.6.3.0.1\lib\MonoAndroid1.0\Prism.DryIoc.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="DryIoc" Condition=" '$(Container)' == 'DryIoc' ">
-      <HintPath Condition=" '$(DataProvider)' != 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
-      <HintPath Condition=" '$(DataProvider)' == 'AzureMobileClient' ">..\..\packages\DryIoc.dll.2.11.3\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Ninject.Forms" Condition=" '$(Container)' == 'Ninject' ">
-      <HintPath>..\..\packages\Prism.Ninject.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Ninject.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject" Condition=" '$(Container)' == 'Ninject' ">
-      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\monoandroid\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Unity.Forms" Condition=" '$(Container)' == 'Unity' ">
-      <HintPath>..\..\pacakges\Prism.Unity.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Unity.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity" Condition=" '$(Container)' == 'Unity' ">
-      <HintPath>..\..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation" Condition=" '$(Container)' == 'Unity' ">
-      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Android.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Crashes.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.Android.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Crashes" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Analytics.Android.Bindings" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.Android.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Analytics" Condition=" '$(UseMobileCenter)' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.12.0\lib\MonoAndroid403\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmHelpers" Condition=" '$(UseMvvmHelpers)' ">
-      <HintPath>..\..\packages\Refractored.MvvmHelpers.1.2.2\lib\portable-net45+wp80+win8+wpa81\MvvmHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="PropertyChanged">
-      <HintPath>..\..\packages\PropertyChanged.Fody.2.1.2\lib\netstandard1.3\PropertyChanged.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
-    <Reference Include="SQLitePCLRaw.core" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.2\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.lib.e_sqlite3" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.provider.e_sqlite3" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_green" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_v2" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Compression" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
-    <Reference Include="System.Net.Http" Condition=" '$(DataProvider)' == 'AzureMobileClient' " />
-    <Reference Include="Newtonsoft.Json" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Client" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.4.0.0\lib\MonoAndroid44\Microsoft.Azure.Mobile.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.SQLiteStore.4.0.0\lib\netstandard1.4\Microsoft.Azure.Mobile.Client.SQLiteStore.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity.Abstractions" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.3.0\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
-    </Reference>
-    <Reference Include="AzureMobileClient.Helpers" Condition=" '$(DataProvider)' == 'AzureMobileClient' ">
-      <HintPath>..\..\packages\AzureMobileClient.Helpers.4.0.0\lib\netstandard1.4\AzureMobileClient.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="AzureMobileClient.Helpers.DryIoc" Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' ">
-      <HintPath>..\..\packages\AzureMobileClient.Helpers.DryIoc.4.0.0\lib\netstandard1.4\AzureMobileClient.Helpers.DryIoc.dll</HintPath>
-    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -206,7 +85,7 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
-    <None Include="packages.config" />
+    <None Include="project.json" />
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -227,21 +106,9 @@
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\values-v19\" />
-    <Folder Include="i18n" Condition=" '$(Localization)' " />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MobileApp\MobileApp.csproj">
-      <Project>{492AD228-B4CC-4485-A752-0F237A45B2E3}</Project>
       <Name>MobileApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
-  <Import Project="..\..\packages\Fody.2.1.0\build\netstandard1.4\Fody.targets" Condition="Exists('..\..\packages\Fody.2.1.0\build\netstandard1.4\Fody.targets')" />
 </Project>
