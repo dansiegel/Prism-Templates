@@ -22,8 +22,8 @@
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="6.3.0" />
     <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.2.2" />
     <PackageReference Condition=" '$(Localization)' " Include="System.ComponentModel" Version="4.3.0" />
-    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Analytics" Version="0.12.0" />
-    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.12.0" />
+    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Analytics" Version="0.13.0" />
+    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.13.0" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' != 'DryIoc' " Include="AzureMobileClient.Helpers" Version="4.0.1-pre1" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.0" />
     <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.5.0" />
