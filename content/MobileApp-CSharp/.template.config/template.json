@@ -38,7 +38,7 @@
           ]
         },
         {
-          "condition": "(!IncludeUWP)",
+          "condition": "(!UWPSupported)",
           "exclude": [
             "src/MobileApp.UWP/**"
           ]
@@ -201,6 +201,14 @@
           "description": "Uses netstandard1.4 core library"
         },
         {
+          "choice": "netstandard1.5",
+          "description": "Uses netstandard1.5 core library"
+        },
+        {
+          "choice": "netstandard1.6",
+          "description": "Uses netstandard1.6 core library"
+        },
+        {
           "choice": "netstandard2.0",
           "description": "Uses netstandard2.0 core library"
         }
@@ -226,6 +234,16 @@
         }
       ]
     },
+    "AuthenticationClientId": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "",
+      "replaces": "AUTHENTICATION_CLIENT_ID"
+    },
+    "HasAuthClientId": {
+      "type": "computed",
+      "value": "(AuthenticationClientId != \"\")"
+    },
     "UseRealm": {
       "type": "computed",
       "value": "(DataProvider == \"Realm\")"
@@ -249,6 +267,10 @@
     "UnityContainer": {
       "type": "computed",
       "value": "(Container == \"Unity\")"
+    },
+    "UWPSupported": {
+      "type":"computed",
+      "value": "(IncludeUWP && Framework == \"netstandard1.4\")"
     },
     "GitInitialize": {
       "type": "parameter",

@@ -63,6 +63,10 @@
       "longName": "data-provider",
       "shortName": "data"
     },
+    "AuthenticationClientId": {
+      "longName": "auth-client-id",
+      "shortName": "client-id"
+    },
     "skipRestore": {
       "isHidden": true
     }
