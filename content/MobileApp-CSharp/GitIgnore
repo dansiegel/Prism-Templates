@@ -27,9 +27,6 @@ autom4te.cache/
 tarballs/
 test-results/
 Thumbs.db
-.droidres/
-.vs/
-.vscode/
 
 # Mac bundle stuff
 *.dmg
@@ -41,3 +38,11 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+Certificate/
+.vs/
+.vscode/
+.droidres/
+
+secrets.json
+Secrets.cs
