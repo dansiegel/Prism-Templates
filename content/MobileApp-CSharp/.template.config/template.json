@@ -238,6 +238,7 @@
       "type": "parameter",
       "datatype": "text",
       "defaultValue": "",
+      "description": "Client ID for an Authentication source such as Azure Active Directory",
       "replaces": "AUTHENTICATION_CLIENT_ID"
     },
     "HasAuthClientId": {

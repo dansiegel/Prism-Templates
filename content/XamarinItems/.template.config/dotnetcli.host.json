@@ -9,7 +9,7 @@
             "longName": "use-mvvm-helpers",
             "shortName": "umh"
         },
-        "TemplateItemType": {
+        "ItemType": {
             "longName": "item-type",
             "shortName": "item"
         },
