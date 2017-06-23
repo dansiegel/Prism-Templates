@@ -31,7 +31,7 @@ The Service Item Templates will create an interface an implementing class, and a
 
 ## Installing
 
-[![<https://img.shields.io/myget/dansiegel-templates/dt/Prism.Forms.Templates.svg>]][<https://www.myget.org/feed/dansiegel-templates/package/nuget/Prism.Forms.Templates>]
+[![Shield]][MyGetPage]
 
 ```bash
 nuget sources Add -Name "Prism-Beta-Templates" -Source https://www.myget.org/F/dansiegel-templates/api/v3/index.json
@@ -102,3 +102,6 @@ dotnet new prismitem -n "ViewD" -namespace $namespace -umh false
 
 - The Fody Weavers file is not being properly renamed and as such will need to be manually renamed. You simply need to remove either the `Normal` or `Realm` part of the file name.
 - When creating a Service item from the templates, an error occurs that prevents the creation of the empty service class though the Mock class is created.
+
+[Shield]: https://img.shields.io/myget/dansiegel-templates/vpre/Prism.Forms.Templates.svg
+[MyGetPage]: https://www.myget.org/feed/dansiegel-templates/package/nuget/Prism.Forms.Templates
