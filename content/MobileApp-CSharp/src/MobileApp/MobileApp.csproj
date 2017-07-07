@@ -6,12 +6,6 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
 
-<!--/-:cnd:noEmit -->
-  <PropertyGroup Condition=" '$(Configuration)' == 'Mock' ">
-    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
-  </PropertyGroup>
-<!--/+:cnd:noEmit -->
-
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
     <PackageReference Include="Fody" Version="2.1.0" PrivateAssets="all" />
@@ -29,14 +23,14 @@
     <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.5.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(Localization)' " Label="Localization">
+  <ItemGroup Condition=" '$(Localization)' ">
      <!-- To generate Resources with public access update the generator to 'PublicResXFileCodeGenerator' -->
     <EmbeddedResource Update="Strings\*.resx" Generator="ResXFileCodeGenerator" LastGenOutput="%(Filename).Designer.cs" />
     <Compile Update="Strings\Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
      <!--<Compile Include="Strings\Resources.es.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.es.resx" />-->
   </ItemGroup>
 
-  <ItemGroup Label="XAML">
+  <ItemGroup>
     <!-- https://bugzilla.xamarin.com/show_bug.cgi?id=55591 -->
     <None Remove="**\*.xaml" />
 
