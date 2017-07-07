@@ -8,12 +8,11 @@
     <language>en-US</language>
     <projectUrl>https://github.com/PrismLibrary/Prism.Templates</projectUrl>
     <licenseUrl>https://github.com/PrismLibrary/Prism/blob/master/LICENSE</licenseUrl>
-    
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
   </metadata>
   <files>
-    <file src="content/**" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json" target="content" />
+    <file src="content/**" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json;**\.DS_Store" target="content" />
   </files>
 </package>
