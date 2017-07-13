@@ -1,0 +1,382 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Dan Siegel",
+  "classifications": ["Xamarin", "Prism"],
+  "name": "Prism Forms Mobile App - Quickstart",
+  "groupIdentity": "PrismLibrary.Xamarin.Forms",
+  "precedence": "100",
+  "identity": "PrismLibrary.Xamarin.Forms.QuickStart.CSharp",
+  "shortName": "prismforms",
+  "thirdPartyNotices": "https://github.com/dansiegel/Prism-Templates/blob/master/template-3pn",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Company.MobileApp",
+  "preferNameDirectory": true,
+  "guids": [
+    "00000000-0000-0000-0000-000000000000", // iOS Project Id
+    "11111111-1111-1111-1111-111111111111", // Android Project Id
+    "22222222-2222-2222-2222-222222222222", // UI Test Project Id
+    "33333333-3333-3333-3333-333333333333", // PCL Project Id
+    "44444444-4444-4444-4444-444444444444", // Src Folder 
+    "55555555-5555-5555-5555-555555555555" // Tests Folder
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!IncludeiOS)",
+          "exclude": [
+            "src/Company.MobileApp.iOS/**"
+          ]
+        },
+        {
+          "condition": "(!IncludeAndroid)",
+          "exclude": [
+            "src/Company.MobileApp.Droid/**"
+          ]
+        },
+        {
+          "condition": "(!UWPSupported)",
+          "exclude": [
+            "src/Company.MobileApp.UWP/**"
+          ]
+        },
+        {
+          "condition": "(!IncludeUITest)",
+          "exclude": [
+            "tests/Company.MobileApp.UITests/**"
+          ]
+        },
+        {
+          "condition": "(!Localization)",
+          "exclude": [
+            "src/Company.MobileApp/i18n/**",
+            "src/Company.MobileApp/Resx/**",
+            "src/Company.MobileApp.iOS/i18n/**",
+            "src/Company.MobileApp.Droid/i18n/**",
+            "src/Company.MobileApp.UWP/i18n/**"
+          ]
+        },
+        {
+          "rename": {
+            "GitIgnore": ".gitignore"
+          }
+        },
+        {
+          "condition": "(UseRealm)",
+          "rename": {
+            "RealmFodyWeavers.xml": "FodyWeavers.xml"
+          },
+          "exclude": [
+            "**/NormalFodyWeavers.xml"
+          ]
+        },
+        {
+          "condition": "(!UseRealm)",
+          "rename": {
+            "NormalFodyWeavers.xml": "FodyWeavers.xml"
+          },
+          "exclude": [
+            "**/RealmFodyWeavers.xml"
+          ]
+        },
+        {
+          "condition": "(DataProvider != \"AzureMobileClient\")",
+          "exclude": [
+            "src/Company.MobileApp/Data/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols":{
+    "AppId": {
+      "type": "parameter",
+      "dataType": "text",
+      "replaces": "com.prismtemplate.name",
+      "isRequired": "true",
+      "description": "Sets the iOS Bundle Id and the Android package Id <com.company.appname>"
+    },
+    "IncludeiOS": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "Determines whether to include the iOS project"
+    },
+    "IncludeAndroid": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "Determines whether to include the Android project"
+    },
+    "IncludeUWP": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "false"
+    },
+    "IncludeUITest": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "Determines whether to include a UI Test project"
+    },
+    "Localization": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true"
+    },
+    "UseMvvmHelpers": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "Determines whether to import the Mvvm Helpers from James Montemagno and use the ViewModelBase or BindableBase for your ViewModels"
+    },
+    "UseMobileCenter": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "false",
+      "description": "Will setup Mobile Center for Crashes and Analytics"
+    },
+    "MobileCenter-iOS": {
+      "type": "parameter",
+      "dataType": "text",
+      "replaces": "MOBILECENTER-IOS-SECRET",
+      "defaultValue": "",
+      "description": "Application Secret from Mobile Center for iOS"
+    },
+    "MobileCenter-Android": {
+      "type": "parameter",
+      "dataType": "text",
+      "replaces": "MOBILECENTER-ANDROID-SECRET",
+      "defaultValue": "",
+      "description": "Application Secret from Mobile Center for Android"
+    },
+    "MobileCenter-UWP": {
+      "type": "parameter",
+      "datatype":"text",
+      "replaces": "MOBILECENTER-UWP-SECRET",
+      "defaultValue": "",
+      "description": "Application Secret from Mobile Center for UWP"
+    },
+    "Container": {
+      "type": "parameter",
+      "dataType": "choice",
+      "defaultValue": "DryIoc",
+      "choices": [
+        // {
+        //   "choice": "Autofac",
+        //   "description": "Uses Autofac as the Dependency Injection Container"
+        // },
+        {
+          "choice": "DryIoc",
+          "description": "Uses DryIoc as the Dependency Injection Container"
+        },
+        // {
+        //   "choice": "Ninject",
+        //   "description": "Uses Ninject as the Dependency Injection Container"
+        // },
+        {
+          "choice": "Unity",
+          "description": "Uses Unity as the Dependency Injection Container"
+        }
+      ],
+      "description": "The Dependency Injection Container to use"
+    },
+    "Framework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "netstandard1.4",
+      "choices": [
+        {
+          "choice": "netstandard1.4",
+          "description": "Uses netstandard1.4 core library"
+        },
+        {
+          "choice": "netstandard1.5",
+          "description": "Uses netstandard1.5 core library"
+        },
+        {
+          "choice": "netstandard1.6",
+          "description": "Uses netstandard1.6 core library"
+        },
+        {
+          "choice": "netstandard2.0",
+          "description": "Uses netstandard2.0 core library"
+        }
+      ],
+      "replaces": "NETSTANDARD_LIBRARY_VERSION"
+    },
+    "DataProvider": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "None",
+      "choices": [
+        {
+          "choice": "None",
+          "description": "No data provider"
+        },
+        {
+          "choice": "AzureMobileClient",
+          "description": "Uses the Azure Mobile Client"
+        },
+        {
+          "choice": "Realm",
+          "description": "Uses a Realm Object Server"
+        }
+      ]
+    },
+    "AuthenticationClientId": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "",
+      "description": "Client ID for an Authentication source such as Azure Active Directory",
+      "replaces": "AUTHENTICATION_CLIENT_ID"
+    },
+    "HasAuthClientId": {
+      "type": "computed",
+      "value": "(AuthenticationClientId != \"\")"
+    },
+    "UseRealm": {
+      "type": "computed",
+      "value": "(DataProvider == \"Realm\")"
+    },
+    "UseAzureMobileClient": {
+      "type": "computed",
+      "value": "(DataProvider == \"AzureMobileClient\")"
+    },
+    "AutofacContainer": {
+      "type": "computed",
+      "value": "(Container == \"Autofac\")"
+    },
+    "DryIocContainer": {
+      "type": "computed",
+      "value": "(Container == \"DryIoc\")"
+    },
+    "NinjectContainer": {
+      "type": "computed",
+      "value": "(Container == \"Ninject\")"
+    },
+    "UnityContainer": {
+      "type": "computed",
+      "value": "(Container == \"Unity\")"
+    },
+    "UWPSupported": {
+      "type":"computed",
+      "value": "(IncludeUWP && Framework == \"netstandard1.4\")"
+    },
+    "GitInitialize": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "false"
+    },
+    "skipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "If specified, skips the automatic restore of the project on create.",
+      "defaultValue": "true"
+    }
+  },
+  "primaryOutputs": [ 
+        {
+          "path": "src/Company.MobileApp/Company.MobileApp.csproj" 
+        },
+        {
+          "condition": "(IncludeAndroid)",
+          "path": "src/Company.MobileApp.Droid/Company.MobileApp.Droid.csproj"
+        },
+        {
+          "condition": "(IncludeiOS)",
+          "path": "src/Company.MobileApp.iOS/Company.MobileApp.iOS.csproj" 
+        },
+        {
+          "condition": "(IncludeUWP)",
+          "path": "src/Company.MobileApp.UWP/Company.MobileApp.UWP.csproj" 
+        },
+        {
+          "condition": "(IncludeUITest)",
+          "path": "tests/Company.MobileApp.UITests/Company.MobileApp.UITests.csproj" 
+        }
+  ],
+  "SpecialCustomOperations": {
+    "**/packages.config": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "actionableIf": [ "<!--#if" ],
+            "actionableElse": [ "#else", "<!--#else" ],
+            "actionableElseif": [ "#elseif", "<!--#elseif" ],
+            "endif": [ "#endif", "<!--#endif" ],
+            "trim" : "true",
+            "wholeLine": "true"
+          }
+        }
+      ]
+    },
+    "**/*.ps1": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "actionableIf": [ "#if", "//if" ],
+            "actionableElse": [ "#else", "//else" ],
+            "actionableElseif": [ "#elseif", "//elseif" ],
+            "endif": [ "#endif" ],
+            "trim": "true",
+            "wholeLine": "true"
+          }
+        }
+      ]
+    }
+  },
+  "defaultName": "PrismApp",
+  "postActions": [
+    // {
+    //   "condition": "(!skipRestore)",
+    //   "description": "Restore NuGet packages required by this project.",
+    //   "manualInstructions": [
+    //     { "text": "Run 'dotnet restore'" }
+    //   ],
+    //   "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+    //   "continueOnError": true
+    // },
+    // {
+    //   "condition": "(AllowScripts)",
+    //   "description": "Run 'git init'",
+    //   "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    //   "manualInstructions": [
+    //     { "text": "Run 'git init'" }
+    //   ],
+    //   "args": {
+    //     "executable": "git",
+    //     "args": "init"
+    //   }
+    // }
+    // {
+    //   "condition": "(AllowScripts == \"yes\")",
+    //   "description": "Run 'git add *'",
+    //   "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    //   "manualInstructions": [
+    //     { "text": "Run 'git add *'" }
+    //   ],
+    //   "args": {
+    //     "executable": "git",
+    //     "args": "add *"
+    //   }
+    // },
+    // {
+    //   "condition": "(AllowScripts == \"yes\")",
+    //   "description": "Run 'git commit'",
+    //   "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+    //   "manualInstructions": [
+    //     { "text": "Run 'git commit -m \"Initial Commit\"'" }
+    //   ],
+    //   "args": {
+    //     "executable": "git",
+    //     "args": "commit -m \"Initial Commit\""
+    //   }
+    // }
+  ]
+}

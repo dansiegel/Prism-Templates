@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="Main Page"
+             x:Class="Company.MobileApp.Views.MainPage">
+
+    <ListView ItemsSource="{Binding TodoItems}">
+        <ListView.Behaviors>
+            <behaviors:EventToCommandBehavior Command="{Binding TodoItemTappedCommand}" 
+                                              EventName="ItemTapped"
+                                              EventArgsParameterPath="Item" />
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

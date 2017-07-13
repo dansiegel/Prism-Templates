@@ -1,0 +1,15 @@
+<Project InitialTargets="Secrets">
+
+<!--/-:cnd:noEmit -->
+  <Target Name="Secrets">
+    <PropertyGroup>
+      <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+      <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
+      <ScriptLocation Condition=" '$(ScriptLocation)'=='' ">$(SolutionDir)\Secrets.ps1</ScriptLocation>
+    </PropertyGroup>
+    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -Command &quot;&amp; { &amp;$(ScriptLocation) -RootNamespace &apos;$(RootNamespace)&apos; -ProjectPath &apos;$(ProjectDir)&apos; }&quot;"
+          Condition=" Exists('$(ScriptLocation)') And Exists('$(PowerShellExe)') " />
+  </Target>
+<!--/+:cnd:noEmit -->
+
+</Project>
