@@ -34,7 +34,6 @@ namespace Company.MobileApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            SetupLogging();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage?todo=Item1&todo=Item2&todo=Item3");
         }
@@ -58,24 +57,6 @@ namespace Company.MobileApp
         protected override void OnResume()
         {
             // Handle when your app resumes
-        }
-
-        private void SetupLogging()
-        {
-            // By default, PrismApplication sets the logger to use the included DebugLogger,
-            // which uses System.Diagnostics.Debug.WriteLine to print your message. If you have
-            // overridden the default DebugLogger, you will need to update the Logger here to
-            // ensure that any calls to your logger in the App.xaml.cs will use your logger rather
-            // than the default DebugLogger.
-#if (NinjectContainer)
-            Logger = Container.Get<ILoggerFacade>();
-#else
-            Logger = Container.Resolve<ILoggerFacade>();
-#endif
-            TaskScheduler.UnobservedTaskException += ( sender, e ) =>
-            {
-                Logger.Log(e.Exception.ToString(), Category.Exception, Priority.High);
-            };
         }
     }
 }

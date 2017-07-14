@@ -11,9 +11,7 @@ namespace Company.MobileApp.Models
         public string Name { get; set; }
 
         public bool Done { get; set; }
-#if (!UseAzureMobileClient && !UseRealm)
 
         public event PropertyChangedEventHandler PropertyChanged;
-#endif
     }
 }
