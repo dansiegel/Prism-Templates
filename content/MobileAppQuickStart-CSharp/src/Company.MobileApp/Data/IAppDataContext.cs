@@ -1,7 +1,7 @@
 using AzureMobileClient.Helpers;
-using MobileApp.Models;
+using Company.MobileApp.Models;
 
-namespace MobileApp.Data
+namespace Company.MobileApp.Data
 {
     public interface IAppDataContext
     {

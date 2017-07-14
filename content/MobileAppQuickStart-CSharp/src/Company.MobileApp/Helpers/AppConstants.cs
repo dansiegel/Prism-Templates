@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Company.MobileApp.Helpers
 {
     public static class AppConstants
