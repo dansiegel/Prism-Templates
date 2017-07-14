@@ -65,7 +65,7 @@ namespace Company.MobileApp.Data
 
         public override ICloudTable<T> Table<T>() =>
             _container.Resolve<ICloudTable<T>>();
-#if (NinjectContainer)
+#elseif (NinjectContainer)
 
         public override ICloudSyncTable<T> SyncTable<T>() =>
             _kernel.Get<ICloudSyncTable<T>>();

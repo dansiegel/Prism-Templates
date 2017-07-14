@@ -1,5 +1,6 @@
 ﻿using System;
 #if (UseAzureMobileClient)
+using Android.App;
 using AzureMobileClient.Helpers.Accounts;
 #endif
 #if (AutofacContainer)

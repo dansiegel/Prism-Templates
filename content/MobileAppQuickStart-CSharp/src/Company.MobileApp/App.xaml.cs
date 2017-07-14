@@ -121,6 +121,9 @@ namespace Company.MobileApp
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+            // Navigating to "TabbedPage?tab=ViewA&tab=ViewB&tab=ViewC will generate a TabbedPage
+            // with three tabs for ViewA, ViewB, & ViewC
+            Container.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
 #if (AutofacContainer)
 
             builder.Update(Container);

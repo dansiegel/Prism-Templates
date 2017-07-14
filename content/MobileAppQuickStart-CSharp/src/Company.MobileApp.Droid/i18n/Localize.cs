@@ -1,8 +1,8 @@
 using System.Globalization;
 using System.Threading;
-using MobileApp.i18n;
+using Company.MobileApp.i18n;
 
-namespace MobileApp.Droid.i18n
+namespace Company.MobileApp.Droid.i18n
 {
     public class Localize : ILocalize
     {

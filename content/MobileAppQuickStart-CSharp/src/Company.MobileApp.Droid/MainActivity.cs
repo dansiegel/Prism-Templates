@@ -29,7 +29,11 @@ namespace Company.MobileApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+#if (UseAzureMobileClient)
+            LoadApplication(new App(new AndroidInitializer(Application)));
+#else
             LoadApplication(new App(new AndroidInitializer()));
+#endif
         }
     }
 }

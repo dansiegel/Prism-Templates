@@ -5,6 +5,7 @@ using MvvmHelpers;
 #else
 using System.Collections.ObjectModel;
 #endif
+using Prism.AppModel;
 using Prism.Commands;
 #if (!UseMvvmHelpers)
 using Prism.Mvvm;
@@ -18,23 +19,22 @@ using Company.MobileApp.Strings;
 
 namespace Company.MobileApp.ViewModels
 {
-#if (UseMvvmHelpers)
-    public class MainPageViewModel : BaseViewModel, INavigatedAware
-#else
-    public class MainPageViewModel : BindableBase, INavigatedAware
-#endif
+    public class MainPageViewModel : ViewModelBase
     {
         private IPageDialogService _pageDialogService { get; }
-        public MainPageViewModel(IPageDialogService pageDialogService)
+
+        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+                             IDeviceService deviceService, IPageDialogService pageDialogService)
+            : base(navigationService, applicationStore, deviceService)
         {
             _pageDialogService = pageDialogService;
 
-#if (UseMvvmHelpers)
-    #if (Localization)
+#if (Localization)
             Title = Resources.MainPageTitle;
-    #else
+#else
             Title = "Main Page";
-    #endif
+#endif
+#if (UseMvvmHelpers)
             TodoItems = new ObservableRangeCollection<TodoItem>();
 #else
             TodoItems = new ObservableCollection<TodoItem>();
@@ -50,11 +50,7 @@ namespace Company.MobileApp.ViewModels
 
         public DelegateCommand<TodoItem> TodoItemTappedCommand { get; }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
-        {
-        }
-
-        public void OnNavigatedTo(NavigationParameters parameters)
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
 #if (UseMvvmHelpers)
             TodoItems.AddRange(parameters.GetValues<string>("todo")

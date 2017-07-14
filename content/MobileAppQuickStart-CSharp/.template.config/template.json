@@ -330,6 +330,21 @@
           }
         }
       ]
+    },
+    "**/*.txt": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "actionableIf": [ "#if", "//if" ],
+            "actionableElse": [ "#else", "//else" ],
+            "actionableElseif": [ "#elseif", "//elseif" ],
+            "endif": [ "#endif" ],
+            "trim": "true",
+            "wholeLine": "true"
+          }
+        }
+      ]
     }
   },
   "defaultName": "PrismApp",
