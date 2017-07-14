@@ -85,6 +85,7 @@
         {
           "condition": "(DataProvider != \"AzureMobileClient\")",
           "exclude": [
+            "src/Company.MobileApp/Auth/**",
             "src/Company.MobileApp/Data/**"
           ]
         }

@@ -27,6 +27,15 @@ namespace Company.MobileApp.Droid
 {
     public class AndroidInitializer : IPlatformInitializer
     {
+#if (UseAzureMobileClient)
+        private Application CurrentApplication { get; }
+
+        public AndroidInitializer(Application application)
+        {
+            CurrentApplication = application;
+        }
+
+#endif
 #if (AutofacContainer || DryIocContainer)
         public void RegisterTypes(IContainer container)
 #endif
@@ -55,15 +64,19 @@ namespace Company.MobileApp.Droid
             container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
 #endif
 #if (UseAzureMobileClient && AutofacContainer)
+            builder.RegisterInstance(CurrentApplication).As<Application>().SingleInstance();
             builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
 #endif
 #if (UseAzureMobileClient && DryIocContainer)
+            container.UseInstance(CurrentApplication);
             container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
 #endif
 #if (UseAzureMobileClient && NinjectContainer)
+            container.Bind<Application>().ToConstant(CurrentApplication).InSingletonScope();
             container.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
 #endif
 #if (UseAzureMobileClient && UnityContainer)
+            container.RegisterInstance(CurrentApplication);
             container.RegisterType<ISecureStore, SecureStore>(new ContainerControlledLifetimeManager());
 #endif
 #if (AutofacContainer)

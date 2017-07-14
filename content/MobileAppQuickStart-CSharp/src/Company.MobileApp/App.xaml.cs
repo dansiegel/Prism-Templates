@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Company.MobileApp.Services;
 using Company.MobileApp.Views;
 #if (AutofacContainer)
 using Autofac;
@@ -18,8 +19,8 @@ using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
 #if (UseMobileCenter || UseAzureMobileClient)
-using Company.MobileApp.Helpers;
 using Company.MobileApp.Data;
+using Company.MobileApp.Helpers;
 #endif
 #if (UseMobileCenter)
 using Microsoft.Azure.Mobile;
@@ -27,6 +28,7 @@ using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 #endif
 #if (UseAzureMobileClient)
+using Company.MobileApp.Auth;
 using AzureMobileClient.Helpers;
 using AzureMobileClient.Helpers.Accounts;
 using Microsoft.WindowsAzure.MobileServices;
@@ -34,6 +36,8 @@ using Microsoft.WindowsAzure.MobileServices;
 using Prism.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+// For compatibility with Prism 6.3. Prism 7 removes the non-working Debug Logger.
+using DebugLogger = Company.MobileApp.Services.DebugLogger;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Company.MobileApp
@@ -63,6 +67,9 @@ namespace Company.MobileApp
 
         protected override void RegisterTypes()
         {
+#if (AutofacContainer)
+            var builder = new ContainerBuilder();
+#endif
 #if (UseAzureMobileClient)
     #if (DryIocContainer)
             // ICloudTable is only needed for Online Only data
@@ -70,22 +77,21 @@ namespace Company.MobileApp
             Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
 
             // If you are not using Authentication
-            Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
+            // Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
 
             // If you are using Authentication
             // If using Facebook or some other 3rd Party OAuth provider be sure to register ILoginProvider
             // in IPlatformServices in your Platform Project. If you are using a custom auth provider, you may
             // be able to author an ILoginProvider from shared code.
-            // Container.Register<IAzureCloudServiceOptions, AppServiceContextOptions>(Reuse.Singleton);
-            Container.Register<AppDataContext>(Reuse.Singleton);
-            // Container.Register<ICloudService>(reuse: Reuse.Singleton,
-            //                                   made: Made.Of(() => Arg.Of<AppDataContext>()));
-            Container.Register<IAppDataContext>(reuse: Reuse.Singleton,
-                                                made: Made.Of(() => Arg.Of<AppDataContext>()));
-            // Container.Register<IMobileServiceClient>(reuse: Reuse.Singleton,
-            //                                          made: Made.Of(() => Arg.Of<AppDataContext>().Client));
+            Container.Register<IAzureCloudServiceOptions, AppServiceContextOptions>(Reuse.Singleton);
+            Container.RegisterMany<AppDataContext>(Reuse.Singleton,
+                                                   serviceTypeCondition: type => type == typeof(AppDataContext) ||
+                                                   type == typeof(IAppDataContext) ||
+                                                   type == typeof(ICloudService));
+            Container.Register<IMobileServiceClient>(reuse: Reuse.Singleton,
+                                                     made: Made.Of(() => Arg.Of<AppDataContext>().Client));
             Container.Register<IAccountStore,AccountStore>(Reuse.Singleton);
-            Container.Register<ILoginProvider,LoginProvider(Reuse.Singleton);
+            Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
     #endif
     #if (UnityContainer)
             Container.RegisterType(typeof(IGenericClass<>), typeof(GenericClass<>));
@@ -109,11 +115,16 @@ namespace Company.MobileApp
             // Container.RegisterType<IMobileServiceClient>(reuse: Reuse.Singleton,
             //                                          made: Made.Of(() => Arg.Of<AppDataContext>().Client));
             Container.RegisterType<IAccountStore,AccountStore>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ILoginProvider,LoginProvider(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ILoginProvider,LoginProvider>(new ContainerControlledLifetimeManager());
     #endif
 #endif
+
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+#if (AutofacContainer)
+
+            builder.Update(Container);
+#endif
         }
 
         protected override void OnStart()
@@ -135,17 +146,19 @@ namespace Company.MobileApp
             // Handle when your app resumes
         }
 
+        protected override ILoggerFacade CreateLogger() => new DebugLogger();
+
         private void SetupLogging()
         {
-            // By default, PrismApplication sets the logger to use the included DebugLogger,
+            // By default, we set the logger to use the included DebugLogger,
             // which uses System.Diagnostics.Debug.WriteLine to print your message. If you have
             // overridden the default DebugLogger, you will need to update the Logger here to
             // ensure that any calls to your logger in the App.xaml.cs will use your logger rather
             // than the default DebugLogger.
 #if (NinjectContainer)
-            Logger = Container.Get<ILoggerFacade>();
+            //Logger = Container.Get<ILoggerFacade>();
 #else
-            Logger = Container.Resolve<ILoggerFacade>();
+            //Logger = Container.Resolve<ILoggerFacade>();
 #endif
             TaskScheduler.UnobservedTaskException += ( sender, e ) =>
             {
