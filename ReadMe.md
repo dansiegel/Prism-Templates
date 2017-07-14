@@ -1,6 +1,6 @@
 # Prism Quickstart Templates
 
-These templates are a prototype for the official Prism Templates to be released later this year. These templates will be released separately and in parallel. These templates have several major changes from the traditional templates you are used to from Xamarin or Prism.
+These templates are a prototype for the official Prism Templates. These templates have several major changes from the traditional templates you are used to from Xamarin or Prism.
 
 The core project uses netstandard1.4 by default, and can be overridden to use netstandard1.5, netstandard1.6 or netstandard2.0. Localization is supported and ready to go out of the box with this template.
 
@@ -31,17 +31,19 @@ The Service Item Templates will create an interface an implementing class, and a
 
 ## Installing
 
-[![Shield]][MyGetPage]
+[![NuGetShield]][NuGetPage]
+
+Currently it is recommended that you have at least at least the [DotNet CLI 2.0 preview 3](https://github.com/dotnet/cli/tree/release/2.0.0) or later.
 
 ```bash
-nuget sources Add -Name "Prism-Beta-Templates" -Source https://www.myget.org/F/dansiegel-templates/api/v3/index.json
-dotnet new -i Prism.Forms.Templates::*
+dotnet new -i Prism.Forms.QuickstartTemplates::1.0.0-*
 ```
 
 ```bash
 # Support for installing directly from a Git Repo has not been introduced and as such it must be done locally
 git clone https://github.com/dansiegel/Prism-Templates.git
-dotnet new --install Prism-Templates/content/MobileApp-CSharp/
+dotnet new --install Prism-Templates/content/MobileAppEmpty-CSharp/
+dotnet new --install Prism-Templates/content/MobileAppQuickStart-CSharp/
 dotnet new --install Prism-Templates/content/XamarinItems/
 ```
 
@@ -104,5 +106,7 @@ dotnet new prismitem -n "ViewD" -namespace $namespace -umh false
 - When creating a Service item from the templates, an error occurs that prevents the creation of the empty service class though the Mock class is created.
 - When creating a UWP project there is currently no way to update the project with a new temporary signing certificate.
 
-[Shield]: https://img.shields.io/myget/dansiegel-templates/vpre/Prism.Forms.Templates.svg
+[MyGetShield]: https://img.shields.io/myget/dansiegel-templates/vpre/Prism.Forms.Templates.svg
 [MyGetPage]: https://www.myget.org/feed/dansiegel-templates/package/nuget/Prism.Forms.Templates
+[NuGetShield]: https://img.shields.io/nuget/vpre/Prism.Forms.QuickstartTemplates.svg
+[NuGetPage]: https://www.nuget.org/packages/Prism.Forms.QuickstartTemplates
