@@ -53,26 +53,42 @@ Currently the Visual Studio team is working on integration with dotnet templates
 
 To create a new Project using the Prism Template you must specify an App Id which should follow the format of `com.somecompany.yourappname`.
 
+There are two project templates and one item template that is installed with this package. Note that the two project templates may be grouped and as such you will only see one listed in the installed templates even though they are both successfully installed.
+
+| Template Name | Short Name |
+|---------------|:----------:|
+| Prism Forms Mobile App - Quickstart | prismforms |
+| Prism Forms Mobile App - Empty | prismformsempty |
+| Prism Forms Item Templates | prismitem |
+
+### Listing Template Options
+
+```bash
+dotnet new prismitem -h
+dotnet new prismforms -h
+dotnet new prismformsempty -h
+```
+
 ### Basic App Creation
 
-Note that basic app creation will give you a solution with projects for iOS, Android, a Shared .NET Standard 1.4 library and a UI Test project.
+Note that basic app creation will give you a solution with projects for iOS, Android, a Shared .NET Standard 1.4 library and a UI Test project. This will work the exact same for either the Empty or QuickStart template.
 
 ```bash
 # To create an app inside of an empty directory or an app that will take the name of the parent directory
-dotnet new prismforms -id "com.contoso.awesomeapp"
+dotnet new prismformsempty -id "com.contoso.awesomeapp"
 
 # To create an app in a new directory
-dotnet new prismforms -id "com.contoso.awesomeapp" -o AwesomeApp
+dotnet new prismformsempty -id "com.contoso.awesomeapp" -o AwesomeApp
 
 # To create an app with a specific name in the current directory
-dotnet new prismforms -id "com.contoso.awesomeapp" -n "Contoso.AwesomeApp"
+dotnet new prismformsempty -id "com.contoso.awesomeapp" -n "Contoso.AwesomeApp"
 ```
 
 ### Advanced App Creation
 
 ```bash
 dotnet new prismforms -id "com.contoso.awesomeapp" --use-mobile-center true -ios-secret "{your iOS secret}" -android-secret "{your Android secret}"
-dotnet new prismforms -id "com.contoso.awesomeapp" -data "AzureMobileClient" -framework "netstandard1.5" -client-id "your Authentication Client Id"
+dotnet new prismforms -id "com.contoso.awesomeapp" -data "AzureMobileClient" -fr "netstandard1.5" -client-id "{Your Authentication Client Id}"
 ```
 
 ### Creating Prism Items
@@ -102,9 +118,10 @@ dotnet new prismitem -n "ViewD" -namespace $namespace -umh false
 
 ### Known Issues
 
+NOTE: These issues are fixed when using version 2.0 pre3 or later of the dotnet cli.
+
 - The Fody Weavers file is not being properly renamed and as such will need to be manually renamed. You simply need to remove either the `Normal` or `Realm` part of the file name.
 - When creating a Service item from the templates, an error occurs that prevents the creation of the empty service class though the Mock class is created.
-- When creating a UWP project there is currently no way to update the project with a new temporary signing certificate.
 
 [MyGetShield]: https://img.shields.io/myget/dansiegel-templates/vpre/Prism.Forms.Templates.svg
 [MyGetPage]: https://www.myget.org/feed/dansiegel-templates/package/nuget/Prism.Forms.Templates
