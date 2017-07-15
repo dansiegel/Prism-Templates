@@ -4,3 +4,11 @@ These templates use several third party libraries
  - Xamarin Forms - https://github.com/xamarin/Xamarin.Forms/blob/master/LICENSE
  - Mvvm Helpers - https://github.com/jamesmontemagno/mvvm-helpers/blob/master/LICENSE.md
  - Mobile Center - https://github.com/Microsoft/mobile-center-sdk-dotnet/blob/master/license.txt
+ - Refractored MVVM Helpers - https://github.com/jamesmontemagno/mvvm-helpers/blob/master/LICENSE.md
+ - Azure Mobile Apps .NET Client - https://github.com/Azure/azure-mobile-apps-net-client/blob/master/LICENSE.txt
+ - AzureMobileClient.Helpers - https://github.com/dansiegel/AzureMobileClient.Helpers/blob/master/LICENSE
+ - Realm - https://github.com/realm/realm-dotnet/blob/master/license.txt
+ - Fody - https://github.com/Fody/Fody/blob/master/License.txt
+ - PropertyChanged.Fody - https://github.com/Fody/PropertyChanged/blob/master/license.txt
+ - Rg.Plugins.Popup - https://github.com/rotorgames/Rg.Plugins.Popup/blob/master/LICENSE.md
+ 
