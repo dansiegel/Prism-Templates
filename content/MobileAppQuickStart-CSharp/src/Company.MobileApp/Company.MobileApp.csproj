@@ -14,6 +14,10 @@
     <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="6.3.0.1" />
     <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="6.3.0" />
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="6.3.0" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Plugin.Popups.Autofac" Version="1.1.0" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.Plugin.Popups.DryIoc" Version="1.1.0" />
+    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Plugin.Popups.Ninject" Version="1.1.0" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Plugin.Popups.Unity" Version="1.1.0" />
     <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.3.2.47-beta" />
     <PackageReference Condition=" '$(Localization)' " Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Analytics" Version="0.14.0" />
