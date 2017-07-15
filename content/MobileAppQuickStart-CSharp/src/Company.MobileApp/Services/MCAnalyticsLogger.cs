@@ -8,8 +8,9 @@ namespace Company.MobileApp.Services
     {
         public void Log(string message, Category category, Priority priority)
         {
-            Analytics.TrackEvent(category.ToString(), new Dictionary<string, string>
+            Analytics.TrackEvent($"{category}", new Dictionary<string, string>
             {
+                { "logger", nameof(ILoggerFacade) },
                 { "priority", $"{priority}" },
                 { "message", message }
             });
