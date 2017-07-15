@@ -76,6 +76,8 @@ namespace Company.MobileApp
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
             Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
 
+            Container.Register<ILoggerFacade, MCAnalyticsLogger>(Reuse.Singleton);
+
             // If you are not using Authentication
             // Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
 
@@ -94,10 +96,11 @@ namespace Company.MobileApp
             Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
     #endif
     #if (UnityContainer)
-            Container.RegisterType(typeof(IGenericClass<>), typeof(GenericClass<>));
             // ICloudTable is only needed for Online Only data
-            Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
-            Container.RegisterType(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
+            Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), new ContainerControlledLifetimeManager());
+            Container.RegisterType(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), new ContainerControlledLifetimeManager());
+
+            Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
 
             // If you are not using Authentication
             Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
@@ -136,6 +139,8 @@ namespace Company.MobileApp
 #if (UseMobileCenter)
             MobileCenter.Start(AppConstants.MobileCenterStart,
                                 typeof(Analytics), typeof(Crashes));
+
+            Logger = Container.Resolve<ILoggerFacade>();
 #endif
         }
 
