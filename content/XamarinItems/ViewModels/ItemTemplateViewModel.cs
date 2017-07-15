@@ -20,81 +20,15 @@ using MobileApp.Models;
 
 namespace MobileApp.ViewModels
 {
-#if (UseMvvmHelpers)
-    #if (IsIActiveAware && IsINavigationAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigationAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigationAware
-    #endif
-    #elseif (IsIActiveAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BaseViewModel, IActiveAware, INavigatingAware
-    #endif
-    #elseif (IsINavigatedAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BaseViewModel, INavigatedAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BaseViewModel, INavigatedAware
-    #endif
-    #elseif (IsINavigationAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BaseViewModel, INavigationAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BaseViewModel, INavigationAware
-    #endif
-    #else
-    #if (IDestructible)
-    public class ItemTemplateViewModel : BaseViewModel, IDestructible
-    #else
-    public class ItemTemplateViewModel : BaseViewModel
-    #endif
-    #endif
-#else
-    #if (IsIActiveAware && IsINavigationAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigationAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigationAware
-    #endif
-    #elseif (IsIActiveAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigatingAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BindableBase, IActiveAware, INavigatingAware
-    #endif
-    #elseif (IsINavigatedAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BindableBase, INavigatedAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BindableBase, INavigatedAware
-    #endif
-    #elseif (IsINavigationAware)
-    #if (IsIDestructible)
-    public class ItemTemplateViewModel : BindableBase, INavigationAware, IDestructible
-    #else
-    public class ItemTemplateViewModel : BindableBase, INavigationAware
-    #endif
-    #else
-    #if (IDestructible)
-    public class ItemTemplateViewModel : BindableBase, IDestructible
-    #else
-    public class ItemTemplateViewModel : BindableBase
-    #endif
-    #endif
-#endif
+    public class ItemTemplateViewModel : ViewModelBase
     {
-        private INavigationService _navigationService { get; }
-
-        public ItemTemplateViewModel(INavigationService navigationService)
+        public ItemTemplateViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+                                       IDeviceService deviceService) 
+            : base(navigationService, applicationStore, deviceService)
         {
-            _navigationService = navigationService;
-            #if (UseMvvmHelpers)
             Title = Resources.ItemTemplateTitle;
-            #endif
             #if (IsMasterDetailPage)
+
             NavigateCommand = new DelegateCommand<string>(OnNavigateCommandExecuted);
             #endif
         }
@@ -104,32 +38,48 @@ namespace MobileApp.ViewModels
 #endif
 #if (IsIActiveAware)
 
-        public event EventHandler IsActiveChanged;
+        protected override void OnIsActive()
+        { 
+            // TODO: Handle anything that needs to be done when the View goes active
+        }
 
-        public bool IsActive { get; set; }
+        protected override void OnIsNotActive()
+        { 
+            // TODO: Handle anything that needs to be done when the View goes inactive
+        }
 #endif
 #if (IsINavigatingAware || IsIActiveAware || IsINavigationAware)
 
-        public void OnNavigatingTo(NavigationParameters parameters)
+        public override void OnNavigatingTo(NavigationParameters parameters)
         {
             // TODO: Implement your initialization logic
         }
 #endif
 #if (IsINavigatedAware || IsINavigationAware)
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
+        public override void OnNavigatedFrom(NavigationParameters parameters)
         {
             // TODO: Handle any final tasks before you navigate away
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            // TODO: Handle anything tasks you need to now that the page has been pushed to the Navigation Stack
+            switch(parameters.GetNavigationMode())
+            {
+                case NavigationMode.Back:
+                    // TODO: Handle any tasks that should occur only when navigated back to
+                    break;
+                case NavigationMode.New:
+                    // TODO: Handle any tasks that should occur only when navigated to for the first time
+                    break;
+            }
+
+            // TODO: Handle any tasks that should be done every time OnNavigatedTo is triggered
         }
 #endif
 #if (IsIDestructible)
 
-        public void Destroy()
+        public override void Destroy()
         {
             // TODO: Dispose of any objects you need to for memory management
         }
@@ -138,23 +88,6 @@ namespace MobileApp.ViewModels
 
         private async void OnNavigateCommandExecuted(string pageName) =>
             await _navigationService.NavigateAsync($"NavigationPage/{pageName}");
-#endif
-#if (IsIActiveAware)
-
-        private void OnIsActiveChanged()
-        {
-            #if (UseMvvmHelpers)
-            IsBusy = true;
-            #endif
-            // TODO: Implement your refresh logic
-            #if (UseMvvmHelpers)
-
-            IsBusy = false;
-            #endif
-            
-            // Notify anything that might be listening to the Event
-            IsActiveChanged?.Invoke(this, EventArgs.Empty);
-        }
 #endif
     }
 }
