@@ -62,7 +62,11 @@ namespace Company.MobileApp
             localize.SetLocale(Strings.Resources.Culture = localize.GetCurrentCultureInfo());
 
 #endif
+#if (UseAzureMobileClient || UseRealm)
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+#else
             await NavigationService.NavigateAsync("NavigationPage/MainPage?todo=Item1&todo=Item2&todo=Item3");
+#endif
         }
 
         protected override void RegisterTypes()
