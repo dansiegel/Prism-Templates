@@ -14,6 +14,7 @@ using Prism.Common;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Xamarin.Forms;
+using Company.MobileApp.Behaviors;
 
 namespace Company.MobileApp.Views
 {
@@ -55,10 +56,12 @@ namespace Company.MobileApp.Views
                     {
                         case null:
                             page = CreatePage(segment);
+                            page.Behaviors.Add(new IsActiveAwareBehavior());
                             PageUtilities.OnNavigatingTo(page, parameters);
                             break;
                         case NavigationPage navPage:
                             var childPage = CreatePage(segment);
+                            childPage.Behaviors.Add(new IsActiveAwareBehavior());
                             PageUtilities.OnNavigatingTo(childPage, parameters);
                             await navPage.PushAsync(childPage);
                             break;

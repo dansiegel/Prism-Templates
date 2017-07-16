@@ -11,6 +11,11 @@ namespace Company.MobileApp.Views
             foreach(var child in Children)
             {
                 PageUtilities.OnNavigatingTo(child, parameters);
+
+                if(child is NavigationPage navPage)
+                {
+                    PageUtilities.OnNavigatingTo(navPage.CurrentPage, parameters);
+                }
             }
         }
     }
