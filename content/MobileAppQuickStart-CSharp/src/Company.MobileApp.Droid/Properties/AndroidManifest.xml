@@ -3,6 +3,7 @@
     <uses-sdk android:minSdkVersion="17" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application android:label="MobileApp">
+    <!--#if (AADAuth || AADB2CAuth) -->
         <activity android:name="microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -11,5 +12,6 @@
                 <data android:scheme="msalAUTHENTICATION_CLIENT_ID" android:host="auth" />
             </intent-filter>
         </activity>
+    <!--#endif -->
     </application>
 </manifest>

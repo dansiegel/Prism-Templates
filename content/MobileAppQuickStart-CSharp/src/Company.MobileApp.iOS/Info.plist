@@ -42,6 +42,7 @@
     </array>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+<!--#if (AADAuth || AADB2CAuth) -->
     <array>
         <dict>
             <key>CFBundleURLSchemes</key>
@@ -50,5 +51,6 @@
             </array>
         </dict>
     </array>
+<!--#endif -->
 </dict>
 </plist>
