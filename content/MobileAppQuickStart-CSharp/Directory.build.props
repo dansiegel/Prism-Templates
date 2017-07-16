@@ -9,6 +9,7 @@
     <IsWindows Condition=" '$(IsWindows)' == '' ">false</IsWindows>
     <IsUnix Condition=" '$(OS)' == 'Unix' ">true</IsUnix>
     <IsUnix Condition=" '$(IsUnix)' == '' ">false</IsUnix>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <!-- VS4Mac executes using the Mono Runtime & provides no way for us to know -->
