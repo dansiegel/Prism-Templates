@@ -13,6 +13,9 @@ namespace Company.MobileApp.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
+#if (IncludeBarcodeService)
+            global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+#endif
 
 //-:cnd:noEmit
             // Code for starting up the Xamarin Test Cloud Agent

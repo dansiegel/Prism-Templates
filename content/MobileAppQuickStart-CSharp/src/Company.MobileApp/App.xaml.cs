@@ -44,6 +44,11 @@ using Company.MobileApp.Helpers;
 using Realms;
 using Realms.Sync;
 #endif
+#if (IncludeBarcodeService)
+using Rg.Plugins.Popup.Contracts;
+using Rg.Plugins.Popup.Services;
+using BarcodeScanner;
+#endif
 using Prism.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -88,11 +93,11 @@ namespace Company.MobileApp
 #endif
 #if (UseMobileCenter)
     #if (AutofacContainer)
-            // TODO: Register the Mobile Center Analytics Logger
+            builder.Register(ctx => new MCAnalyticsLogger()).As<ILoggerFacade>().SingleInstance();
     #elseif (DryIocContainer)
             Container.Register<ILoggerFacade, MCAnalyticsLogger>(Reuse.Singleton);
     #elseif (NinjectContainer)
-            // TODO: Register the Mobile Center Analytics Logger
+            Container.Bind<ILoggerFacade>().To<MCAnalyticsLogger>().InSingletonScope();
     #else
             Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
     #endif
@@ -101,8 +106,12 @@ namespace Company.MobileApp
     #if (AutofacContainer)
         // TODO: generically register ICloudTable<> as AzureCloudTable<>
         // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+        #if (NoAuth)
         // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
-
+        #else
+            #if (AADAuth || AADB2CAuth)
+            // TODO: Register an instance of IPublicClientApplication
+            #endif
         // TODO: if you are using authentication see below
         /* 
          * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
@@ -113,6 +122,7 @@ namespace Company.MobileApp
          * Register => IAccountStore <-> AccountStore
          * Register => ILoginProvider <-> LoginProvider
          */
+        #endif
     #elseif (DryIocContainer)
             // ICloudTable is only needed for Online Only data
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
@@ -145,8 +155,12 @@ namespace Company.MobileApp
     #elseif (NinjectContainer)
         // TODO: generically register ICloudTable<> as AzureCloudTable<>
         // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+        #if (NoAuth)
         // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
-
+        #else
+            #if (AADAuth || AADB2CAuth)
+            // TODO: Register an instance of IPublicClientApplication
+            #endif
         // TODO: if you are using authentication see below
         /* 
          * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
@@ -157,28 +171,34 @@ namespace Company.MobileApp
          * Register => IAccountStore <-> AccountStore
          * Register => ILoginProvider <-> LoginProvider
          */
+        #endif
     #elseif (UnityContainer)
             // ICloudTable is only needed for Online Only data
             Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), new ContainerControlledLifetimeManager());
             Container.RegisterType(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), new ContainerControlledLifetimeManager());
 
-            // If you are not using Authentication
+        #if (NoAuth)
             Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
-
-            // If you are using Authentication
-            // If using Facebook or some other 3rd Party OAuth provider be sure to register ILoginProvider
-            // in IPlatformServices in your Platform Project. If you are using a custom auth provider, you may
-            // be able to author an ILoginProvider from shared code.
-            // Container.RegisterType<IAzureCloudServiceOptions, AppServiceContextOptions>(new ContainerControlledLifetimeManager());
             Container.RegisterType<AppDataContext>(new ContainerControlledLifetimeManager());
-            // Container.RegisterType<ICloudService>(reuse: Reuse.Singleton,
-            //                                   made: Made.Of(() => Arg.Of<AppDataContext>()));
-            // Container.RegisterType<IAppDataContext>(reuse: Reuse.Singleton,
-                                                //made: Made.Of(() => Arg.Of<AppDataContext>()));
-            // Container.RegisterType<IMobileServiceClient>(reuse: Reuse.Singleton,
-            //                                          made: Made.Of(() => Arg.Of<AppDataContext>().Client));
+            Container.RegisterType<IAppDataContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+            Container.RegisterType<ICloudAppContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+        #else
+            #if (AADAuth || AADB2CAuth)
+            Container.RegisterInstance<IPublicClientApplication>(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
+            {
+                RedirectUri = AppConstants.RedirectUri
+            });
+            #endif
+            
+            Container.RegisterType<IAzureCloudServiceOptions, AppServiceContextOptions>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<AppDataContext>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IAppDataContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+            Container.RegisterType<ICloudService>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+            Container.RegisterType<IMobileServiceClient>(new InjectionFactory(c => c.Resolve<ICloudService>().Client));
+
             Container.RegisterType<IAccountStore,AccountStore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILoginProvider,LoginProvider>(new ContainerControlledLifetimeManager());
+        #endif
     #endif
 #endif
 #if (UseRealm)
@@ -194,7 +214,23 @@ namespace Company.MobileApp
     #elseif (NinjectContainer)
             // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
     #else
-            // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
+            Container.RegisterType<Realm>(new InjectionFactory(c => Realm.GetInstance(config)));
+    #endif
+#endif
+#if (IncludeBarcodeService)
+            // Uses a Popup Page to contain the Scanner
+    #if (AutofacContainer)
+            builder.RegisterInstance(PopupNavigation.Instance).As<IPopupNavigation>().SingleInstance();
+            builder.Register(ctx => new PopupBarcodeScannerService(Container.Resolve<IPopupNavigation>())).As<IBarcodeScannerService>().SingleInstance();
+    #elseif (DryIocContainer)
+            Container.UseInstance<IPopupNavigation>(PopupNavigation.Instance);
+            Container.Register<IBarcodeScannerService, PopupBarcodeScannerService>();
+    #elseif (NinjectContainer)
+            Container.Bind<IPopupNavigation>().ToConstant(PopupNavigation.Instance).InSingletonScope();
+            Container.Bind<IBarcodeScannerService>().To<PopupBarcodeScannerService>().InSingletonScope();
+    #else
+            Container.RegisterInstance<IPopupNavigation>(PopupNavigation.Instance);
+            Container.RegisterType<IBarcodeScannerService, PopupBarcodeScannerService>();
     #endif
 #endif
 

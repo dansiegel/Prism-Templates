@@ -303,6 +303,12 @@
       "description": "AAD B2C Reset Password Policy",
       "replaces": "PolicyResetPasswordName"
     },
+    "IncludeBarcodeService": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Includes the Barcode Service plugin"
+    },
     "HasAuthClientId": {
       "type": "computed",
       "value": "(AuthenticationClientId != \"\")"

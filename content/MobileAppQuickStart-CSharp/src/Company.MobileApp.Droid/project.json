@@ -40,6 +40,9 @@
 ////#if (Localization)
 //    "System.ComponentModel": "4.3.0",
 ////#endif
+////#if (IncludeBarcodeService)
+//    "BarcodeScanning.Service": "1.0.0-pre1",
+////#endif
 ////#if (UseMobileCenter)
 //    "Microsoft.Azure.Mobile.Analytics":"0.14.0",
 //    "Microsoft.Azure.Mobile.Crashes": "0.14.0",

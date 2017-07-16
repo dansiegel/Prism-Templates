@@ -42,6 +42,10 @@
     </array>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+<!--#if (IncludeBarcodeService) -->
+    <key>NSCameraUsageDescription</key>
+    <string>We need to scan barcodes</string>
+<!--#endif -->
 <!--#if (AADAuth || AADB2CAuth) -->
     <array>
         <dict>

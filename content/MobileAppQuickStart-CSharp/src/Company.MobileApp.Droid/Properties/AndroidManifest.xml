@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.prismtemplate.name">
     <uses-sdk android:minSdkVersion="17" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--#if (IncludeBarcodeService) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!--#endif -->
     <application android:label="MobileApp">
     <!--#if (AADAuth || AADB2CAuth) -->
         <activity android:name="microsoft.identity.client.BrowserTabActivity">

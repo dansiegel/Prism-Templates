@@ -28,6 +28,9 @@ namespace Company.MobileApp.Droid
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+#if (IncludeBarcodeService)
+            global::ZXing.Net.Mobile.Forms.Android.Platform.Init();
+#endif
 
 #if (UseAzureMobileClient)
             LoadApplication(new App(new AndroidInitializer(Application)));
@@ -35,6 +38,17 @@ namespace Company.MobileApp.Droid
             LoadApplication(new App(new AndroidInitializer()));
 #endif
         }
+#if (IncludeBarcodeService)
+
+    public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+                                                    Permission[] grantResults)
+    {
+        global::ZXing.Net.Mobile
+                         .Android
+                         .PermissionsHandler
+                         .OnRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+#endif
 #if (AADAuth || AADB2CAuth)
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

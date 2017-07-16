@@ -83,6 +83,10 @@
       "longName": "reset-password-policy",
       "shortName": "rpp"
     },
+    "IncludeBarcodeService": {
+      "longName": "barcode-service",
+      "shortName": "barcode"
+    },
     "skipRestore": {
       "isHidden": true
     }
