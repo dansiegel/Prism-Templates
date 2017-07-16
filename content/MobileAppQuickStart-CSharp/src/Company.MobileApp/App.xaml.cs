@@ -73,6 +73,18 @@ namespace Company.MobileApp
         {
 #if (AutofacContainer)
             var builder = new ContainerBuilder();
+
+#endif
+#if (UseMobileCenter)
+    #if (AutofacContainer)
+            // TODO: Register the Mobile Center Analytics Logger
+    #elseif (DryIocContainer)
+            Container.Register<ILoggerFacade, MCAnalyticsLogger>(Reuse.Singleton);
+    #elseif (NinjectContainer)
+            // TODO: Register the Mobile Center Analytics Logger
+    #else
+            // TODO: Register the Mobile Center Analytics Logger
+    #endif
 #endif
 #if (UseAzureMobileClient)
     #if (DryIocContainer)
@@ -80,7 +92,6 @@ namespace Company.MobileApp
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
             Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
 
-            Container.Register<ILoggerFacade, MCAnalyticsLogger>(Reuse.Singleton);
 
             // If you are not using Authentication
             // Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
