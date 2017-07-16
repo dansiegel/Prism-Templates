@@ -1,12 +1,20 @@
 using System.Globalization;
 using System.Threading;
 using Foundation;
+using Prism.Logging;
 using Company.MobileApp.i18n;
 
 namespace Company.MobileApp.iOS.i18n
 {
     public class Localize : ILocalize
     {
+        private ILoggerFacade _logger { get; }
+
+        public Localize(ILoggerFacade logger)
+        {
+            _logger = logger;
+        }
+
         public void SetLocale(CultureInfo ci)
         {
             Thread.CurrentThread.CurrentCulture = ci;
@@ -31,6 +39,7 @@ namespace Company.MobileApp.iOS.i18n
             {
                 // iOS locale not valid .NET culture (eg. "en-ES" : English in Spain)
                 // fallback to first characters, in this case "en"
+                _logger.Log($"{e1}", Category.Exception, Priority.None);
                 try
                 {
                     var fallback = ToDotnetFallbackLanguage(new PlatformCulture(netLanguage));
@@ -38,6 +47,7 @@ namespace Company.MobileApp.iOS.i18n
                 }
                 catch (CultureNotFoundException e2)
                 {
+                    _logger.Log($"{e2}", Category.Exception, Priority.None);
                     // iOS language not valid .NET culture, falling back to English
                     ci = new CultureInfo("en");
                 }
