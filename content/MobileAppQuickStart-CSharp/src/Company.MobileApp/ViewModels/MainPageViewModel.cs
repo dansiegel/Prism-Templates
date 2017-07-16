@@ -101,6 +101,8 @@ namespace Company.MobileApp.ViewModels
                     foreach (var item in await _dataContext.TodoItems.ReadAllItemsAsync())
                         TodoItems.Add(item);
     #endif
+#elseif (UseRealm)
+                    // Do anything you want to do only when Navigating Back to the View
 #else
                     if(parameters.ContainsKey("todoItem"))
                     {
