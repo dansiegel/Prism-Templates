@@ -42,5 +42,13 @@
     </array>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>msalAUTHENTICATION_CLIENT_ID</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

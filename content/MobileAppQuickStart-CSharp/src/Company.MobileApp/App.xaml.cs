@@ -32,6 +32,9 @@ using Microsoft.Azure.Mobile.Crashes;
 #if (!NoAuth)
 using Company.MobileApp.Auth;
 #endif
+#if (AADAuth || AADB2CAuth)
+using Microsoft.Identity.Client;
+#endif
 using AzureMobileClient.Helpers;
 using AzureMobileClient.Helpers.Accounts;
 using Microsoft.WindowsAzure.MobileServices;
@@ -117,18 +120,25 @@ namespace Company.MobileApp
 
         #if (NoAuth)
             Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
-            Container.RegisterMany<AppDataContext>(Reuse.Singleton,
+            Container.RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
                                                    serviceTypeCondition: type => 
-                                                   type == typeof(IAppDataContext) ||
-                                                   type == typeof(ICloudAppContext));
+                                                        type == typeof(IAppDataContext) ||
+                                                        type == typeof(ICloudAppContext));
         #else
+            #if (AADAuth || AADB2CAuth)
+            Container.UseInstance<IPublicClientApplication>(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
+            {
+                RedirectUri = AppConstants.RedirectUri
+            });
+            #endif
             Container.Register<IAzureCloudServiceOptions, AppServiceContextOptions>(Reuse.Singleton);
-            Container.RegisterMany<AppDataContext>(Reuse.Singleton,
+            Container.RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
                                                    serviceTypeCondition: type => 
-                                                   type == typeof(IAppDataContext) ||
-                                                   type == typeof(ICloudService));
-            Container.Register<IMobileServiceClient>(reuse: Reuse.Singleton,
-                                                     made: Made.Of(() => Arg.Of<ICloudService>().Client));
+                                                        type == typeof(IAppDataContext) ||
+                                                        type == typeof(ICloudService));
+            Container.RegisterDelegate<IMobileServiceClient>(factoryDelegate: r => r.Resolve<ICloudService>().Client,
+                                                             reuse: Reuse.Singleton,
+                                                             setup: Setup.With(allowDisposableTransient: true));
             Container.Register<IAccountStore,AccountStore>(Reuse.Singleton);
             Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
         #endif

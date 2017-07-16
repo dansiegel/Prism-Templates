@@ -27,6 +27,9 @@
 ////#if (UseAzureMobileClient && DryIocContainer)
 //         "AzureMobileClient.Helpers.DryIoc": "4.0.0",
 ////#endif
+////#if (AADAuth || AADB2CAuth)
+//    "Microsoft.Identity.Client": "1.1.0-preview",
+////#endif
 ////#if (UseRealm)
 //         "Realm": "1.5.0",
 ////#endif

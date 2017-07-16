@@ -7,16 +7,16 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Company.MobileApp.Helpers;
+#if (AADAuth || AADB2CAuth)
+using Microsoft.Identity.Client;
+#endif
 using Xamarin.Forms.Platform.Android;
 
 namespace Company.MobileApp.Droid
 {
     [Activity(Label = "@string/ApplicationName",
-              //Name="com.prismtemplate.name.MainActivity",
-              //Exported = true,
               Icon = "@mipmap/ic_launcher",
               Theme = "@style/MyTheme",
-              //LaunchMode = LaunchMode.SingleTask, 
               ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
@@ -35,5 +35,13 @@ namespace Company.MobileApp.Droid
             LoadApplication(new App(new AndroidInitializer()));
 #endif
         }
+#if (AADAuth || AADB2CAuth)
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
+        }
+#endif
     }
 }

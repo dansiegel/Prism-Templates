@@ -18,6 +18,7 @@ using Prism.Services;
 using Realms;
 #endif
 #if (UseAzureMobileClient)
+using AzureMobileClient.Helpers;
 using Company.MobileApp.Data;
 #endif
 using Company.MobileApp.Models;
@@ -30,10 +31,12 @@ namespace Company.MobileApp.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
 #if (UseAzureMobileClient)
+        private ICloudService _cloudService { get; }
+
         private IAppDataContext _dataContext { get; }
 
         public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
-                                 IDeviceService deviceService, IAppDataContext dataContext)
+                                 IDeviceService deviceService, IAppDataContext dataContext, ICloudService cloudService)
 #elseif (UseRealm)
         private Realm _realm { get; }
 
@@ -46,6 +49,7 @@ namespace Company.MobileApp.ViewModels
             : base(navigationService, applicationStore, deviceService)
         {
 #if (UseAzureMobileClient)
+            _cloudService = cloudService;
             _dataContext = dataContext;
 
 #elseif (UseRealm)
@@ -113,6 +117,7 @@ namespace Company.MobileApp.ViewModels
                 case NavigationMode.New:
 #if (UseAzureMobileClient)
     #if (UseMvvmHelpers)
+                    await _cloudService.LoginAsync();
                     TodoItems.AddRange(await _dataContext.TodoItems.ReadAllItemsAsync());
     #else
                     foreach (var item in await _dataContext.TodoItems.ReadAllItemsAsync())

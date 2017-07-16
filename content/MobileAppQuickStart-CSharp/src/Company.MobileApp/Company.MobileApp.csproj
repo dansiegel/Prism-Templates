@@ -24,6 +24,8 @@
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.14.0" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' != 'DryIoc' " Include="AzureMobileClient.Helpers" Version="4.0.1-pre1" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.0" />
+    <PackageReference Condition=" '$(AADAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Condition=" '$(AADB2CAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.5.0" />
   </ItemGroup>
 

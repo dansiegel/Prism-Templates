@@ -282,6 +282,27 @@
       "description": "Client ID for an Authentication source such as Azure Active Directory",
       "replaces": "AUTHENTICATION_CLIENT_ID"
     },
+    "PolicySignUpSignIn": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "b2c_1_susi",
+      "description": "AAD B2C SignUpSignIn Policy",
+      "replaces": "PolicySignUpSignInName"
+    },
+    "PolicyEditProfile": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "b2c_1_edit_profile",
+      "description": "AAD B2c Edit Profile Policy",
+      "replaces": "PolicyEditProfileName"
+    },
+    "PolicyResetPassword": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "b2c_1_reset",
+      "description": "AAD B2C Reset Password Policy",
+      "replaces": "PolicyResetPasswordName"
+    },
     "HasAuthClientId": {
       "type": "computed",
       "value": "(AuthenticationClientId != \"\")"

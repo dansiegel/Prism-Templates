@@ -18,6 +18,9 @@ using Prism.Ninject;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
+#if (AADAuth || AADB2CAuth)
+using Microsoft.Identity.Client;
+#endif
 #if (Localization)
 using Company.MobileApp.i18n;
 using Company.MobileApp.iOS.i18n;
@@ -29,11 +32,9 @@ namespace Company.MobileApp.iOS
     {
 #if (AutofacContainer || DryIocContainer)
         public void RegisterTypes(IContainer container)
-#endif
-#if (NinjectContainer)
+#elseif (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
-#endif
-#if (UnityContainer)
+#elseif (UnityContainer)
         public void RegisterTypes(IUnityContainer container)
 #endif
         {
@@ -42,31 +43,41 @@ namespace Company.MobileApp.iOS
 #if(AutofacContainer)
             var builder = new ContainerBuilder();
 #endif
-#if (Localization && AutofacContainer)
+#if (Localization)
+  #if (AutofacContainer)
             builder.Register(ctx => new Localize()).As<ILocalize>().SingleInstance();
-#endif
-#if (Localization && DryIocContainer)
+  #elseif (DryIocContainer)
             container.Register<ILocalize, Localize>(Reuse.Singleton);
-#endif
-#if (Localization && NinjectContainer)
+  #elseif (NinjectContainer)
             container.Bind<ILocalize>().To<Localize>().InSingletonScope();
-#endif
-#if (Localization && UnityContainer)
+  #elseif (UnityContainer)
             container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
+  #endif
 #endif
-#if (UseAzureMobileClient && AutofacContainer)
+#if (UseAzureMobileClient)
+  #if (AutofacContainer)
             builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
-#endif
-#if (UseAzureMobileClient && DryIocContainer)
+  #elseif (DryIocContainer)
             container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
-#endif
-#if (UseAzureMobileClient && NinjectContainer)
+  #elseif (NinjectContainer)
             container.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
-#endif
-#if (UseAzureMobileClient && UnityContainer)
+  #elseif (UnityContainer)
             container.RegisterType<ISecureStore, SecureStore>(new ContainerControlledLifetimeManager());
+  #endif
+#endif
+#if (AADAuth || AADB2CAuth) 
+  #if (AutofacContainer)
+            builder.RegisterInstance(new UIParent()).As<UIParent>().SingleInstance();
+  #elseif (DryIocContainer)
+            container.UseInstance(new UIParent());
+  #elseif (NinjectContainer)
+            kernel.Bind<UIParent>().ToConstant(new UIParent()).InSingletonScope();
+  #elseif (UnityContainer)
+            container.RegisterInstance(new UIParent());
+  #endif
 #endif
 #if (AutofacContainer)
+
             builder.Update(container);
 #endif
         }

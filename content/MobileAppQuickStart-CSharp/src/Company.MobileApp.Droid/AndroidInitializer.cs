@@ -19,6 +19,9 @@ using Prism.Ninject;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
+#if (AADAuth || AADB2CAuth)
+using Microsoft.Identity.Client;
+#endif
 #if (Localization)
 using Company.MobileApp.i18n;
 using Company.MobileApp.Droid.i18n;
@@ -39,11 +42,9 @@ namespace Company.MobileApp.Droid
 #endif
 #if (AutofacContainer || DryIocContainer)
         public void RegisterTypes(IContainer container)
-#endif
-#if (NinjectContainer)
+#elseif (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
-#endif
-#if (UnityContainer)
+#elseif (UnityContainer)
         public void RegisterTypes(IUnityContainer container)
 #endif
         {
@@ -52,35 +53,45 @@ namespace Company.MobileApp.Droid
 #if(AutofacContainer)
             var builder = new ContainerBuilder();
 #endif
-#if (Localization && AutofacContainer)
+#if (Localization)
+  #if (AutofacContainer)
             builder.Register(ctx => new Localize()).As<ILocalize>().SingleInstance();
-#endif
-#if (Localization && DryIocContainer)
+  #elseif (DryIocContainer)
             container.Register<ILocalize, Localize>(Reuse.Singleton);
-#endif
-#if (Localization && NinjectContainer)
-            container.Bind<ILocalize>().To<Localize>().InSingletonScope();
-#endif
-#if (Localization && UnityContainer)
+  #elseif (NinjectContainer)
+            kernel.Bind<ILocalize>().To<Localize>().InSingletonScope();
+  #elseif (UnityContainer)
             container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
+  #endif
 #endif
-#if (UseAzureMobileClient && AutofacContainer)
+#if (UseAzureMobileClient)
+  #if (AutofacContainer)
             builder.RegisterInstance(CurrentApplication).As<Application>().SingleInstance();
             builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
-#endif
-#if (UseAzureMobileClient && DryIocContainer)
+  #elseif (DryIocContainer)
             container.UseInstance(CurrentApplication);
             container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
-#endif
-#if (UseAzureMobileClient && NinjectContainer)
-            container.Bind<Application>().ToConstant(CurrentApplication).InSingletonScope();
-            container.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
-#endif
-#if (UseAzureMobileClient && UnityContainer)
+  #elseif (NinjectContainer)
+            kernel.Bind<Application>().ToConstant(CurrentApplication).InSingletonScope();
+            kernel.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
+  #elseif (UnityContainer)
             container.RegisterInstance(CurrentApplication);
             container.RegisterType<ISecureStore, SecureStore>(new ContainerControlledLifetimeManager());
+  #endif
+#endif
+#if (AADAuth || AADB2CAuth) 
+  #if (AutofacContainer)
+            builder.RegisterInstance(new UIParent(Xamarin.Forms.Forms.Context as Activity)).As<UIParent>().SingleInstance();
+  #elseif (DryIocContainer)
+            container.UseInstance(new UIParent(Xamarin.Forms.Forms.Context as Activity));
+  #elseif (NinjectContainer)
+            kernel.Bind<UIParent>().ToConstant(new UIParent(Xamarin.Forms.Forms.Context as Activity)).InSingletonScope();
+  #elseif (UnityContainer)
+            container.RegisterInstance(new UIParent(Xamarin.Forms.Forms.Context as Activity));
+  #endif
 #endif
 #if (AutofacContainer)
+
             builder.Update(container);
 #endif
         }

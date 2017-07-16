@@ -71,6 +71,18 @@
       "longName": "auth-client-id",
       "shortName": "client-id"
     },
+    "PolicySignUpSignIn": {
+      "longName": "signup-signin-policy",
+      "shortName": "susi"
+    },
+    "PolicyEditProfile": {
+      "longName": "edit-profile-policy",
+      "shortName": "epp"
+    },
+    "PolicyResetPassword": {
+      "longName": "reset-password-policy",
+      "shortName": "rpp"
+    },
     "skipRestore": {
       "isHidden": true
     }

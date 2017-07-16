@@ -16,8 +16,11 @@ using Prism.Services;
 #if (UseRealm)
 using Realms;
 #endif
-using Company.MobileApp.Strings;
+#if (UseAzureMobileClient)
+using Company.MobileApp.Data;
+#endif
 using Company.MobileApp.Models;
+using Company.MobileApp.Strings;
 
 namespace Company.MobileApp.ViewModels
 {
