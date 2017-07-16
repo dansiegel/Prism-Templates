@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Company.MobileApp.Services;
 using Company.MobileApp.Views;
 #if (AutofacContainer)
@@ -28,10 +29,17 @@ using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 #endif
 #if (UseAzureMobileClient)
+#if (!NoAuth)
 using Company.MobileApp.Auth;
+#endif
 using AzureMobileClient.Helpers;
 using AzureMobileClient.Helpers.Accounts;
 using Microsoft.WindowsAzure.MobileServices;
+#endif
+#if (UseRealm)
+using Company.MobileApp.Helpers;
+using Realms;
+using Realms.Sync;
 #endif
 using Prism.Logging;
 using Xamarin.Forms;
@@ -83,39 +91,66 @@ namespace Company.MobileApp
     #elseif (NinjectContainer)
             // TODO: Register the Mobile Center Analytics Logger
     #else
-            // TODO: Register the Mobile Center Analytics Logger
+            Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
     #endif
 #endif
 #if (UseAzureMobileClient)
-    #if (DryIocContainer)
+    #if (AutofacContainer)
+        // TODO: generically register ICloudTable<> as AzureCloudTable<>
+        // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+        // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
+
+        // TODO: if you are using authentication see below
+        /* 
+         * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
+         * var context = new AppDataContext
+         * Register Instance => IAppDataContext <-> context
+         * Register Instance => ICloudCloudService <-> context
+         * Register Instance => IMobileServiceClient <-> context.Client
+         * Register => IAccountStore <-> AccountStore
+         * Register => ILoginProvider <-> LoginProvider
+         */
+    #elseif (DryIocContainer)
             // ICloudTable is only needed for Online Only data
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
             Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
 
-
-            // If you are not using Authentication
-            // Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
-
-            // If you are using Authentication
-            // If using Facebook or some other 3rd Party OAuth provider be sure to register ILoginProvider
-            // in IPlatformServices in your Platform Project. If you are using a custom auth provider, you may
-            // be able to author an ILoginProvider from shared code.
+        #if (NoAuth)
+            Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
+            Container.RegisterMany<AppDataContext>(Reuse.Singleton,
+                                                   serviceTypeCondition: type => 
+                                                   type == typeof(IAppDataContext) ||
+                                                   type == typeof(ICloudAppContext));
+        #else
             Container.Register<IAzureCloudServiceOptions, AppServiceContextOptions>(Reuse.Singleton);
             Container.RegisterMany<AppDataContext>(Reuse.Singleton,
-                                                   serviceTypeCondition: type => type == typeof(AppDataContext) ||
+                                                   serviceTypeCondition: type => 
                                                    type == typeof(IAppDataContext) ||
                                                    type == typeof(ICloudService));
             Container.Register<IMobileServiceClient>(reuse: Reuse.Singleton,
-                                                     made: Made.Of(() => Arg.Of<AppDataContext>().Client));
+                                                     made: Made.Of(() => Arg.Of<ICloudService>().Client));
             Container.Register<IAccountStore,AccountStore>(Reuse.Singleton);
             Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
-    #endif
-    #if (UnityContainer)
+        #endif
+    #elseif (NinjectContainer)
+        // TODO: generically register ICloudTable<> as AzureCloudTable<>
+        // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+        // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
+
+        // TODO: if you are using authentication see below
+        /* 
+         * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
+         * var context = new AppDataContext
+         * Register Instance => IAppDataContext <-> context
+         * Register Instance => ICloudCloudService <-> context
+         * Register Instance => IMobileServiceClient <-> context.Client
+         * Register => IAccountStore <-> AccountStore
+         * Register => ILoginProvider <-> LoginProvider
+         */
+    #elseif (UnityContainer)
             // ICloudTable is only needed for Online Only data
             Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), new ContainerControlledLifetimeManager());
             Container.RegisterType(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), new ContainerControlledLifetimeManager());
-
-            Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
 
             // If you are not using Authentication
             Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
@@ -129,16 +164,33 @@ namespace Company.MobileApp
             // Container.RegisterType<ICloudService>(reuse: Reuse.Singleton,
             //                                   made: Made.Of(() => Arg.Of<AppDataContext>()));
             // Container.RegisterType<IAppDataContext>(reuse: Reuse.Singleton,
-                                                made: Made.Of(() => Arg.Of<AppDataContext>()));
+                                                //made: Made.Of(() => Arg.Of<AppDataContext>()));
             // Container.RegisterType<IMobileServiceClient>(reuse: Reuse.Singleton,
             //                                          made: Made.Of(() => Arg.Of<AppDataContext>().Client));
             Container.RegisterType<IAccountStore,AccountStore>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILoginProvider,LoginProvider>(new ContainerControlledLifetimeManager());
     #endif
 #endif
+#if (UseRealm)
+            //var serverURL = new Uri(Secrets.RealmServer);
+            //var config = new SyncConfiguration(User.Current, serverURL);
+            var config = RealmConfiguration.DefaultConfiguration;
+    #if (AutofacContainer)
+            // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
+    #elseif (DryIocContainer)
+            Container.Register(reuse: Reuse.Transient,
+                               made: Made.Of(() => Realm.GetInstance(config)),
+                               setup: Setup.With(allowDisposableTransient: true));
+    #elseif (NinjectContainer)
+            // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
+    #else
+            // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
+    #endif
+#endif
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<TodoItemDetail>();
             // Navigating to "TabbedPage?tab=ViewA&tab=ViewB&tab=ViewC will generate a TabbedPage
             // with three tabs for ViewA, ViewB, & ViewC
             Container.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");

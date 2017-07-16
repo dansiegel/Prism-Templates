@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 <!--#if Localization -->
+                 xmlns:i18n="clr-namespace:Company.MobileApp.i18n;assembly=Company.MobileApp"
+                 <!--#endif -->
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 Padding="30,80"
+                 Title="{Binding Title}"
+                 x:Class="Company.MobileApp.Views.TodoItemDetail">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8"
+                                   DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout Padding="20"
+                 BackgroundColor="White">
+    <!--#if Localization -->
+        <Label Text="{i18n:Translate DescriptionLabel}" />
+    <!--#else -->
+        <Label Text="Description" />
+    <!--#endif -->
+        <Entry Text="{Binding Model.Name}" />
+    <!--#if Localization -->
+        <Label Text="{i18n:Translate IsDoneLabel}" />
+    <!--#else -->
+        <Label Text="Is Done" />
+    <!--#endif -->
+        <Switch IsToggled="{Binding Model.Done}" />
+    <!--#if Localization -->
+        <Button Text="{i18n:Translate SaveButton}" 
+    <!--#else -->
+        <Button Text="Save" 
+    <!--#endif -->
+                Command="{Binding SaveCommand}" />
+    </StackLayout>
+
+</pages:PopupPage>

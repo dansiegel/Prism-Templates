@@ -13,9 +13,9 @@ using Prism.Services;
 namespace Company.MobileApp.ViewModels
 {
 #if (UseMvvmHelpers)
-    public class ViewModelBase : BaseViewModel, IApplicationLifecycle, IActiveAware, INavigationAware
+    public class ViewModelBase : BaseViewModel, IApplicationLifecycle, IActiveAware, INavigationAware, IDestructible
 #else
-    public class ViewModelBase : BindableBase, IApplicationLifecycle, IActiveAware, INavigationAware
+    public class ViewModelBase : BindableBase, IApplicationLifecycle, IActiveAware, INavigationAware, IDestructible
 #endif
     {
         protected IApplicationStore _applicationStore { get; }
@@ -97,5 +97,11 @@ namespace Company.MobileApp.ViewModels
         public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
 
 #endregion INavigationAware
+
+#region IDestructible
+
+        public virtual void Destroy() { }
+
+#endregion IDestructible
     }
 }

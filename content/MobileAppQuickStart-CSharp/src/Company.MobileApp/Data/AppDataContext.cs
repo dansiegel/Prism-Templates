@@ -13,49 +13,86 @@ using Microsoft.Practices.Unity;
 
 namespace Company.MobileApp.Data
 {
-#if (DryIocContainer)
+#if (NoAuth)
+     #if (DryIocContainer)
+    // If you do want to use authentication inherit from DryIocCloudServiceContext
+    public class AppDataContext : DryIocCloudAppContext, IAppDataContext
+    #else
+    // If you do want to use authentication inherit from AzureCloudServiceContext
+    public class AppDataContext : AzureCloudAppContext, IAppDataContext
+    #endif
+#else
+    #if (DryIocContainer)
     // If you don't want to use authentication inherit from DryIocCloudAppContext
     public class AppDataContext : DryIocCloudServiceContext, IAppDataContext
-#elseif (UnityContainer)
+    #else
     // If you don't want to use authentication inherit from AzureCloudAppContext
     public class AppDataContext : AzureCloudServiceContext, IAppDataContext
+    #endif
 #endif
     {
 #if (AutofacContainer)
         private IContainer _container { get; }
 
-        public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider, string offlineDbPath = "azureCloudAppContext.db") 
-            : base(options, loginProvider, offlineDbPath)
-        {
-            _container = container;
-        }
-
-#elseif (DryIocContainer)
-       public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider, string offlineDbPath = "azureCloudAppContext.db") 
-            : base(container, options, loginProvider, offlineDbPath)
-        {
-        }
-
 #elseif (NinjectContainer)
         private IKernel _kernel { get; }
-
-        public AppDataContext(IKernel kernel, IAzureCloudServiceOptions options, ILoginProvider loginProvider, string offlineDbPath = "azureCloudAppContext.db") 
-            : base(options, loginProvider, offlineDbPath)
-        {
-            _kernel = kernel;
-        }
 
 #elseif (UnityContainer)
         private IUnityContainer _container { get; }
 
-        // Be sure to remove the reference to the IMobileServiceClient if using authentication
-        public AppDataContext(IUnityContainer container, IMobileServiceClient client)
+#endif
+#if (NoAuth)
+    #if (AutofacContainer)
+        public AppDataContext(IContainer container, IMobileServiceClient client) 
             : base(client) // you can optionally pass in the data store name
         {
             _container = container;
         }
-
+    #elseif (DryIocContainer)
+        public AppDataContext(IContainer container) 
+            : base(container) // you can optionally pass in the data store name
+        {
+        }
+    #elseif (NinjectContainer)
+        public AppDataContext(IKernel kernel, IMobileServiceClient client) 
+            : base(client) // you can optionally pass in the data store name
+        {
+            _kernel = kernel;
+        }
+    #elseif (UnityContainer)
+        public AppDataContext(IUnityContainer container, IMobileServiceClient client) 
+            : base(client) // you can optionally pass in the data store name
+        {
+            _container = container;
+        }
+    #endif
+#else
+    #if (AutofacContainer)
+        public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+            : base(options, loginProvider) // you can optionally pass in the data store name
+        {
+            _container = container;
+        }
+    #elseif (DryIocContainer)
+       public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+            : base(container, options, loginProvider) // you can optionally pass in the data store name
+        {
+        }
+    #elseif (NinjectContainer)
+        public AppDataContext(IKernel kernel, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+            : base(options, loginProvider) // you can optionally pass in the data store name
+        {
+            _kernel = kernel;
+        }
+    #elseif (UnityContainer)
+        public AppDataContext(IUnityContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+            : base(options, loginProvider) // you can optionally pass in the data store name
+        {
+            _container = container;
+        }
+    #endif
 #endif
+
         // Any ICloudSyncTable's that you have here will be automatically registered with the local store.
         public ICloudSyncTable<TodoItem> TodoItems => SyncTable<TodoItem>();
 #if (AutofacContainer)

@@ -56,19 +56,59 @@ namespace Company.MobileApp.Strings
             }
         }
 
-        internal static string MainPageTitle
+        internal static string MainPageTitle 
         {
-            get
+            get 
             {
                 return ResourceManager.GetString("MainPageTitle", resourceCulture);
             }
         }
-
-        internal static string HelloWorld
+        
+        internal static string TodoItemDetailTitle
+        {
+            get 
+            {
+                return ResourceManager.GetString("TodoItemDetailTitle", resourceCulture);
+            }
+        }
+        
+        internal static string AddButton
         {
             get
             {
-                return ResourceManager.GetString("HelloWorld", resourceCulture);
+                return ResourceManager.GetString("AddButton", resourceCulture);
+            }
+        }
+        
+        internal static string DeleteButton
+        {
+            get
+            {
+                return ResourceManager.GetString("DeleteButton", resourceCulture);
+            }
+        }
+        
+        internal static string DescriptionLabel
+        {
+            get
+            {
+                return ResourceManager.GetString("DescriptionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string IsDoneLabel
+        {
+            get
+            {
+                return ResourceManager.GetString("IsDoneLabel", resourceCulture);
+            }
+        }
+        
+        internal static string SaveButton
+        {
+            get
+            {
+                return ResourceManager.GetString("SaveButton", resourceCulture);
             }
         }
     }

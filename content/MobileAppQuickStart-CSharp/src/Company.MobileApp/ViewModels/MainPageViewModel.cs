@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 #if (UseMvvmHelpers)
 using System.Linq;
 using MvvmHelpers;
 #else
 using System.Collections.ObjectModel;
+using System.Linq;
 #endif
 using Prism.AppModel;
 using Prism.Commands;
@@ -12,6 +14,12 @@ using Prism.Mvvm;
 #endif
 using Prism.Navigation;
 using Prism.Services;
+#if (UseRealm)
+using Realms;
+#endif
+#if (UseAzureMobileClient)
+using Company.MobileApp.Data;
+#endif
 using Company.MobileApp.Models;
 #if (Localization)
 using Company.MobileApp.Strings;
@@ -21,49 +29,144 @@ namespace Company.MobileApp.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        private IPageDialogService _pageDialogService { get; }
+#if (UseAzureMobileClient)
+        private IAppDataContext _dataContext { get; }
 
         public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
-                             IDeviceService deviceService, IPageDialogService pageDialogService)
+                                 IDeviceService deviceService, IAppDataContext dataContext)
+#elseif (UseRealm)
+        private Realm _realm { get; }
+
+        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+                                 IDeviceService deviceService, Realm realm)
+#else
+        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+                                 IDeviceService deviceService)
+#endif
             : base(navigationService, applicationStore, deviceService)
         {
-            _pageDialogService = pageDialogService;
+#if (UseAzureMobileClient)
+            _dataContext = dataContext;
 
+#elseif (UseRealm)
+            _realm = realm;
+
+#endif
 #if (Localization)
             Title = Resources.MainPageTitle;
 #else
             Title = "Main Page";
 #endif
-#if (UseMvvmHelpers)
+#if (UseRealm)
+#elseif (UseMvvmHelpers)
             TodoItems = new ObservableRangeCollection<TodoItem>();
 #else
             TodoItems = new ObservableCollection<TodoItem>();
 #endif
+
+            AddItemCommand = new DelegateCommand(OnAddItemCommandExecuted);
+            DeleteItemCommand = new DelegateCommand<TodoItem>(OnDeleteItemCommandExecuted);
             TodoItemTappedCommand = new DelegateCommand<TodoItem>(OnTodoItemTappedCommandExecuted);
         }
 
-#if (UseMvvmHelpers)
+#if (UseRealm)
+        public IEnumerable<TodoItem> TodoItems { get; set; }
+#elseif (UseMvvmHelpers)
         public ObservableRangeCollection<TodoItem> TodoItems { get; set; }
 #else
         public ObservableCollection<TodoItem> TodoItems { get; set; }
 #endif
 
+        public DelegateCommand AddItemCommand { get; }
+
+        public DelegateCommand<TodoItem> DeleteItemCommand { get; }
+
         public DelegateCommand<TodoItem> TodoItemTappedCommand { get; }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
-        {
-#if (UseMvvmHelpers)
-            TodoItems.AddRange(parameters.GetValues<string>("todo")
-                                         .Select(n => new TodoItem { Name = n }));
+#if (UseAzureMobileClient)
+        public override async void OnNavigatedTo(NavigationParameters parameters)
 #else
-            foreach (var item in parameters.GetValues<string>("todo"))
-                TodoItems.Add(new TodoItem() { Name = item });
+        public override void OnNavigatedTo(NavigationParameters parameters)
 #endif
+        {
+            IsBusy = true;
+            switch(parameters.GetNavigationMode())
+            {
+                case NavigationMode.Back:
+#if (UseAzureMobileClient)
+    #if (UseMvvmHelpers)
+                    TodoItems.ReplaceRange(await _dataContext.TodoItems.ReadAllItemsAsync());
+    #else
+                    Todoitems.Clear();
+                    foreach (var item in await _dataContext.TodoItems.ReadAllItemsAsync())
+                        TodoItems.Add(item);
+    #endif
+#else
+                    if(parameters.ContainsKey("todoItem"))
+                    {
+                        TodoItems.Add(parameters.GetValue<TodoItem>("todoItem"));
+                    }
+#endif
+                    break;
+                case NavigationMode.New:
+#if (UseAzureMobileClient)
+    #if (UseMvvmHelpers)
+                    TodoItems.AddRange(await _dataContext.TodoItems.ReadAllItemsAsync());
+    #else
+                    foreach (var item in await _dataContext.TodoItems.ReadAllItemsAsync())
+                        TodoItems.Add(item);
+    #endif
+#elseif (UseRealm)
+                    TodoItems = _realm.All<TodoItem>();
+#else
+    #if (UseMvvmHelpers)
+                    TodoItems.AddRange(parameters.GetValues<string>("todo")
+                                         .Select(n => new TodoItem { Name = n }));
+    #else
+                    foreach (var item in parameters.GetValues<string>("todo"))
+                        TodoItems.Add(new TodoItem() { Name = item });
+    #endif
+#endif
+                    break;
+            }
+            IsBusy = false;
         }
 
-        private async void OnTodoItemTappedCommandExecuted(TodoItem item)
+#if (UseRealm)
+        private async void OnAddItemCommandExecuted()
         {
-            await _pageDialogService.DisplayAlertAsync("Item Tapped", item.Name, "Ok");
+            var transaction = _realm.BeginWrite();
+            var todoItem = _realm.Add(new TodoItem());
+            await _navigationService.PushPopupPageAsync("TodoItemDetail", new NavigationParameters
+            {
+                { "new", true },
+                { "transaction", transaction },
+                { "todoItem", todoItem }
+            });
         }
+
+        private void OnDeleteItemCommandExecuted(TodoItem item) =>
+            _realm.Write(() => _realm.Remove(item));
+
+        private async void OnTodoItemTappedCommandExecuted(TodoItem item) =>
+            await _navigationService.PushPopupPageAsync("TodoItemDetail", new NavigationParameters
+            {
+                { "todoItem", item },
+                { "transaction", _realm.BeginWrite() }
+            });
+#else
+        private async void OnAddItemCommandExecuted() => 
+            await _navigationService.PushPopupPageAsync("TodoItemDetail", new NavigationParameters
+            {
+                { "new", true },
+                { "todoItem", new TodoItem() }
+            });
+
+        private void OnDeleteItemCommandExecuted(TodoItem item) =>
+            TodoItems.Remove(item);
+
+        private async void OnTodoItemTappedCommandExecuted(TodoItem item) =>
+            await _navigationService.PushPopupPageAsync("TodoItemDetail", "todoItem", item);
+#endif
     }
 }

@@ -10,14 +10,20 @@
              <!--#else -->
              Title="Main Page"
              <!--#endif -->
+             x:Name="view"
              x:Class="Company.MobileApp.Views.MainPage">
 
+    <ContentPage.ToolbarItems>
 <!--#if Localization -->
-    <ListView ItemsSource="{Binding TodoItems}" 
-              Header="{i18n:Translate HelloWorld}">
+        <ToolbarItem Text="{i18n:Translate AddButton}"
 <!--#else -->
-    <ListView ItemsSource="{Binding TodoItems}">
+        <ToolbarItem Text="Add"
 <!--#endif -->
+                     Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ListView ItemsSource="{Binding TodoItems}"
+              IsRefreshing="{Binding IsBusy}">
         <ListView.Behaviors>
             <behaviors:EventToCommandBehavior Command="{Binding TodoItemTappedCommand}" 
                                               EventName="ItemTapped"
@@ -25,7 +31,18 @@
         </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Name}" />
+                <TextCell Text="{Binding Name}">
+                    <TextCell.ContextActions>
+<!--#if Localization -->
+                        <MenuItem Text="{i18n:Translate DeleteButton}"
+<!--#else -->
+                        <MenuItem Text="Delete"
+<!--#endif -->
+                                  IsDestructive="true"
+                                  Command="{Binding BindingContext.DeleteItemCommand,Source={x:Reference view}}"
+                                  CommandParameter="{Binding .}" />
+                    </TextCell.ContextActions>
+                </TextCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

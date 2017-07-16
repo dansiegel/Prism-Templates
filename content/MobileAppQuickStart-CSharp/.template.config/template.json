@@ -90,6 +90,12 @@
           ]
         },
         {
+          "condition": "(DataProvider == \"AzureMobileClient\" && AuthenticationSource == \"None\")",
+          "exclude": [
+            "src/Company.MobileApp/Auth/**"
+          ]
+        },
+        {
           "condition": "(!UseMobileCenter)",
           "exclude": [
             "src/Company.MobileApp/Services/MCAnalyticsLogger.cs"
@@ -234,6 +240,41 @@
         }
       ]
     },
+    "AuthenticationSource": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "None",
+      "choices": [
+        {
+          "choice": "None",
+          "description": "Uses anonymous authentication"
+        },
+        {
+          "choice": "AAD",
+          "description": "Uses Azure Active Directory"
+        },
+        {
+          "choice": "AADB2C",
+          "description": "Uses Azure Active Directory B2C"
+        },
+        {
+          "choice": "Custom",
+          "description": "Use a custom Authentication Source"
+        },
+        {
+          "choice": "Google",
+          "description": "Use Google"
+        },
+        {
+          "choice": "Facebook",
+          "description": "Use Facebook"
+        },
+        {
+          "choice": "MicrosoftAccount",
+          "description": "Use Microsoft Accounts"
+        }
+      ]
+    },
     "AuthenticationClientId": {
       "type": "parameter",
       "datatype": "text",
@@ -268,6 +309,34 @@
     "UnityContainer": {
       "type": "computed",
       "value": "(Container == \"Unity\")"
+    },
+    "NoAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"None\")"
+    },
+    "AADAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"AAD\")"
+    },
+    "AADB2CAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"AADB2C\")"
+    },
+    "CustomAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"Custom\")"
+    },
+    "GoogleAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"Google\")"
+    },
+    "FacebookAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"Facebook\")"
+    },
+    "MicrosoftAuth": {
+      "type": "computed",
+      "value": "(AuthenticationSource ==\"MicrosoftAccount\")"
     },
     "UWPSupported": {
       "type":"computed",
