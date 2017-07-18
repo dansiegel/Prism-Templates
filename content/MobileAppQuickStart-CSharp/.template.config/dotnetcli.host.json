@@ -87,6 +87,9 @@
       "longName": "barcode-service",
       "shortName": "barcode"
     },
+    "Empty": {
+      "shortName": "empty"
+    },
     "skipRestore": {
       "isHidden": true
     }

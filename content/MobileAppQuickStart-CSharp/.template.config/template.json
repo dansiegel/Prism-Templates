@@ -100,6 +100,28 @@
           "exclude": [
             "src/Company.MobileApp/Services/MCAnalyticsLogger.cs"
           ]
+        },
+        {
+          "condition": "(Empty)",
+          "exclude": [
+            "src/Company.MobileApp/ViewModels/MainPageViewModel.cs",
+            "src/Company.MobileApp/ViewModels/TodoItemDetailViewModel.cs",
+            "src/Company.MobileApp/Views/MainPage.cs",
+            "src/Company.MobileApp/Views/TodoItemDetail.cs",
+            "src/Company.MobileApp/Models/**"
+          ],
+          "rename": {
+            "AltMainPageViewModel.cs": "MainPageViewModel.cs",
+            "AltMainPage.xaml": "MainPage.xaml",
+            "AltMainPage.xaml.cs": "MainPage.xaml.cs"
+          }
+        },
+        {
+          "condition": "(!Empty)",
+          "exclude": [
+            "**/AltMainPage.*",
+            "**/AltMainPageViewModel.cs"
+          ]
         }
       ]
     }
@@ -373,6 +395,12 @@
       "type": "parameter",
       "dataType": "bool",
       "defaultValue": "false"
+    },
+    "Empty": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "If true the sample pages will be excluded"
     },
     "skipRestore": {
       "type": "parameter",

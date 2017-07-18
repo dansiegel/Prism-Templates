@@ -94,7 +94,11 @@ namespace Company.MobileApp.Data
 #endif
 
         // Any ICloudSyncTable's that you have here will be automatically registered with the local store.
+#if (Empty)
+        // TODO: Create ICloudSyncTable<Model> Models { get; }
+#else
         public ICloudSyncTable<TodoItem> TodoItems => SyncTable<TodoItem>();
+#endif
 #if (AutofacContainer)
 
         public override ICloudSyncTable<T> SyncTable<T>() =>
