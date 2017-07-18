@@ -5,11 +5,7 @@
              <!--#if Localization -->
              xmlns:i18n="clr-namespace:Company.MobileApp.i18n;assembly=Company.MobileApp"
              <!--#endif -->
-             <!--#if UseMvvmHelpers -->
              Title="{Binding Title}"
-             <!--#else -->
-             Title="Main Page"
-             <!--#endif -->
              x:Name="view"
              x:Class="Company.MobileApp.Views.MainPage">
 

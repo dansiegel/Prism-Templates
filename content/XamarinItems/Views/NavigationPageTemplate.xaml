@@ -4,10 +4,6 @@
                 <!--#if Localization -->
                 xmlns:i18n="clr-namespace:MobileApp.i18n;assembly=MobileApp"
                 <!--#endif -->
-                <!--#if UseMvvmHelpers -->
                 Title="{Binding Title}"
-                <!--#else -->
-                Title="Template"
-                <!--#endif -->
                 x:Class="MobileApp.Views.ItemTemplate">
 </NavigationPage>

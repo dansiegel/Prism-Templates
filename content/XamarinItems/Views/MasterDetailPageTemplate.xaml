@@ -7,11 +7,7 @@
                   <!--#endif -->
                   xmlns:xaml="clr-namespace:MobileApp.Xaml;assembly=MobileApp"
                   BindingContext="{xaml:ViewModelLocator {x:Reference view}}"
-                  <!--#if UseMvvmHelpers -->
                   Title="{Binding Title}"
-                  <!--#else -->
-                  Title="Template"
-                  <!--#endif -->
                   x:Name="view"
                   x:Class="MobileApp.Views.ItemTemplate">
 
