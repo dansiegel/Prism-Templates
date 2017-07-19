@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using Company.MobileApp.Services;
 using Company.MobileApp.Views;
+#if (UseAcrDialogs)
+using Acr.UserDialogs;
+#endif
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
@@ -231,6 +234,17 @@ namespace Company.MobileApp
     #else
             Container.RegisterInstance<IPopupNavigation>(PopupNavigation.Instance);
             Container.RegisterType<IBarcodeScannerService, PopupBarcodeScannerService>();
+    #endif
+#endif
+#if (UseAcrDialogs)
+    #if (AutofacContainer)
+            builder.RegisterInstance(UserDialogs.Instance).As<IUserDialogs>().SingleInstance();
+    #elseif (DryIocContainer)
+            Container.UseInstance<IUserDialogs>(UserDialogs.Instance);
+    #elseif (NinjectContainer)
+            Container.Bind<IUserDialogs>().ToConstant(UserDialogs.Instance).InSingletonScope();
+    #else
+            Container.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
     #endif
 #endif
 

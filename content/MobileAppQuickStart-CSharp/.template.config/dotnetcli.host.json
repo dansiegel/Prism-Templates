@@ -31,6 +31,10 @@
     "GitInitialize": {
       "isHidden": true
     },
+    "UseAcrDialogs": {
+      "shortName": "acr",
+      "longName": "acr-dialogs"
+    },
     "UseMobileCenter": {
       "longName": "use-mobileCenter",
       "shortName": "mc"

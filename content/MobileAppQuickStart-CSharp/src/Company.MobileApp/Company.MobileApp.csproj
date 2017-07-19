@@ -28,6 +28,7 @@
     <PackageReference Condition=" '$(AADB2CAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Condition=" '$(IncludeBarcodeService)' " Include="BarcodeScanning.Service" Version="1.0.0-pre1" />
     <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.5.0" />
+    <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(Localization)' ">

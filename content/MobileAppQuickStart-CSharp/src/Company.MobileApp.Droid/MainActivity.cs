@@ -31,6 +31,9 @@ namespace Company.MobileApp.Droid
 #if (IncludeBarcodeService)
             global::ZXing.Net.Mobile.Forms.Android.Platform.Init();
 #endif
+#if (UseAcrDialogs)
+            global::Acr.UserDialogs.UserDialogs.Init(this);
+#endif
 
 #if (UseAzureMobileClient)
             LoadApplication(new App(new AndroidInitializer(Application)));

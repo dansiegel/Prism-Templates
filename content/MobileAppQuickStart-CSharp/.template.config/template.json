@@ -168,6 +168,12 @@
       "defaultValue": "true",
       "description": "Determines whether to import the Mvvm Helpers from James Montemagno and use the ViewModelBase or BindableBase for your ViewModels"
     },
+    "UseAcrDialogs": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "false",
+      "description": "Will add Acr.UserDialogs to the Solution"
+    },
     "UseMobileCenter": {
       "type": "parameter",
       "dataType": "bool",
