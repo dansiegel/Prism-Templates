@@ -1,4 +1,4 @@
-<Project InitialTargets="BuildHostSecrets,Secrets">
+<Project InitialTargets="BuildHostSecrets;Secrets">
 
 <!--/-:cnd:noEmit -->
   <Target Name="BuildHostSecrets">
