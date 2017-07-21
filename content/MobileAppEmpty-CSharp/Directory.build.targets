@@ -1,14 +1,20 @@
-<Project InitialTargets="Secrets">
+<Project InitialTargets="BuildHostSecrets,Secrets">
 
 <!--/-:cnd:noEmit -->
+  <Target Name="BuildHostSecrets">
+    <PropertyGroup>
+      <BuildHostScriptLocation Condition=" '$(BuildHostScriptLocation)'=='' ">$(SolutionDir)\BuildHostSecrets.ps1</BuildHostScriptLocation>
+    </PropertyGroup>
+    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -Command &quot;&amp; { &amp;$(BuildHostScriptLocation) }&quot;"
+          Condition=" Exists('$(BuildHostScriptLocation)') And Exists('$(PowerShellExe)') " />
+  </Target>
+
   <Target Name="Secrets">
     <PropertyGroup>
-      <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
-      <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
-      <ScriptLocation Condition=" '$(ScriptLocation)'=='' ">$(SolutionDir)\Secrets.ps1</ScriptLocation>
+      <SecretsScriptLocation Condition=" '$(SecretsScriptLocation)'=='' ">$(SolutionDir)\Secrets.ps1</SecretsScriptLocation>
     </PropertyGroup>
-    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -Command &quot;&amp; { &amp;$(ScriptLocation) -RootNamespace &apos;$(RootNamespace)&apos; -ProjectPath &apos;$(ProjectDir)&apos; }&quot;"
-          Condition=" Exists('$(ScriptLocation)') And Exists('$(PowerShellExe)') " />
+    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -Command &quot;&amp; { &amp;$(SecretsScriptLocation) -RootNamespace &apos;$(RootNamespace)&apos; -ProjectPath &apos;$(ProjectDir)&apos; }&quot;"
+          Condition=" Exists('$(SecretsScriptLocation)') And Exists('$(PowerShellExe)') " />
   </Target>
 <!--/+:cnd:noEmit -->
 

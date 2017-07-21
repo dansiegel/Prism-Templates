@@ -9,6 +9,9 @@
     <IsWindows Condition=" '$(IsWindows)' == '' ">false</IsWindows>
     <IsUnix Condition=" '$(OS)' == 'Unix' ">true</IsUnix>
     <IsUnix Condition=" '$(IsUnix)' == '' ">false</IsUnix>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+    <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
   </PropertyGroup>
 
   <!-- VS4Mac executes using the Mono Runtime & provides no way for us to know -->
