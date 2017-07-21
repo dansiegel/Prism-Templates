@@ -100,7 +100,7 @@ namespace Company.MobileApp
 #endif
 #if (UseMobileCenter)
     #if (AutofacContainer)
-            builder.Register(ctx => new MCAnalyticsLogger()).As<ILoggerFacade>().SingleInstance();
+            builder.RegisterType<MCAnalyticsLogger>().As<ILoggerFacade>().SingleInstance();
     #elseif (DryIocContainer)
             Container.Register<ILoggerFacade, MCAnalyticsLogger>(Reuse.Singleton);
     #elseif (NinjectContainer)
@@ -110,28 +110,30 @@ namespace Company.MobileApp
     #endif
 #endif
 #if (UseAzureMobileClient)
+            // ICloudTable is only needed for Online Only data
     #if (AutofacContainer)
-        // TODO: generically register ICloudTable<> as AzureCloudTable<>
-        // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+            builder.RegisterGeneric(typeof(AzureCloudTable<>)).As(typeof(ICloudTable<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(AzureCloudSyncTable<>)).As(typeof(ICloudSyncTable<>)).InstancePerLifetimeScope();
+
         #if (NoAuth)
-        // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
+            builder.RegisterInstance(new MobileServiceClient(Secrets.AppServiceEndpoint)).As<IMobileServiceClient>().SingleInstance();
+            builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudAppContext>().SingleInstance();
         #else
             #if (AADAuth || AADB2CAuth)
-            // TODO: Register an instance of IPublicClientApplication
+            builder.RegisterInstance(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
+            {
+                RedirectUri = AppConstants.RedirectUri
+            }).As<IPublicClientApplication>().SingleInstance();
+
             #endif
-        // TODO: if you are using authentication see below
-        /* 
-         * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
-         * var context = new AppDataContext
-         * Register Instance => IAppDataContext <-> context
-         * Register Instance => ICloudCloudService <-> context
-         * Register Instance => IMobileServiceClient <-> context.Client
-         * Register => IAccountStore <-> AccountStore
-         * Register => ILoginProvider <-> LoginProvider
-         */
+            builder.RegisterType<AppServiceContextOptions>().As<IAzureCloudServiceOptions>().SingleInstance();
+            builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<ICloudService>().Client).As<IMobileServiceClient>().SingleInstance();
+
+            builder.RegisterType<AccountStore>().As<IAccountStore>().SingleInstance();
+            builder.RegisterType<LoginProvider>().As<ILoginProvider>().SingleInstance();
         #endif
     #elseif (DryIocContainer)
-            // ICloudTable is only needed for Online Only data
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
             Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
 
@@ -213,7 +215,7 @@ namespace Company.MobileApp
             //var config = new SyncConfiguration(User.Current, serverURL);
             var config = RealmConfiguration.DefaultConfiguration;
     #if (AutofacContainer)
-            // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
+            builder.Register(ctx => Realm.GetInstance(config)).As<Realm>().InstancePerDependency();
     #elseif (DryIocContainer)
             Container.Register(reuse: Reuse.Transient,
                                made: Made.Of(() => Realm.GetInstance(config)),
@@ -225,10 +227,11 @@ namespace Company.MobileApp
     #endif
 #endif
 #if (IncludeBarcodeService)
-            // Uses a Popup Page to contain the Scanner
+            // NOTE: Uses a Popup Page to contain the Scanner. You can optionally register 
+            // the ContentPageBarcodeScannerService if you prefer a full screen approach.
     #if (AutofacContainer)
             builder.RegisterInstance(PopupNavigation.Instance).As<IPopupNavigation>().SingleInstance();
-            builder.Register(ctx => new PopupBarcodeScannerService(Container.Resolve<IPopupNavigation>())).As<IBarcodeScannerService>().SingleInstance();
+            builder.RegisterType<PopupBarcodeScannerService>().As<IBarcodeScannerService>().SingleInstance();
     #elseif (DryIocContainer)
             Container.UseInstance<IPopupNavigation>(PopupNavigation.Instance);
             Container.Register<IBarcodeScannerService, PopupBarcodeScannerService>();
@@ -262,6 +265,8 @@ namespace Company.MobileApp
             Container.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
 #if (AutofacContainer)
 
+            // NOTE: This is obsolete but still required for Prism to work properly. This requirement will
+            // likely be removed before Prism 7 is released.
             builder.Update(Container);
 #endif
         }
