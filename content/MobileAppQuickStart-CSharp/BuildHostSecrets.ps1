@@ -1,3 +1,12 @@
+# You can create as many secrets as you want by adding the name to the 
+# secretNames array.
+# 
+# $secretNames = @(
+#   "ClientId",
+#   "ClientSecret",
+#   "AuthEndpoint"
+# )
+
 $secretNames = @(
 #if (UseMobileCenter)
   "MobileCenter_iOS_Secret",
@@ -19,8 +28,21 @@ $secretNames = @(
 $jsonValues = @()
 foreach($secretName in $secretNames)
 {
-  $secretValue = (get-item env:$secretName).Value
-  $jsonValues += '"' + $secretName + '": "' + $secretValue + '"'
+  if(Test-Path env:$secretName)
+  {
+    $secretValue = (get-item env:$secretName).Value
+    $jsonValues += '"' + $secretName + '": "' + $secretValue + '"'
+  }
+  else 
+  {
+    Write-Host "$secretName has not been defined"
+  }
 }
 
-Out-File -FilePath ./src/Company.MobileApp/secrets.json -Encoding ASCII -Force -InputObject "{$($jsonValues -join ',')}"
+$secretFilePath = "./src/Company.MobileApp/secrets.json"
+
+# Avoid overwriting a secret.json that may exist on a developer machine.
+if(-not (Test-Path -Path $secretFilePath))
+{
+  Out-File -FilePath $secretFilePath  -Encoding ASCII -Force -InputObject "{$($jsonValues -join ',')}"
+}
