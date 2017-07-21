@@ -55,7 +55,6 @@ using BarcodeScanner;
 using Prism.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-// For compatibility with Prism 6.3. Prism 7 removes the non-working Debug Logger.
 using DebugLogger = Company.MobileApp.Services.DebugLogger;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -162,24 +161,24 @@ namespace Company.MobileApp
             Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
         #endif
     #elseif (NinjectContainer)
-        // TODO: generically register ICloudTable<> as AzureCloudTable<>
-        // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+            // TODO: generically register ICloudTable<> as AzureCloudTable<>
+            // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
         #if (NoAuth)
-        // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
+            // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
         #else
             #if (AADAuth || AADB2CAuth)
             // TODO: Register an instance of IPublicClientApplication
             #endif
-        // TODO: if you are using authentication see below
-        /* 
-         * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
-         * var context = new AppDataContext
-         * Register Instance => IAppDataContext <-> context
-         * Register Instance => ICloudCloudService <-> context
-         * Register Instance => IMobileServiceClient <-> context.Client
-         * Register => IAccountStore <-> AccountStore
-         * Register => ILoginProvider <-> LoginProvider
-         */
+            // TODO: if you are using authentication see below
+            /* 
+            * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
+            * var context = new AppDataContext
+            * Register Instance => IAppDataContext <-> context
+            * Register Instance => ICloudCloudService <-> context
+            * Register Instance => IMobileServiceClient <-> context.Client
+            * Register => IAccountStore <-> AccountStore
+            * Register => ILoginProvider <-> LoginProvider
+            */
         #endif
     #elseif (UnityContainer)
             // ICloudTable is only needed for Online Only data
