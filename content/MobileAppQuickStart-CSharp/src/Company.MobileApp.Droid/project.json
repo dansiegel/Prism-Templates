@@ -1,25 +1,25 @@
 {
   "dependencies": {
-    "Xamarin.Forms": "2.3.4.247",
+    "Xamarin.Forms": "2.3.5.256-pre6",
     "Xamarin.Android.Support.Design": "25.3.1",
     "Xamarin.Android.Support.v4": "25.3.1",
     "Xamarin.Android.Support.v7.AppCompat": "25.3.1",
     "Xamarin.Android.Support.v7.CardView": "25.3.1",
     "Xamarin.Android.Support.v7.MediaRouter": "25.3.1",
 ////#if (AutofacContainer)
-//    "Prism.Autofac.Forms": "6.3.0",
+//    "Prism.Autofac.Forms": "7.0.0.14-ci",
 //    "Prism.Plugin.Popups.Autofac": "1.1.0",
 ////#endif
 ////#if (DryIocContainer)
-//    "Prism.DryIoc.Forms": "6.3.0.1",
+//    "Prism.DryIoc.Forms": "7.0.0.14-ci",
 //    "Prism.Plugin.Popups.DryIoc": "1.1.0",
 ////#endif
 ////#if (NinjectContainer)
-//    "Prism.Ninject.Forms": "6.3.0",
+//    "Prism.Ninject.Forms": "7.0.0.14-ci",
 //    "Prism.Plugin.Popups.Ninject": "1.1.0",
 ////#endif
 ////#if (UnityContainer)
-//    "Prism.Unity.Forms": "6.3.0",
+//    "Prism.Unity.Forms": "7.0.0.14-ci",
 //    "Prism.Plugin.Popups.Unity": "1.1.0",
 ////#endif
 ////#if (UseMvvmHelpers)
