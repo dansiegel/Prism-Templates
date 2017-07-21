@@ -77,7 +77,11 @@ namespace Company.MobileApp
             // determine the correct, supported .NET culture
             // set the RESX for resource localization
             // set the Thread for locale-aware methods
+    #if (NinjectContainer)
+            var localize = Container.Get<i18n.ILocalize>();
+    #else
             var localize = Container.Resolve<i18n.ILocalize>();
+    #endif
             localize.SetLocale(Strings.Resources.Culture = localize.GetCurrentCultureInfo());
 
 #endif

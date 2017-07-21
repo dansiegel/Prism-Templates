@@ -26,9 +26,9 @@ namespace Company.MobileApp.Views
         public DynamicTabbedPage(IContainer container)
 #endif
 #if (NinjectContainer)
-        private IKernel _kernel { get; }
+        private IReadOnlyKernel _kernel { get; }
 
-        public DynamicTabbedPage(IKernel kernel)
+        public DynamicTabbedPage(IReadOnlyKernel kernel)
 #endif
 #if (UnityContainer)
         private IUnityContainer _container { get; }
@@ -84,7 +84,7 @@ namespace Company.MobileApp.Views
             var page = _container.Resolve<object>(childName) as Page;
 #endif
 #if (NinjectContainer)
-            var page = _kernel.Get<object>(name) as Page;
+            var page = _kernel.Get<object>(childName) as Page;
 #endif
 
             if(ViewModelLocator.GetAutowireViewModel(page) == null)

@@ -35,7 +35,7 @@ namespace Company.MobileApp.Data
         private IContainer _container { get; }
 
 #elseif (NinjectContainer)
-        private IKernel _kernel { get; }
+        private IReadOnlyKernel _kernel { get; }
 
 #elseif (UnityContainer)
         private IUnityContainer _container { get; }
@@ -54,7 +54,7 @@ namespace Company.MobileApp.Data
         {
         }
     #elseif (NinjectContainer)
-        public AppDataContext(IKernel kernel, IMobileServiceClient client) 
+        public AppDataContext(IReadOnlyKernel kernel, IMobileServiceClient client) 
             : base(client) // you can optionally pass in the data store name
         {
             _kernel = kernel;
@@ -79,7 +79,7 @@ namespace Company.MobileApp.Data
         {
         }
     #elseif (NinjectContainer)
-        public AppDataContext(IKernel kernel, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+        public AppDataContext(IReadOnlyKernel kernel, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
             : base(options, loginProvider) // you can optionally pass in the data store name
         {
             _kernel = kernel;

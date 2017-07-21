@@ -46,7 +46,7 @@ namespace Company.MobileApp.UWP
   #elseif (DryIocContainer)
             container.Register<ILocalize, Localize>(Reuse.Singleton);
   #elseif (NinjectContainer)
-            container.Bind<ILocalize>().To<Localize>().InSingletonScope();
+            kernel.Bind<ILocalize>().To<Localize>().InSingletonScope();
   #elseif (UnityContainer)
             container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
   #endif
@@ -57,7 +57,7 @@ namespace Company.MobileApp.UWP
   #elseif (DryIocContainer)
             container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
   #elseif (NinjectContainer)
-            container.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
+            kernel.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
   #elseif (UnityContainer)
             container.RegisterType<ISecureStore, SecureStore>(new ContainerControlledLifetimeManager());
   #endif

@@ -27,7 +27,11 @@ namespace Company.MobileApp.i18n
 
         public TranslateExtension()
         {
+#if (NinjectContainer)
+            _ci = (Application.Current as App).Container.Get<ILocalize>().GetCurrentCultureInfo();
+#else
             _ci = (Application.Current as App).Container.Resolve<ILocalize>().GetCurrentCultureInfo();
+#endif
         }
 
         public string Text { get; set; }
