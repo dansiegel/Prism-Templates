@@ -23,4 +23,11 @@ You will also notice that a global style has been set in 'App.xaml' to use the c
 #if (UWPSupported)
 -- UWP --
 Your new project created a UWP project. You will need to generate a pfx to sign the project. This is not currently supported from the dotnet Templating Engine.
+
 #endif
+-- CI Builds --
+This template makes it easy to handle App Secrets and Build defined Environments. Your template may include several defined variables already. This works with a two step process to make it easy on both build hosts including VSTS and AppVeyor, as well as in your development environment. Note that this project comes with a .gitignore that will ignore both the secrets.json and Secrets.cs files to ensure you do not accidentally check in any secrets used during development.
+
+The BuildHostSecrets.ps1 is called as part of the build process and will automatically generate a `secrets.json` file in the event that one does not exist. This ensures that while developing you can create the secrets.json file and easily edit it without your changes being clobbered by the build. On your build host, you will need to create an environmental variable for each key listed in the script. The script will output it's failure to find variables that do not exist.
+
+The Secrets.ps1 script is called as part of the build and will regenerate the Helpers/Secrets.cs based on the secrets.json on each build. While working in your development environment this will make it easier to iterate as you simply need to update a value in the json file and rebuild your project.
