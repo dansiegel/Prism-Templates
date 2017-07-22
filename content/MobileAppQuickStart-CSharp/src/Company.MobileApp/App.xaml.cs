@@ -162,24 +162,27 @@ namespace Company.MobileApp
             Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
         #endif
     #elseif (NinjectContainer)
-            // TODO: generically register ICloudTable<> as AzureCloudTable<>
-            // TODO: generically register ICloudSyncTable<> as AzureCloudSyncTable<>
+            Container.Bind(typeof(ICloudTable<>)).To(typeof(AzureCloudTable<>)).InSingletonScope();
+            Container.Bind(typeof(ICloudSyncTable<>)).To(typeof(AzureCloudSyncTable<>)).InSingletonScope();
         #if (NoAuth)
-            // TODO: if you aren't using authentication you just need to register an instance of IMobileServiceClient -> MobileServiceClient
+            Container.Bind<IMobileServiceClient>().ToConstant(new MobileServiceClient(Secrets.AppServiceEndpoint)).InSingletonScope();
+            Container.Bind<IAppDataContext, ICloudAppContext>().To<AppDataContext>().InSingletonScope();
         #else
             #if (AADAuth || AADB2CAuth)
-            // TODO: Register an instance of IPublicClientApplication
+            Container.Bind<IPublicClientApplication>()
+                     .ToConstant(
+                        new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
+                        {
+                            RedirectUri = AppConstants.RedirectUri
+                        })
+                    .InSingletonScope();
             #endif
-            // TODO: if you are using authentication see below
-            /* 
-            * Register IAzureCloudServiceOptions <-> AppServiceContextOptions
-            * var context = new AppDataContext
-            * Register Instance => IAppDataContext <-> context
-            * Register Instance => ICloudCloudService <-> context
-            * Register Instance => IMobileServiceClient <-> context.Client
-            * Register => IAccountStore <-> AccountStore
-            * Register => ILoginProvider <-> LoginProvider
-            */
+            Container.Bind<IAzureCloudServiceOptions>().To<AppServiceContextOptions>().InSingletonScope();
+            Container.Bind<IAppDataContext, ICloudService>().To<AppDataContext>().InSingletonScope();
+            Container.Bind<IMobileServiceClient>().ToMethod(c => Container.Get<ICloudService>().Client).InSingletonScope();
+
+            Container.Bind<IAccountStore>().To<AccountStore>().InSingletonScope();
+            Container.Bind<ILoginProvider>().To<LoginProvider>().InSingletonScope();
         #endif
     #elseif (UnityContainer)
             // ICloudTable is only needed for Online Only data
@@ -221,7 +224,7 @@ namespace Company.MobileApp
                                made: Made.Of(() => Realm.GetInstance(config)),
                                setup: Setup.With(allowDisposableTransient: true));
     #elseif (NinjectContainer)
-            // TODO: Register Realm as a Transient Service using the factory () => Realm.GetInstance()
+            Container.Bind<Realm>().ToMethod(c => Realm.GetInstance(config)).InTransientScope();
     #else
             Container.RegisterType<Realm>(new InjectionFactory(c => Realm.GetInstance(config)));
     #endif
