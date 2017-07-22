@@ -94,6 +94,7 @@ namespace Company.MobileApp
         protected override void RegisterTypes()
         {
 #if (AutofacContainer)
+            // NOTE: You currently do not have access to the PrismApplication's builder.
             var builder = new ContainerBuilder();
 
 #endif
