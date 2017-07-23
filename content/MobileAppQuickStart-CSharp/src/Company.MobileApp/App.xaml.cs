@@ -23,7 +23,6 @@ using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
 #if (UseMobileCenter || UseAzureMobileClient)
-using Company.MobileApp.Data;
 using Company.MobileApp.Helpers;
 #endif
 #if (UseMobileCenter)
@@ -35,6 +34,7 @@ using Microsoft.Azure.Mobile.Crashes;
 #if (!NoAuth)
 using Company.MobileApp.Auth;
 #endif
+using Company.MobileApp.Data;
 #if (AADAuth || AADB2CAuth)
 using Microsoft.Identity.Client;
 #endif
