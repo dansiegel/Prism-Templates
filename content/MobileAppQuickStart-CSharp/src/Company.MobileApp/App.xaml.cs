@@ -99,15 +99,19 @@ namespace Company.MobileApp
 
 #endif
 #if (UseMobileCenter)
+            if(!string.IsNullOrWhiteSpace(AppConstants.MobileCenterStart))
+            {
     #if (AutofacContainer)
-            builder.RegisterType<MCAnalyticsLogger>().As<ILoggerFacade>().SingleInstance();
+                builder.RegisterType<MCAnalyticsLogger>().As<ILoggerFacade>().SingleInstance();
     #elseif (DryIocContainer)
-            Container.Register<ILoggerFacade, MCAnalyticsLogger>(Reuse.Singleton);
+                Container.Register<ILoggerFacade, MCAnalyticsLogger>(reuse: Reuse.Singleton,
+                                                                     ifAlreadyRegistered: IfAlreadyRegistered.Replace);
     #elseif (NinjectContainer)
-            Container.Bind<ILoggerFacade>().To<MCAnalyticsLogger>().InSingletonScope();
+                Container.Bind<ILoggerFacade>().To<MCAnalyticsLogger>().InSingletonScope();
     #else
-            Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
+                Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
     #endif
+            }
 #endif
 #if (UseAzureMobileClient)
             // ICloudTable is only needed for Online Only data
@@ -304,11 +308,6 @@ namespace Company.MobileApp
             // overridden the default DebugLogger, you will need to update the Logger here to
             // ensure that any calls to your logger in the App.xaml.cs will use your logger rather
             // than the default DebugLogger.
-#if (NinjectContainer)
-            //Logger = Container.Get<ILoggerFacade>();
-#else
-            //Logger = Container.Resolve<ILoggerFacade>();
-#endif
             TaskScheduler.UnobservedTaskException += ( sender, e ) =>
             {
                 Logger.Log(e.Exception.ToString(), Category.Exception, Priority.High);
