@@ -3,8 +3,7 @@
   "author": "Dan Siegel",
   "classifications": ["Xamarin", "Prism"],
   "name": "Prism Forms Mobile App - Quickstart",
-  "groupIdentity": "PrismLibrary.Xamarin.Forms",
-  "precedence": "100",
+  "groupIdentity": "PrismLibrary.Xamarin.Forms.Quickstart",
   "identity": "PrismLibrary.Xamarin.Forms.QuickStart.CSharp",
   "shortName": "prismforms",
   "thirdPartyNotices": "https://github.com/dansiegel/Prism-Templates/blob/master/template-3pn",
@@ -149,7 +148,8 @@
     "IncludeUWP": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "description": "Determines whether to include the UWP project"
     },
     "IncludeUITest": {
       "type": "parameter",
@@ -160,19 +160,20 @@
     "Localization": {
       "type": "parameter",
       "dataType": "bool",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Includes resources to localize apps"
     },
     "UseMvvmHelpers": {
       "type": "parameter",
       "dataType": "bool",
       "defaultValue": "true",
-      "description": "Determines whether to import the Mvvm Helpers from James Montemagno and use the ViewModelBase or BindableBase for your ViewModels"
+      "description": "Includes the Mvvm Helpers from James Montemagno"
     },
     "UseAcrDialogs": {
       "type": "parameter",
       "dataType": "bool",
       "defaultValue": "false",
-      "description": "Will add Acr.UserDialogs to the Solution"
+      "description": "Adds Acr.UserDialogs to the Solution"
     },
     "UseMobileCenter": {
       "type": "parameter",
@@ -288,18 +289,18 @@
         {
           "choice": "Custom",
           "description": "Use a custom Authentication Source"
-        },
-        {
-          "choice": "Google",
-          "description": "Use Google"
-        },
-        {
-          "choice": "Facebook",
-          "description": "Use Facebook"
-        },
-        {
-          "choice": "MicrosoftAccount",
-          "description": "Use Microsoft Accounts"
+        // },
+        // {
+        //   "choice": "Google",
+        //   "description": "Use Google"
+        // },
+        // {
+        //   "choice": "Facebook",
+        //   "description": "Use Facebook"
+        // },
+        // {
+        //   "choice": "MicrosoftAccount",
+        //   "description": "Use Microsoft Accounts"
         }
       ]
     },
@@ -411,8 +412,8 @@
     "skipRestore": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "If specified, skips the automatic restore of the project on create.",
-      "defaultValue": "true"
+      "description": "Skips the package restore if specified",
+      "defaultValue": "false"
     }
   },
   "primaryOutputs": [ 
@@ -486,15 +487,6 @@
   "defaultName": "PrismApp",
   "postActions": [
     // {
-    //   "condition": "(!skipRestore)",
-    //   "description": "Restore NuGet packages required by this project.",
-    //   "manualInstructions": [
-    //     { "text": "Run 'dotnet restore'" }
-    //   ],
-    //   "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-    //   "continueOnError": true
-    // },
-    // {
     //   "condition": "(AllowScripts)",
     //   "description": "Run 'git init'",
     //   "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
@@ -529,6 +521,5 @@
     //     "executable": "git",
     //     "args": "commit -m \"Initial Commit\""
     //   }
-    // }
   ]
 }

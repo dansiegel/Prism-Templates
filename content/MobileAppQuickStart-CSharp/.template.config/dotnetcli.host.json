@@ -68,8 +68,8 @@
       "shortName": "data"
     },
     "AuthenticationSource": {
-      "longName": "authentication-source",
-      "shortName": "auth"
+      "longName": "auth",
+      "shortName": "au"
     },
     "AuthenticationClientId": {
       "longName": "auth-client-id",
