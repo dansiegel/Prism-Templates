@@ -15,7 +15,7 @@
 //         "Prism.Unity.Forms": "7.0.0.14-ci",
 ////#endif
         "PropertyChanged.Fody": "2.1.3",
-        "Fody":"2.1.1"
+        "Fody":"2.1.2"
   },
   "frameworks": {
     "uap10.0": {}
