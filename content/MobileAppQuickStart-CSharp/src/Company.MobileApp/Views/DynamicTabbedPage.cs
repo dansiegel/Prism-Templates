@@ -15,6 +15,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Company.MobileApp.Behaviors;
+using Company.MobileApp.Helpers;
 
 namespace Company.MobileApp.Views
 {
@@ -50,25 +51,27 @@ namespace Company.MobileApp.Views
 
         public async void OnNavigatingTo(NavigationParameters parameters)
         {
-            var tabs = parameters.GetValues<string>("tab");
+            var tabs = parameters.GetValues<string>(AppConstants.DynamicTabKey);
             foreach(var tabSegment in tabs)
             {
                 Page page = null;
 
-                foreach(var segment in tabSegment.Split('/'))
+                var uri = UriParsingHelper.Parse(tabSegment);
+                foreach(var segment in UriParsingHelper.GetUriSegments(uri))
                 {
+                    if(page != null && !(page is NavigationPage)) continue;
+
+                    var segmentPage = CreatePage(UriParsingHelper.GetSegmentName(segment));
+                    segmentPage.Behaviors.Add(new IsActiveAwareBehavior());
+                    PageUtilities.OnNavigatingTo(segmentPage, 
+                                                 UriParsingHelper.GetSegmentParameters(segment, parameters));
                     switch(page)
                     {
                         case null:
-                            page = CreatePage(segment);
-                            page.Behaviors.Add(new IsActiveAwareBehavior());
-                            PageUtilities.OnNavigatingTo(page, parameters);
+                            page = segmentPage;
                             break;
                         case NavigationPage navPage:
-                            var childPage = CreatePage(segment);
-                            childPage.Behaviors.Add(new IsActiveAwareBehavior());
-                            PageUtilities.OnNavigatingTo(childPage, parameters);
-                            await navPage.PushAsync(childPage);
+                            await navPage.PushAsync(segmentPage);
                             break;
                     }
                 }
