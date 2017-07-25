@@ -20,7 +20,12 @@ namespace Company.MobileApp.Views
 {
     public class DynamicTabbedPage : TabbedPage, INavigatingAware
     {
-#if (AutofacContainer || DryIocContainer)
+#if (AutofacContainer)
+        private IComponentContext _container { get; }
+
+        public DynamicTabbedPage(IComponentContext container)
+#endif
+#if (DryIocContainer)
         private IContainer _container { get; }
 
         public DynamicTabbedPage(IContainer container)
