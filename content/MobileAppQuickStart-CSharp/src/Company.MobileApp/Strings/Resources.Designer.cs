@@ -56,6 +56,14 @@ namespace Company.MobileApp.Strings
             }
         }
 
+        internal static string LoadingText 
+        {
+            get 
+            {
+                return ResourceManager.GetString("LoadingText", resourceCulture);
+            }
+        }
+
         internal static string MainPageTitle 
         {
             get 

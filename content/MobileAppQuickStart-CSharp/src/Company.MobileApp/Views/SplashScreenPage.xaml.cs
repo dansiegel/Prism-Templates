@@ -2,9 +2,9 @@ using Xamarin.Forms;
 
 namespace Company.MobileApp.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class SplashScreenPage : ContentPage
     {
-        public MainPage()
+        public SplashScreen()
         {
             InitializeComponent();
         }

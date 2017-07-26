@@ -84,10 +84,10 @@ namespace Company.MobileApp
             localize.SetLocale(Strings.Resources.Culture = localize.GetCurrentCultureInfo());
 
 #endif
-#if (UseAzureMobileClient || UseRealm || Empty)
+#if (Empty)
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
 #else
-            await NavigationService.NavigateAsync("NavigationPage/MainPage?todo=Item1&todo=Item2&todo=Item3");
+            await NavigationService.NavigateAsync("SplashScreenPage");
 #endif
         }
 
@@ -265,6 +265,7 @@ namespace Company.MobileApp
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
 #if (!Empty)
+            Container.RegisterTypeForNavigation<SplashScreenPage>();
             Container.RegisterTypeForNavigation<TodoItemDetail>();
 #endif
             // Navigating to "TabbedPage?tab=ViewA&tab=ViewB&tab=ViewC will generate a TabbedPage
