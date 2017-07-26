@@ -105,22 +105,21 @@
           "exclude": [
             "src/Company.MobileApp/ViewModels/MainPageViewModel.cs",
             "src/Company.MobileApp/ViewModels/TodoItemDetailViewModel.cs",
-            "src/Company.MobileApp/Views/MainPage.cs",
-            "src/Company.MobileApp/Views/TodoItemDetail.cs",
             "src/Company.MobileApp.ViewModels/SplashScreenPageViewModel.cs",
+            "src/Company.MobileApp/Views/MainPage.xaml",
             "src/Company.MobileApp/Views/SplashScreenPage.*",
+            "src/Company.MobileApp/Views/TodoItemDetail.*",
             "src/Company.MobileApp/Models/**"
           ],
           "rename": {
             "AltMainPageViewModel.cs": "MainPageViewModel.cs",
-            "AltMainPage.xaml": "MainPage.xaml",
-            "AltMainPage.xaml.cs": "MainPage.xaml.cs"
+            "AltMainPage.xaml": "MainPage.xaml"
           }
         },
         {
           "condition": "(!Empty)",
           "exclude": [
-            "**/AltMainPage.*",
+            "**/AltMainPage.xaml",
             "**/AltMainPageViewModel.cs"
           ]
         }
