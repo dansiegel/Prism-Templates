@@ -4,7 +4,7 @@ namespace Company.MobileApp.Views
 {
     public partial class SplashScreenPage : ContentPage
     {
-        public SplashScreen()
+        public SplashScreenPage()
         {
             InitializeComponent();
         }

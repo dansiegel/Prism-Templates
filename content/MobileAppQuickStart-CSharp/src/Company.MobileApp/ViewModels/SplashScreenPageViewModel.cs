@@ -8,7 +8,7 @@ namespace Company.MobileApp.ViewModels
 
     public class SplashScreenPageViewModel : ViewModelBase
     {
-        public SplashScreenViewModel(INavigationService navigationService, IApplicationStore applicationStore, IDeviceService deviceService) 
+        public SplashScreenPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, IDeviceService deviceService) 
             : base(navigationService, applicationStore, deviceService)
         {
         }
