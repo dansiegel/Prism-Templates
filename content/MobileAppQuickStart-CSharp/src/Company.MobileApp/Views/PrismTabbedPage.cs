@@ -4,6 +4,8 @@ using Xamarin.Forms;
 
 namespace Company.MobileApp.Views
 {
+    // NOTE: This class is being provided to better assist app development with Tabbed Pages until this feature is
+    // included out of the box in the Navigation Service with Prism 7
     public class PrismTabbedPage : TabbedPage, INavigatingAware
     {
         public virtual void OnNavigatingTo(NavigationParameters parameters)

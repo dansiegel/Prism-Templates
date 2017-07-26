@@ -19,6 +19,8 @@ using Company.MobileApp.Helpers;
 
 namespace Company.MobileApp.Views
 {
+    // NOTE: This class is being provided to better assist app development with Tabbed Pages until this feature is
+    // included out of the box in the Navigation Service with Prism 7
     public class DynamicTabbedPage : TabbedPage, INavigatingAware
     {
 #if (AutofacContainer)
