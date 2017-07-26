@@ -20,6 +20,7 @@
         <value>Todo Items</value>
         <comment>The title of the Main Page</comment>
     </data>
+<!--#if (!Empty) -->
     <data name="TodoItemDetailTitle" xml:space="preserve">
         <value>Item Detail</value>
         <comment>The title of the TodoItemDetail page</comment>
@@ -44,4 +45,5 @@
         <value>Save</value>
         <comment>Save Button Text</comment>
     </data>
+<!--#endif -->
 </root>

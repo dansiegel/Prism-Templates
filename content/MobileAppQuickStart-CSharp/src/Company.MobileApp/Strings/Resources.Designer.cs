@@ -71,6 +71,7 @@ namespace Company.MobileApp.Strings
                 return ResourceManager.GetString("MainPageTitle", resourceCulture);
             }
         }
+#if (!Empty)
         
         internal static string TodoItemDetailTitle
         {
@@ -119,5 +120,6 @@ namespace Company.MobileApp.Strings
                 return ResourceManager.GetString("SaveButton", resourceCulture);
             }
         }
+#endif
     }
 }
