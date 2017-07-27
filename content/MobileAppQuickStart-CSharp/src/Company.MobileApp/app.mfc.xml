@@ -14,5 +14,6 @@
     <configure id="com.mfractor.code_gen.forms.csharp.value_converter">
         <property name="Folder" value="Converters" />
         <property name="ImplementConversionForConvert" value="true" />
+        <property name="Namespace" value="Company.MobileApp.Converters" />
     </configure>
 </mfractor>
