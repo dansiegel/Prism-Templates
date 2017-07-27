@@ -111,9 +111,6 @@ dotnet new prismitem -n "ViewB" -namespace $namespace -navigating
 
 # Make a ViewModel IActiveAware and not INavigationAware
 dotnet new prismitem -n "ViewC" -namespace $namespace -aa true -navigation false
-
-# Use BindableBase instead of MvvmHelpers BaseViewModel
-dotnet new prismitem -n "ViewD" -namespace $namespace -umh false
 ```
 
 ### Known Issues

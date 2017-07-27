@@ -5,10 +5,6 @@
             "longName": "base-namespace",
             "shortName": "namespace"
         },
-        "UseMvvmHelpers": {
-            "longName": "use-mvvm-helpers",
-            "shortName": "umh"
-        },
         "ItemType": {
             "longName": "item-type",
             "shortName": "item"

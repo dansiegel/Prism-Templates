@@ -1,18 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if (UseMvvmHelpers)
-using MvvmHelpers;
-#endif
 #if (IsIActiveAware)
 using Prism;
 #endif
 using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
-#if (!UseMvvmHelpers)
-using Prism.Mvvm;
-#endif
 using Prism.Navigation;
 using Prism.Services;
 using MobileApp.Strings;
@@ -23,7 +17,7 @@ namespace MobileApp.ViewModels
     public class ItemTemplateViewModel : ViewModelBase
     {
         public ItemTemplateViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
-                                       IDeviceService deviceService) 
+                                     IDeviceService deviceService) 
             : base(navigationService, applicationStore, deviceService)
         {
             Title = Resources.ItemTemplateTitle;

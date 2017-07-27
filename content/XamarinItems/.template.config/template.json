@@ -20,11 +20,6 @@
             "isRequired": "true",
             "replaces": "MobileApp"
         },
-        "UseMvvmHelpers": {
-            "type": "parameter",
-            "datatype": "bool",
-            "defaultValue": "true"
-        },
         "ItemType": {
             "type": "parameter",
             "datatype": "choice",
