@@ -52,10 +52,7 @@
           "condition": "(!Localization)",
           "exclude": [
             "src/Company.MobileApp/i18n/**",
-            "src/Company.MobileApp/Resx/**",
-            "src/Company.MobileApp.iOS/i18n/**",
-            "src/Company.MobileApp.Droid/i18n/**",
-            "src/Company.MobileApp.UWP/i18n/**"
+            "src/Company.MobileApp/Strings/**"
           ]
         },
         {

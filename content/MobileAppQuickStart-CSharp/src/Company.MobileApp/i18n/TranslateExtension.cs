@@ -1,19 +1,6 @@
 using System;
 using System.Globalization;
-using System.Reflection;
 using System.Resources;
-#if (AutofacContainer)
-using Autofac;
-#endif
-#if (DryIocContainer)
-using DryIoc;
-#endif
-#if (NinjectContainer)
-using Ninject;
-#endif
-#if (UnityContainer)
-using Microsoft.Practices.Unity;
-#endif
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,17 +10,6 @@ namespace Company.MobileApp.i18n
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        private CultureInfo _ci { get; }
-
-        public TranslateExtension()
-        {
-#if (NinjectContainer)
-            _ci = (Application.Current as App).Container.Get<ILocalize>().GetCurrentCultureInfo();
-#else
-            _ci = (Application.Current as App).Container.Resolve<ILocalize>().GetCurrentCultureInfo();
-#endif
-        }
-
         public string Text { get; set; }
 
         public object ProvideValue(IServiceProvider serviceProvider)
@@ -43,13 +19,13 @@ namespace Company.MobileApp.i18n
 
             ResourceManager resmgr = new ResourceManager(typeof(Strings.Resources));
 
-            var translation = resmgr.GetString(Text, _ci);
+            var translation = resmgr.GetString(Text, CultureInfo.CurrentCulture);
 
             if (translation == null)
             {
 //-:cnd:noEmit
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine($"Key '{Text}' was not found in resources for culture '{_ci.Name}'.");
+                System.Diagnostics.Debug.WriteLine($"Key '{Text}' was not found in resources for culture '{CultureInfo.CurrentCulture.Name}'.");
 #endif
 //+:cnd:noEmit
                 translation = Text; // HACK: returns the key, which GETS DISPLAYED TO THE USER
