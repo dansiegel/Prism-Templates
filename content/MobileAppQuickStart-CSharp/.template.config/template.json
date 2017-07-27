@@ -64,24 +64,6 @@
           }
         },
         {
-          "condition": "(UseRealm)",
-          "rename": {
-            "RealmFodyWeavers.xml": "FodyWeavers.xml"
-          },
-          "exclude": [
-            "**/NormalFodyWeavers.xml"
-          ]
-        },
-        {
-          "condition": "(!UseRealm)",
-          "rename": {
-            "NormalFodyWeavers.xml": "FodyWeavers.xml"
-          },
-          "exclude": [
-            "**/RealmFodyWeavers.xml"
-          ]
-        },
-        {
           "condition": "(DataProvider != \"AzureMobileClient\")",
           "exclude": [
             "src/Company.MobileApp/Auth/**",
