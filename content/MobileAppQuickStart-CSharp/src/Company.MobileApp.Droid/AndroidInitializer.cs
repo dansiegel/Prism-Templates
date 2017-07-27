@@ -53,17 +53,6 @@ namespace Company.MobileApp.Droid
 #if(AutofacContainer)
             var builder = new ContainerBuilder();
 #endif
-#if (Localization)
-  #if (AutofacContainer)
-            builder.Register(ctx => new Localize()).As<ILocalize>().SingleInstance();
-  #elseif (DryIocContainer)
-            container.Register<ILocalize, Localize>(Reuse.Singleton);
-  #elseif (NinjectContainer)
-            kernel.Bind<ILocalize>().To<Localize>().InSingletonScope();
-  #elseif (UnityContainer)
-            container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
-  #endif
-#endif
 #if (UseAzureMobileClient)
   #if (AutofacContainer)
             builder.RegisterInstance(CurrentApplication).As<Application>().SingleInstance();

@@ -166,7 +166,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="iOSInitializer.cs" />
-    <Compile Include="i18n\Localize.cs" Condition=" '$(Localization)' "/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Company.MobileApp\Company.MobileApp.csproj">

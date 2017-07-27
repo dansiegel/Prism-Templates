@@ -43,17 +43,6 @@ namespace Company.MobileApp.iOS
 #if(AutofacContainer)
             var builder = new ContainerBuilder();
 #endif
-#if (Localization)
-  #if (AutofacContainer)
-            builder.Register(ctx => new Localize()).As<ILocalize>().SingleInstance();
-  #elseif (DryIocContainer)
-            container.Register<ILocalize, Localize>(Reuse.Singleton);
-  #elseif (NinjectContainer)
-            kernel.Bind<ILocalize>().To<Localize>().InSingletonScope();
-  #elseif (UnityContainer)
-            container.RegisterType<ILocalize, Localize>(new ContainerControlledLifetimeManager());
-  #endif
-#endif
 #if (UseAzureMobileClient)
   #if (AutofacContainer)
             builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
