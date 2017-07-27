@@ -7,6 +7,9 @@ using MvvmHelpers;
 using System.Collections.ObjectModel;
 using System.Linq;
 #endif
+#if (UseAcrDialogs)
+using Acr.UserDialogs;
+#endif
 using Prism.AppModel;
 using Prism.Commands;
 using Prism.Events;
@@ -73,6 +76,9 @@ namespace Company.MobileApp.ViewModels
         private async void OnSaveCommandExecuted()
         {
             _transaction.Commit();
+    #if (UseAcrDialogs)
+            Toast("Item Saved");
+    #endif
             await _navigationService.PopupGoBackAsync("todoItem", Model);
         }
 
@@ -86,10 +92,16 @@ namespace Company.MobileApp.ViewModels
             if(_isNew)
             {
                 await _dataContext.TodoItems.CreateItemAsync(Model);
+    #if (UseAcrDialogs)
+                Toast("New Item Saved");
+    #endif
             }
             else
             {
                 await _dataContext.TodoItems.UpdateItemAsync(Model);
+    #if (UseAcrDialogs)
+                Toast("Item Updated");
+    #endif
             }
 
             await _navigationService.PopupGoBackAsync();
@@ -99,12 +111,29 @@ namespace Company.MobileApp.ViewModels
         {
             if(_isNew)
             {
+    #if (UseAcrDialogs)
+                Toast("New Item Saved");
+    #endif
                 await _navigationService.PopupGoBackAsync("todoItem", Model);
             }
             else
             {
+    #if (UseAcrDialogs)
+                Toast("Item Updated");
+    #endif
                 await _navigationService.PopupGoBackAsync();
             }
+        }
+#endif
+#if (UseAcrDialogs)
+        private void Toast(string message)
+        {
+            _userDialogs.Toast(new ToastConfig(message)
+            {
+                BackgroundColor = System.Drawing.Color.Green,
+                MessageTextColor = System.Drawing.Color.White,
+                Position = ToastPosition.Top
+            });
         }
 #endif
     }
