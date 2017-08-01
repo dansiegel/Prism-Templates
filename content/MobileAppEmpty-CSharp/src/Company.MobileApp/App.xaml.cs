@@ -3,7 +3,6 @@ using Company.MobileApp.Views;
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
-using Prism.Autofac.Forms;
 #endif
 #if (DryIocContainer)
 using DryIoc;
@@ -51,8 +50,13 @@ namespace Company.MobileApp
 
         protected override void RegisterTypes()
         {
+#if (AutofacContainer)
+            Builder.RegisterTypeForNavigation<NavigationPage>();
+            Builder.RegisterTypeForNavigation<MainPage>();
+#else
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+#endif
         }
 
         protected override void OnStart()

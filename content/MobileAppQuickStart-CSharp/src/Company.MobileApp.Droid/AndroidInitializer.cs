@@ -40,7 +40,9 @@ namespace Company.MobileApp.Droid
         }
 
 #endif
-#if (AutofacContainer || DryIocContainer)
+#if (AutofacContainer)
+        public void RegisterTypes(ContainerBuilder builder)
+#elseif (DryIocContainer)
         public void RegisterTypes(IContainer container)
 #elseif (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
@@ -50,13 +52,10 @@ namespace Company.MobileApp.Droid
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
-#if(AutofacContainer)
-            var builder = new ContainerBuilder();
-#endif
 #if (UseAzureMobileClient)
   #if (AutofacContainer)
             builder.RegisterInstance(CurrentApplication).As<Application>().SingleInstance();
-            builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
+            builder.RegisterType<SecureStore().As<ISecureStore>().SingleInstance();
   #elseif (DryIocContainer)
             container.UseInstance(CurrentApplication);
             container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
@@ -78,10 +77,6 @@ namespace Company.MobileApp.Droid
   #elseif (UnityContainer)
             container.RegisterInstance(new UIParent(Xamarin.Forms.Forms.Context as Activity));
   #endif
-#endif
-#if (AutofacContainer)
-
-            builder.Update(container);
 #endif
         }
     }

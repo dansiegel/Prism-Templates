@@ -20,13 +20,13 @@ namespace Company.MobileApp.UWP
 {
     public class UWPInitializer : IPlatformInitializer
     {
-#if (AutofacContainer || DryIocContainer)
+#if (AutofacContainer)
+        public void RegisterTypes(ContainerBuilder builder)
+#elseif (DryIocContainer)
         public void RegisterTypes(IContainer container)
-#endif
-#if (NinjectContainer)
+#elseif (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
-#endif
-#if (UnityContainer)
+#elseif (UnityContainer)
         public void RegisterTypes(IUnityContainer container)
 #endif
         {

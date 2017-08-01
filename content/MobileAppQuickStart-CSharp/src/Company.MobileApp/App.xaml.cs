@@ -92,16 +92,11 @@ namespace Company.MobileApp
 
         protected override void RegisterTypes()
         {
-#if (AutofacContainer)
-            // NOTE: You currently do not have access to the PrismApplication's builder.
-            var builder = new ContainerBuilder();
-
-#endif
 #if (UseMobileCenter)
             if(!string.IsNullOrWhiteSpace(AppConstants.MobileCenterStart))
             {
     #if (AutofacContainer)
-                builder.RegisterType<MCAnalyticsLogger>().As<ILoggerFacade>().SingleInstance();
+                Builder.RegisterType<MCAnalyticsLogger>().As<ILoggerFacade>().SingleInstance();
     #elseif (DryIocContainer)
                 Container.Register<ILoggerFacade, MCAnalyticsLogger>(reuse: Reuse.Singleton,
                                                                      ifAlreadyRegistered: IfAlreadyRegistered.Replace);
@@ -115,26 +110,26 @@ namespace Company.MobileApp
 #if (UseAzureMobileClient)
             // ICloudTable is only needed for Online Only data
     #if (AutofacContainer)
-            builder.RegisterGeneric(typeof(AzureCloudTable<>)).As(typeof(ICloudTable<>)).InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(AzureCloudSyncTable<>)).As(typeof(ICloudSyncTable<>)).InstancePerLifetimeScope();
+            Builder.RegisterGeneric(typeof(AzureCloudTable<>)).As(typeof(ICloudTable<>)).InstancePerLifetimeScope();
+            Builder.RegisterGeneric(typeof(AzureCloudSyncTable<>)).As(typeof(ICloudSyncTable<>)).InstancePerLifetimeScope();
 
         #if (NoAuth)
-            builder.RegisterInstance(new MobileServiceClient(Secrets.AppServiceEndpoint)).As<IMobileServiceClient>().SingleInstance();
-            builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudAppContext>().SingleInstance();
+            Builder.RegisterInstance(new MobileServiceClient(Secrets.AppServiceEndpoint)).As<IMobileServiceClient>().SingleInstance();
+            Builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudAppContext>().SingleInstance();
         #else
             #if (AADAuth || AADB2CAuth)
-            builder.RegisterInstance(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
+            Builder.RegisterInstance(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
             {
                 RedirectUri = AppConstants.RedirectUri
             }).As<IPublicClientApplication>().SingleInstance();
 
             #endif
-            builder.RegisterType<AppServiceContextOptions>().As<IAzureCloudServiceOptions>().SingleInstance();
-            builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
-            builder.Register(ctx => ctx.Resolve<ICloudService>().Client).As<IMobileServiceClient>().SingleInstance();
+            Builder.RegisterType<AppServiceContextOptions>().As<IAzureCloudServiceOptions>().SingleInstance();
+            Builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
+            Builder.Register(ctx => ctx.Resolve<ICloudService>().Client).As<IMobileServiceClient>().SingleInstance();
 
-            builder.RegisterType<AccountStore>().As<IAccountStore>().SingleInstance();
-            builder.RegisterType<LoginProvider>().As<ILoginProvider>().SingleInstance();
+            Builder.RegisterType<AccountStore>().As<IAccountStore>().SingleInstance();
+            Builder.RegisterType<LoginProvider>().As<ILoginProvider>().SingleInstance();
         #endif
     #elseif (DryIocContainer)
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
@@ -221,7 +216,7 @@ namespace Company.MobileApp
             //var config = new SyncConfiguration(User.Current, serverURL);
             var config = RealmConfiguration.DefaultConfiguration;
     #if (AutofacContainer)
-            builder.Register(ctx => Realm.GetInstance(config)).As<Realm>().InstancePerDependency();
+            Builder.Register(ctx => Realm.GetInstance(config)).As<Realm>().InstancePerDependency();
     #elseif (DryIocContainer)
             Container.Register(reuse: Reuse.Transient,
                                made: Made.Of(() => Realm.GetInstance(config)),
@@ -236,8 +231,8 @@ namespace Company.MobileApp
             // NOTE: Uses a Popup Page to contain the Scanner. You can optionally register 
             // the ContentPageBarcodeScannerService if you prefer a full screen approach.
     #if (AutofacContainer)
-            builder.RegisterInstance(PopupNavigation.Instance).As<IPopupNavigation>().SingleInstance();
-            builder.RegisterType<PopupBarcodeScannerService>().As<IBarcodeScannerService>().SingleInstance();
+            Builder.RegisterInstance(PopupNavigation.Instance).As<IPopupNavigation>().SingleInstance();
+            Builder.RegisterType<PopupBarcodeScannerService>().As<IBarcodeScannerService>().SingleInstance();
     #elseif (DryIocContainer)
             Container.UseInstance<IPopupNavigation>(PopupNavigation.Instance);
             Container.Register<IBarcodeScannerService, PopupBarcodeScannerService>();
@@ -251,7 +246,7 @@ namespace Company.MobileApp
 #endif
 #if (UseAcrDialogs)
     #if (AutofacContainer)
-            builder.RegisterInstance(UserDialogs.Instance).As<IUserDialogs>().SingleInstance();
+            Builder.RegisterInstance(UserDialogs.Instance).As<IUserDialogs>().SingleInstance();
     #elseif (DryIocContainer)
             Container.UseInstance<IUserDialogs>(UserDialogs.Instance);
     #elseif (NinjectContainer)
@@ -261,20 +256,28 @@ namespace Company.MobileApp
     #endif
 #endif
 
+#if (AutofacContainer)
+            Builder.RegisterTypeForNavigation<NavigationPage>();
+            Builder.RegisterTypeForNavigation<MainPage>();
+#else
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+#endif
 #if (!Empty)
+    #if (AutofacContainer)
+            Builder.RegisterTypeForNavigation<SplashScreenPage>();
+            Builder.RegisterTypeForNavigation<TodoItemDetail>();
+    #else
             Container.RegisterTypeForNavigation<SplashScreenPage>();
             Container.RegisterTypeForNavigation<TodoItemDetail>();
+    #endif
 #endif
             // Navigating to "TabbedPage?tab=ViewA&tab=ViewB&tab=ViewC will generate a TabbedPage
             // with three tabs for ViewA, ViewB, & ViewC
-            Container.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
 #if (AutofacContainer)
-
-            // NOTE: This is obsolete but still required for Prism to work properly. This requirement will
-            // likely be removed before Prism 7 is released.
-            builder.Update(Container);
+            Builder.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
+#else
+            Container.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
 #endif
         }
 
@@ -285,7 +288,11 @@ namespace Company.MobileApp
             MobileCenter.Start(AppConstants.MobileCenterStart,
                                 typeof(Analytics), typeof(Crashes));
 
+    #if (NinjectContainer)
+            Logger = Container.Get<ILoggerFacade>();
+    #else
             Logger = Container.Resolve<ILoggerFacade>();
+    #endif
 #endif
         }
 

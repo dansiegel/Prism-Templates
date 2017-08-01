@@ -27,7 +27,9 @@ namespace Company.MobileApp.UWP
 {
     public class UWPInitializer : IPlatformInitializer
     {
-#if (AutofacContainer || DryIocContainer)
+#if (AutofacContainer)
+        public void RegisterTypes(ContainerBuilder builder)
+#elseif (DryIocContainer)
         public void RegisterTypes(IContainer container)
 #elseif (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
@@ -37,9 +39,6 @@ namespace Company.MobileApp.UWP
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
-#if(AutofacContainer)
-            var builder = new ContainerBuilder();
-#endif
 #if (UseAzureMobileClient)
   #if (AutofacContainer)
             builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
@@ -61,10 +60,6 @@ namespace Company.MobileApp.UWP
   #elseif (UnityContainer)
             container.RegisterInstance(new UIParent());
   #endif
-#endif
-#if (AutofacContainer)
-
-            builder.Update(container);
 #endif
         }
     }

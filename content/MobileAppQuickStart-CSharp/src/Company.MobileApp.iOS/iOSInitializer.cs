@@ -30,7 +30,9 @@ namespace Company.MobileApp.iOS
 {
     public class iOSInitializer : IPlatformInitializer
     {
-#if (AutofacContainer || DryIocContainer)
+#if (AutofacContainer)
+        public void RegisterTypes(ContainerBuilder builder)
+#elseif (DryIocContainer)
         public void RegisterTypes(IContainer container)
 #elseif (NinjectContainer)
         public void RegisterTypes(IKernel kernel)
@@ -40,12 +42,9 @@ namespace Company.MobileApp.iOS
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
-#if(AutofacContainer)
-            var builder = new ContainerBuilder();
-#endif
 #if (UseAzureMobileClient)
   #if (AutofacContainer)
-            builder.Register(ctx => new SecureStore()).As<ISecureStore>().SingleInstance();
+            builder.RegisterType<SecureStore().As<ISecureStore>().SingleInstance();
   #elseif (DryIocContainer)
             container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
   #elseif (NinjectContainer)
@@ -64,10 +63,6 @@ namespace Company.MobileApp.iOS
   #elseif (UnityContainer)
             container.RegisterInstance(new UIParent());
   #endif
-#endif
-#if (AutofacContainer)
-
-            builder.Update(container);
 #endif
         }
     }
