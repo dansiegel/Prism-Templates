@@ -1,4 +1,5 @@
 #if (AutofacContainer)
+using System;
 using Autofac;
 #endif
 #if (DryIocContainer)

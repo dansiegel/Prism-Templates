@@ -8,7 +8,6 @@ using Acr.UserDialogs;
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
-using Prism.Autofac.Forms;
 #endif
 #if (DryIocContainer)
 using DryIoc;

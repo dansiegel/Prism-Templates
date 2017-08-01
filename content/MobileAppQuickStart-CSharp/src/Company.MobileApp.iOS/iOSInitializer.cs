@@ -21,10 +21,6 @@ using Prism.Unity;
 #if (AADAuth || AADB2CAuth)
 using Microsoft.Identity.Client;
 #endif
-#if (Localization)
-using Company.MobileApp.i18n;
-using Company.MobileApp.iOS.i18n;
-#endif
 
 namespace Company.MobileApp.iOS
 {
