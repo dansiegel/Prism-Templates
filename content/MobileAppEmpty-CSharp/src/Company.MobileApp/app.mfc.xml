@@ -3,6 +3,8 @@
     <configure id="com.mfractor.code_actions.xaml.implement_view_model">
         <property name="BaseClass" value="ViewModelBase" />
         <property name="ViewModelsFolder" value="ViewModels" />
+        <property name="ViewModelNamespace" value=".ViewModels" />
+        <property name="ShouldRemoveXamlViewSuffix" value="false" />
     </configure>
     <configure id="com.mfractor.code_gen.forms.csharp.command_implementation">
         <property name="CommandType" value="Prism.Commands.DelegateCommand" />
@@ -13,5 +15,6 @@
     <configure id="com.mfractor.code_gen.forms.csharp.value_converter">
         <property name="Folder" value="Converters" />
         <property name="ImplementConversionForConvert" value="true" />
+        <property name="Namespace" value="Company.MobileApp.Converters" />
     </configure>
 </mfractor>
