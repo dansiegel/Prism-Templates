@@ -291,15 +291,22 @@ namespace Company.MobileApp
 
         protected override void OnSleep()
         {
+            // Handle IApplicationLifecycle
+            base.OnSleep();
+
             // Handle when your app sleeps
         }
 
         protected override void OnResume()
         {
+            // Handle IApplicationLifecycle
+            base.OnResume();
+
             // Handle when your app resumes
         }
 
-        protected override ILoggerFacade CreateLogger() => new DebugLogger();
+        protected override ILoggerFacade CreateLogger() => 
+            new DebugLogger();
 
         private void SetupLogging()
         {
