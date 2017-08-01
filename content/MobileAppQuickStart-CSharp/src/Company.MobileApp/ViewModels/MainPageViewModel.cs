@@ -144,7 +144,7 @@ namespace Company.MobileApp.ViewModels
         {
             var transaction = _realm.BeginWrite();
             var todoItem = _realm.Add(new TodoItem());
-            await _navigationService.PushPopupPageAsync("TodoItemDetail", new NavigationParameters
+            await _navigationService.NavigateAsync("TodoItemDetail", new NavigationParameters
             {
                 { "new", true },
                 { "transaction", transaction },
@@ -156,14 +156,14 @@ namespace Company.MobileApp.ViewModels
             _realm.Write(() => _realm.Remove(item));
 
         private async void OnTodoItemTappedCommandExecuted(TodoItem item) =>
-            await _navigationService.PushPopupPageAsync("TodoItemDetail", new NavigationParameters
+            await _navigationService.NavigateAsync("TodoItemDetail", new NavigationParameters
             {
                 { "todoItem", item },
                 { "transaction", _realm.BeginWrite() }
             });
 #else
         private async void OnAddItemCommandExecuted() => 
-            await _navigationService.PushPopupPageAsync("TodoItemDetail", new NavigationParameters
+            await _navigationService.NavigateAsync("TodoItemDetail", new NavigationParameters
             {
                 { "new", true },
                 { "todoItem", new TodoItem() }
@@ -173,7 +173,7 @@ namespace Company.MobileApp.ViewModels
             TodoItems.Remove(item);
 
         private async void OnTodoItemTappedCommandExecuted(TodoItem item) =>
-            await _navigationService.PushPopupPageAsync("TodoItemDetail", "todoItem", item);
+            await _navigationService.NavigateAsync("TodoItemDetail", "todoItem", item);
 #endif
     }
 }

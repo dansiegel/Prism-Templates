@@ -79,7 +79,7 @@ namespace Company.MobileApp.ViewModels
     #if (UseAcrDialogs)
             Toast("Item Saved");
     #endif
-            await _navigationService.PopupGoBackAsync("todoItem", Model);
+            await _navigationService.GoBackAsync("todoItem", Model);
         }
 
         public override void Destroy()
@@ -104,7 +104,7 @@ namespace Company.MobileApp.ViewModels
     #endif
             }
 
-            await _navigationService.PopupGoBackAsync();
+            await _navigationService.GoBackAsync();
         }
 #else
         private async void OnSaveCommandExecuted()
@@ -114,14 +114,14 @@ namespace Company.MobileApp.ViewModels
     #if (UseAcrDialogs)
                 Toast("New Item Saved");
     #endif
-                await _navigationService.PopupGoBackAsync("todoItem", Model);
+                await _navigationService.GoBackAsync("todoItem", Model);
             }
             else
             {
     #if (UseAcrDialogs)
                 Toast("Item Updated");
     #endif
-                await _navigationService.PopupGoBackAsync();
+                await _navigationService.GoBackAsync();
             }
         }
 #endif
