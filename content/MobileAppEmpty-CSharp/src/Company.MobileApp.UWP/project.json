@@ -3,16 +3,16 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
         "Xamarin.Forms": "2.3.5.256-pre6",
 ////#if (AutofacContainer)
-//         "Prism.Autofac.Forms": "7.0.0.29-ci",
+//         "Prism.Autofac.Forms": "7.0.0.30-ci",
 ////#endif
 ////#if (DryIocContainer)
-//         "Prism.DryIoc.Forms": "7.0.0.29-ci",
+//         "Prism.DryIoc.Forms": "7.0.0.30-ci",
 ////#endif
 ////#if (NinjectContainer)
-//         "Prism.Ninject.Forms": "7.0.0.29-ci",
+//         "Prism.Ninject.Forms": "7.0.0.30-ci",
 ////#endif
 ////#if (UnityContainer)
-//         "Prism.Unity.Forms": "7.0.0.29-ci",
+//         "Prism.Unity.Forms": "7.0.0.30-ci",
 ////#endif
         "PropertyChanged.Fody": "2.1.3",
         "Fody":"2.1.2"
