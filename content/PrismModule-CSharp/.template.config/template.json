@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Dan Siegel",
+  "classifications": ["Xamarin", "Prism"],
+  "name": "Prism Forms Module",
+  "groupIdentity": "Prism.Forms.Module",
+  "identity": "Prism.Forms.Module.CSharp",
+  "shortName": "prismmodule",
+  "thirdPartyNotices": "https://github.com/dansiegel/Prism-Templates/blob/master/template-3pn",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "defaultName": "PrismModule",
+  "sourceName": "Company.MobileApp.ModuleName",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!Localization)",
+          "exclude": [
+            "i18n/**",
+            "Strings/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    "Localization": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "Includes resources to localize apps"
+    },
+    "Container": {
+      "type": "parameter",
+      "dataType": "choice",
+      "defaultValue": "DryIoc",
+      "choices": [
+        {
+          "choice": "Autofac",
+          "description": "Uses Autofac as the Dependency Injection Container"
+        },
+        {
+          "choice": "DryIoc",
+          "description": "Uses DryIoc as the Dependency Injection Container"
+        },
+        {
+          "choice": "Ninject",
+          "description": "Uses Ninject as the Dependency Injection Container"
+        },
+        {
+          "choice": "Unity",
+          "description": "Uses Unity as the Dependency Injection Container"
+        }
+      ],
+      "description": "The Dependency Injection Container to use"
+    },
+    "Framework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "netstandard1.4",
+      "choices": [
+        {
+          "choice": "netstandard1.4",
+          "description": "Uses netstandard1.4 core library"
+        },
+        {
+          "choice": "netstandard1.5",
+          "description": "Uses netstandard1.5 core library"
+        },
+        {
+          "choice": "netstandard1.6",
+          "description": "Uses netstandard1.6 core library"
+        },
+        {
+          "choice": "netstandard2.0",
+          "description": "Uses netstandard2.0 core library"
+        }
+      ],
+      "replaces": "NETSTANDARD_LIBRARY_VERSION"
+    },
+    "AutofacContainer": {
+      "type": "computed",
+      "value": "(Container == \"Autofac\")"
+    },
+    "DryIocContainer": {
+      "type": "computed",
+      "value": "(Container == \"DryIoc\")"
+    },
+    "NinjectContainer": {
+      "type": "computed",
+      "value": "(Container == \"Ninject\")"
+    },
+    "UnityContainer": {
+      "type": "computed",
+      "value": "(Container == \"Unity\")"
+    }
+  }
+}
