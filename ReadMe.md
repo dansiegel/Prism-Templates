@@ -16,6 +16,8 @@ The core project uses netstandard1.4 by default, and can be overridden to use ne
 - Includes a UWP project
 - Includes a UI Test project by default
 - Includes a `Mock` Build configuration great for swapping services for testing and development.
+- Includes [Prism.Forms.Extensions](https://www.nuget.org/packages/Prism.Forms.Extensions/)
+- Includes updated [Prism.Plugin.Popups](https://github.com/dansiegel/Prism.Plugin.Popups) with fully integrated support for Popup Pages in Prism's Navigation Service.
 
 ## Item Templates
 
@@ -36,7 +38,7 @@ The Service Item Templates will create an interface an implementing class, and a
 Currently it is recommended that you have at least at least the [DotNet CLI 2.0 preview 3](https://github.com/dotnet/cli/tree/release/2.0.0) or later.
 
 ```bash
-dotnet new -i Prism.Forms.QuickstartTemplates::1.0.0-*
+dotnet new -i Prism.Forms.QuickstartTemplates::*
 ```
 
 ```bash
@@ -44,6 +46,7 @@ dotnet new -i Prism.Forms.QuickstartTemplates::1.0.0-*
 git clone https://github.com/dansiegel/Prism-Templates.git
 dotnet new --install Prism-Templates/content/MobileAppEmpty-CSharp/
 dotnet new --install Prism-Templates/content/MobileAppQuickStart-CSharp/
+dotnet new --install Prism-Templates/content/PrismModule-CSharp/
 dotnet new --install Prism-Templates/content/XamarinItems/
 ```
 
@@ -59,6 +62,7 @@ There are two project templates and one item template that is installed with thi
 |---------------|:----------:|
 | Prism Forms Mobile App - Quickstart | prismforms |
 | Prism Forms Mobile App - Empty | prismformsempty |
+| Prism Forms Module | prismmodule |
 | Prism Forms Item Templates | prismitem |
 
 ### Listing Template Options
@@ -67,6 +71,7 @@ There are two project templates and one item template that is installed with thi
 dotnet new prismitem -h
 dotnet new prismforms -h
 dotnet new prismformsempty -h
+dotnet new prismmodule -h
 ```
 
 ### Basic App Creation
@@ -113,11 +118,18 @@ dotnet new prismitem -n "ViewB" -namespace $namespace -navigating
 dotnet new prismitem -n "ViewC" -namespace $namespace -aa true -navigation false
 ```
 
+### Creating a Module
+
+```bash
+dotnet new prismforms -id com.contoso.awesomeapp -o Contoso.AwesomeApp
+cd Contoso.AwesomeApp/src
+dotnet new prismmodule -o Contoso.AwesomeApp.AwesomeModule
+cd ..
+dotnet sln add src/Contoso.AwesomeApp.AwesomeModule/Contoso.AwesomeApp.AwesomeModule.csproj
+```
+
 ### Known Issues
 
-NOTE: These issues are fixed when using version 2.0 pre3 or later of the dotnet cli.
-
-- The Fody Weavers file is not being properly renamed and as such will need to be manually renamed. You simply need to remove either the `Normal` or `Realm` part of the file name.
 - When creating a Service item from the templates, an error occurs that prevents the creation of the empty service class though the Mock class is created.
 
 [MyGetShield]: https://img.shields.io/myget/dansiegel-templates/vpre/Prism.Forms.Templates.svg
