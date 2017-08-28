@@ -15,6 +15,9 @@
     <configure id="com.mfractor.code_gen.forms.csharp.value_converter">
         <property name="Folder" value="Converters" />
         <property name="ImplementConversionForConvert" value="true" />
-        <property name="Namespace" value="Company.MobileApp.Converters" />
+        <property name="Namespace" value=".Converters" />
+    </configure>
+    <configure id="com.mfractor.code_gen.forms.migrate_string_to_localistion">
+        <property name="TranslateExtensionSymbol" value=".i18n.TranslateExtension"/>
     </configure>
 </mfractor>
