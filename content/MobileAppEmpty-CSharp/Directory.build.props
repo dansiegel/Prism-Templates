@@ -12,6 +12,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
+    <EnableDefaultEmbeddedResourceItems>True</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
 
   <!-- VS4Mac executes using the Mono Runtime & provides no way for us to know -->
