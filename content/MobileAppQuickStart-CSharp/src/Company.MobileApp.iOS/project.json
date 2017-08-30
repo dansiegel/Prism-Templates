@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "Xamarin.Forms": "2.4.0.266-pre1",
+        "Xamarin.Forms": "2.4.0.269-pre2",
 ////#if (AutofacContainer)
 //    "Prism.Autofac.Forms": "7.0.0.30-ci",
 //    "Prism.Plugin.Popups.Autofac": "2.0.0-pre2",

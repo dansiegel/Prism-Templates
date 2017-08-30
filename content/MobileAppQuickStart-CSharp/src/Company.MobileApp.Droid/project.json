@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "Xamarin.Forms": "2.4.0.266-pre1",
+    "Xamarin.Forms": "2.4.0.269-pre2",
     "Xamarin.Android.Support.Design": "25.3.1",
     "Xamarin.Android.Support.v4": "25.3.1",
     "Xamarin.Android.Support.v7.AppCompat": "25.3.1",

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.266-pre1" />
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.269-pre2" />
     <PackageReference Include="Fody" Version="2.1.2" PrivateAssets="all" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.1.4" PrivateAssets="all" />
     <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.30-ci" />
