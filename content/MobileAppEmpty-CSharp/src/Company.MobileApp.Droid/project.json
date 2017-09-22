@@ -1,22 +1,21 @@
 {
   "dependencies": {
-    "Xamarin.Forms": "2.4.0.269-pre2",
-    "Xamarin.Android.Support.Design": "25.3.1",
-    "Xamarin.Android.Support.v4": "25.3.1",
-    "Xamarin.Android.Support.v7.AppCompat": "25.3.1",
-    "Xamarin.Android.Support.v7.CardView": "25.3.1",
-    "Xamarin.Android.Support.v7.MediaRouter": "25.3.1",
+    "Xamarin.Android.Support.Design": "25.4.0.2",
+    "Xamarin.Android.Support.v4": "25.4.0.2",
+    "Xamarin.Android.Support.v7.AppCompat": "25.4.0.2",
+    "Xamarin.Android.Support.v7.CardView": "25.4.0.2",
+    "Xamarin.Android.Support.v7.MediaRouter": "25.4.0.2",
 ////#if (AutofacContainer)
-//    "Prism.Autofac.Forms": "7.0.0.30-ci",
+//    "Prism.Autofac.Forms": "7.0.0-pre1",
 ////#endif
 ////#if (DryIocContainer)
-//    "Prism.DryIoc.Forms": "7.0.0.30-ci",
+//    "Prism.DryIoc.Forms": "7.0.0-pre1",
 ////#endif
 ////#if (NinjectContainer)
-//    "Prism.Ninject.Forms": "7.0.0.30-ci",
+//    "Prism.Ninject.Forms": "7.0.0-pre1",
 ////#endif
 ////#if (UnityContainer)
-//    "Prism.Unity.Forms": "7.0.0.30-ci",
+//    "Prism.Unity.Forms": "7.0.0-pre1",
 ////#endif
     "PropertyChanged.Fody": "2.1.4",
     "Fody":"2.1.2"

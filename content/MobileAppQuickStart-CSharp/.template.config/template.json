@@ -330,6 +330,10 @@
       "type": "computed",
       "value": "(DataProvider == \"AzureMobileClient\")"
     },
+    "UsesAuthentication": {
+      "type": "computed",
+      "value": "(AuthenticationSource != \"None\")"
+    },
     "AutofacContainer": {
       "type": "computed",
       "value": "(Container == \"Autofac\")"

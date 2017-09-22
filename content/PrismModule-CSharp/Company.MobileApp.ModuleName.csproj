@@ -7,18 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.269-pre2" />
     <PackageReference Include="Fody" Version="2.1.2" PrivateAssets="all" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.1.4" PrivateAssets="all" />
-    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.30-ci" />
-    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.30-ci" />
-    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0.30-ci" />
-    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.30-ci" />
-    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Plugin.Popups.Autofac" Version="2.0.0-pre2" />
-    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.Plugin.Popups.DryIoc" Version="2.0.0-pre2" />
-    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Plugin.Popups.Ninject" Version="2.0.0-pre2" />
-    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Plugin.Popups.Unity" Version="2.0.0-pre2" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0-pre1" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0-pre1" />
+    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0-pre1" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0-pre1" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Plugin.Popups.Autofac" Version="2.0.0-pre3" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.Plugin.Popups.DryIoc" Version="2.0.0-pre3" />
+    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Plugin.Popups.Ninject" Version="2.0.0-pre3" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Plugin.Popups.Unity" Version="2.0.0-pre3" />
     <PackageReference Condition=" '$(Localization)' " Include="System.ComponentModel" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="**/*.xaml" />
+
   </ItemGroup>
 
 </Project>
