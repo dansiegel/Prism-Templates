@@ -3,12 +3,15 @@ using Company.MobileApp.Helpers;
 using Company.MobileApp.Models;
 #if (AutofacContainer)
 using Autofac;
+using Microsoft.WindowsAzure.MobileServices;
 #elseif (DryIocContainer)
 using DryIoc;
 #elseif (NinjectContainer)
+using Microsoft.WindowsAzure.MobileServices;
 using Ninject;
 #elseif (UnityContainer)
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices;
 #endif
 
 namespace Company.MobileApp.Data
@@ -116,10 +119,10 @@ namespace Company.MobileApp.Data
 #elseif (UnityContainer)
 
         public override ICloudSyncTable<T> SyncTable<T>() =>
-            Container.Resolve<ICloudSyncTable<T>>();
+            _container.Resolve<ICloudSyncTable<T>>();
 
         public override ICloudTable<T> Table<T>() =>
-            Container.Resolve<ICloudTable<T>>();
+            _container.Resolve<ICloudTable<T>>();
 #endif
     }
 }
