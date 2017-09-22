@@ -116,8 +116,10 @@ namespace Company.MobileApp.ViewModels
                     break;
                 case NavigationMode.New:
 #if (UseAzureMobileClient)
-    #if (UseMvvmHelpers)
+    #if (UsesAuthentication)
                     await _cloudService.LoginAsync();
+    #endif
+    #if (UseMvvmHelpers)
                     TodoItems.AddRange(await _dataContext.TodoItems.ReadAllItemsAsync());
     #else
                     foreach (var item in await _dataContext.TodoItems.ReadAllItemsAsync())
