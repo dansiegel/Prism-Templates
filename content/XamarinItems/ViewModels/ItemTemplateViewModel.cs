@@ -4,6 +4,7 @@ using System.Linq;
 #if (IsIActiveAware)
 using Prism;
 #endif
+using Prism.AppModel;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
