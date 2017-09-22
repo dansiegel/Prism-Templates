@@ -182,7 +182,6 @@ namespace Company.MobileApp
             Container.Bind<ILoginProvider>().To<LoginProvider>().InSingletonScope();
         #endif
     #elseif (UnityContainer)
-            // ICloudTable is only needed for Online Only data
             Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), new ContainerControlledLifetimeManager());
             Container.RegisterType(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), new ContainerControlledLifetimeManager());
 
