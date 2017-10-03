@@ -49,6 +49,7 @@
 ////#if (UseAcrDialogs)
 //    "Acr.UserDialogs": "6.5.1",
 ////#endif
+    "Xamarin.Forms": "2.4.0.282",
     "Prism.Forms.Extensions": "1.0.0-pre2",
     "PropertyChanged.Fody": "2.1.4",
     "Fody":"2.1.3"

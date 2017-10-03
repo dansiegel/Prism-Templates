@@ -17,6 +17,7 @@
     <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.Plugin.Popups.DryIoc" Version="2.0.0-pre3" />
     <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Plugin.Popups.Ninject" Version="2.0.0-pre3" />
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Plugin.Popups.Unity" Version="2.0.0-pre3" />
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.282" />
     <PackageReference Condition=" '$(Localization)' " Include="System.ComponentModel" Version="4.3.0" />
   </ItemGroup>
 

@@ -13,6 +13,7 @@
     <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0-pre1" />
     <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0-pre1" />
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0-pre1" />
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.282" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(EnableDefaultItems)' != 'True' Or '$(EnableDefaultXamlItems)' != 'True' Or '$(EnableDefaultEmbeddedResourceItems)' != 'True' ">
