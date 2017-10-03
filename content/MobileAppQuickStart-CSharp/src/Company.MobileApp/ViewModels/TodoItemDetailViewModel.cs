@@ -29,19 +29,35 @@ namespace Company.MobileApp.ViewModels
 {
     public class TodoItemDetailViewModel : ViewModelBase
     {
+#if (UseAcrDialogs)
+        private IUserDialogs _userDialogs { get; }
+#endif
 #if (UseAzureMobileClient)
         private IAppDataContext _dataContext { get; }
 
         public TodoItemDetailViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+    #if (UseAcrDialogs)
+                                       IDeviceService deviceService, IAppDataContext dataContext, IUserDialogs userDialogs)
+    #else
                                        IDeviceService deviceService, IAppDataContext dataContext)
+    #endif
 #else
         public TodoItemDetailViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+    #if (UseAcrDialogs)
+                                       IDeviceService deviceService, IUserDialogs userDialogs)
+    #else
                                        IDeviceService deviceService)
+    #endif
 #endif
             : base(navigationService, applicationStore, deviceService)
         {
+#if (UseAcrDialogs)
+            _userDialogs = userDialogs;
+#endif
 #if (UseAzureMobileClient)
             _dataContext = dataContext;
+#endif
+#if (UseAcrDialogs || UseAzureMobileClient)
 
 #endif
 #if (Localization)
