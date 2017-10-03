@@ -21,7 +21,7 @@ namespace MobileApp.ViewModels
                                      IDeviceService deviceService) 
             : base(navigationService, applicationStore, deviceService)
         {
-            Title = Resources.ItemTemplateTitle;
+            Title = "ItemTemplate";
             #if (IsMasterDetailPage)
 
             NavigateCommand = new DelegateCommand<string>(OnNavigateCommandExecuted);
