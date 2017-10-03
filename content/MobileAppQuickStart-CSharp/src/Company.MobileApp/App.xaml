@@ -10,6 +10,9 @@
              <!--#else -->
              xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              <!--#endif -->
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
              x:Class="Company.MobileApp.App">
     <prism:PrismApplication.Resources>
         <!-- Application resource dictionary -->

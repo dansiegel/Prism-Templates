@@ -5,6 +5,9 @@
              <!--#if Localization -->
              xmlns:i18n="clr-namespace:Company.MobileApp.i18n;assembly=Company.MobileApp"
              <!--#endif -->
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
              Title="{Binding Title}"
              x:Class="Company.MobileApp.Views.MainPage">
 

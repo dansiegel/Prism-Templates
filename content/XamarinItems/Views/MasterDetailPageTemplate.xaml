@@ -5,8 +5,9 @@
                   <!--#if Localization -->
                   xmlns:i18n="clr-namespace:MobileApp.i18n;assembly=MobileApp"
                   <!--#endif -->
-                  xmlns:xaml="clr-namespace:MobileApp.Xaml;assembly=MobileApp"
-                  BindingContext="{xaml:ViewModelLocator {x:Reference view}}"
+                  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                  xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+                  xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
                   Title="{Binding Title}"
                   x:Name="view"
                   x:Class="MobileApp.Views.ItemTemplate">
