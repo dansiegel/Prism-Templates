@@ -12,7 +12,10 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
-    <EnableDefaultEmbeddedResourceItems>True</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultItems Condition=" '$(EnableDefaultItems)' == '' ">true</EnableDefaultItems>
+    <EnableDefaultNoneItems Condition=" '$(EnableDefaultNoneItems)' == '' ">true</EnableDefaultNoneItems>
+    <EnableDefaultXamlItems Condition=" '$(EnableDefaultXamlItems)' == '' ">true</EnableDefaultXamlItems>
+    <EnableDefaultEmbeddedResourceItems Condition=" '$(EnableDefaultEmbeddedResourceItems)' == '' ">true</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
 
   <!-- VS4Mac executes using the Mono Runtime & provides no way for us to know -->

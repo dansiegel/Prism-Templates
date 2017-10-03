@@ -15,11 +15,10 @@
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0-pre1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="**/*.xaml" />
-    <EmbeddedResource Include="**/*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
-    <EmbeddedResource Update="Strings\*.resx" Generator="ResXFileCodeGenerator" LastGenOutput="%(Filename).Designer.cs" />
-    <Compile Update="Strings\Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
+  <ItemGroup Condition=" '$(EnableDefaultItems)' != 'True' Or '$(EnableDefaultXamlItems)' != 'True' Or '$(EnableDefaultEmbeddedResourceItems)' != 'True' ">
+    <EmbeddedResource Include="**\*.xaml" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
+    <Compile Update="**\*.xaml$(DefaultLanguageSourceExtension)" DependentUpon="%(Filename)" SubType="Code" />
+		<None Remove="**\*.xaml" Condition="'$(EnableDefaultNoneItems)' != 'True'" />
   </ItemGroup>
 
 </Project>
