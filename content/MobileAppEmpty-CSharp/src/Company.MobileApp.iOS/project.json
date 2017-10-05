@@ -1,16 +1,16 @@
 {
     "dependencies": {
 ////#if (AutofacContainer)
-//         "Prism.Autofac.Forms": "7.0.0-pre1",
+//         "Prism.Autofac.Forms": "7.0.0.124-ci",
 ////#endif
 ////#if (DryIocContainer)
-//         "Prism.DryIoc.Forms": "7.0.0-pre1",
+//         "Prism.DryIoc.Forms": "7.0.0.124-ci",
 ////#endif
 ////#if (NinjectContainer)
-//         "Prism.Ninject.Forms": "7.0.0-pre1",
+//         "Prism.Ninject.Forms": "7.0.0.124-ci",
 ////#endif
 ////#if (UnityContainer)
-//         "Prism.Unity.Forms": "7.0.0-pre1",
+//         "Prism.Unity.Forms": "7.0.0.124-ci",
 ////#endif
         "Xamarin.Forms": "2.4.0.282",
         "PropertyChanged.Fody": "2.1.4",
