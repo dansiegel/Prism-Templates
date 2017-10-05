@@ -4,6 +4,12 @@ These templates are a prototype for the official Prism Templates. These template
 
 The core project uses netstandard1.4 by default, and can be overridden to use netstandard1.5, netstandard1.6 or netstandard2.0. Localization is supported and ready to go out of the box with this template.
 
+## Support
+
+If this project helped you reduce time to develop and made your app better, please help support this project.
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/dansiegel)
+
 ## Additional Features
 
 - Uses [MvvmHelpers](https://github.com/jamesmontemagno/mvvm-helpers) from James Montemagno by default.
