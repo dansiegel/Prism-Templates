@@ -250,10 +250,15 @@ namespace Company.MobileApp
     #endif
 #endif
 
+            // Navigating to "TabbedPage?createTab=ViewA&createTab=ViewB&createTab=ViewC will generate a TabbedPage
+            // with three tabs for ViewA, ViewB, & ViewC
+            // Adding `selectedTab=ViewB` will set the current tab to ViewB
 #if (AutofacContainer)
+            Builder.RegisterTypeForNavigation<TabbedPage>();
             Builder.RegisterTypeForNavigation<NavigationPage>();
             Builder.RegisterTypeForNavigation<MainPage>();
 #else
+            Container.RegisterTypeForNavigation<TabbedPage>();
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
 #endif
@@ -265,13 +270,6 @@ namespace Company.MobileApp
             Container.RegisterTypeForNavigation<SplashScreenPage>();
             Container.RegisterTypeForNavigation<TodoItemDetail>();
     #endif
-#endif
-            // Navigating to "TabbedPage?tab=ViewA&tab=ViewB&tab=ViewC will generate a TabbedPage
-            // with three tabs for ViewA, ViewB, & ViewC
-#if (AutofacContainer)
-            Builder.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
-#else
-            Container.RegisterTypeForNavigation<DynamicTabbedPage>("TabbedPage");
 #endif
         }
 

@@ -52,9 +52,11 @@ namespace Company.MobileApp
         {
 #if (AutofacContainer)
             Builder.RegisterTypeForNavigation<NavigationPage>();
+            Builder.RegisterTypeForNavigation<TabbedPage>();
             Builder.RegisterTypeForNavigation<MainPage>();
 #else
             Container.RegisterTypeForNavigation<NavigationPage>();
+            Container.RegisterTypeForNavigation<TabbedPage>();
             Container.RegisterTypeForNavigation<MainPage>();
 #endif
         }
