@@ -104,7 +104,7 @@
         },
         {
           "choice": "Ninject",
-          "description": "Uses Ninject as the Dependency Injection Container"
+          "description": "Uses Ninject as the Dependency Injection Container. REQUIRES netstandard2.0"
         },
         {
           "choice": "Unity",
@@ -155,7 +155,7 @@
     },
     "UWPSupported": {
       "type":"computed",
-      "value": "(IncludeUWP && Framework == \"netstandard1.4\")"
+      "value": "(IncludeUWP && Framework == \"netstandard1.4\" || Framework == \"netstandard2.0\")"
     },
     "GitInitialize": {
       "type": "parameter",
