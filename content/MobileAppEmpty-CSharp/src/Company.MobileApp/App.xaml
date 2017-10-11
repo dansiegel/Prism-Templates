@@ -30,6 +30,11 @@
                 <Setter Property="BarTextColor" Value="{StaticResource NavigationText}" />
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDark}" />
             </Style>
+
+            <Style TargetType="TabbedPage">
+                <Setter Property="BarTextColor" Value="{StaticResource NavigationText}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDark}" />
+            </Style>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
 </prism:PrismApplication>
