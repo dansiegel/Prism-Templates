@@ -127,8 +127,7 @@ namespace Company.MobileApp
             Builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
             Builder.Register(ctx => ctx.Resolve<ICloudService>().Client).As<IMobileServiceClient>().SingleInstance();
 
-            Builder.RegisterType<AccountStore>().As<IAccountStore>().SingleInstance();
-            Builder.RegisterType<LoginProvider>().As<ILoginProvider>().SingleInstance();
+            Builder.RegisterType<LoginProvider>().As<ILoginProvider<MobileAppUser>>().SingleInstance();
         #endif
     #elseif (DryIocContainer)
             Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
@@ -155,8 +154,7 @@ namespace Company.MobileApp
             Container.RegisterDelegate<IMobileServiceClient>(factoryDelegate: r => r.Resolve<ICloudService>().Client,
                                                              reuse: Reuse.Singleton,
                                                              setup: Setup.With(allowDisposableTransient: true));
-            Container.Register<IAccountStore,AccountStore>(Reuse.Singleton);
-            Container.Register<ILoginProvider,LoginProvider>(Reuse.Singleton);
+            Container.Register<ILoginProvider<MobileAppUser>,LoginProvider>(Reuse.Singleton);
         #endif
     #elseif (NinjectContainer)
             Container.Bind(typeof(ICloudTable<>)).To(typeof(AzureCloudTable<>)).InSingletonScope();
@@ -178,8 +176,7 @@ namespace Company.MobileApp
             Container.Bind<IAppDataContext, ICloudService>().To<AppDataContext>().InSingletonScope();
             Container.Bind<IMobileServiceClient>().ToMethod(c => Container.Get<ICloudService>().Client).InSingletonScope();
 
-            Container.Bind<IAccountStore>().To<AccountStore>().InSingletonScope();
-            Container.Bind<ILoginProvider>().To<LoginProvider>().InSingletonScope();
+            Container.Bind<ILoginProvider<MobileAppUser>>().To<LoginProvider>().InSingletonScope();
         #endif
     #elseif (UnityContainer)
             Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), new ContainerControlledLifetimeManager());
@@ -204,8 +201,7 @@ namespace Company.MobileApp
             Container.RegisterType<ICloudService>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
             Container.RegisterType<IMobileServiceClient>(new InjectionFactory(c => c.Resolve<ICloudService>().Client));
 
-            Container.RegisterType<IAccountStore,AccountStore>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ILoginProvider,LoginProvider>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ILoginProvider<MobileAppUser>,LoginProvider>(new ContainerControlledLifetimeManager());
         #endif
     #endif
 #endif

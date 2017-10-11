@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AzureMobileClient.Helpers;
 using AzureMobileClient.Helpers.Accounts;
 #if (AADAuth || AADB2CAuth)
+using AzureMobileClient.Helpers.AzureActiveDirectory;
 using Microsoft.Identity.Client;
 #endif
 using Microsoft.WindowsAzure.MobileServices;
@@ -17,88 +18,38 @@ using Company.MobileApp.Helpers;
 
 namespace Company.MobileApp.Auth
 {
-    public class LoginProvider : LoginProviderBase
+#if (AADAuth || AADB2CAuth)
+    public class LoginProvider : AADLoginProvider
+#else
+    public class LoginProvider : LoginProviderBase<MobileAppUser>
+#endif
     {
         private ILoggerFacade _logger { get; }
 
 #if (AADAuth || AADB2CAuth)
-        private IPublicClientApplication _clientApplication { get; }
-
-        private UIParent _parent { get; }
-
-        public LoginProvider(IPublicClientApplication clientApplication, UIParent parent, 
-                             IAccountStore accountStore, ILoggerFacade logger)
+        public LoginProvider(IPublicClientApplication client, UIParent parent, 
+                             IAADOptions options, ILoggerFacade logger)
+            : base(client, parent, options)
 #else
         public LoginProvider(IAccountStore accountStore, ILoggerFacade logger) 
 #endif
             : base(accountStore)
         {
-#if (AADAuth || AADB2CAuth)
-            _clientApplication = clientApplication;
-            _parent = parent;
-#endif
             _logger = logger;
         }
 
         public override string AccountServiceName => "Company.MobileApp";
 
-#if (AADB2CAuth)
-        public override async Task<MobileServiceUser> LoginAsync(IMobileServiceClient client)
+#if (AADAuth || AADB2CAuth)
+        protected override void Log(Exception exception)
+        {
+            _logger.Log(exception);
+        }
 #else
         public override Task<MobileServiceUser> LoginAsync(IMobileServiceClient client)
-#endif
         {
-#if (AADB2CAuth)
-            try
-            {
-                AuthenticationResult authenticationResult = 
-                    await _clientApplication.AcquireTokenSilentAsync(
-                        AppConstants.Scopes,
-                        GetUserByPolicy(Secrets.PolicySignUpSignIn),
-                        AppConstants.Authority,
-                        false
-                    );
-
-                var payload = new JObject();
-                if(authenticationResult != null && !string.IsNullOrWhiteSpace(authenticationResult.AccessToken))
-                {
-                    payload["access_token"] = authenticationResult.AccessToken;
-                }
-
-                client.CurrentUser = await client.LoginAsync(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory, payload);
-
-                return client.CurrentUser;
-            }
-            catch(Exception ex)
-            {
-                _logger.Log(ex.ToString(), Category.Exception, Priority.High);
-                throw;
-            }
-#else
             // TODO: Implement your login logic
             throw new NotImplementedException();
-#endif
-        }
-
-#if (AADB2CAuth || AADAuth)
-        private IUser GetUserByPolicy(string policy)
-        {
-            foreach(var user in _clientApplication.Users)
-            {
-                string userIdentifier = Base64UrlDecode(user.Identifier.Split('.')[0]);
-                if(userIdentifier.EndsWith(policy, StringComparison.OrdinalIgnoreCase)) return user;
-            }
-
-            return null;
-        }
-
-        private string Base64UrlDecode(string s)
-        {
-            s = s.Replace('-', '+').Replace('_', '/');
-            s = s.PadRight(s.Length + (4 - s.Length % 4) % 4, '=');
-            var byteArray = Convert.FromBase64String(s);
-            var decoded = Encoding.UTF8.GetString(byteArray, 0, byteArray.Count());
-            return decoded;
         }
 #endif
     }

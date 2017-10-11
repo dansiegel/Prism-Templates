@@ -50,21 +50,6 @@ namespace Company.MobileApp.Droid
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
-#if (UseAzureMobileClient)
-  #if (AutofacContainer)
-            builder.RegisterInstance(CurrentApplication).As<Application>().SingleInstance();
-            builder.RegisterType<SecureStore().As<ISecureStore>().SingleInstance();
-  #elseif (DryIocContainer)
-            container.UseInstance(CurrentApplication);
-            container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
-  #elseif (NinjectContainer)
-            kernel.Bind<Application>().ToConstant(CurrentApplication).InSingletonScope();
-            kernel.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
-  #elseif (UnityContainer)
-            container.RegisterInstance(CurrentApplication);
-            container.RegisterType<ISecureStore, SecureStore>(new ContainerControlledLifetimeManager());
-  #endif
-#endif
 #if (AADAuth || AADB2CAuth) 
   #if (AutofacContainer)
             builder.RegisterInstance(new UIParent(Xamarin.Forms.Forms.Context as Activity)).As<UIParent>().SingleInstance();

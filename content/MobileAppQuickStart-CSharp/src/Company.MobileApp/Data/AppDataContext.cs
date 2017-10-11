@@ -1,4 +1,5 @@
 using AzureMobileClient.Helpers;
+using Company.MobileApp.Auth;
 using Company.MobileApp.Helpers;
 using Company.MobileApp.Models;
 #if (AutofacContainer)
@@ -17,39 +18,44 @@ using Microsoft.WindowsAzure.MobileServices;
 namespace Company.MobileApp.Data
 {
 #if (NoAuth)
-     #if (DryIocContainer)
+    #if (AutofacContainer)
+    // If you do want to use authentication inherit from AutofacCloudServiceContext
+    public class AppDataContext : AutofacCloudAppContext, IAppDataContext
+    #elseif (DryIocContainer)
     // If you do want to use authentication inherit from DryIocCloudServiceContext
     public class AppDataContext : DryIocCloudAppContext, IAppDataContext
+    #elseif (UnityContainer)
+    // If you do want to use authentication inherit from UnityCloudServiceContext
+    public class AppDataContext : UnityCloudAppContext, IAppDataContext
     #else
     // If you do want to use authentication inherit from AzureCloudServiceContext
     public class AppDataContext : AzureCloudAppContext, IAppDataContext
     #endif
 #else
-    #if (DryIocContainer)
+    #if (AutofacContainer)
+    // If you don't want to use authentication inherit from AutofacCloudAppContext
+    public class AppDataContext : AutofactCloudServiceContext<MobileAppUser>, IAppDataContext
+    #elseif (DryIocContainer)
     // If you don't want to use authentication inherit from DryIocCloudAppContext
-    public class AppDataContext : DryIocCloudServiceContext, IAppDataContext
+    public class AppDataContext : DryIocCloudServiceContext<MobileAppUser>, IAppDataContext
+    #elseif (UnityContainer)
+    // If you don't want to use authentication inherit from UnityCloudAppContext
+    public class AppDataContext : UnityCloudServiceContext<MobileAppUser>, IAppDataContext
     #else
     // If you don't want to use authentication inherit from AzureCloudAppContext
-    public class AppDataContext : AzureCloudServiceContext, IAppDataContext
+    public class AppDataContext : AzureCloudServiceContext<MobileAppUser>, IAppDataContext
     #endif
 #endif
     {
-#if (AutofacContainer)
-        private IContainer _container { get; }
-
-#elseif (NinjectContainer)
+#if (NinjectContainer)
         private IReadOnlyKernel _kernel { get; }
-
-#elseif (UnityContainer)
-        private IUnityContainer _container { get; }
 
 #endif
 #if (NoAuth)
     #if (AutofacContainer)
-        public AppDataContext(IContainer container, IMobileServiceClient client) 
-            : base(client) // you can optionally pass in the data store name
+        public AppDataContext(IComponentContext context) 
+            : base(context) // you can optionally pass in the data store name
         {
-            _container = container;
         }
     #elseif (DryIocContainer)
         public AppDataContext(IContainer container) 
@@ -63,35 +69,32 @@ namespace Company.MobileApp.Data
             _kernel = kernel;
         }
     #elseif (UnityContainer)
-        public AppDataContext(IUnityContainer container, IMobileServiceClient client) 
-            : base(client) // you can optionally pass in the data store name
+        public AppDataContext(IUnityContainer container) 
+            : base(container) // you can optionally pass in the data store name
         {
-            _container = container;
         }
     #endif
 #else
     #if (AutofacContainer)
-        public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
-            : base(options, loginProvider) // you can optionally pass in the data store name
+        public AppDataContext(IComponentContext context, IAzureCloudServiceOptions options, ILoginProvider<MobileAppUser> loginProvider) 
+            : base(context, options, loginProvider) // you can optionally pass in the data store name
         {
-            _container = container;
         }
     #elseif (DryIocContainer)
-       public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+       public AppDataContext(IContainer container, IAzureCloudServiceOptions options, ILoginProvider<MobileAppUser> loginProvider) 
             : base(container, options, loginProvider) // you can optionally pass in the data store name
         {
         }
     #elseif (NinjectContainer)
-        public AppDataContext(IReadOnlyKernel kernel, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
+        public AppDataContext(IReadOnlyKernel kernel, IAzureCloudServiceOptions options, ILoginProvider<MobileAppUser> loginProvider) 
             : base(options, loginProvider) // you can optionally pass in the data store name
         {
             _kernel = kernel;
         }
     #elseif (UnityContainer)
-        public AppDataContext(IUnityContainer container, IAzureCloudServiceOptions options, ILoginProvider loginProvider) 
-            : base(options, loginProvider) // you can optionally pass in the data store name
+        public AppDataContext(IUnityContainer container, IAzureCloudServiceOptions options, ILoginProvider<MobileAppUser> loginProvider) 
+            : base(container, options, loginProvider) // you can optionally pass in the data store name
         {
-            _container = container;
         }
     #endif
 #endif
@@ -102,27 +105,13 @@ namespace Company.MobileApp.Data
 #else
         public ICloudSyncTable<TodoItem> TodoItems => SyncTable<TodoItem>();
 #endif
-#if (AutofacContainer)
-
-        public override ICloudSyncTable<T> SyncTable<T>() =>
-            _container.Resolve<ICloudSyncTable<T>>();
-
-        public override ICloudTable<T> Table<T>() =>
-            _container.Resolve<ICloudTable<T>>();
-#elseif (NinjectContainer)
+#if (NinjectContainer)
 
         public override ICloudSyncTable<T> SyncTable<T>() =>
             _kernel.Get<ICloudSyncTable<T>>();
 
         public override ICloudTable<T> Table<T>() =>
             _kernel.Get<ICloudTable<T>>();
-#elseif (UnityContainer)
-
-        public override ICloudSyncTable<T> SyncTable<T>() =>
-            _container.Resolve<ICloudSyncTable<T>>();
-
-        public override ICloudTable<T> Table<T>() =>
-            _container.Resolve<ICloudTable<T>>();
 #endif
     }
 }

@@ -38,17 +38,6 @@ namespace Company.MobileApp.iOS
         {
             // Register Any Platform Specific Implementations that you cannot 
             // access from Shared Code
-#if (UseAzureMobileClient)
-  #if (AutofacContainer)
-            builder.RegisterType<SecureStore().As<ISecureStore>().SingleInstance();
-  #elseif (DryIocContainer)
-            container.Register<ISecureStore, SecureStore>(Reuse.Singleton);
-  #elseif (NinjectContainer)
-            kernel.Bind<ISecureStore>().To<SecureStore>().InSingletonScope();
-  #elseif (UnityContainer)
-            container.RegisterType<ISecureStore, SecureStore>(new ContainerControlledLifetimeManager());
-  #endif
-#endif
 #if (AADAuth || AADB2CAuth) 
   #if (AutofacContainer)
             builder.RegisterInstance(new UIParent()).As<UIParent>().SingleInstance();
