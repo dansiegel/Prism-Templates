@@ -35,6 +35,8 @@
 ////#if (UseMobileCenter)
 //    "Microsoft.Azure.Mobile.Analytics":"0.16.0",
 //    "Microsoft.Azure.Mobile.Crashes": "0.16.0",
+//    "Microsoft.Azure.Mobile.Distribute": "0.16.0",
+//    "Microsoft.Azure.Mobile.Push": "0.16.0",
 ////#endif
 ////#if (UseAcrDialogs)
 //    "Acr.UserDialogs": "6.5.1",

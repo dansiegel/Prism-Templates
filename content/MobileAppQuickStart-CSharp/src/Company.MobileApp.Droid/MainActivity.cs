@@ -7,6 +7,9 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Company.MobileApp.Helpers;
+#if (UseMobileCenter)
+using Microsoft.Azure.Mobile.Push;
+#endif
 #if (AADAuth || AADB2CAuth)
 using Microsoft.Identity.Client;
 #endif
@@ -58,6 +61,14 @@ namespace Company.MobileApp.Droid
         {
             base.OnActivityResult(requestCode, resultCode, data);
             AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
+        }
+#endif
+#if (UseMobileCenter)
+
+        protected override void OnNewIntent(Android.Content.Intent intent)
+        {
+            base.OnNewIntent(intent);
+            Push.CheckLaunchedFromNotification(this, intent);
         }
 #endif
     }

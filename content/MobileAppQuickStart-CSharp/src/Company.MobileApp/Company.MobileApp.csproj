@@ -24,6 +24,8 @@
     <PackageReference Condition=" '$(Localization)' " Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Analytics" Version="0.16.0" />
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.16.0" />
+    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Distribute" Version="0.16.0" />
+    <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Push" Version="0.16.0" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'Autofac' " Include="AzureMobileClient.Helpers.Autofac" Version="4.0.1.342-pre" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.1.342-pre" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'Ninject' " Include="AzureMobileClient.Helpers" Version="4.0.1.342-pre" />

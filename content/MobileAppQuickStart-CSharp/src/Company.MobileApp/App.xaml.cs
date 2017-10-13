@@ -28,6 +28,8 @@ using Company.MobileApp.Helpers;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
+using Microsoft.Azure.Mobile.Distribute;
+using Microsoft.Azure.Mobile.Push;
 #endif
 #if (UseAzureMobileClient)
 #if (!NoAuth)
@@ -277,8 +279,13 @@ namespace Company.MobileApp
         {
             // Handle when your app starts
 #if (UseMobileCenter)
+            // https://docs.microsoft.com/en-us/mobile-center/sdk/distribute/xamarin
+            Distribute.ReleaseAvailable = OnReleaseAvailable;
+            // https://docs.microsoft.com/en-us/mobile-center/sdk/push/xamarin-forms
+            Push.PushNotificationReceived += OnPushNotificationReceived;
+            // Handle when your app starts
             MobileCenter.Start(AppConstants.MobileCenterStart,
-                                typeof(Analytics), typeof(Crashes));
+                               typeof(Analytics), typeof(Crashes), typeof(Distribute), typeof(Push));
 
     #if (NinjectContainer)
             Logger = Container.Get<ILoggerFacade>();
@@ -319,5 +326,71 @@ namespace Company.MobileApp
                 Logger.Log(e.Exception.ToString(), Category.Exception, Priority.High);
             };
         }
+#if (UseMobileCenter)
+
+        private void OnPushNotificationReceived(object sender, PushNotificationReceivedEventArgs e)
+        {
+            // Add the notification message and title to the message
+            var summary = $"Push notification received:" +
+                $"\n\tNotification title: {e.Title}" +
+                $"\n\tMessage: {e.Message}";
+
+            // If there is custom data associated with the notification,
+            // print the entries
+            if(e.CustomData != null)
+            {
+                summary += "\n\tCustom data:\n";
+                foreach(var key in e.CustomData.Keys)
+                {
+                    summary += $"\t\t{key} : {e.CustomData[key]}\n";
+                }
+            }
+
+            // Send the notification summary to debug output
+            System.Diagnostics.Debug.WriteLine(summary);
+            Logger.Log(summary);
+        }
+
+        private bool OnReleaseAvailable(ReleaseDetails releaseDetails)
+        {
+            // Look at releaseDetails public properties to get version information, release notes text or release notes URL
+            string versionName = releaseDetails.ShortVersion;
+            string versionCodeOrBuildNumber = releaseDetails.Version;
+            string releaseNotes = releaseDetails.ReleaseNotes;
+            Uri releaseNotesUrl = releaseDetails.ReleaseNotesUrl;
+
+            // custom dialog
+            var title = "Version " + versionName + " available!";
+            Task answer;
+
+            // On mandatory update, user cannot postpone
+            if(releaseDetails.MandatoryUpdate)
+            {
+                answer = Current.MainPage.DisplayAlert(title, releaseNotes, "Download and Install");
+            }
+            else
+            {
+                answer = Current.MainPage.DisplayAlert(title, releaseNotes, "Download and Install", "Maybe tomorrow...");
+            }
+            answer.ContinueWith((task) =>
+            {
+                // If mandatory or if answer was positive
+                if(releaseDetails.MandatoryUpdate || (task as Task<bool>).Result)
+                {
+                    // Notify SDK that user selected update
+                    Distribute.NotifyUpdateAction(UpdateAction.Update);
+                }
+                else
+                {
+                    // Notify SDK that user selected postpone (for 1 day)
+                    // Note that this method call is ignored by the SDK if the update is mandatory
+                    Distribute.NotifyUpdateAction(UpdateAction.Postpone);
+                }
+            });
+
+            // Return true if you are using your own dialog, false otherwise
+            return true;
+        }
+#endif
     }
 }
