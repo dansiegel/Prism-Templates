@@ -62,7 +62,7 @@ namespace Company.MobileApp.ViewModels
 
         private void OnIsActiveChanged()
         {
-            IsActiveChanged(this, EventArgs.Empty);
+            IsActiveChanged?.Invoke(this, EventArgs.Empty);
 
             if(IsActive)
             {
