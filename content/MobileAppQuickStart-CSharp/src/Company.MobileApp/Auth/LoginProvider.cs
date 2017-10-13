@@ -32,8 +32,8 @@ namespace Company.MobileApp.Auth
             : base(client, parent, options)
 #else
         public LoginProvider(IAccountStore accountStore, ILoggerFacade logger) 
-#endif
             : base(accountStore)
+#endif
         {
             _logger = logger;
         }
