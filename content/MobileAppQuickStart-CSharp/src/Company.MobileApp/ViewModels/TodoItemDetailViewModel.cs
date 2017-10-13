@@ -35,21 +35,21 @@ namespace Company.MobileApp.ViewModels
 #if (UseAzureMobileClient)
         private IAppDataContext _dataContext { get; }
 
-        public TodoItemDetailViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public TodoItemDetailViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
     #if (UseAcrDialogs)
                                        IDeviceService deviceService, IAppDataContext dataContext, IUserDialogs userDialogs)
     #else
                                        IDeviceService deviceService, IAppDataContext dataContext)
     #endif
 #else
-        public TodoItemDetailViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public TodoItemDetailViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
     #if (UseAcrDialogs)
                                        IDeviceService deviceService, IUserDialogs userDialogs)
     #else
                                        IDeviceService deviceService)
     #endif
 #endif
-            : base(navigationService, applicationStore, deviceService)
+            : base(navigationService, pageDialogService, deviceService)
         {
 #if (UseAcrDialogs)
             _userDialogs = userDialogs;

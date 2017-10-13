@@ -17,9 +17,9 @@ namespace MobileApp.ViewModels
 {
     public class ItemTemplateViewModel : ViewModelBase
     {
-        public ItemTemplateViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public ItemTemplateViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
                                      IDeviceService deviceService) 
-            : base(navigationService, applicationStore, deviceService)
+            : base(navigationService, pageDialogService, deviceService)
         {
             Title = "ItemTemplate";
             #if (IsMasterDetailPage)

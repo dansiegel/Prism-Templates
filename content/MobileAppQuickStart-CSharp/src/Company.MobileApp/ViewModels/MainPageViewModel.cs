@@ -35,18 +35,18 @@ namespace Company.MobileApp.ViewModels
 
         private IAppDataContext _dataContext { get; }
 
-        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
                                  IDeviceService deviceService, IAppDataContext dataContext, ICloudService cloudService)
 #elseif (UseRealm)
         private Realm _realm { get; }
 
-        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
                                  IDeviceService deviceService, Realm realm)
 #else
-        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
                                  IDeviceService deviceService)
 #endif
-            : base(navigationService, applicationStore, deviceService)
+            : base(navigationService, pageDialogService, deviceService)
         {
 #if (UseAzureMobileClient)
             _cloudService = cloudService;

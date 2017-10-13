@@ -8,18 +8,18 @@ using Prism.Services;
 
 namespace Company.MobileApp.ViewModels
 {
-    public class ViewModelBase : BindableBase, IApplicationLifecycle, IActiveAware, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, IApplicationLifecycle, IActiveAware, INavigationAware, IDestructible, IConfirmNavigation, IConfirmNavigationAsync, IApplicationLifecycleAware, IPageLifecycleAware
     {
-        protected IApplicationStore _applicationStore { get; }
+        protected IPageDialogService _pageDialogService { get; }
 
         protected IDeviceService _deviceService { get; }
 
         protected INavigationService _navigationService { get; }
 
-        public ViewModelBase(INavigationService navigationService, IApplicationStore applicationStore, 
+        public ViewModelBase(INavigationService navigationService, IPageDialogService pageDialogService, 
                              IDeviceService deviceService)
         {
-            _applicationStore = applicationStore;
+            _pageDialogService = pageDialogService;
             _deviceService = deviceService;
             _navigationService = navigationService;
         }
@@ -93,5 +93,30 @@ namespace Company.MobileApp.ViewModels
         public virtual void Destroy() { }
 
 #endregion IDestructible
+
+#region IConfirmNavigation
+
+        public virtual bool CanNavigate(NavigationParameters parameters) => true;
+
+        public virtual Task<bool> CanNavigateAsync(NavigationParameters parameters) =>
+            Task.FromResult(CanNavigate(parameters));
+
+#endregion IConfirmNavigation
+
+#region IApplicationLifecycleAware
+
+        public virtual void OnResume() { }
+
+        public virtual void OnSleep() { }
+
+#endregion IApplicationLifecycleAware
+
+#region IPageLifecycleAware
+
+        public virtual void OnAppearing() { }
+
+        public virtual void OnDisappearing() { }
+
+#endregion IPageLifecycleAware
     }
 }

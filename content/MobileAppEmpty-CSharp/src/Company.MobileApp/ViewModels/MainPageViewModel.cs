@@ -10,9 +10,9 @@ namespace Company.MobileApp.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public MainPageViewModel(INavigationService navigationService, IApplicationStore applicationStore, 
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
                                  IDeviceService deviceService) 
-            : base(navigationService, applicationStore, deviceService)
+            : base(navigationService, pageDialogService, deviceService)
         {
             Title = "Main Page";
         }
