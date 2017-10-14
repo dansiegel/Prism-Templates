@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Prism;
 using Prism.AppModel;
 using Prism.Mvvm;
@@ -8,7 +9,7 @@ using Prism.Services;
 
 namespace Company.MobileApp.ViewModels
 {
-    public class ViewModelBase : BindableBase, IApplicationLifecycle, IActiveAware, INavigationAware, IDestructible, IConfirmNavigation, IConfirmNavigationAsync, IApplicationLifecycleAware, IPageLifecycleAware
+    public class ViewModelBase : BindableBase, IApplicationLifecycleAware, IActiveAware, INavigationAware, IDestructible, IConfirmNavigation, IConfirmNavigationAsync, IPageLifecycleAware
     {
         protected IPageDialogService _pageDialogService { get; }
 
@@ -69,14 +70,6 @@ namespace Company.MobileApp.ViewModels
         protected virtual void OnIsNotActive() { }
 
 #endregion IActiveAware
-
-#region IApplicationLifecycle
-
-        public virtual void OnResume() { }
-
-        public virtual void OnSleep() { }
-
-#endregion IApplicationLifecycle
 
 #region INavigationAware
 
