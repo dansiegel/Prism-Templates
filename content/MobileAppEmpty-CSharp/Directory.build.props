@@ -10,7 +10,7 @@
     <IsUnix Condition=" '$(OS)' == 'Unix' ">true</IsUnix>
     <IsUnix Condition=" '$(IsUnix)' == '' ">false</IsUnix>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+    <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">powershell.exe</PowerShellExe>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
     <EnableDefaultEmbeddedResourceItems>True</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
@@ -34,7 +34,7 @@
     <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition=" '$(IsUnix)' ">
     <EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" SubType="Code" />
     <None Remove="**\*.xaml" />
