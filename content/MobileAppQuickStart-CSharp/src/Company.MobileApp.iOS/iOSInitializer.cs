@@ -1,7 +1,4 @@
 ﻿using System;
-#if (UseAzureMobileClient)
-using AzureMobileClient.Helpers.Accounts;
-#endif
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;

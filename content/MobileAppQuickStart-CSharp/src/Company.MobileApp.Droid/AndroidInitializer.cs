@@ -2,9 +2,6 @@
 #if (UseAzureMobileClient || AADAuth || AADB2CAuth)
 using Android.App;
 #endif
-#if (UseAzureMobileClient)
-using AzureMobileClient.Helpers.Accounts;
-#endif
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;

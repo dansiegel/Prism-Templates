@@ -36,12 +36,15 @@ using Microsoft.Azure.Mobile.Push;
 using Company.MobileApp.Auth;
 #endif
 using Company.MobileApp.Data;
-#if (AADAuth || AADB2CAuth)
-using Microsoft.Identity.Client;
-#endif
 using AzureMobileClient.Helpers;
 using AzureMobileClient.Helpers.Accounts;
 using Microsoft.WindowsAzure.MobileServices;
+#endif
+#if (UseAzureMobileClient && AADAuth || AADB2CAuth)
+using AzureMobileClient.Helpers.AzureActiveDirectory;
+#endif
+#if (AADAuth || AADB2CAuth)
+using Microsoft.Identity.Client;
 #endif
 #if (UseRealm)
 using Company.MobileApp.Helpers;
