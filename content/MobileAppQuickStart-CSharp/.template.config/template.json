@@ -350,6 +350,22 @@
       "type": "computed",
       "value": "(Container == \"Unity\")"
     },
+    "AutofacAzureMobileClient": {
+      "type": "computed",
+      "value": "(DataProvider == \"AzureMobileClient\" && Container == \"Autofac\")"
+    },
+    "DryIocAzureMobileClient": {
+      "type": "computed",
+      "value": "(DataProvider == \"AzureMobileClient\" && Container == \"DryIoc\")"
+    },
+    "NinjectAzureMobileClient": {
+      "type": "computed",
+      "value": "(DataProvider == \"AzureMobileClient\" && Container == \"Ninject\")"
+    },
+    "UnityAzureMobileClient": {
+      "type": "computed",
+      "value": "(DataProvider == \"AzureMobileClient\" && Container == \"Unity\")"
+    },
     "NoAuth": {
       "type": "computed",
       "value": "(AuthenticationSource ==\"None\")"

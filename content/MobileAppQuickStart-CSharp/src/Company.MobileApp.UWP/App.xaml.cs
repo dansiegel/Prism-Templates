@@ -63,6 +63,8 @@ namespace Company.MobileApp.UWP
                 // Initialization is required due to an error when compiling in release mode.
                 // Details: https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting
                 Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Windows.Popup.GetExtraAssemblies());
+                global::FFImageLoading.Forms.WinUWP.CachedImageRenderer.Init();
+                global::FFImageLoading.ImageService.Instance.Initialize();
 #if (IncludeBarcodeService)
                 ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
 #endif

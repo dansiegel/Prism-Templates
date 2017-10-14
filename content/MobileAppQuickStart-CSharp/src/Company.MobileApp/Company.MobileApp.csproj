@@ -26,16 +26,18 @@
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Crashes" Version="0.16.0" />
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Distribute" Version="0.16.0" />
     <PackageReference Condition=" '$(UseMobileCenter)' " Include="Microsoft.Azure.Mobile.Push" Version="0.16.0" />
-    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'Autofac' " Include="AzureMobileClient.Helpers.Autofac" Version="4.0.1.342-pre" />
-    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'DryIoc' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.1.342-pre" />
-    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'Ninject' " Include="AzureMobileClient.Helpers" Version="4.0.1.342-pre" />
-    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(Container)' == 'Unity' " Include="AzureMobileClient.Helpers.Unity" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(AutofacAzureMobileClient)'  " Include="AzureMobileClient.Helpers.Autofac" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(DryIocAzureMobileClient)' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(NinjectAzureMobileClient)' " Include="AzureMobileClient.Helpers" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(UnityAzureMobileClient)' " Include="AzureMobileClient.Helpers.Unity" Version="4.0.1.342-pre" />
     <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(AADAuth)' Or '$(AADB2CAuth)' " Include="AzureMobileClient.Helpers.AzureActiveDirectory" Version="4.0.1.342-pre" />
     <PackageReference Condition=" '$(AADAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Condition=" '$(AADB2CAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Condition=" '$(IncludeBarcodeService)' " Include="BarcodeScanning.Service" Version="1.0.0-pre1" />
     <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="1.6.0" />
     <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="6.5.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.2.20" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.2.20" />
   </ItemGroup>
 
   <ItemGroup>

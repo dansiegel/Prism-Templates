@@ -17,6 +17,8 @@ namespace Company.MobileApp.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
+            global::FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
+            global::FFImageLoading.ImageService.Instance.Initialize();
 #if (IncludeBarcodeService)
             global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 #endif

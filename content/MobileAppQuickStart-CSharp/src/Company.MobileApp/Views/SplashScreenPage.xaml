@@ -4,24 +4,33 @@
              <!--#if Localization -->
              xmlns:i18n="clr-namespace:Company.MobileApp.i18n;assembly=Company.MobileApp"
              <!--#endif -->
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
              Title="{Binding Title}"
              BackgroundColor="{StaticResource PrimaryDark}"
-             x:Name="view"
              x:Class="Company.MobileApp.Views.SplashScreenPage">
 
     <StackLayout HorizontalOptions="CenterAndExpand"
                  VerticalOptions="CenterAndExpand">
-        <Image>
-            <Image.Source>
+        <ffimageloading:CachedImage HorizontalOptions="Center" 
+                                    VerticalOptions="Center"
+                                    DownsampleToViewSize="true"
+                                    Aspect="AspectFill" 
+                                    HeightRequest="100" 
+                                    WidthRequest="100">
+            <ffimageloading:CachedImage.Source>
                 <OnPlatform x:TypeArguments="ImageSource">
                     <On Platform="Android">launchscreen_icon.png</On>
                     <On Platform="iOS">AppIcon.png</On>
                 </OnPlatform>
-            </Image.Source>
-        </Image>
+            </ffimageloading:CachedImage.Source>
+            <ffimageloading:CachedImage.Transformations>
+                <fftransformations:CircleTransformation/>
+            </ffimageloading:CachedImage.Transformations>
+        </ffimageloading:CachedImage>
         <ActivityIndicator Color="{StaticResource Accent}" IsRunning="true" />
 <!--#if Localization -->
         <Label Text="{i18n:Translate LoadingText}" TextColor="{StaticResource Accent}" />

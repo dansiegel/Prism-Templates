@@ -44,7 +44,9 @@
         "Prism.Forms.Extensions": "1.0.0-pre3",
         "PropertyChanged.Fody": "2.1.4",
         "Fody":"2.1.3",
-        "Xamarin.TestCloud.Agent": "0.21.1"
+        "Xamarin.TestCloud.Agent": "0.21.1",
+        "Xamarin.FFImageLoading.Forms": "2.2.20",
+        "Xamarin.FFImageLoading.Transformations": "2.2.20"
     },
     "frameworks": {
         "Xamarin.iOS,Version=v1.0": {}
