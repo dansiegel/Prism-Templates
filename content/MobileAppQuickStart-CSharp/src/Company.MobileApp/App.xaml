@@ -26,12 +26,12 @@
             <Color x:Key="LabelSectionText">#6D6D72</Color>
             <Color x:Key="DetailTextColor">#979797</Color>
 
-            <Style TargetType="NavigationPage">
+            <Style TargetType="NavigationPage" ApplyToDerivedTypes="true">
                 <Setter Property="BarTextColor" Value="{StaticResource NavigationText}" />
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDark}" />
             </Style>
 
-            <Style TargetType="TabbedPage">
+            <Style TargetType="TabbedPage" ApplyToDerivedTypes="true">
                 <Setter Property="BarTextColor" Value="{StaticResource NavigationText}" />
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDark}" />
             </Style>
