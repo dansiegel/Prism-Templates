@@ -80,6 +80,15 @@ namespace Company.MobileApp
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
+#if (UseMobileCenter)
+            // https://docs.microsoft.com/en-us/mobile-center/sdk/distribute/xamarin
+            Distribute.ReleaseAvailable = OnReleaseAvailable;
+            // https://docs.microsoft.com/en-us/mobile-center/sdk/push/xamarin-forms
+            Push.PushNotificationReceived += OnPushNotificationReceived;
+            // Handle when your app starts
+            MobileCenter.Start(AppConstants.MobileCenterStart,
+                               typeof(Analytics), typeof(Crashes), typeof(Distribute), typeof(Push));
+#endif
         }
 
         protected override async void OnInitialized()
@@ -296,14 +305,8 @@ namespace Company.MobileApp
         {
             // Handle when your app starts
 #if (UseMobileCenter)
-            // https://docs.microsoft.com/en-us/mobile-center/sdk/distribute/xamarin
-            Distribute.ReleaseAvailable = OnReleaseAvailable;
-            // https://docs.microsoft.com/en-us/mobile-center/sdk/push/xamarin-forms
-            Push.PushNotificationReceived += OnPushNotificationReceived;
-            // Handle when your app starts
-            MobileCenter.Start(AppConstants.MobileCenterStart,
-                               typeof(Analytics), typeof(Crashes), typeof(Distribute), typeof(Push));
 
+            // Reset the Logger to use the Mobile Center Logger
     #if (NinjectContainer)
             Logger = Container.Get<ILoggerFacade>();
     #else
