@@ -127,6 +127,8 @@ namespace Company.MobileApp
                 RedirectUri = AppConstants.RedirectUri
             }).As<IPublicClientApplication>().SingleInstance();
 
+            Builder.RegisterType<AADOptions>().As<IAADOptions>().As<IAADLoginProviderOptions>().SingleInstance();
+
             #endif
             Builder.RegisterType<AppServiceContextOptions>().As<IAzureCloudServiceOptions>().SingleInstance();
             Builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
@@ -150,6 +152,12 @@ namespace Company.MobileApp
             {
                 RedirectUri = AppConstants.RedirectUri
             });
+
+            Container.RegisterMany<AADOptions>(reuse: Reuse.Singleton,
+                                               serviceTypeCondition: type =>
+                                               type == typeof(IAADOptions) ||
+                                               type == typeof(IAADLoginProviderOptions));
+
             #endif
             Container.Register<IAzureCloudServiceOptions, AppServiceContextOptions>(Reuse.Singleton);
             Container.RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
@@ -176,6 +184,8 @@ namespace Company.MobileApp
                             RedirectUri = AppConstants.RedirectUri
                         })
                     .InSingletonScope();
+
+            Container.Bind<IAADOptions, IAADLoginProviderOptions>().To<AADOptions>().InSingletonScope();
             #endif
             Container.Bind<IAzureCloudServiceOptions>().To<AppServiceContextOptions>().InSingletonScope();
             Container.Bind<IAppDataContext, ICloudService>().To<AppDataContext>().InSingletonScope();
@@ -198,6 +208,10 @@ namespace Company.MobileApp
             {
                 RedirectUri = AppConstants.RedirectUri
             });
+
+            Container.RegisterType<AADOptions>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IAADOptions>(new InjectionFactory(c => c.Resolve<AADOptions>()));
+            Container.RegisterType<IAADLoginProviderOptions>()new InjectionFactory(c => c.Resolve<AADOptions>());
             #endif
             
             Container.RegisterType<IAzureCloudServiceOptions, AppServiceContextOptions>(new ContainerControlledLifetimeManager());

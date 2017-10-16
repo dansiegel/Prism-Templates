@@ -74,6 +74,12 @@
           ]
         },
         {
+          "condition": "(DataProvider == \"AzureMobileClient\" && AuthenticationSource != \"AAD\" && AuthenticationSource != \"AADB2C\")",
+          "exclude": [
+            "src/Company.MobileApp/Auth/AADOptions.cs"
+          ]
+        },
+        {
           "condition": "(!UseMobileCenter)",
           "exclude": [
             "src/Company.MobileApp/Services/MCAnalyticsLogger.cs"
