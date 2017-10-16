@@ -18,7 +18,10 @@ namespace Company.MobileApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
-            global::FFImageLoading.ImageService.Instance.Initialize();
+            global::FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
+            {
+                Logger = new Services.DebugLogger()
+            });
 #if (IncludeBarcodeService)
             global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 #endif

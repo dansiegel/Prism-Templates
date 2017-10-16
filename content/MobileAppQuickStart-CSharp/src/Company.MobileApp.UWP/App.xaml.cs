@@ -64,7 +64,10 @@ namespace Company.MobileApp.UWP
                 // Details: https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting
                 Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Windows.Popup.GetExtraAssemblies());
                 global::FFImageLoading.Forms.WinUWP.CachedImageRenderer.Init();
-                global::FFImageLoading.ImageService.Instance.Initialize();
+                global::FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
+            {
+                Logger = new Services.DebugLogger()
+            });
 #if (IncludeBarcodeService)
                 ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
 #endif

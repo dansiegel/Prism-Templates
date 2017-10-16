@@ -32,7 +32,10 @@ namespace Company.MobileApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
-            global::FFImageLoading.ImageService.Instance.Initialize();
+            global::FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
+            {
+                Logger = new Services.DebugLogger()
+            });
 #if (IncludeBarcodeService)
             global::ZXing.Net.Mobile.Forms.Android.Platform.Init();
 #endif
