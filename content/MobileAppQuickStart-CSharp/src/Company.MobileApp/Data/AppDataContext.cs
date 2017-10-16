@@ -1,5 +1,7 @@
 using AzureMobileClient.Helpers;
+#if (!NoAuth)
 using Company.MobileApp.Auth;
+#endif
 using Company.MobileApp.Helpers;
 using Company.MobileApp.Models;
 #if (AutofacContainer)
