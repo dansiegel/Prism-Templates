@@ -3,7 +3,7 @@ using FFImageLoading.Helpers;
 using Prism.Logging;
 using static System.Diagnostics.Debug;
 
-namespace MyHikerBox.Services
+namespace Company.MobileApp.Services
 {
     public class DebugLogger : ILoggerFacade, IMiniLogger
     {
