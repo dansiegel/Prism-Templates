@@ -49,17 +49,26 @@
 <!--#if (AADAuth || AADB2CAuth || UseMobileCenter) -->
     <key>CFBundleURLTypes</key>
     <array>
+<!--#if (AADAuth || AADB2CAuth) -->
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.prismtemplate.name</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>msalAUTHENTICATION_CLIENT_ID</string>
+            </array>
+        </dict>
+<!--#endif -->
+<!--#if (UseMobileCenter) -->
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
-<!--#if (AADAuth || AADB2CAuth) -->
-                <string>msalAUTHENTICATION_CLIENT_ID</string>
-<!--#endif -->
-<!--#if (UseMobileCenter) -->
                 <string>mobilecenter-MOBILECENTER-IOS-SECRET</string>
-<!--#endif -->
             </array>
         </dict>
+<!--#endif -->
     </array>
 <!--#endif -->
 </dict>
