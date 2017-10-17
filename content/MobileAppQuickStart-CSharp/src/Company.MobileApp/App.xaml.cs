@@ -92,7 +92,7 @@ namespace Company.MobileApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            SetupLogging();
+            LogUnobservedTaskExceptions();
 
 #if (Empty)
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
@@ -303,13 +303,15 @@ namespace Company.MobileApp
         {
             // Handle when your app starts
 #if (UseMobileCenter)
-
-            // Reset the Logger to use the Mobile Center Logger
-    #if (NinjectContainer)
-            Logger = Container.Get<ILoggerFacade>();
-    #else
-            Logger = Container.Resolve<ILoggerFacade>();
-    #endif
+            if (await Analytics.IsEnabledAsync())
+            {
+                System.Diagnostics.Debug.WriteLine("Analaytics is enabled");
+                FFImageLoading.ImageService.Instance.Config.Logger = (IMiniLogger)Logger;
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Analytics is disabled");
+            }
 #endif
         }
 
@@ -329,19 +331,49 @@ namespace Company.MobileApp
             // Handle when your app resumes
         }
 
+#if (UseMobileCenter)
+        protected override ILoggerFacade CreateLogger()
+        {
+            switch (Xamarin.Forms.Device.RuntimePlatform)
+            {
+                #if (IncludeAndroid)
+                case "Android":
+                    if (!string.IsNullOrWhiteSpace(Secrets.MobileCenter_Android_Secret))
+                        return CreateMobileCenterLogger();
+                    break;
+                #endif
+                #if (IncludeiOS)
+                case "iOS":
+                    if (!string.IsNullOrWhiteSpace(Secrets.MobileCenter_iOS_Secret))
+                        return CreateMobileCenterLogger();
+                    break;
+                #endif
+                #if (UWPSupported)
+                case "UWP":
+                    if (!string.IsNullOrWhiteSpace(Secrets.MobileCenter_UWP_Secret))
+                        return CreateMobileCenterLogger();
+                    break;
+                #endif
+            }
+            return new DebugLogger();
+        }
+
+        private MCAnalyticsLogger CreateMobileCenterLogger()
+        {
+            var logger = new MCAnalyticsLogger();
+            FFImageLoading.ImageService.Instance.Config.Logger = (IMiniLogger)logger;
+            return logger;
+        }
+#else
         protected override ILoggerFacade CreateLogger() => 
             new DebugLogger();
+#endif
 
-        private void SetupLogging()
+        private void LogUnobservedTaskExceptions()
         {
-            // By default, we set the logger to use the included DebugLogger,
-            // which uses System.Diagnostics.Debug.WriteLine to print your message. If you have
-            // overridden the default DebugLogger, you will need to update the Logger here to
-            // ensure that any calls to your logger in the App.xaml.cs will use your logger rather
-            // than the default DebugLogger.
             TaskScheduler.UnobservedTaskException += ( sender, e ) =>
             {
-                Logger.Log(e.Exception.ToString(), Category.Exception, Priority.High);
+                Logger.Log(e.Exception);
             };
         }
 #if (UseMobileCenter)
