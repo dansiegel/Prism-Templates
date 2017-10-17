@@ -58,10 +58,8 @@ using BarcodeScanner;
 #endif
 using Prism.Logging;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using DebugLogger = Company.MobileApp.Services.DebugLogger;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Company.MobileApp
 {
     public partial class App : PrismApplication
