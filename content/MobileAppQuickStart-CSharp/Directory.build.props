@@ -9,6 +9,8 @@
     <IsWindows Condition=" '$(IsWindows)' == '' ">false</IsWindows>
     <IsUnix Condition=" '$(OS)' == 'Unix' ">true</IsUnix>
     <IsUnix Condition=" '$(IsUnix)' == '' ">false</IsUnix>
+    <IsOSX>false</IsOSX>
+    <IsLinux>false</IsLinux>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsWindows)' == 'true' ">powershell.exe</PowerShellExe>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' And '$(IsUnix)' == 'true' ">\usr\local\bin\powershell</PowerShellExe>
