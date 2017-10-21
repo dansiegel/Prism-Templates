@@ -1,6 +1,20 @@
-<Project InitialTargets="BuildHostSecrets;Secrets">
+<Project InitialTargets="ConfigCopy;BuildHostSecrets;Secrets">
 
 <!--/-:cnd:noEmit -->
+  <Target Name="ConfigCopy">
+    <PropertyGroup>
+      <BuildTemplateInfoPlistPath>$(MSBuildThisFileDirectory)build/BuildTemplateInfo.plist</BuildTemplateInfoPlistPath>
+      <InfoPlistPath>$(MSBuildThisFileDirectory)src/Company.MobileApp.iOS/Info.plist</InfoPlistPath>
+    </PropertyGroup>
+
+    <Message Text="Copying '$(BuildTemplateInfoPListPath)' to '$(InfoPlistPath)'" />
+
+    <Copy SourceFiles="$(BuildTemplateInfoPlistPath)"  
+          DestinationFolder="$(InfoPlistPath)"
+          Condition=" !Exists('$(InfoPlistPath)') And '$(IsUnix)' " />
+
+  </Target>
+
   <Target Name="BuildHostSecrets">
     <PropertyGroup>
       <BuildHostScriptLocation Condition=" '$(BuildHostScriptLocation)'=='' ">$(SolutionDir)\BuildHostSecrets.ps1</BuildHostScriptLocation>
