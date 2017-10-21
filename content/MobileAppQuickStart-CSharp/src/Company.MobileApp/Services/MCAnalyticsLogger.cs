@@ -4,7 +4,7 @@ using FFImageLoading.Helpers;
 using Microsoft.Azure.Mobile.Analytics;
 using Prism.Logging;
 
-namespace MyHikerBox.Services
+namespace Company.MobileApp.Services
 {
     public class MCAnalyticsLogger : ILoggerFacade, IMiniLogger
     {
