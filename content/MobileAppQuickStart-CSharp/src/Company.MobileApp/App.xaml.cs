@@ -25,6 +25,7 @@ using Prism.Unity;
 using Company.MobileApp.Helpers;
 #endif
 #if (UseMobileCenter)
+using FFImageLoading.Helpers;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
@@ -40,7 +41,7 @@ using AzureMobileClient.Helpers;
 using AzureMobileClient.Helpers.Accounts;
 using Microsoft.WindowsAzure.MobileServices;
 #endif
-#if (UseAzureMobileClient && AADAuth || AADB2CAuth)
+#if (UseAzureMobileClient && (AADAuth || AADB2CAuth))
 using AzureMobileClient.Helpers.AzureActiveDirectory;
 #endif
 #if (AADAuth || AADB2CAuth)
@@ -306,10 +307,10 @@ namespace Company.MobileApp
 #endif
         }
 
-        protected override void OnStart()
+#if (UseMobileCenter)
+        protected override async void OnStart()
         {
             // Handle when your app starts
-#if (UseMobileCenter)
             if (await Analytics.IsEnabledAsync())
             {
                 System.Diagnostics.Debug.WriteLine("Analaytics is enabled");
@@ -319,8 +320,13 @@ namespace Company.MobileApp
             {
                 System.Diagnostics.Debug.WriteLine("Analytics is disabled");
             }
-#endif
         }
+#else
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
+#endif
 
         protected override void OnSleep()
         {
