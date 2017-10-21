@@ -6,8 +6,8 @@
     <authors>Dan Siegel</authors>
     <description>Prism Library Templates</description>
     <language>en-US</language>
-    <projectUrl>https://github.com/PrismLibrary/Prism.Templates</projectUrl>
-    <licenseUrl>https://github.com/PrismLibrary/Prism/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/dansiegel/Prism-Templates</projectUrl>
+    <licenseUrl>https://github.com/dansiegel/Prism-Templates/blob/master/LICENSE</licenseUrl>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
