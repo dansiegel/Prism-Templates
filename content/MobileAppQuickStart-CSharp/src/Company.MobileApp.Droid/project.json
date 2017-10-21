@@ -53,7 +53,7 @@
     "Xamarin.FFImageLoading.Transformations": "2.2.20"
   },
   "frameworks": {
-    "MonoAndroid,Version=v7.1": {
+    "MonoAndroid,Version=vANDROID-SDK-VERSION": {
     }
   },
   "runtimes": {

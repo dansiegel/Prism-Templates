@@ -24,6 +24,10 @@
     "ConnectedApp": {
       "isHidden": true
     },
+    "AndroidSDK": {
+      "shortName": "droid-sdk",
+      "longName": "android-sdk-version"
+    },
     "Container": {
       "longName": "di-container",
       "shortName": "di"
