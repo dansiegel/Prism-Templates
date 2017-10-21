@@ -103,6 +103,13 @@ namespace Company.MobileApp
 
         protected override void RegisterTypes()
         {
+            // Register the Popup Plugin Navigation Service
+#if (AutofacContainer)
+            Builder.RegisterPopupNavigationService();
+#else
+            Container.RegisterPopupNavigationService();
+#endif
+
 #if (UseMobileCenter)
             if(!string.IsNullOrWhiteSpace(AppConstants.MobileCenterStart))
             {
