@@ -360,6 +360,18 @@
       "type": "computed",
       "value": "(AuthenticationSource != \"None\")"
     },
+    "AndroidSDK70": {
+      "type": "computed",
+      "value": "(AndroidSDK == \"7.0\")"
+    },
+    "AndroidSDK71": {
+      "type": "computed",
+      "value": "(AndroidSDK == \"7.1\")"
+    },
+    "AndroidSDK80": {
+      "type": "computed",
+      "value": "(AndroidSDK == \"7.0\")"
+    },
     "AutofacContainer": {
       "type": "computed",
       "value": "(Container == \"Autofac\")"
