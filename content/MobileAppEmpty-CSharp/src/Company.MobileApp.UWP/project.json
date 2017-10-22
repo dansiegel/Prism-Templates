@@ -13,7 +13,7 @@
 ////#if (UnityContainer)
 //    "Prism.Unity.Forms": "7.0.0.168-pre",
 ////#endif
-    "Xamarin.Forms": "2.4.0.282",
+    "Xamarin.Forms": "2.4.0.18342",
     "PropertyChanged.Fody": "2.1.4",
     "Fody":"2.1.3"
   },
