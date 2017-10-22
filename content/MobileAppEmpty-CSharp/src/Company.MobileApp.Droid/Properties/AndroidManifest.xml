@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.prismtemplate.name">
-    <uses-sdk android:minSdkVersion="17" />
+    <uses-sdk android:minSdkVersion="ANDROID-MINIMUM-TARGET-SDK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application android:label="Company.MobileApp">
     </application>

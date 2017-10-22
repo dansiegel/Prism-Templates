@@ -24,6 +24,10 @@
     "ConnectedApp": {
       "isHidden": true
     },
+    "MinimumAndroidTarget": {
+      "shortName": "min-droid-sdk",
+      "longName": "minimum-android-sdk-version"
+    },
     "AndroidSDK": {
       "shortName": "droid-sdk",
       "longName": "android-sdk-version"

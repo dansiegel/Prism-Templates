@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.prismtemplate.name">
-    <uses-sdk android:minSdkVersion="17" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          android:versionCode="1"
+          android:versionName="1.0"
+          package="com.prismtemplate.name">
+    <uses-sdk android:minSdkVersion="ANDROID-MINIMUM-TARGET-SDK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!--#if (IncludeBarcodeService) -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <!--#endif -->
-    <application android:label="MobileApp">
+    <application android:label="Company.MobileApp">
     <!--#if (AADAuth || AADB2CAuth) -->
         <activity android:name="microsoft.identity.client.BrowserTabActivity">
             <intent-filter>

@@ -89,6 +89,58 @@
       "defaultValue": "true",
       "description": "Determines whether to include a UI Test project"
     },
+    "MinimumAndroidTarget": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "21",
+      "choices": [
+        {
+          "choice": "17",
+          "description": "Targets Android Jelly Bean 4.2.X"
+        },
+        {
+          "choice": "18",
+          "description": "Targets Android Jelly Bean 4.3"
+        },
+        {
+          "choice": "19",
+          "description": "Targets Android Kit Kat 4.4"
+        },
+        {
+          "choice": "21",
+          "description": "Targets Android Lollipop 5.0"
+        },
+        {
+          "choice": "22",
+          "description": "Targets Android Lollipop 5.1"
+        },
+        {
+          "choice": "23",
+          "description": "Targets Android Marshmallow 6.0"
+        }
+      ],
+      "replaces": "ANDROID-MINIMUM-TARGET-SDK"
+    },
+    "AndroidSDK": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "7.1",
+      "choices": [
+        {
+          "choice": "8.0",
+          "description": "Targets Android Oreo API 26"
+        },
+        {
+          "choice": "7.1",
+          "description": "Targets Android Nougat API 25"
+        },
+        {
+          "choice": "7.0",
+          "description": "Targets Android Nougat API 24"
+        }
+      ],
+      "replaces": "ANDROID-SDK-VERSION"
+    },
     "Container": {
       "type": "parameter",
       "dataType": "choice",
@@ -136,6 +188,18 @@
         }
       ],
       "replaces": "NETSTANDARD_LIBRARY_VERSION"
+    },
+    "AndroidSDK70": {
+      "type": "computed",
+      "value": "(AndroidSDK == \"7.0\")"
+    },
+    "AndroidSDK71": {
+      "type": "computed",
+      "value": "(AndroidSDK == \"7.1\")"
+    },
+    "AndroidSDK80": {
+      "type": "computed",
+      "value": "(AndroidSDK == \"7.0\")"
     },
     "AutofacContainer": {
       "type": "computed",
