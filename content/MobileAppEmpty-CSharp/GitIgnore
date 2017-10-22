@@ -49,6 +49,5 @@ Secrets.cs
 
 # Auto generated files
 project.lock.json
-Company.MobileApp.Droid.nuget.props
-Company.MobileApp.iOS.nuget.props
+Company.MobileApp.*.nuget.*
 
