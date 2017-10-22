@@ -53,6 +53,16 @@ namespace Company.MobileApp.iOS
                 completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
             }
         }
+
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        {
+            Push.FailedToRegisterForRemoteNotifications(error);
+        }
+
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        {
+            Push.RegisteredForRemoteNotifications(deviceToken);
+        }
 #endif
     }
 }
