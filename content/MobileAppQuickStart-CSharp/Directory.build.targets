@@ -3,8 +3,11 @@
 <!--/-:cnd:noEmit -->
   <Target Name="ConfigCopy">
     <PropertyGroup>
-      <BuildTemplateInfoPlistPath>$(MSBuildThisFileDirectory)build/BuildTemplateInfo.plist</BuildTemplateInfoPlistPath>
+      <BuildResourcesDirRootPath>$(MSBuildThisFileDirectory)build/</BuildResourcesDirRootPath>
+      <BuildTemplateInfoPlistPath>$(BuildResourcesDirRootPath)BuildTemplateInfo.plist</BuildTemplateInfoPlistPath>
       <InfoPlistPath>$(MSBuildThisFileDirectory)src/Company.MobileApp.iOS/Info.plist</InfoPlistPath>
+      <BuildTemplateAndroidManifestPath>$(BuildResourcesDirRootPath)AndroidTemplateManifest.xml</BuildTemplateAndroidManifestPath>
+      <AndroidManifestPath>$(MSBuildThisFileDirectory)src/Company.MobileApp.Droid/Properties/AndroidManifest.xml</AndroidManifestPath>
     </PropertyGroup>
 
     <Message Text="Copying '$(BuildTemplateInfoPListPath)' to '$(InfoPlistPath)'" />
@@ -13,6 +16,12 @@
           DestinationFolder="$(InfoPlistPath)"
           Condition=" !Exists('$(InfoPlistPath)') And '$(IsUnix)' " />
 
+    <Copy SourceFiles="$(BuildTemplateAndroidManifestPath)"
+          DestinationFolder="$(AndroidManifestPath)"
+          Condition="!Exists('$(AndroidManifestPath)')">
+
+    <!-- <Exec Condition=" Exists('$(InfoPlistPath)') And '$(IsUnix)' "
+          Command="$(MSBuildThisFileDirectory)build/plist_prebuild.sh" /> -->
   </Target>
 
   <Target Name="BuildHostSecrets">
