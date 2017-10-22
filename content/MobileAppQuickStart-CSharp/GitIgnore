@@ -46,3 +46,7 @@ Certificate/
 
 secrets.json
 Secrets.cs
+
+# Auto generated files
+project.lock.json
+Company.MobileApp.*.nuget.*
