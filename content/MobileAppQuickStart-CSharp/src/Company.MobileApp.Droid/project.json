@@ -64,7 +64,7 @@
     "Xamarin.Forms": "2.4.0.18342",
     "Prism.Forms.Extensions": "1.0.0-pre4",
     "PropertyChanged.Fody": "2.1.4",
-    "Fody":"2.1.3",
+    "Fody":"2.2.0",
     "Xamarin.FFImageLoading.Forms": "2.2.20",
     "Xamarin.FFImageLoading.Transformations": "2.2.20"
   },
