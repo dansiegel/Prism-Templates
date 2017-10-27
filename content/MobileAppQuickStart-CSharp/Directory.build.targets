@@ -18,7 +18,7 @@
 
     <Copy SourceFiles="$(BuildTemplateAndroidManifestPath)"
           DestinationFolder="$(AndroidManifestPath)"
-          Condition="!Exists('$(AndroidManifestPath)')">
+          Condition="!Exists('$(AndroidManifestPath)')" />
 
     <!-- <Exec Condition=" Exists('$(InfoPlistPath)') And '$(IsUnix)' "
           Command="$(MSBuildThisFileDirectory)build/plist_prebuild.sh" /> -->
