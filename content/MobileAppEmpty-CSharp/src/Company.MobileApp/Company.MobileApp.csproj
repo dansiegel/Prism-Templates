@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="2.2.0" PrivateAssets="all" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.1.4" PrivateAssets="all" />
+    <PackageReference Condition=" '$(IncludeFody)' " Include="Fody" Version="2.2.0" PrivateAssets="all" />
+    <PackageReference Condition=" '$(IncludeFody)' " Include="PropertyChanged.Fody" Version="2.1.4" PrivateAssets="all" />
     <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.168-pre" />
     <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.168-pre" />
     <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0.168-pre" />
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.168-pre" />
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.18342" />
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.38779" />
   </ItemGroup>
 
 </Project>

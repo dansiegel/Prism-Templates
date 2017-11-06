@@ -25,6 +25,63 @@ namespace Company.MobileApp.ViewModels
             _navigationService = navigationService;
         }
 
+#if (IncludeFody)
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
+
+        private string _subtitle;
+        public string Subtitle
+        {
+            get => _subtitle;
+            set => SetProperty(ref _subtitle, value);
+        }
+
+        private string _icon;
+        public string Icon
+        {
+            get => _icon;
+            set => SetProperty(ref _icon, value);
+        }
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value, onChanged: OnIsBusyChanged);
+        }
+
+        private bool _isNotBusy;
+        public bool IsNotBusy
+        {
+            get => _isNotBusy;
+            set => SetProperty(ref _isNotBusy, value, onChanged: OnIsNotBusyChanged);
+        }
+
+        private bool _canLoadMore;
+        public bool CanLoadMore
+        {
+            get => _canLoadMore;
+            set => SetProperty(ref _canLoadMore, value);
+        }
+
+        private string _header;
+        public string Header
+        {
+            get => _header;
+            set => SetProperty(ref _header, value);
+        }
+
+        private string _footer;
+        public string Footer
+        {
+            get => _footer;
+            set => SetProperty(ref _footer, value);
+        }
+#else
         public string Title { get; set; }
 
         public string Subtitle { get; set; }
@@ -40,6 +97,7 @@ namespace Company.MobileApp.ViewModels
         public string Header { get; set; }
 
         public string Footer { get; set; }
+#endif
 
         private void OnIsBusyChanged() => IsNotBusy = !IsBusy;
 
@@ -47,7 +105,16 @@ namespace Company.MobileApp.ViewModels
 
 #region IActiveAware
 
+#if (IncludeFody)
+        private bool _isActive;
+        public bool IsActive
+        {
+            get => _isActive;
+            set => SetProperty(ref _isActive, value, onChanged: OnIsActiveChanged);
+        }
+#else
         public bool IsActive { get; set; }
+#endif
 
         public event EventHandler IsActiveChanged;
 

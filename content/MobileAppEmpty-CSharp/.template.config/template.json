@@ -53,6 +53,12 @@
           "rename": {
             "GitIgnore": ".gitignore"
           }
+        },
+        {
+          "condition": "(!IncludeFody)",
+          "exclude": [
+            "**/FodyWeavers.xml"
+          ]
         }
       ]
     }
@@ -88,6 +94,12 @@
       "dataType": "bool",
       "defaultValue": "true",
       "description": "Determines whether to include a UI Test project"
+    },
+    "IncludeFody": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include PropertyChanged.Fody weaver"
     },
     "MinimumAndroidTarget": {
       "type": "parameter",

@@ -21,6 +21,10 @@
       "longName": "include-ui-test",
       "shortName": "test"
     },
+    "IncludeFody": {
+      "longName": "include-fody",
+      "shortName": "fody"
+    },
     "ConnectedApp": {
       "isHidden": true
     },
