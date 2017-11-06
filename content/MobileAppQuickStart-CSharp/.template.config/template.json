@@ -466,7 +466,7 @@
     },
     "UWPSupported": {
       "type":"computed",
-      "value": "(IncludeUWP && Framework == \"netstandard1.4\")"
+      "value": "(IncludeUWP && (Framework == \"netstandard1.4\" || Framework == \"netstandard2.0\"))"
     },
     "GitInitialize": {
       "type": "parameter",
