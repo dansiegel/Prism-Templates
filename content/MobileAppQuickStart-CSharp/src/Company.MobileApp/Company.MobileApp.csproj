@@ -38,6 +38,7 @@
     <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="6.5.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.2.20" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.2.20" />
+    <PackageReference Include="Mobile.BuildTools" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
