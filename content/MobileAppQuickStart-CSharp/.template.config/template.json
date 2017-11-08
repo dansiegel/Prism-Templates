@@ -267,7 +267,7 @@
     "Framework": {
       "type": "parameter",
       "datatype": "choice",
-      "defaultValue": "netstandard1.4",
+      "defaultValue": "netstandard2.0",
       "choices": [
         {
           "choice": "netstandard1.4",
