@@ -28,10 +28,6 @@
       "shortName": "min-droid-sdk",
       "longName": "minimum-android-sdk-version"
     },
-    "AndroidSDK": {
-      "shortName": "droid-sdk",
-      "longName": "android-sdk-version"
-    },
     "Container": {
       "longName": "di-container",
       "shortName": "di"

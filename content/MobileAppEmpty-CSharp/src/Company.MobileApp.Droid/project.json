@@ -1,26 +1,10 @@
 {
   "dependencies": {
-////#if (AndroidSDK70)
-//    "Xamarin.Android.Support.Design": "24.2.1",
-//    "Xamarin.Android.Support.v4": "24.2.1",
-//    "Xamarin.Android.Support.v7.AppCompat": "24.2.1",
-//    "Xamarin.Android.Support.v7.CardView": "24.2.1",
-//    "Xamarin.Android.Support.v7.MediaRouter": "24.2.1",
-////#endif
-////#if (AndroidSDK71)
-//    "Xamarin.Android.Support.Design": "25.4.0.2",
-//    "Xamarin.Android.Support.v4": "25.4.0.2",
-//    "Xamarin.Android.Support.v7.AppCompat": "25.4.0.2",
-//    "Xamarin.Android.Support.v7.CardView": "25.4.0.2",
-//    "Xamarin.Android.Support.v7.MediaRouter": "25.4.0.2",
-////#endif
-////#if (AndroidSDK80)
-//    "Xamarin.Android.Support.Design": "26.0.2",
-//    "Xamarin.Android.Support.v4": "26.0.2",
-//    "Xamarin.Android.Support.v7.AppCompat": "26.0.2",
-//    "Xamarin.Android.Support.v7.CardView": "26.0.2",
-//    "Xamarin.Android.Support.v7.MediaRouter": "26.0.2",
-////#endif
+    "Xamarin.Android.Support.Design": "26.1.0.1",
+    "Xamarin.Android.Support.v4": "26.1.0.1",
+    "Xamarin.Android.Support.v7.AppCompat": "26.1.0.1",
+    "Xamarin.Android.Support.v7.CardView": "26.1.0.1",
+    "Xamarin.Android.Support.v7.MediaRouter": "26.1.0.1",
 ////#if (AutofacContainer)
 //    "Prism.Autofac.Forms": "7.0.0.168-pre",
 ////#endif
@@ -40,7 +24,7 @@
     "Xamarin.Forms": "2.4.0.38779"
   },
   "frameworks": {
-      "MonoAndroid,Version=vANDROID-SDK-VERSION": {
+      "MonoAndroid,Version=v8.0": {
     }
   },
   "runtimes": {
