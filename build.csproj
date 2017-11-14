@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <EnableDefaultItems>false</EnableDefaultItems>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+        <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+        <Authors>Dan Siegel</Authors>
+        <Copyright>© Dan Siegel</Copyright>
+        <VersionPrefix>1.2.0</VersionPrefix>
+        <VersionSuffix Condition=" '$(BUILD_BUILDNUMBER)' != '' And '$(Is_Release)' != 'true' ">ci$(BUILD_BUILDNUMBER)</VersionSuffix>
+        <PackageId>Prism.Forms.QuickstartTemplates</PackageId>
+        <Title>Prism QuickStart Templates</Title>
+        <Description>Templates for Prism for Xamarin Forms. This includes an empty project template, a customizable quickstart template, module template, and item templates for Pages and Services.</Description>
+        <PackageTags>dotnet;xamarin;android;ios;uwp;prism;dryioc;autofac;unity;ninject;realm;azure;azuread;offline sync;mobile center;</PackageTags>
+        <PackageIconUrl>http://prismlibrary.github.io/images/prism-logo-graphic-128.png</PackageIconUrl>
+        <PackageLicenseUrl>https://github.com/dansiegel/Prism-Templates/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/dansiegel/Prism-Templates</PackageProjectUrl>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
+        <PackageType>Template</PackageType>
+        <PackageOutputPath>$(MSBuildThisFileDirectory)</PackageOutputPath>
+        <PackageOutputPath Condition=" '$(BUILD_ARTIFACTSTAGINGDIRECTORY)' != '' ">$(BUILD_ARTIFACTSTAGINGDIRECTORY)</PackageOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="**\*.cs" Pack="true" PackagePath="." />
+        <None Include="**\*.csproj" Pack="true" PackagePath="." />
+        <None Include="**\*.xaml" Pack="true" PackagePath="." />
+        <None Include="**\*.json" Pack="true" PackagePath="." />
+        <None Include="**\*.sln" Pack="true" PackagePath="." />
+        <None Include="**\*.xml" Pack="true" PackagePath="." />
+        <None Include="**\*.png" Pack="true" PackagePath="." />
+        <None Include="**\*.axml" Pack="true" PackagePath="." />
+        <None Include="**\*.storyboard" Pack="true" PackagePath="." />
+        <None Include="**\*.resx" Pack="true" PackagePath="." />
+        <None Include="**\*.ignore" Pack="true" PackagePath="." />
+        <None Include="**\*.props" Pack="true" PackagePath="." />
+        <None Include="**\*.targets" Pack="true" PackagePath="." />
+        <None Include="**\*.config" Pack="true" PackagePath="." />
+        <None Include="**\*.txt" Pack="true" PackagePath="." />
+        <None Include="**\*.appxmanifest" Pack="true" PackagePath="." />
+        <None Remove="version.json" />
+        <None Remove="build.csproj" />
+    </ItemGroup>
+</Project>
