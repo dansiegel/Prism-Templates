@@ -8,14 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Condition=" '$(IncludeFody)' " Include="Fody" Version="2.2.0" PrivateAssets="all" />
+    <PackageReference Condition=" '$(IncludeFody)' " Include="Fody" Version="2.2.1" PrivateAssets="all" />
     <PackageReference Condition=" '$(IncludeFody)' " Include="PropertyChanged.Fody" Version="2.1.4" PrivateAssets="all" />
     <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.168-pre" />
     <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.168-pre" />
     <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0.168-pre" />
     <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.168-pre" />
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.38779" />
-    <PackageReference Include="Mobile.BuildTools" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.74863" />
+    <PackageReference Include="Mobile.BuildTools" Version="1.0.2" PrivateAssets="all" />
+    <PackageReference Include="Prism.QuickStart.MFractor.Config" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

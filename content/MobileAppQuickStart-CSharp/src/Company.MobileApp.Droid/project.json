@@ -37,20 +37,21 @@
 //    "BarcodeScanning.Service": "1.0.0-pre1",
 ////#endif
 ////#if (UseMobileCenter)
-//    "Microsoft.Azure.Mobile.Analytics":"0.16.0",
-//    "Microsoft.Azure.Mobile.Crashes": "0.16.0",
-//    "Microsoft.Azure.Mobile.Distribute": "0.16.0",
-//    "Microsoft.Azure.Mobile.Push": "0.16.0",
+//    "Microsoft.Azure.Mobile.Analytics":"0.17.1",
+//    "Microsoft.Azure.Mobile.Crashes": "0.17.1",
+//    "Microsoft.Azure.Mobile.Distribute": "0.17.1",
+//    "Microsoft.Azure.Mobile.Push": "0.17.1",
 ////#endif
 ////#if (UseAcrDialogs)
 //    "Acr.UserDialogs": "6.5.1",
 ////#endif
-    "Xamarin.Forms": "2.4.0.38779",
+    "Xamarin.Forms": "2.4.0.74863",
     "Prism.Forms.Extensions": "1.0.0-pre4",
     "PropertyChanged.Fody": "2.1.4",
-    "Fody":"2.2.0",
-    "Xamarin.FFImageLoading.Forms": "2.2.20",
-    "Xamarin.FFImageLoading.Transformations": "2.2.20"
+    "Fody":"2.2.1",
+    "Xamarin.FFImageLoading.Forms": "2.2.25",
+    "Xamarin.FFImageLoading.Transformations": "2.2.25",
+    "Mobile.BuildTools": "1.0.2"
   },
   "frameworks": {
     "MonoAndroid,Version=v8.0": {
