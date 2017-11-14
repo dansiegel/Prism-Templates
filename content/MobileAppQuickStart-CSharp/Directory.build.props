@@ -35,11 +35,6 @@
     <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(IsUnix)' ">
-    <EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
-    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" SubType="Code" />
-    <None Remove="**\*.xaml" />
-  </ItemGroup>
 <!--/+:cnd:noEmit -->
 
 </Project>
