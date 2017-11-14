@@ -51,7 +51,7 @@
         },
         {
           "rename": {
-            "GitIgnore": ".gitignore"
+            "git.ignore": ".gitignore"
           }
         },
         {
