@@ -14,12 +14,14 @@ namespace Company.MobileApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
+#if (IncludeUITest)
 //-:cnd:noEmit
             // Code for starting up the Xamarin Test Cloud Agent
 #if DEBUG
             Xamarin.Calabash.Start();
 #endif
 //+:cnd:noEmit
+#endif
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(uiApplication, launchOptions);
