@@ -8,7 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Company.MobileApp.Helpers;
 #if (UseMobileCenter)
-using Microsoft.Azure.Mobile.Push;
+using Microsoft.AppCenter.Push;
 #endif
 #if (AADAuth || AADB2CAuth)
 using Microsoft.Identity.Client;

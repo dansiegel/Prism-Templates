@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FFImageLoading.Helpers;
-using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.AppCenter.Analytics;
 using Prism.Logging;
 
 namespace Company.MobileApp.Services

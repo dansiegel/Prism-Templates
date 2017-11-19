@@ -2,23 +2,23 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.1",
 ////#if (AutofacContainer)
-//    "Prism.Autofac.Forms": "7.0.0.168-pre",
+//    "Prism.Autofac.Forms": "7.0.0.269-pre",
 ////#endif
 ////#if (DryIocContainer)
-//    "Prism.DryIoc.Forms": "7.0.0.168-pre",
+//    "Prism.DryIoc.Forms": "7.0.0.269-pre",
 ////#endif
 ////#if (NinjectContainer)
-//    "Prism.Ninject.Forms": "7.0.0.168-pre",
+//    "Prism.Ninject.Forms": "7.0.0.269-pre",
 ////#endif
 ////#if (UnityContainer)
-//    "Prism.Unity.Forms": "7.0.0.168-pre",
+//    "Prism.Unity.Forms": "7.0.0.269-pre",
 ////#endif
 ////#if (IncludeFody)
 //    "PropertyChanged.Fody": "2.1.4",
 //    "Fody":"2.2.1",
 ////#endif
-    "Xamarin.Forms": "2.4.0.74863",
-    "Mobile.BuildTools": "1.0.2"
+    "Xamarin.Forms": "2.5.*",
+    "Mobile.BuildTools": "*"
   },
   "frameworks": {
     "uap10.0": {}

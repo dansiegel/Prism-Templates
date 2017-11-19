@@ -26,11 +26,11 @@ using Company.MobileApp.Helpers;
 #endif
 #if (UseMobileCenter)
 using FFImageLoading.Helpers;
-using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
-using Microsoft.Azure.Mobile.Distribute;
-using Microsoft.Azure.Mobile.Push;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
+using Microsoft.AppCenter.Push;
 #endif
 #if (UseAzureMobileClient)
 #if (!NoAuth)

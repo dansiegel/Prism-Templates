@@ -5,8 +5,8 @@ using Xamarin.Forms.Platform.iOS;
 using Foundation;
 using UIKit;
 #if (UseMobileCenter)
-using Microsoft.Azure.Mobile.Distribute;
-using Microsoft.Azure.Mobile.Push;
+using Microsoft.AppCenter.Distribute;
+using Microsoft.AppCenter.Push;
 #endif
 
 namespace Company.MobileApp.iOS
