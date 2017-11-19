@@ -1,8 +1,6 @@
 # Prism Quickstart Templates
 
-These templates are a prototype for the official Prism Templates. These templates have several major changes from the traditional templates you are used to from Xamarin or Prism.
-
-The core project uses netstandard1.4 by default, and can be overridden to use netstandard1.5, netstandard1.6 or netstandard2.0. Localization is supported and ready to go out of the box with this template.
+These templates are far from the traditional templates you are used to from Xamarin or Prism. These templates are designed to get you from a new project to a real working app as fast as possible. The QuickStart Template provides you options to hit the ground running with a number of services and even includes my "DevOps in a Box" [Mobile.BuildTools](https://github.com/dansiegel/Mobile.BuildTools).
 
 ## Support
 
@@ -24,6 +22,8 @@ If this project helped you reduce time to develop and made your app better, plea
 - Includes a `Mock` Build configuration great for swapping services for testing and development.
 - Includes [Prism.Forms.Extensions](https://www.nuget.org/packages/Prism.Forms.Extensions/)
 - Includes updated [Prism.Plugin.Popups](https://github.com/dansiegel/Prism.Plugin.Popups) with fully integrated support for Popup Pages in Prism's Navigation Service.
+- NuGet based configuration for MFractor
+- NuGet based DevOps tooling [Mobile.BuildTools](https://github.com/dansiegel/Mobile.BuildTools)
 
 ## Item Templates
 
