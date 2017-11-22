@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "Xamarin.Android.Support.Design": "26.1.0.1",
-    "Xamarin.Android.Support.v4": "26.1.0.1",
-    "Xamarin.Android.Support.v7.AppCompat": "26.1.0.1",
-    "Xamarin.Android.Support.v7.CardView": "26.1.0.1",
-    "Xamarin.Android.Support.v7.MediaRouter": "26.1.0.1",
+    "Xamarin.Android.Support.Design": "26.*",
+    "Xamarin.Android.Support.v4": "26.*",
+    "Xamarin.Android.Support.v7.AppCompat": "26.*",
+    "Xamarin.Android.Support.v7.CardView": "26.*",
+    "Xamarin.Android.Support.v7.MediaRouter": "26.*",
 ////#if (AutofacContainer)
 //    "Prism.Autofac.Forms": "7.0.0.269-pre",
 ////#endif
@@ -18,11 +18,11 @@
 //    "Prism.Unity.Forms": "7.0.0.269-pre",
 ////#endif
 ////#if (IncludeFody)
-//    "PropertyChanged.Fody": "2.1.4",
-//    "Fody":"2.2.1",
+//    "PropertyChanged.Fody": "2.*",
+//    "Fody":"2.*",
 ////#endif
     "Xamarin.Forms": "2.5.*",
-    "Mobile.BuildTools": "*"
+    "Mobile.BuildTools": "1.*"
   },
   "frameworks": {
       "MonoAndroid,Version=v8.0": {

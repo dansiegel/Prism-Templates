@@ -13,14 +13,14 @@
 //         "Prism.Unity.Forms": "7.0.0.269-pre",
 ////#endif
 ////#if (IncludeFody)
-//    "PropertyChanged.Fody": "2.1.4",
-//    "Fody":"2.2.1",
+//    "PropertyChanged.Fody": "2.*",
+//    "Fody":"2.*",
 ////#endif
         "Xamarin.Forms": "2.5.*",
 ////#if (IncludeUITest)
-//        "Xamarin.TestCloud.Agent": "0.21.2",
+//        "Xamarin.TestCloud.Agent": "0.*",
 ////#endif
-        "Mobile.BuildTools": "*"
+        "Mobile.BuildTools": "1.*"
     },
     "frameworks": {
         "Xamarin.iOS,Version=v1.0": {}

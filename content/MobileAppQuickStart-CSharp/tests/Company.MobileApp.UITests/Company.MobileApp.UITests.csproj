@@ -13,13 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Company.MobileApp.iOS\Company.MobileApp.iOS.csproj" 
-                      Condition=" $(IncludeiOS) ">
+    <ProjectReference Include="..\..\src\Company.MobileApp.iOS\Company.MobileApp.iOS.csproj" Condition=" $(IncludeiOS) ">
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Company.MobileApp.Droid\Company.MobileApp.Droid.csproj" 
-                      Condition=" $(IncludeAndroid) ">
+    <ProjectReference Include="..\..\src\Company.MobileApp.Droid\Company.MobileApp.Droid.csproj" Condition=" $(IncludeAndroid) ">
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>

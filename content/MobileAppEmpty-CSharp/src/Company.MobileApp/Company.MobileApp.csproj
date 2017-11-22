@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Condition=" '$(IncludeFody)' " Include="Fody" Version="2.2.1" PrivateAssets="all" />
-    <PackageReference Condition=" '$(IncludeFody)' " Include="PropertyChanged.Fody" Version="2.1.4" PrivateAssets="all" />
+    <PackageReference Condition=" '$(IncludeFody)' " Include="Fody" Version="*" PrivateAssets="all" />
+    <PackageReference Condition=" '$(IncludeFody)' " Include="PropertyChanged.Fody" Version="*" PrivateAssets="all" />
     <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.269-pre" />
     <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.269-pre" />
     <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0.269-pre" />
