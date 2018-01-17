@@ -11,7 +11,7 @@ If this project helped you reduce time to develop and made your app better, plea
 ## Additional Features
 
 - Uses [MvvmHelpers](https://github.com/jamesmontemagno/mvvm-helpers) from James Montemagno by default.
-- Integrate with [Mobile Center](https://mobile.azure.com).
+- Integrate with [App Center](https://appcenter.ms).
 - Includes Fody Property Changed to keep your code clean and concise.
 - Supports Data Services using the [AzureMobileClient.Helpers](https://github.com/dansiegel/AzureMobileClient.Helpers) and [Realm](https://github.com/realm/realm-dotnet) (Defaults to no data services)
 - Works Cross Platform with `dotnet new`
