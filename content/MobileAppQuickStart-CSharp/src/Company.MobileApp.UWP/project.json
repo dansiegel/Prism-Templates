@@ -2,21 +2,15 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.*",
 ////#if (AutofacContainer)
-//    "Prism.Autofac.Forms": "7.0.0.269-pre",
-//    "Prism.Plugin.Popups.Autofac": "2.0.0-pre*",
+//    "Prism.Autofac.Forms": "7.0.0.362",
 ////#endif
 ////#if (DryIocContainer)
-//    "Prism.DryIoc.Forms": "7.0.0.269-pre",
-//    "Prism.Plugin.Popups.DryIoc": "2.0.0-pre*",
-////#endif
-////#if (NinjectContainer)
-//    "Prism.Ninject.Forms": "7.0.0.269-pre",
-//    "Prism.Plugin.Popups.Ninject": "2.0.0-pre*",
+//    "Prism.DryIoc.Forms": "7.0.0.362",
 ////#endif
 ////#if (UnityContainer)
-//    "Prism.Unity.Forms": "7.0.0.269-pre",
-//    "Prism.Plugin.Popups.Unity": "2.0.0-pre*",
+//    "Prism.Unity.Forms": "7.0.0.362",
 ////#endif
+    "Prism.Plugin.Popups": "2.0.0-pre4",
 ////#if (UseMvvmHelpers)
 //    "Refractored.MvvmHelpers":"1.*",
 ////#endif
@@ -32,7 +26,7 @@
 ////#if (IncludeBarcodeService)
 //    "BarcodeScanning.Service": "1.0.0-pre*",
 ////#endif
-////#if (UseMobileCenter)
+////#if (UseAppCenter)
 //    "Microsoft.AppCenter.Analytics":"1.*",
 //    "Microsoft.AppCenter.Crashes": "1.*",
 //    "Microsoft.AppCenter.Distribute": "1.*",
@@ -41,7 +35,7 @@
 ////#if (UseAcrDialogs)
 //    "Acr.UserDialogs": "6.*",
 ////#endif
-    "Xamarin.Forms": "2.5.*",
+    "Xamarin.Forms": "2.5.0.122203",
     "Prism.Forms.Extensions": "1.0.0-pre*",
     "PropertyChanged.Fody": "2.*",
     "Fody":"2.*",

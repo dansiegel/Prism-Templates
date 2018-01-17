@@ -46,7 +46,7 @@
     <key>NSCameraUsageDescription</key>
     <string>We need to scan barcodes</string>
 <!--#endif -->
-<!--#if (AADAuth || AADB2CAuth || UseMobileCenter) -->
+<!--#if (AADAuth || AADB2CAuth || UseAppCenter) -->
     <key>CFBundleURLTypes</key>
     <array>
 <!--#if (AADAuth || AADB2CAuth) -->
@@ -61,11 +61,11 @@
             </array>
         </dict>
 <!--#endif -->
-<!--#if (UseMobileCenter) -->
+<!--#if (UseAppCenter) -->
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>mobilecenter-$$MobileCenterSecret$$</string>
+                <string>appcenter-$$AppCenterSecret$$</string>
             </array>
         </dict>
 <!--#endif -->

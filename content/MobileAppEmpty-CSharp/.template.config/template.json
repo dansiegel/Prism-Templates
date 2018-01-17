@@ -147,10 +147,6 @@
           "description": "Uses DryIoc as the Dependency Injection Container"
         },
         {
-          "choice": "Ninject",
-          "description": "Uses Ninject as the Dependency Injection Container. REQUIRES netstandard2.0"
-        },
-        {
           "choice": "Unity",
           "description": "Uses Unity as the Dependency Injection Container"
         }
@@ -188,10 +184,6 @@
     "DryIocContainer": {
       "type": "computed",
       "value": "(Container == \"DryIoc\")"
-    },
-    "NinjectContainer": {
-      "type": "computed",
-      "value": "(Container == \"Ninject\")"
     },
     "UnityContainer": {
       "type": "computed",

@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Company.MobileApp.Helpers;
-#if (UseMobileCenter)
+#if (UseAppCenter)
 using Microsoft.AppCenter.Push;
 #endif
 #if (AADAuth || AADB2CAuth)
@@ -68,7 +68,7 @@ namespace Company.MobileApp.Droid
             AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
         }
 #endif
-#if (UseMobileCenter)
+#if (UseAppCenter)
 
         protected override void OnNewIntent(Android.Content.Intent intent)
         {

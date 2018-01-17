@@ -10,15 +10,11 @@
   <ItemGroup>
     <PackageReference Include="Fody" Version="*" PrivateAssets="all" />
     <PackageReference Include="PropertyChanged.Fody" Version="*" PrivateAssets="all" />
-    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.269-pre" />
-    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.269-pre" />
-    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Ninject.Forms" Version="7.0.0.269-pre" />
-    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.269-pre" />
-    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Plugin.Popups.Autofac" Version="2.0.0-pre*" />
-    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.Plugin.Popups.DryIoc" Version="2.0.0-pre*" />
-    <PackageReference Condition=" '$(Container)' == 'Ninject' " Include="Prism.Plugin.Popups.Ninject" Version="2.0.0-pre*" />
-    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Plugin.Popups.Unity" Version="2.0.0-pre*" />
-    <PackageReference Include="Xamarin.Forms" Version="2.5.*" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.362" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.362" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.362" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="2.0.0-pre4" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Condition=" '$(Localization)' And '$(Framework)' != 'netstandard2.0' " Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Include="Mobile.BuildTools" Version="*" />
     <PackageReference Include="Prism.QuickStart.MFractor.Config" Version="*" />

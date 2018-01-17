@@ -5,8 +5,6 @@
              xmlns:prism="clr-namespace:Prism.Autofac;assembly=Prism.Autofac.Forms"
              <!--#elif DryIocContainer -->
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
-             <!--#elif NinjectContainer -->
-             xmlns:prism="clr-namespace:Prism.Ninject;assembly=Prism.Ninject.Forms"
              <!--#else -->
              xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              <!--#endif -->

@@ -14,6 +14,7 @@
       "shortName": "android"
     },
     "IncludeUWP": {
+      "isHidden": true,
       "longName": "include-uwp",
       "shortName": "uwp"
     },
@@ -39,20 +40,21 @@
       "shortName": "acr",
       "longName": "acr-dialogs"
     },
-    "UseMobileCenter": {
-      "longName": "use-mobileCenter",
-      "shortName": "mc"
+    "UseAppCenter": {
+      "longName": "use-appCenter",
+      "shortName": "ac"
     },
-    "MobileCenter-iOS": {
-      "longName": "mobilecenter-ios-secret",
+    "AppCenter-iOS": {
+      "longName": "appcenter-ios-secret",
       "shortName": "ios-secret"
     },
-    "MobileCenter-Android": {
-      "longName": "mobilecenter-android-secret",
+    "AppCenter-Android": {
+      "longName": "appcenter-android-secret",
       "shortName": "android-secret"
     },
-    "MobileCenter-UWP": {
-      "longName": "mobilecenter-uwp-secret",
+    "AppCenter-UWP": {
+      "isHidden": true,
+      "longName": "appcenter-uwp-secret",
       "shortName": "uwp-secret"
     },
     "UseMvvmHelpers": {

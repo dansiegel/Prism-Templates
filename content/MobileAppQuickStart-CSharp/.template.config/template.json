@@ -80,7 +80,7 @@
           ]
         },
         {
-          "condition": "(!UseMobileCenter)",
+          "condition": "(!UseAppCenter)",
           "exclude": [
             "src/Company.MobileApp/Services/MCAnalyticsLogger.cs"
           ]
@@ -161,32 +161,32 @@
       "defaultValue": "false",
       "description": "Adds Acr.UserDialogs to the Solution"
     },
-    "UseMobileCenter": {
+    "UseAppCenter": {
       "type": "parameter",
       "dataType": "bool",
       "defaultValue": "false",
-      "description": "Will setup Mobile Center for Crashes and Analytics"
+      "description": "Will setup App Center for Crashes and Analytics"
     },
-    "MobileCenter-iOS": {
+    "AppCenter-iOS": {
       "type": "parameter",
       "dataType": "text",
-      "replaces": "MOBILECENTER-IOS-SECRET",
+      "replaces": "APPCENTER-IOS-SECRET",
       "defaultValue": "",
-      "description": "Application Secret from Mobile Center for iOS"
+      "description": "Application Secret from App Center for iOS"
     },
-    "MobileCenter-Android": {
+    "AppCenter-Android": {
       "type": "parameter",
       "dataType": "text",
-      "replaces": "MOBILECENTER-ANDROID-SECRET",
+      "replaces": "APPCENTER-ANDROID-SECRET",
       "defaultValue": "",
-      "description": "Application Secret from Mobile Center for Android"
+      "description": "Application Secret from App Center for Android"
     },
-    "MobileCenter-UWP": {
+    "AppCenter-UWP": {
       "type": "parameter",
       "datatype":"text",
-      "replaces": "MOBILECENTER-UWP-SECRET",
+      "replaces": "APPCENTER-UWP-SECRET",
       "defaultValue": "",
-      "description": "Application Secret from Mobile Center for UWP"
+      "description": "Application Secret from App Center for UWP"
     },
     "MinimumAndroidTarget": {
       "type": "parameter",
@@ -232,10 +232,6 @@
         {
           "choice": "DryIoc",
           "description": "Uses DryIoc as the Dependency Injection Container"
-        },
-        {
-          "choice": "Ninject",
-          "description": "Uses Ninject as the Dependency Injection Container"
         },
         {
           "choice": "Unity",
@@ -380,10 +376,6 @@
       "type": "computed",
       "value": "(Container == \"DryIoc\")"
     },
-    "NinjectContainer": {
-      "type": "computed",
-      "value": "(Container == \"Ninject\")"
-    },
     "UnityContainer": {
       "type": "computed",
       "value": "(Container == \"Unity\")"
@@ -395,10 +387,6 @@
     "DryIocAzureMobileClient": {
       "type": "computed",
       "value": "(DataProvider == \"AzureMobileClient\" && Container == \"DryIoc\")"
-    },
-    "NinjectAzureMobileClient": {
-      "type": "computed",
-      "value": "(DataProvider == \"AzureMobileClient\" && Container == \"Ninject\")"
     },
     "UnityAzureMobileClient": {
       "type": "computed",

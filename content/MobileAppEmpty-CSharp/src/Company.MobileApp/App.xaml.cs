@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Company.MobileApp.Views;
+using Prism.Ioc;
 #if (AutofacContainer)
 using Autofac;
 using Prism.Autofac;
@@ -7,10 +8,6 @@ using Prism.Autofac;
 #if (DryIocContainer)
 using DryIoc;
 using Prism.DryIoc;
-#endif
-#if (NinjectContainer)
-using Ninject;
-using Prism.Ninject;
 #endif
 #if (UnityContainer)
 using Microsoft.Practices.Unity;
@@ -48,17 +45,11 @@ namespace Company.MobileApp
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
-        protected override void RegisterTypes()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-#if (AutofacContainer)
-            Builder.RegisterTypeForNavigation<NavigationPage>();
-            Builder.RegisterTypeForNavigation<TabbedPage>();
-            Builder.RegisterTypeForNavigation<MainPage>();
-#else
-            Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<TabbedPage>();
-            Container.RegisterTypeForNavigation<MainPage>();
-#endif
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<TabbedPage>();
+            containerRegistry.RegisterForNavigation<MainPage>();
         }
 
         protected override void OnStart()

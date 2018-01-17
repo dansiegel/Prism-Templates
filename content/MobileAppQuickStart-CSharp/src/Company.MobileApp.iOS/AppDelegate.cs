@@ -4,7 +4,7 @@ using System.Linq;
 using Xamarin.Forms.Platform.iOS;
 using Foundation;
 using UIKit;
-#if (UseMobileCenter)
+#if (UseAppCenter)
 using Microsoft.AppCenter.Distribute;
 using Microsoft.AppCenter.Push;
 #endif
@@ -25,7 +25,7 @@ namespace Company.MobileApp.iOS
 #if (IncludeBarcodeService)
             global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 #endif
-#if (UseMobileCenter)
+#if (UseAppCenter)
             Distribute.DontCheckForUpdatesInDebug();
 #endif
 
@@ -41,7 +41,7 @@ namespace Company.MobileApp.iOS
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
-#if (UseMobileCenter)
+#if (UseAppCenter)
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
         {

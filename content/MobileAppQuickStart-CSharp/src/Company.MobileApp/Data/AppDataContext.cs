@@ -4,17 +4,13 @@ using Company.MobileApp.Auth;
 #endif
 using Company.MobileApp.Helpers;
 using Company.MobileApp.Models;
+using Microsoft.WindowsAzure.MobileServices;
 #if (AutofacContainer)
 using Autofac;
-using Microsoft.WindowsAzure.MobileServices;
 #elseif (DryIocContainer)
 using DryIoc;
-#elseif (NinjectContainer)
-using Microsoft.WindowsAzure.MobileServices;
-using Ninject;
 #elseif (UnityContainer)
-using Microsoft.Practices.Unity;
-using Microsoft.WindowsAzure.MobileServices;
+using Unity;
 #endif
 
 namespace Company.MobileApp.Data
@@ -49,10 +45,6 @@ namespace Company.MobileApp.Data
     #endif
 #endif
     {
-#if (NinjectContainer)
-        private IReadOnlyKernel _kernel { get; }
-
-#endif
 #if (NoAuth)
     #if (AutofacContainer)
         public AppDataContext(IComponentContext context) 
@@ -63,12 +55,6 @@ namespace Company.MobileApp.Data
         public AppDataContext(IContainer container) 
             : base(container) // you can optionally pass in the data store name
         {
-        }
-    #elseif (NinjectContainer)
-        public AppDataContext(IReadOnlyKernel kernel, IMobileServiceClient client) 
-            : base(client) // you can optionally pass in the data store name
-        {
-            _kernel = kernel;
         }
     #elseif (UnityContainer)
         public AppDataContext(IUnityContainer container) 
@@ -87,12 +73,6 @@ namespace Company.MobileApp.Data
             : base(container, options, loginProvider) // you can optionally pass in the data store name
         {
         }
-    #elseif (NinjectContainer)
-        public AppDataContext(IReadOnlyKernel kernel, IAzureCloudServiceOptions options, ILoginProvider<MobileAppUser> loginProvider) 
-            : base(options, loginProvider) // you can optionally pass in the data store name
-        {
-            _kernel = kernel;
-        }
     #elseif (UnityContainer)
         public AppDataContext(IUnityContainer container, IAzureCloudServiceOptions options, ILoginProvider<MobileAppUser> loginProvider) 
             : base(container, options, loginProvider) // you can optionally pass in the data store name
@@ -106,14 +86,6 @@ namespace Company.MobileApp.Data
         // TODO: Create ICloudSyncTable<Model> Models { get; }
 #else
         public ICloudSyncTable<TodoItem> TodoItems => SyncTable<TodoItem>();
-#endif
-#if (NinjectContainer)
-
-        public override ICloudSyncTable<T> SyncTable<T>() =>
-            _kernel.Get<ICloudSyncTable<T>>();
-
-        public override ICloudTable<T> Table<T>() =>
-            _kernel.Get<ICloudTable<T>>();
 #endif
     }
 }

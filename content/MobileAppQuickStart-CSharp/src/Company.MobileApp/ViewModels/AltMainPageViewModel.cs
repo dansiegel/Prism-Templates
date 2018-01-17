@@ -21,7 +21,6 @@ using Realms;
 using AzureMobileClient.Helpers;
 using Company.MobileApp.Data;
 #endif
-using Company.MobileApp.Models;
 #if (Localization)
 using Company.MobileApp.Strings;
 #endif

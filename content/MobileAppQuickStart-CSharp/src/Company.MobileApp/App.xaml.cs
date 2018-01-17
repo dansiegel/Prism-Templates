@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Company.MobileApp.Services;
 using Company.MobileApp.Views;
+using Prism;
+using Prism.Ioc;
 #if (UseAcrDialogs)
 using Acr.UserDialogs;
 #endif
@@ -13,18 +15,14 @@ using Prism.Autofac;
 using DryIoc;
 using Prism.DryIoc;
 #endif
-#if (NinjectContainer)
-using Ninject;
-using Prism.Ninject;
-#endif
 #if (UnityContainer)
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 #endif
-#if (UseMobileCenter || UseAzureMobileClient)
+#if (UseAppCenter || UseAzureMobileClient)
 using Company.MobileApp.Helpers;
 #endif
-#if (UseMobileCenter)
+#if (UseAppCenter)
 using FFImageLoading.Helpers;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -79,13 +77,13 @@ namespace Company.MobileApp
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
-#if (UseMobileCenter)
+#if (UseAppCenter)
             // https://docs.microsoft.com/en-us/mobile-center/sdk/distribute/xamarin
             Distribute.ReleaseAvailable = OnReleaseAvailable;
             // https://docs.microsoft.com/en-us/mobile-center/sdk/push/xamarin-forms
             Push.PushNotificationReceived += OnPushNotificationReceived;
             // Handle when your app starts
-            MobileCenter.Start(AppConstants.MobileCenterStart,
+            AppCenter.Start(AppConstants.AppCenterStart,
                                typeof(Analytics), typeof(Crashes), typeof(Distribute), typeof(Push));
 #endif
         }
@@ -102,219 +100,56 @@ namespace Company.MobileApp
 #endif
         }
 
-        protected override void RegisterTypes()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register the Popup Plugin Navigation Service
-#if (AutofacContainer)
-            Builder.RegisterPopupNavigationService();
-#else
-            Container.RegisterPopupNavigationService();
-#endif
+            containerRegistry.RegisterPopupNavigationService();
+            containerRegistry.RegisterInstance(CreateLogger());
 
-#if (UseMobileCenter)
-            if(!string.IsNullOrWhiteSpace(AppConstants.MobileCenterStart))
-            {
-    #if (AutofacContainer)
-                Builder.RegisterType<MCAnalyticsLogger>().As<ILoggerFacade>().SingleInstance();
-    #elseif (DryIocContainer)
-                Container.Register<ILoggerFacade, MCAnalyticsLogger>(reuse: Reuse.Singleton,
-                                                                     ifAlreadyRegistered: IfAlreadyRegistered.Replace);
-    #elseif (NinjectContainer)
-                Container.Bind<ILoggerFacade>().To<MCAnalyticsLogger>().InSingletonScope();
-    #else
-                Container.RegisterType<ILoggerFacade, MCAnalyticsLogger>(new ContainerControlledLifetimeManager());
-    #endif
-            }
-#endif
-#if (UseAzureMobileClient)
-            // ICloudTable is only needed for Online Only data
-    #if (AutofacContainer)
-            Builder.RegisterGeneric(typeof(AzureCloudTable<>)).As(typeof(ICloudTable<>)).InstancePerLifetimeScope();
-            Builder.RegisterGeneric(typeof(AzureCloudSyncTable<>)).As(typeof(ICloudSyncTable<>)).InstancePerLifetimeScope();
 
-        #if (NoAuth)
-            Builder.RegisterInstance(new MobileServiceClient(Secrets.AppServiceEndpoint)).As<IMobileServiceClient>().SingleInstance();
-            Builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudAppContext>().SingleInstance();
-        #else
-            #if (AADAuth || AADB2CAuth)
-            Builder.RegisterInstance(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
-            {
-                RedirectUri = AppConstants.RedirectUri
-            }).As<IPublicClientApplication>().SingleInstance();
-
-            Builder.RegisterType<AADOptions>().As<IAADOptions>().As<IAADLoginProviderOptions>().SingleInstance();
-
-            #endif
-            Builder.RegisterType<AppServiceContextOptions>().As<IAzureCloudServiceOptions>().SingleInstance();
-            Builder.RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
-            Builder.Register(ctx => ctx.Resolve<ICloudService>().Client).As<IMobileServiceClient>().SingleInstance();
-
-            Builder.RegisterType<LoginProvider>().As<ILoginProvider<AADAccount>>().SingleInstance();
-        #endif
-    #elseif (DryIocContainer)
-            Container.Register(typeof(ICloudTable<>), typeof(AzureCloudTable<>), Reuse.Singleton);
-            Container.Register(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), Reuse.Singleton);
-
-        #if (NoAuth)
-            Container.UseInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
-            Container.RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
-                                                   serviceTypeCondition: type => 
-                                                        type == typeof(IAppDataContext) ||
-                                                        type == typeof(ICloudAppContext));
-        #else
-            #if (AADAuth || AADB2CAuth)
-            Container.UseInstance<IPublicClientApplication>(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
-            {
-                RedirectUri = AppConstants.RedirectUri
-            });
-
-            Container.RegisterMany<AADOptions>(reuse: Reuse.Singleton,
-                                               serviceTypeCondition: type =>
-                                               type == typeof(IAADOptions) ||
-                                               type == typeof(IAADLoginProviderOptions));
-
-            #endif
-            Container.Register<IAzureCloudServiceOptions, AppServiceContextOptions>(Reuse.Singleton);
-            Container.RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
-                                                   serviceTypeCondition: type => 
-                                                        type == typeof(IAppDataContext) ||
-                                                        type == typeof(ICloudService));
-            Container.RegisterDelegate<IMobileServiceClient>(factoryDelegate: r => r.Resolve<ICloudService>().Client,
-                                                             reuse: Reuse.Singleton,
-                                                             setup: Setup.With(allowDisposableTransient: true));
-            Container.Register<ILoginProvider<AADAccount>,LoginProvider>(Reuse.Singleton);
-        #endif
-    #elseif (NinjectContainer)
-            Container.Bind(typeof(ICloudTable<>)).To(typeof(AzureCloudTable<>)).InSingletonScope();
-            Container.Bind(typeof(ICloudSyncTable<>)).To(typeof(AzureCloudSyncTable<>)).InSingletonScope();
-        #if (NoAuth)
-            Container.Bind<IMobileServiceClient>().ToConstant(new MobileServiceClient(Secrets.AppServiceEndpoint)).InSingletonScope();
-            Container.Bind<IAppDataContext, ICloudAppContext>().To<AppDataContext>().InSingletonScope();
-        #else
-            #if (AADAuth || AADB2CAuth)
-            Container.Bind<IPublicClientApplication>()
-                     .ToConstant(
-                        new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
-                        {
-                            RedirectUri = AppConstants.RedirectUri
-                        })
-                    .InSingletonScope();
-
-            Container.Bind<IAADOptions, IAADLoginProviderOptions>().To<AADOptions>().InSingletonScope();
-            #endif
-            Container.Bind<IAzureCloudServiceOptions>().To<AppServiceContextOptions>().InSingletonScope();
-            Container.Bind<IAppDataContext, ICloudService>().To<AppDataContext>().InSingletonScope();
-            Container.Bind<IMobileServiceClient>().ToMethod(c => Container.Get<ICloudService>().Client).InSingletonScope();
-
-            Container.Bind<ILoginProvider<AADAccount>>().To<LoginProvider>().InSingletonScope();
-        #endif
-    #elseif (UnityContainer)
-            Container.RegisterType(typeof(ICloudTable<>), typeof(AzureCloudTable<>), new ContainerControlledLifetimeManager());
-            Container.RegisterType(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>), new ContainerControlledLifetimeManager());
-
-        #if (NoAuth)
-            Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
-            Container.RegisterType<AppDataContext>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IAppDataContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
-            Container.RegisterType<ICloudAppContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
-        #else
-            #if (AADAuth || AADB2CAuth)
-            Container.RegisterInstance<IPublicClientApplication>(new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
-            {
-                RedirectUri = AppConstants.RedirectUri
-            });
-
-            Container.RegisterType<AADOptions>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IAADOptions>(new InjectionFactory(c => c.Resolve<AADOptions>()));
-            Container.RegisterType<IAADLoginProviderOptions>()new InjectionFactory(c => c.Resolve<AADOptions>());
-            #endif
-            
-            Container.RegisterType<IAzureCloudServiceOptions, AppServiceContextOptions>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<AppDataContext>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IAppDataContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
-            Container.RegisterType<ICloudService>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
-            Container.RegisterType<IMobileServiceClient>(new InjectionFactory(c => c.Resolve<ICloudService>().Client));
-
-            Container.RegisterType<ILoginProvider<AADAccount>,LoginProvider>(new ContainerControlledLifetimeManager());
-        #endif
-    #endif
-#endif
 #if (UseRealm)
             //var serverURL = new Uri(Secrets.RealmServer);
             //var config = new SyncConfiguration(User.Current, serverURL);
             var config = RealmConfiguration.DefaultConfiguration;
     #if (AutofacContainer)
-            Builder.Register(ctx => Realm.GetInstance(config)).As<Realm>().InstancePerDependency();
+            containerRegistry.GetBuilder().Register(ctx => Realm.GetInstance(config)).As<Realm>().InstancePerDependency();
     #elseif (DryIocContainer)
-            Container.Register(reuse: Reuse.Transient,
+            containerRegistry.GetContainer().Register(reuse: Reuse.Transient,
                                made: Made.Of(() => Realm.GetInstance(config)),
                                setup: Setup.With(allowDisposableTransient: true));
-    #elseif (NinjectContainer)
-            Container.Bind<Realm>().ToMethod(c => Realm.GetInstance(config)).InTransientScope();
     #else
-            Container.RegisterType<Realm>(new InjectionFactory(c => Realm.GetInstance(config)));
+            containerRegistry.GetContainer().RegisterType<Realm>(new InjectionFactory(c => Realm.GetInstance(config)));
     #endif
 #endif
 #if (IncludeBarcodeService)
             // NOTE: Uses a Popup Page to contain the Scanner. You can optionally register 
             // the ContentPageBarcodeScannerService if you prefer a full screen approach.
-    #if (AutofacContainer)
-            Builder.RegisterInstance(PopupNavigation.Instance).As<IPopupNavigation>().SingleInstance();
-            Builder.RegisterType<PopupBarcodeScannerService>().As<IBarcodeScannerService>().SingleInstance();
-    #elseif (DryIocContainer)
-            Container.UseInstance<IPopupNavigation>(PopupNavigation.Instance);
-            Container.Register<IBarcodeScannerService, PopupBarcodeScannerService>();
-    #elseif (NinjectContainer)
-            Container.Bind<IPopupNavigation>().ToConstant(PopupNavigation.Instance).InSingletonScope();
-            Container.Bind<IBarcodeScannerService>().To<PopupBarcodeScannerService>().InSingletonScope();
-    #else
-            Container.RegisterInstance<IPopupNavigation>(PopupNavigation.Instance);
-            Container.RegisterType<IBarcodeScannerService, PopupBarcodeScannerService>();
-    #endif
+            containerRegistry.RegisterSingleton<IBarcodeScannerService, PopupBarcodeScannerService>();
 #endif
 #if (UseAcrDialogs)
-    #if (AutofacContainer)
-            Builder.RegisterInstance(UserDialogs.Instance).As<IUserDialogs>().SingleInstance();
-    #elseif (DryIocContainer)
-            Container.UseInstance<IUserDialogs>(UserDialogs.Instance);
-    #elseif (NinjectContainer)
-            Container.Bind<IUserDialogs>().ToConstant(UserDialogs.Instance).InSingletonScope();
-    #else
-            Container.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
-    #endif
+            containerRegistry.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
 #endif
 
             // Navigating to "TabbedPage?createTab=ViewA&createTab=ViewB&createTab=ViewC will generate a TabbedPage
             // with three tabs for ViewA, ViewB, & ViewC
             // Adding `selectedTab=ViewB` will set the current tab to ViewB
-#if (AutofacContainer)
-            Builder.RegisterTypeForNavigation<TabbedPage>();
-            Builder.RegisterTypeForNavigation<NavigationPage>();
-            Builder.RegisterTypeForNavigation<MainPage>();
-#else
-            Container.RegisterTypeForNavigation<TabbedPage>();
-            Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<MainPage>();
-#endif
+            containerRegistry.RegisterForNavigation<TabbedPage>();
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage>();
 #if (!Empty)
-    #if (AutofacContainer)
-            Builder.RegisterTypeForNavigation<SplashScreenPage>();
-            Builder.RegisterTypeForNavigation<TodoItemDetail>();
-    #else
-            Container.RegisterTypeForNavigation<SplashScreenPage>();
-            Container.RegisterTypeForNavigation<TodoItemDetail>();
-    #endif
+            containerRegistry.RegisterForNavigation<SplashScreenPage>();
+            containerRegistry.RegisterForNavigation<TodoItemDetail>();
 #endif
         }
 
-#if (UseMobileCenter)
+#if (UseAppCenter)
         protected override async void OnStart()
         {
             // Handle when your app starts
             if (await Analytics.IsEnabledAsync())
             {
                 System.Diagnostics.Debug.WriteLine("Analaytics is enabled");
-                FFImageLoading.ImageService.Instance.Config.Logger = (IMiniLogger)Logger;
+                FFImageLoading.ImageService.Instance.Config.Logger = (IMiniLogger)Container.Resolve<ILoggerFacade>();
             }
             else
             {
@@ -344,41 +179,41 @@ namespace Company.MobileApp
             // Handle when your app resumes
         }
 
-#if (UseMobileCenter)
-        protected override ILoggerFacade CreateLogger()
+#if (UseAppCenter)
+        private ILoggerFacade CreateLogger()
         {
             switch (Xamarin.Forms.Device.RuntimePlatform)
             {
                 #if (IncludeAndroid)
                 case "Android":
-                    if (!string.IsNullOrWhiteSpace(Secrets.MobileCenter_Android_Secret))
-                        return CreateMobileCenterLogger();
+                    if (!string.IsNullOrWhiteSpace(Secrets.AppCenter_Android_Secret))
+                        return CreateAppCenterLogger();
                     break;
                 #endif
                 #if (IncludeiOS)
                 case "iOS":
-                    if (!string.IsNullOrWhiteSpace(Secrets.MobileCenter_iOS_Secret))
-                        return CreateMobileCenterLogger();
+                    if (!string.IsNullOrWhiteSpace(Secrets.AppCenter_iOS_Secret))
+                        return CreateAppCenterLogger();
                     break;
                 #endif
                 #if (UWPSupported)
                 case "UWP":
-                    if (!string.IsNullOrWhiteSpace(Secrets.MobileCenter_UWP_Secret))
-                        return CreateMobileCenterLogger();
+                    if (!string.IsNullOrWhiteSpace(Secrets.AppCenter_UWP_Secret))
+                        return CreateAppCenterLogger();
                     break;
                 #endif
             }
             return new DebugLogger();
         }
 
-        private MCAnalyticsLogger CreateMobileCenterLogger()
+        private MCAnalyticsLogger CreateAppCenterLogger()
         {
             var logger = new MCAnalyticsLogger();
             FFImageLoading.ImageService.Instance.Config.Logger = (IMiniLogger)logger;
             return logger;
         }
 #else
-        protected override ILoggerFacade CreateLogger() => 
+        private ILoggerFacade CreateLogger() => 
             new DebugLogger();
 #endif
 
@@ -386,10 +221,10 @@ namespace Company.MobileApp
         {
             TaskScheduler.UnobservedTaskException += ( sender, e ) =>
             {
-                Logger.Log(e.Exception);
+                Container.Resolve<ILoggerFacade>().Log(e.Exception);
             };
         }
-#if (UseMobileCenter)
+#if (UseAppCenter)
 
         private void OnPushNotificationReceived(object sender, PushNotificationReceivedEventArgs e)
         {
@@ -411,7 +246,7 @@ namespace Company.MobileApp
 
             // Send the notification summary to debug output
             System.Diagnostics.Debug.WriteLine(summary);
-            Logger.Log(summary);
+            Container.Resolve<ILoggerFacade>().Log(summary);
         }
 
         private bool OnReleaseAvailable(ReleaseDetails releaseDetails)

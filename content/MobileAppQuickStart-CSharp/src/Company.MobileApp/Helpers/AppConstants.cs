@@ -17,30 +17,30 @@ namespace Company.MobileApp.Helpers
         public static readonly string AuthorityEditProfile = $"{AuthorityBase}{Secrets.PolicyEditProfile}";
         public static readonly string AuthorityPasswordReset = $"{AuthorityBase}{Secrets.PolicyResetPassword}";
 #endif
-#if (UseMobileCenter)
+#if (UseAppCenter)
 
-        public static string MobileCenterStart
+        public static string AppCenterStart
         {
             get
             {
                 string startup = string.Empty;
 #if (IncludeiOS)
 
-                if(Guid.TryParse(Secrets.MobileCenter_iOS_Secret, out Guid iOSSecret))
+                if(Guid.TryParse(Secrets.AppCenter_iOS_Secret, out Guid iOSSecret))
                 {
                     startup += $"ios={iOSSecret};";
                 }
 #endif
 #if (IncludeAndroid)
 
-                if(Guid.TryParse(Secrets.MobileCenter_Android_Secret, out Guid AndroidSecret))
+                if(Guid.TryParse(Secrets.AppCenter_Android_Secret, out Guid AndroidSecret))
                 {
                     startup += $"android={AndroidSecret};";
                 }
 #endif
 #if (UWPSupported)
 
-                if(Guid.TryParse(Secrets.MobileCenter_UWP_Secret, out Guid UWPSecret))
+                if(Guid.TryParse(Secrets.AppCenter_UWP_Secret, out Guid UWPSecret))
                 {
                     startup += $"uwp={UWPSecret};";
                 }
