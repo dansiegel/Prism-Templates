@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Prism.Forms.QuickstartTemplates</id>
+    <title>Prism QuickStart Templates</title>
+    <version>$version$</version>
+    <authors>Dan Siegel</authors>
+    <description>Templates for Prism for Xamarin Forms. This includes an empty project template, a customizable quickstart template, module template, and item templates for Pages and Services.</description>
+    <iconUrl>http://prismlibrary.github.io/images/prism-logo-graphic-128.png</iconUrl>
+    <language>en-US</language>
+    <projectUrl>https://github.com/dansiegel/Prism-Templates</projectUrl>
+    <licenseUrl>https://github.com/dansiegel/Prism-Templates/blob/master/LICENSE</licenseUrl>
+    <copyright>Copyright © Dan Siegel</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>dotnet xamarin android ios uwp prism dryioc autofac unity realm azure azuread offline sync appcenter</tags>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file src="content/**" target="" />
+  </files>
+</package>
