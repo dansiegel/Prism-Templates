@@ -8,7 +8,7 @@
         <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
         <!-- <Authors>Dan Siegel</Authors>
         <Copyright>© Dan Siegel</Copyright> -->
-        <VersionPrefix>1.2.0</VersionPrefix>
+        <VersionPrefix>1.3.0</VersionPrefix>
         <VersionSuffix Condition=" '$(BUILD_BUILDNUMBER)' != '' And '$(Is_Release)' != 'true' ">ci$(BUILD_BUILDNUMBER)</VersionSuffix>
         <!-- <PackageId>Prism.Forms.QuickstartTemplates</PackageId>
         <Title>Prism QuickStart Templates</Title>
