@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>netstandard1.0</TargetFramework>
         <NuspecFile>$(MSBuildThisFileDirectory)\Templates.nuspec</NuspecFile>
-        <NuspecProperties>version=$(Version);</NuspecProperties>
         <EnableDefaultItems>false</EnableDefaultItems>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
         <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
@@ -22,6 +21,9 @@
         <!-- <PackageType>Template</PackageType> -->
         <PackageOutputPath>$(MSBuildThisFileDirectory)</PackageOutputPath>
         <PackageOutputPath Condition=" '$(BUILD_ARTIFACTSTAGINGDIRECTORY)' != '' ">$(BUILD_ARTIFACTSTAGINGDIRECTORY)</PackageOutputPath>
+        <NuSpecPackageVersion>$(VersionPrefix)</NuSpecPackageVersion>
+        <NuSpecPackageVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</NuSpecPackageVersion>
+        <NuspecProperties>version=$(NuSpecPackageVersion);</NuspecProperties>
     </PropertyGroup>
 
     <!-- <ItemGroup>
