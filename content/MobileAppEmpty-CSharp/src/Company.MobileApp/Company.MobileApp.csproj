@@ -10,9 +10,9 @@
   <ItemGroup>
     <PackageReference Condition=" '$(IncludeFody)' " Include="Fody" Version="*" PrivateAssets="all" />
     <PackageReference Condition=" '$(IncludeFody)' " Include="PropertyChanged.Fody" Version="*" PrivateAssets="all" />
-    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.362" />
-    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.362" />
-    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.362" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.396" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.396" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Include="Mobile.BuildTools" Version="*" PrivateAssets="all" />
     <PackageReference Include="Prism.QuickStart.MFractor.Config" Version="*" PrivateAssets="all" />

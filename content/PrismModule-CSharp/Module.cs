@@ -20,11 +20,9 @@ namespace Company.MobileApp.ModuleName
 {
     public class Company_MobileApp_ModuleName : IModule
     {
-        // Deprecated
-        public void Initialize() { }
-
-        public void OnInitialized()
+        public void OnInitialized(IContainerProvider containerProvider)
         {
+            // Handle post initialization tasks like resolving IEventAggregator to subscribe events
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

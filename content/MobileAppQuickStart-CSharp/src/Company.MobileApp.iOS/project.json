@@ -1,13 +1,13 @@
 {
   "dependencies": {
 ////#if (AutofacContainer)
-//    "Prism.Autofac.Forms": "7.0.0.362",
+//    "Prism.Autofac.Forms": "7.0.0.396",
 ////#endif
 ////#if (DryIocContainer)
-//    "Prism.DryIoc.Forms": "7.0.0.362",
+//    "Prism.DryIoc.Forms": "7.0.0.396",
 ////#endif
 ////#if (UnityContainer)
-//    "Prism.Unity.Forms": "7.0.0.362",
+//    "Prism.Unity.Forms": "7.0.0.396",
 ////#endif
     "Prism.Plugin.Popups": "2.0.0-pre4",
 ////#if (AADAuth || AADB2CAuth)
