@@ -8,6 +8,10 @@
     "Framework": {
       "longName": "framework",
       "shortName": "fr"
+    },
+    "Empty": {
+      "longName": "empty",
+      "shortName": "em"
     }
   }
 }

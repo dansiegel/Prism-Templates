@@ -23,6 +23,14 @@
             "i18n/**",
             "Strings/**"
           ]
+        },
+        {
+          "condition": "(Empty)",
+          "exclude": [
+            "**/Services/**",
+            "**/ViewModels/**",
+            "**/Views/**"
+          ]
         }
       ]
     }
@@ -33,6 +41,11 @@
       "dataType": "bool",
       "defaultValue": "true",
       "description": "Includes resources to localize apps"
+    },
+    "Empty": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false"
     },
     "Framework": {
       "type": "parameter",

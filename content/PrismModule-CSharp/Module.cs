@@ -15,8 +15,10 @@ namespace Company.MobileApp.ModuleName
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+#if !Empty
             containerRegistry.Register<IFooService, FooService>();
             containerRegistry.RegisterForNavigation<ViewA>();
+#endif
         }
     }
 }
