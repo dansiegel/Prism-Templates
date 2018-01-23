@@ -34,26 +34,6 @@
       "defaultValue": "true",
       "description": "Includes resources to localize apps"
     },
-    "Container": {
-      "type": "parameter",
-      "dataType": "choice",
-      "defaultValue": "DryIoc",
-      "choices": [
-        {
-          "choice": "Autofac",
-          "description": "Uses Autofac as the Dependency Injection Container"
-        },
-        {
-          "choice": "DryIoc",
-          "description": "Uses DryIoc as the Dependency Injection Container"
-        },
-        {
-          "choice": "Unity",
-          "description": "Uses Unity as the Dependency Injection Container"
-        }
-      ],
-      "description": "The Dependency Injection Container to use"
-    },
     "Framework": {
       "type": "parameter",
       "datatype": "choice",
@@ -77,18 +57,6 @@
         }
       ],
       "replaces": "NETSTANDARD_LIBRARY_VERSION"
-    },
-    "AutofacContainer": {
-      "type": "computed",
-      "value": "(Container == \"Autofac\")"
-    },
-    "DryIocContainer": {
-      "type": "computed",
-      "value": "(Container == \"DryIoc\")"
-    },
-    "UnityContainer": {
-      "type": "computed",
-      "value": "(Container == \"Unity\")"
     }
   }
 }

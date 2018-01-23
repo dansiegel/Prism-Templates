@@ -5,10 +5,6 @@
       "longName": "use-localization",
       "shortName": "localization"
     },
-    "Container": {
-      "longName": "di-container",
-      "shortName": "di"
-    },
     "Framework": {
       "longName": "framework",
       "shortName": "fr"
