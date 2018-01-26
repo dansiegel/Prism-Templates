@@ -4,6 +4,7 @@ using Company.MobileApp.Services;
 using Company.MobileApp.Views;
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
 #if (UseAcrDialogs)
 using Acr.UserDialogs;
 #endif
