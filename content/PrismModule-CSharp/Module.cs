@@ -1,5 +1,7 @@
+#if !Empty
 using Company.MobileApp.ModuleName.Services;
 using Company.MobileApp.ModuleName.Views;
+#endif
 using Prism.Ioc;
 using Prism.Modularity;
 using Xamarin.Forms;
