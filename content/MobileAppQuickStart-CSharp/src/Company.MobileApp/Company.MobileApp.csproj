@@ -30,7 +30,7 @@
     <PackageReference Condition=" '$(AADB2CAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
     <PackageReference Condition=" '$(IncludeBarcodeService)' " Include="BarcodeScanning.Service" Version="1.0.0-pre2" />
     <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="2.*" />
-    <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="6.5.1" />
+    <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.*" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.*" />
     <PackageReference Include="Mobile.BuildTools" Version="*" PrivateAssets="all" />

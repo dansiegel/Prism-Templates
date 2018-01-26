@@ -26,7 +26,7 @@
 //    "Microsoft.AppCenter.Push": "1.*",
 ////#endif
 ////#if (UseAcrDialogs)
-//    "Acr.UserDialogs": "6.*",
+//    "Acr.UserDialogs": "7.*",
 ////#endif
     "Xamarin.Forms": "2.5.0.122203",
     "Prism.Forms.Extensions": "1.0.0-pre*",
