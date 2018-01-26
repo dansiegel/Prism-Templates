@@ -36,6 +36,12 @@ Thumbs.db
 *_Resharper.*
 *.Resharper
 
+# MFractor
+.mfractor/
+
+# Azure
+PublishProfiles/
+
 # dotCover
 *.dotCover
 
