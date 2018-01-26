@@ -30,8 +30,9 @@ namespace Company.MobileApp.Droid
 
             base.OnCreate(savedInstanceState);
 
+            global::Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            global::FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
+            global::FFImageLoading.Forms.Droid.CachedImageRenderer.Init(enableFastRenderer: true);
             global::FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
             {
                 Logger = new Services.DebugLogger()

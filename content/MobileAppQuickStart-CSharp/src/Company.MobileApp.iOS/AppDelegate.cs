@@ -17,6 +17,7 @@ namespace Company.MobileApp.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             global::Xamarin.Forms.Forms.Init();
+            global::Rg.Plugins.Popup.Popup.Init();
             global::FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
             global::FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
             {
