@@ -175,7 +175,9 @@ namespace Company.MobileApp.ViewModels
             TodoItems.Remove(item);
 
         private async void OnTodoItemTappedCommandExecuted(TodoItem item) =>
-            await _navigationService.NavigateAsync("TodoItemDetail", "todoItem", item);
+            await _navigationService.NavigateAsync("TodoItemDetail", new NavigationParameters{
+                { "todoItem", item }
+            });
 #endif
     }
 }

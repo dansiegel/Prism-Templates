@@ -95,7 +95,7 @@ namespace Company.MobileApp.ViewModels
     #if (UseAcrDialogs)
             Toast("Item Saved");
     #endif
-            await _navigationService.GoBackAsync("todoItem", Model);
+            await _navigationService.GoBackAsync(new NavigationParameters{ { "todoItem", Model } });
         }
 
         public override void Destroy()
@@ -130,7 +130,7 @@ namespace Company.MobileApp.ViewModels
     #if (UseAcrDialogs)
                 Toast("New Item Saved");
     #endif
-                await _navigationService.GoBackAsync("todoItem", Model);
+                await _navigationService.GoBackAsync(new NavigationParameters{ { "todoItem", Model } });
             }
             else
             {
@@ -146,8 +146,10 @@ namespace Company.MobileApp.ViewModels
         {
             _userDialogs.Toast(new ToastConfig(message)
             {
+    #if(UseAzureMobileClient)
                 BackgroundColor = System.Drawing.Color.Green,
                 MessageTextColor = System.Drawing.Color.White,
+    #endif
                 Position = ToastPosition.Top
             });
         }
