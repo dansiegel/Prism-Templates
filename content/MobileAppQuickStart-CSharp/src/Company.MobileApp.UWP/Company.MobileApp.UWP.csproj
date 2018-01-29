@@ -2,10 +2,10 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <!--/-:cnd:noEmit -->
+<!--/-:cnd:noEmit -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <!--/+:cnd:noEmit -->
+<!--/+:cnd:noEmit -->
     <ProjectGuid>{EB352151-F309-4B1F-BAC3-35D0326CDC34}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -13,18 +13,18 @@
     <AssemblyName>Company.MobileApp.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Company.MobileApp.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
-  <!--/-:cnd:noEmit -->
+<!--/-:cnd:noEmit -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mock|ARM'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <OutputPath>bin\ARM\Mock\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;MOCK</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
@@ -58,7 +58,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mock|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>bin\x64\Mock\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;MOCK</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
@@ -92,7 +92,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mock|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\x86\Mock\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;MOCK</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
@@ -124,12 +124,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
-  <!--/+:cnd:noEmit -->
-  <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="project.json" />
-    <None Include="FodyWeavers.xml" />
-  </ItemGroup>
+<!--/+:cnd:noEmit -->
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -144,6 +139,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="FodyWeavers.xml" />
     <None Include="Company.MobileApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +185,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Fody" Version="*" PrivateAssets="all" />
+    <PackageReference Include="PropertyChanged.Fody" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Prism.Forms.Extensions" Version="1.0.0-pre*" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.396" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.396" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="2.0.0-pre*" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+    <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.*" />
+    <PackageReference Condition=" '$(Localization)' And '$(Framework)' != 'netstandard2.0' " Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Analytics" Version="*" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Crashes" Version="*" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Distribute" Version="*" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Push" Version="*" />
+    <PackageReference Condition=" '$(AutofacAzureMobileClient)'  " Include="AzureMobileClient.Helpers.Autofac" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(DryIocAzureMobileClient)' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(UnityAzureMobileClient)' " Include="AzureMobileClient.Helpers.Unity" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(AADAuth)' Or '$(AADB2CAuth)' " Include="AzureMobileClient.Helpers.AzureActiveDirectory" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(AADAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Condition=" '$(AADB2CAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Condition=" '$(IncludeBarcodeService)' " Include="BarcodeScanning.Service" Version="1.0.0-pre2" />
+    <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="2.*" />
+    <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.*" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.*" />
+    <PackageReference Include="Mobile.BuildTools" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Prism.QuickStart.MFractor.Config" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Company.MobileApp\Company.MobileApp.csproj">

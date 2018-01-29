@@ -39,7 +39,6 @@ namespace Company.MobileApp.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
 //-:cnd:noEmit
 #if DEBUG
             if(System.Diagnostics.Debugger.IsAttached)
@@ -60,17 +59,14 @@ namespace Company.MobileApp.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                global::Xamarin.Forms.Forms.Init();
-                // Initialization is required due to an error when compiling in release mode.
-                // Details: https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting
-                Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Windows.Popup.GetExtraAssemblies());
+                global::Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Popup.GetExtraAssemblies());
                 global::FFImageLoading.Forms.WinUWP.CachedImageRenderer.Init();
                 global::FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
-            {
-                Logger = new Services.DebugLogger()
-            });
+                {
+                    Logger = new Services.DebugLogger()
+                });
 #if (IncludeBarcodeService)
-                ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
+                global::ZXing.Net.Mobile.Forms.WindowsUniversal.ZXingScannerViewRenderer.Init();
 #endif
 
                 if(e.PreviousExecutionState == ApplicationExecutionState.Terminated)

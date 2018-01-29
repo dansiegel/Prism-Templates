@@ -39,28 +39,29 @@ namespace Company.MobileApp.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+//-:cnd:noEmit
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if(System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+//+:cnd:noEmit
 
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if(rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+                global::Xamarin.Forms.Forms.Init(e);
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if(e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }
@@ -69,7 +70,7 @@ namespace Company.MobileApp.UWP
                 Window.Current.Content = rootFrame;
             }
 
-            if (rootFrame.Content == null)
+            if(rootFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
