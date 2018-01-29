@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>NETSTANDARD_LIBRARY_VERSION</TargetFramework>
-    <PackageTargetFallback Condition=" '$(Framework)' != 'netstandard2.0' ">$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-    <AssetTargetFallback Condition=" '$(Framework)' == 'netstandard2.0' ">$(AssetTargetFallback);portable-net45+win8+wpa81+wp8</AssetTargetFallback>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wpa81+wp8</AssetTargetFallback>
     <DebugType>full</DebugType>
   </PropertyGroup>
 

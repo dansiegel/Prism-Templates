@@ -46,30 +46,6 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false"
-    },
-    "Framework": {
-      "type": "parameter",
-      "datatype": "choice",
-      "defaultValue": "netstandard2.0",
-      "choices": [
-        {
-          "choice": "netstandard1.4",
-          "description": "Uses netstandard1.4 core library"
-        },
-        {
-          "choice": "netstandard1.5",
-          "description": "Uses netstandard1.5 core library"
-        },
-        {
-          "choice": "netstandard1.6",
-          "description": "Uses netstandard1.6 core library"
-        },
-        {
-          "choice": "netstandard2.0",
-          "description": "Uses netstandard2.0 core library"
-        }
-      ],
-      "replaces": "NETSTANDARD_LIBRARY_VERSION"
     }
   }
 }

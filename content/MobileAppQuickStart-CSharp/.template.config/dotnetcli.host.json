@@ -65,10 +65,6 @@
       "longName": "use-localization",
       "shortName": "localization"
     },
-    "Framework": {
-      "longName": "framework",
-      "shortName": "fr"
-    },
     "DataProvider": {
       "longName": "data-provider",
       "shortName": "data"

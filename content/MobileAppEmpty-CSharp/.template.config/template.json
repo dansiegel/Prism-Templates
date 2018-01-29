@@ -153,30 +153,6 @@
       ],
       "description": "The Dependency Injection Container to use"
     },
-    "Framework": {
-      "type": "parameter",
-      "datatype": "choice",
-      "defaultValue": "netstandard2.0",
-      "choices": [
-        {
-          "choice": "netstandard1.4",
-          "description": "Uses netstandard1.4 core library"
-        },
-        {
-          "choice": "netstandard1.5",
-          "description": "Uses netstandard1.5 core library"
-        },
-        {
-          "choice": "netstandard1.6",
-          "description": "Uses netstandard1.6 core library"
-        },
-        {
-          "choice": "netstandard2.0",
-          "description": "Uses netstandard2.0 core library"
-        }
-      ],
-      "replaces": "NETSTANDARD_LIBRARY_VERSION"
-    },
     "AutofacContainer": {
       "type": "computed",
       "value": "(Container == \"Autofac\")"
@@ -191,7 +167,7 @@
     },
     "UWPSupported": {
       "type":"computed",
-      "value": "(IncludeUWP && (Framework == \"netstandard1.4\" || Framework == \"netstandard2.0\"))"
+      "value": "(IncludeUWP)"
     },
     "GitInitialize": {
       "type": "parameter",

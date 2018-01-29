@@ -196,7 +196,6 @@
     <PackageReference Include="Prism.Plugin.Popups" Version="2.0.0-pre*" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.*" />
-    <PackageReference Condition=" '$(Localization)' And '$(Framework)' != 'netstandard2.0' " Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Analytics" Version="*" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Crashes" Version="*" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Distribute" Version="*" />

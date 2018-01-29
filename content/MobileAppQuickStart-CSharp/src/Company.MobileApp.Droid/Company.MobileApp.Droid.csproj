@@ -120,7 +120,6 @@
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="26.1.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="26.1.0.1" />
     <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.*" />
-    <PackageReference Condition=" '$(Localization)' And '$(Framework)' != 'netstandard2.0' " Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Analytics" Version="*" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Crashes" Version="*" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Distribute" Version="*" />

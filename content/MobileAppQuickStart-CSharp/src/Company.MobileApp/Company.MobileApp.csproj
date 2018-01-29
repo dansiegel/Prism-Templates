@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>NETSTANDARD_LIBRARY_VERSION</TargetFramework>
-    <PackageTargetFallback Condition=" '$(Framework)' != 'netstandard2.0' ">$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-    <AssetTargetFallback Condition=" '$(Framework)' == 'netstandard2.0' ">$(AssetTargetFallback);portable-net45+win8+wpa81+wp8</AssetTargetFallback>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wpa81+wp8</AssetTargetFallback>
     <DebugType>full</DebugType>
   </PropertyGroup>
 
@@ -17,7 +16,6 @@
     <PackageReference Include="Prism.Plugin.Popups" Version="2.0.0-pre*" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.*" />
-    <PackageReference Condition=" '$(Localization)' And '$(Framework)' != 'netstandard2.0' " Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Analytics" Version="*" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Crashes" Version="*" />
     <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Distribute" Version="*" />
