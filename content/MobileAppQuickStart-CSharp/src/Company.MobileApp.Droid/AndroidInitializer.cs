@@ -6,18 +6,6 @@ using Prism.Ioc;
 #if (UseAzureMobileClient || AADAuth || AADB2CAuth)
 using Android.App;
 #endif
-#if (AutofacContainer)
-using Autofac;
-using Prism.Autofac;
-#endif
-#if (DryIocContainer)
-using DryIoc;
-using Prism.DryIoc;
-#endif
-#if (UnityContainer)
-using Unity;
-using Prism.Unity;
-#endif
 #if (AADAuth || AADB2CAuth)
 using Microsoft.Identity.Client;
 #endif
