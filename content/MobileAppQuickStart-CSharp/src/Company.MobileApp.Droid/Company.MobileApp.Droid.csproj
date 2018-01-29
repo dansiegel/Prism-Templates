@@ -106,6 +106,40 @@
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Fody" Version="*" PrivateAssets="all" />
+    <PackageReference Include="PropertyChanged.Fody" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Prism.Forms.Extensions" Version="1.0.0-pre*" />
+    <PackageReference Condition=" '$(Container)' == 'Autofac' " Include="Prism.Autofac.Forms" Version="7.0.0.396" />
+    <PackageReference Condition=" '$(Container)' == 'DryIoc' " Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
+    <PackageReference Condition=" '$(Container)' == 'Unity' " Include="Prism.Unity.Forms" Version="7.0.0.396" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="2.0.0-pre*" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="26.1.0.1" />
+    <PackageReference Condition=" '$(UseMvvmHelpers)' " Include="Refractored.MvvmHelpers" Version="1.*" />
+    <PackageReference Condition=" '$(Localization)' And '$(Framework)' != 'netstandard2.0' " Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Analytics" Version="*" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Crashes" Version="*" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Distribute" Version="*" />
+    <PackageReference Condition=" '$(UseAppCenter)' " Include="Microsoft.AppCenter.Push" Version="*" />
+    <PackageReference Condition=" '$(AutofacAzureMobileClient)'  " Include="AzureMobileClient.Helpers.Autofac" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(DryIocAzureMobileClient)' " Include="AzureMobileClient.Helpers.DryIoc" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(UnityAzureMobileClient)' " Include="AzureMobileClient.Helpers.Unity" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(DataProvider)' == 'AzureMobileClient' And '$(AADAuth)' Or '$(AADB2CAuth)' " Include="AzureMobileClient.Helpers.AzureActiveDirectory" Version="4.0.1.342-pre" />
+    <PackageReference Condition=" '$(AADAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Condition=" '$(AADB2CAuth)' " Include="Microsoft.Identity.Client" Version="1.1.0-preview" />
+    <PackageReference Condition=" '$(IncludeBarcodeService)' " Include="BarcodeScanning.Service" Version="1.0.0-pre2" />
+    <PackageReference Condition=" '$(DataProvider)' == 'Realm' " Include="Realm" Version="2.*" />
+    <PackageReference Condition=" '$(UseAcrDialogs)' " Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.*" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.*" />
+    <PackageReference Include="Mobile.BuildTools" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Prism.QuickStart.MFractor.Config" Version="*" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Company.MobileApp\Company.MobileApp.csproj">
       <Name>Company.MobileApp</Name>
     </ProjectReference>
