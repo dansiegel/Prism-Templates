@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <QuickStartPackedNuGet></QuickStartPackedNuGet>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoDevelop.Addins" Version="0.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Images\*.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Prism.Forms.QuickstartTemplates.nupkg">
+      <Link>Templates\Prism.Xamarin.Forms.Templates.nupkg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.DotNetCore" />
+    <AddinReference Include="MonoDevelop.Xamarin.Ide" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\*.png" LogicalName="%(Filename).png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Images\prism-16.png">
+      <LogicalName>prism-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Images\prism-32.png">
+      <LogicalName>prism-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Images\prism-project-xamarin-forms.png">
+      <LogicalName>prism-project-xamarin-forms.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

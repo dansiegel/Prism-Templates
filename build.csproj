@@ -27,6 +27,13 @@
         <NuspecProperties>version=$(NuSpecPackageVersion);</NuspecProperties>
     </PropertyGroup>
 
+    <Target Name="_GeneratedNuGetVersion"
+            AfterTargets="GenerateNuspec">
+        <Copy SourceFiles="Prism.Forms.QuickstartTemplates.$(NuSpecPackageVersion).nupkg"
+              DestinationFiles="TemplatePack-Mac/Prism.QuickStart.TemplatePack/Prism.Forms.QuickstartTemplates.nupkg" />
+        <!-- <Exec Command="echo '$(NuSpecPackageVersion)' | tee TemplatePack-Mac/generatedVersion" /> -->
+    </Target>
+
     <!-- <ItemGroup>
         <None Include="**\*.cs" Pack="true" PackagePath="." />
         <None Include="**\*.csproj" Pack="true" PackagePath="." />

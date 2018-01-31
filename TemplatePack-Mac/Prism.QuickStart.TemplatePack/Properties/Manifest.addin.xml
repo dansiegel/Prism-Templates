@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionModel>
+	<Runtime>
+	</Runtime>
+    <Extension path="/MonoDevelop/Ide/ProjectTemplateCategories">
+        <Category id="prism" _name="Prism" icon="prism-platform" insertbefore="multiplat">
+            <Category id="app" _name="App">
+                <Category id="general" _name="Xamarin.Forms" />
+            </Category>
+            <Category id="module" _name="Module">
+                <Category id="general" _name="Xamarin.Forms" />
+            </Category>
+        </Category>
+    </Extension>
+    <Extension path="/MonoDevelop/Ide/Templates">
+        <Template
+            id="PrismLibrary.Xamarin.Forms.CSharp"
+            _overrideName="Blank Prism Application"
+            _overrideDescription="Creates a blank Prism Application with PropertyChanged.Fody &amp; starter icon assets."
+            path="Templates/Prism.Xamarin.Forms.Templates.nupkg"
+            category="prism/app/general"
+            icon="prism-project-xamarin-forms"
+            imageId="prism-project-xamarin-forms"
+        />
+        <Template
+            id="PrismLibrary.Xamarin.Forms.QuickStart.CSharp"
+            _overrideName="QuickStart Prism Application"
+            _overrideDescription="Provides a customizable QuickStart for creating a Prism Application with many common tools already installed."
+            path="Templates/Prism.Xamarin.Forms.Templates.nupkg"
+            category="prism/app/general"
+            icon="prism-project-xamarin-forms"
+            imageId="prism-project-xamarin-forms" 
+            wizard="Prism.QuickStart.ProjectTemplateWizard" 
+        />
+        <Template
+            id="Prism.Forms.Module.CSharp"
+            _overrideName="Prism Forms Module"
+            _overrideDescription="Creates a reusable Module Library for a Prism.Forms application"
+            path="Templates/Prism.Xamarin.Forms.Templates.nupkg"
+            category="prism/module/general"
+            icon="prism-project-xamarin-forms"
+            imageId="prism-project-xamarin-forms"
+        />
+    </Extension>
+    <Extension path="/MonoDevelop/Ide/ProjectTemplateWizards">
+        <Class id="Prism.QuickStart.ProjectTemplateWizard" class="Prism.QuickStart.TemplatePack.Wizards.QuickStartTemplateWizard" />
+    </Extension>
+    <Extension path="/MonoDevelop/Ide/TemplateImages">
+        <Image id="prism-project-xamarin-forms" resource="prism-project-xamarin-forms.png" />
+    </Extension>
+    <Extension path="/MonoDevelop/Core/StockIcons">
+        <StockIcon stockid="prism-platform" resource="prism-16.png" size="Dnd" />
+        <StockIcon stockid="prism-project-xamarin-forms" resource="prism-32.png" size="Dnd" />
+    </Extension>
+    
+</ExtensionModel>
