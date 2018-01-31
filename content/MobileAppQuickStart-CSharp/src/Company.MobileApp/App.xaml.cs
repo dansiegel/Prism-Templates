@@ -107,7 +107,6 @@ namespace Company.MobileApp
             containerRegistry.RegisterPopupNavigationService();
             containerRegistry.RegisterInstance(CreateLogger());
 
-
 #if (UseRealm)
             //var serverURL = new Uri(Secrets.RealmServer);
             //var config = new SyncConfiguration(User.Current, serverURL);
@@ -121,6 +120,59 @@ namespace Company.MobileApp
     #else
             containerRegistry.GetContainer().RegisterType<Realm>(new InjectionFactory(c => Realm.GetInstance(config)));
     #endif
+
+#endif
+#if (UseAzureMobileClient)
+            containerRegistry.RegisterSingleton(typeof(ICloudTable<>), typeof(AzureCloudTable<>));
+            containerRegistry.RegisterSingleton(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>));
+    #if (NoAuth)
+            containerRegistry.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
+    #else
+    #if (AADAuth || AADB2CAuth)
+            containerRegistry.RegisterInstance<IPublicClientApplication>(
+                new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
+                {
+                    RedirectUri = AppConstants.RedirectUri
+                });
+
+        #if (AutofacContainer)
+            containerRegistry.GetBuilder().RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudAppContext>().SingleInstance();
+        #elseif (DryIocContainer)
+            containerRegistry.GetContainer().RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
+                                                   serviceTypeCondition: type => 
+                                                        type == typeof(IAppDataContext) ||
+                                                        type == typeof(ICloudAppContext));
+        #elseif (NinjectContainer)
+            containerRegistry.GetContainer().Bind<IAppDataContext, ICloudAppContext>().To<AppDataContext>().InSingletonScope();
+        #elseif (UnityContainer)
+            containerRegistry.GetContainer().RegisterType<AppDataContext>(new ContainerControlledLifetimeManager());
+            containerRegistry.GetContainer().RegisterType<IAppDataContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+            containerRegistry.GetContainer().RegisterType<ICloudAppContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+        #endif
+    #endif
+            containerRegistry.RegisterSingleton<IAzureCloudServiceOptions, AppServiceContextOptions>();
+        #if (AutofacContainer)
+            containerRegistry.GetBuilder().RegisterType<AppDataContext>().As<IAppDataContext>().As<ICloudService>().SingleInstance();
+            containerRegistry.GetBuilder().Register(ctx => ctx.Resolve<ICloudService>().Client).As<IMobileServiceClient>().SingleInstance();
+        #elseif (DryIocContainer)
+            containerRegistry.GetContainer().RegisterMany<AppDataContext>(reuse: Reuse.Singleton,
+                                                   serviceTypeCondition: type => 
+                                                        type == typeof(IAppDataContext) ||
+                                                        type == typeof(ICloudService));
+            containerRegistry.GetContainer().RegisterDelegate<IMobileServiceClient>(factoryDelegate: r => r.Resolve<ICloudService>().Client,
+                                                             reuse: Reuse.Singleton,
+                                                             setup: Setup.With(allowDisposableTransient: true));
+        #elseif (NinjectContainer)
+            containerRegistry.Bind<IAppDataContext, ICloudService>().To<AppDataContext>().InSingletonScope();
+            containerRegistry.Bind<IMobileServiceClient>().ToMethod(c => containerRegistry.Get<ICloudService>().Client).InSingletonScope();
+        #elseif (UnityContainer)
+            containerRegistry.GetContainer().RegisterType<IAppDataContext>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+            containerRegistry.GetContainer().RegisterType<ICloudService>(new InjectionFactory(c => c.Resolve<AppDataContext>()));
+            containerRegistry.GetContainer().RegisterType<IMobileServiceClient>(new InjectionFactory(c => c.Resolve<ICloudService>().Client));
+        #endif
+
+            containerRegistry.RegisterSingleton<ILoginProvider<AADAccount>, LoginProvider>();
+
 #endif
 #if (IncludeBarcodeService)
             // NOTE: Uses a Popup Page to contain the Scanner. You can optionally register 

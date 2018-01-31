@@ -25,6 +25,24 @@ EndProject
 //#endif
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.MobileApp", "src\Company.MobileApp\Company.MobileApp.csproj", "{33333333-3333-3333-3333-333333333333}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{007140C0-21EC-4A82-9708-E55B1EAC609D}"
+	ProjectSection(SolutionItems) = preProject
+		GettingStarted.txt = GettingStarted.txt
+		ReadMe.md = ReadMe.md
+	EndProjectSection
+EndProject
+//#if (IncludeAndroid || IncludeiOS)
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{76AAAC86-EF4F-47B5-A32A-A578594E8C52}"
+	ProjectSection(SolutionItems) = preProject
+//#if (IncludeAndroid)
+		build\AndroidTemplateManifest.xml = build\AndroidTemplateManifest.xml
+//#endif
+//#if (IncludeiOS)
+		build\BuildTemplateInfo.plist = build\BuildTemplateInfo.plist
+//#endif
+	EndProjectSection
+//#endif
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
