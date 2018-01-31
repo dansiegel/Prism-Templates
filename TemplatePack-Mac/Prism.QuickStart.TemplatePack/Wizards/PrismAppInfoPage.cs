@@ -7,25 +7,29 @@ namespace Prism.QuickStart.TemplatePack.Wizards
 {
     public class PrismAppInfoPage : WizardPage
     {
-        TemplateWizard wizard { get; }
+        TemplateWizard _wizard { get; }
+        bool _quickStart { get; }
 
-        public PrismAppInfoPage(TemplateWizard wizard)
+        public PrismAppInfoPage(TemplateWizard wizard, bool quickStart = false)
         {
-            this.wizard = wizard;
+            _wizard = wizard;
+            _quickStart = quickStart;
         }
 
-        public override string Title
-        {
-            get
-            {
-                string templateName = wizard.Parameters["TemplateName"];
-                return $"{templateName}: Basic Info";
-            }
-        }
+        public override string Title => _quickStart ?
+                            "QuickStart Prism Application Settings" :
+                            "Prism Application Settings";
+        //{
+        //    get
+        //    {
+        //        string templateName = wizard.Parameters["TemplateName"];
+        //        return $"{templateName}: Basic Info";
+        //    }
+        //}
 
         protected override object CreateNativeWidget<T>()
         {
-            var view = new Widgets.BasicAppInfoWidget();
+            var view = new Widgets.BasicAppInfoWidget(_quickStart);
             return Toolkit.CurrentEngine.GetNativeWidget(view);
         }
     }

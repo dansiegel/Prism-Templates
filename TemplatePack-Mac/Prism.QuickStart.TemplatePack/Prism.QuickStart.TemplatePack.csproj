@@ -23,6 +23,15 @@
     <EmbeddedResource Include="Images\*.png" LogicalName="%(Filename).png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Images\appcenter-100.png">
+      <LogicalName>appcenter-100.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Images\appcenter-overview.png">
+      <LogicalName>appcenter-overview.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Images\azuread-100.png">
+      <LogicalName>azuread-100.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Update="Images\prism-16.png">
       <LogicalName>prism-16.png</LogicalName>
     </EmbeddedResource>
@@ -31,6 +40,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Images\prism-project-xamarin-forms.png">
       <LogicalName>prism-project-xamarin-forms.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Images\socialmedia.png">
+      <LogicalName>socialmedia.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
