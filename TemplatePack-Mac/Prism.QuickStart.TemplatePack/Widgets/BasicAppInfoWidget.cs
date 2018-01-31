@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MonoDevelop.Projects;
 using Xwt;
 
 namespace Prism.QuickStart.TemplatePack.Widgets
@@ -21,22 +22,27 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         ComboBox minAndroidSDKList;
         ComboBox dataProviderList;
 
-        public BasicAppInfoWidget(bool quickStart)
+        ProjectCreateParameters Parameters { get; }
+
+        public BasicAppInfoWidget(ProjectCreateParameters parameters, bool quickStart)
         {
-            Include_iOS = true;
-            Include_Android = true;
+            Parameters = parameters;
+            Parameters["IncludeiOS"] = $"{true}";
+            Parameters["IncludeAndroid"] = $"{true}";
+            Parameters["IncludeUITest"] = $"{false}";
+
             SetupUIElements(quickStart);
             AttachEventHandlers(quickStart);
             AddElementsToTable(quickStart);
         }
 
-        public string ProjectName { get; private set; }
-        public string AppId { get; private set; }
-        public bool Include_iOS { get; private set; }
-        public bool Include_Android { get; private set; }
-        public bool Include_UWP => false;
-        public bool Include_UITests { get; private set; }
-        public string DIContainer { get; private set; }
+        //public string ProjectName { get; private set; }
+        //public string AppId { get; private set; }
+        //public bool Include_iOS { get; private set; }
+        //public bool Include_Android { get; private set; }
+        //public bool Include_UWP => false;
+        //public bool Include_UITests { get; private set; }
+        //public string DIContainer { get; private set; }
 
         private void SetupUIElements(bool quickStart)
         {
@@ -77,7 +83,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             containerList.Items.Add("Autofac");
             containerList.Items.Add("DryIoc");
             containerList.Items.Add("Unity");
-            containerList.SelectedItem = DIContainer = "DryIoc";
+            containerList.SelectedItem = Parameters["Container"] = "DryIoc";
             containerList.TooltipText = "Selects the DI Container to use for your Prism Application";
 
             minAndroidSDKList = new ComboBox();
@@ -140,7 +146,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
 
         private void AttachEventHandlers(bool quickStart)
         {
-            projectNameTextBox.Changed += OnProjectNameChanged;
+            //projectNameTextBox.Changed += OnProjectNameChanged;
             appIdTextBox.Changed += OnAppIdChanged;
             iOSCheckBox.Toggled += OnIncludeiOSChanged;
             AndroidCheckBox.Toggled += OnIncludeAndroidChanged;
@@ -237,23 +243,23 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             WidthRequest = 60
         };
 
-        private void OnProjectNameChanged(object sender, EventArgs e) =>
-            ProjectName = projectNameTextBox.Text.Trim();
+        //private void OnProjectNameChanged(object sender, EventArgs e) =>
+        //ProjectName = projectNameTextBox.Text.Trim();
 
         private void OnAppIdChanged(object sender, EventArgs e) =>
-            AppId = appIdTextBox.Text.Trim().ToLower();
+            Parameters["AppId"] = appIdTextBox.Text.Trim().ToLower();
 
         private void OnIncludeiOSChanged(object sender, EventArgs e) =>
-            Include_iOS = iOSCheckBox.State == CheckBoxState.On;
+            Parameters["IncludeiOS"] = $"{iOSCheckBox.State == CheckBoxState.On}";
 
         private void OnIncludeAndroidChanged(object sender, EventArgs e) =>
-            Include_Android = AndroidCheckBox.State == CheckBoxState.On;
+            Parameters["IncludeAndroid"] = $"{AndroidCheckBox.State == CheckBoxState.On}";
 
         private void OnIncludeUITestChanged(object sender, EventArgs e) =>
-            Include_UITests = UITestCheckBox.State == CheckBoxState.On;
+            Parameters["IncludeUITest"] = $"{UITestCheckBox.State == CheckBoxState.On}";
 
         private void OnDIContainerChanged(object sender, EventArgs e) =>
-            DIContainer = $"{containerList.SelectedItem}";
+            Parameters["Container"] = $"{containerList.SelectedItem}";
 
         protected override void Dispose(bool disposing)
         {
@@ -261,7 +267,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
 
             if (projectNameTextBox != null)
             {
-                projectNameTextBox.Changed -= OnProjectNameChanged;
+                //projectNameTextBox.Changed -= OnProjectNameChanged;
                 projectNameTextBox.Dispose();
                 projectNameTextBox = null;
             }

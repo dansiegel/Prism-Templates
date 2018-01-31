@@ -5,10 +5,10 @@
     <Extension path="/MonoDevelop/Ide/ProjectTemplateCategories">
         <Category id="prism" _name="Prism" icon="prism-platform" insertbefore="multiplat">
             <Category id="app" _name="App">
-                <Category id="general" _name="Xamarin.Forms" />
+                <Category id="general" _name="QuickStart" />
             </Category>
             <Category id="module" _name="Module">
-                <Category id="general" _name="Xamarin.Forms" />
+                <Category id="general" _name="QuickStart" />
             </Category>
         </Category>
     </Extension>
@@ -21,7 +21,7 @@
             category="prism/app/general"
             icon="prism-project-xamarin-forms"
             imageId="prism-project-xamarin-forms"
-            wizard="Prism.QuickStart.BlankProjectTemplateWizard"
+            wizard="Prism.QuickStart.ProjectTemplateWizard"
         />
         <Template
             id="PrismLibrary.Xamarin.Forms.QuickStart.CSharp"
@@ -33,7 +33,7 @@
             imageId="prism-project-xamarin-forms" 
             wizard="Prism.QuickStart.ProjectTemplateWizard" 
         />
-        <!--<Template
+        <Template
             id="Prism.Forms.Module.CSharp"
             _overrideName="Blank Prism Forms Module"
             _overrideDescription="Creates a reusable Module Library for a Prism.Forms application"
@@ -42,7 +42,7 @@
             icon="prism-project-xamarin-forms"
             imageId="prism-project-xamarin-forms"
             defaultParameters="Empty=true;Localization=false"
-        />-->
+        />
         <Template
             id="Prism.Forms.Module.CSharp"
             _overrideName="Prism Forms Module (Localizable)"
@@ -56,7 +56,6 @@
     </Extension>
     <Extension path="/MonoDevelop/Ide/ProjectTemplateWizards">
         <Class id="Prism.QuickStart.ProjectTemplateWizard" class="Prism.QuickStart.TemplatePack.Wizards.QuickStartTemplateWizard" />
-        <Class id="Prism.QuickStart.BlankProjectTemplateWizard" class="Prism.QuickStart.TemplatePack.Wizards.BlankAppTemplateWizard" />
     </Extension>
     <Extension path="/MonoDevelop/Ide/TemplateImages">
         <Image id="prism-project-xamarin-forms" resource="prism-project-xamarin-forms.png" />

@@ -11,13 +11,12 @@ namespace Prism.QuickStart.TemplatePack.Wizards
         {
             switch (pageNumber)
             {
-                case 1: return new PrismAppInfoPage(this, true);
+                case 1: return new PrismAppInfoPage(this, Parameters["TemplateName"].Contains("QuickStart"));
                 case 2: return new AppCenterPage(this);
                 default: return new AuthenticationPage(this);
             }
-            //return new PrismAppInfoPage(this);
         }
 
-        public override int TotalPages => 3;
+        public override int TotalPages => Parameters["TemplateName"].Contains("QuickStart") ? 3 : 1;
     }
 }
