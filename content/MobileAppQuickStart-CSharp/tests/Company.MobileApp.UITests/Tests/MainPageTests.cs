@@ -5,24 +5,13 @@ using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
-namespace Company.MobileApp.UITests
+namespace Company.MobileApp.UITests.Tests
 {
-    [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
-    public class Tests
+    public class MainPageTests : AbstractSetup
     {
-        IApp app;
-        Platform platform;
-
         public Tests(Platform platform)
+            : base(platform)
         {
-            this.platform = platform;
-        }
-
-        [SetUp]
-        public void BeforeEachTest()
-        {
-            app = AppInitializer.StartApp(platform);
         }
 
         [Test]
@@ -32,10 +21,6 @@ namespace Company.MobileApp.UITests
             AppResult[] results2 = app.WaitForElement(c => c.Marked("Item2"));
             AppResult[] results3 = app.WaitForElement(c => c.Marked("Item3"));
             app.Screenshot("Main Page");
-
-            Assert.IsTrue(results.Any());
-            Assert.IsTrue(results2.Any());
-            Assert.IsTrue(results3.Any());
         }
     }
 }
