@@ -22,6 +22,8 @@
             icon="prism-project-xamarin-forms"
             imageId="prism-project-xamarin-forms"
             wizard="Prism.QuickStart.ProjectTemplateWizard"
+            defaultParameters="IncludeSolutionFile=false"
+            supportedParameters="AppId;IncludeiOS;IncludeAndroid;IncludeUITest;MinimumAndroidTarget;Container"
         />
         <Template
             id="PrismLibrary.Xamarin.Forms.QuickStart.CSharp"
@@ -31,7 +33,9 @@
             category="prism/app/general"
             icon="prism-project-xamarin-forms"
             imageId="prism-project-xamarin-forms" 
-            wizard="Prism.QuickStart.ProjectTemplateWizard" 
+            wizard="Prism.QuickStart.ProjectTemplateWizard"
+            defaultParameters="IncludeSolutionFile=false"
+            supportedParameters="AppId;IncludeiOS;IncludeAndroid;IncludeUITest;Localization;UseMvvmHelpers;UseAcrDialogs;UseAppCenter;AppCenter-iOS;AppCenter-Android;MinimumAndroidTarget;Container;DataProvider;AuthenticationSource;AuthenticationClientId;PolicySignUpSignIn;PolicyEditProfile;PolicyResetPassword;IncludeBarcodeService;Empty"
         />
         <Template
             id="Prism.Forms.Module.CSharp"

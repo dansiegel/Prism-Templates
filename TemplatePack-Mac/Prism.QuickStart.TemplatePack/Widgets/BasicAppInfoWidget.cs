@@ -27,8 +27,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         public BasicAppInfoWidget(ProjectCreateParameters parameters, bool quickStart)
         {
             Parameters = parameters;
-            Parameters["IncludeiOS"] = $"{true}";
-            Parameters["IncludeAndroid"] = $"{true}";
+            Parameters["Empty"] = $"{true}";
             Parameters["IncludeUITest"] = $"{false}";
 
             SetupUIElements(quickStart);
@@ -62,28 +61,28 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             {
                 Label = "iOS",
                 TooltipText = "Include an iOS Project",
-                State = CheckBoxState.On
+                State = GetCheckBoxState("IncludeiOS")
             };
 
             AndroidCheckBox = new CheckBox()
             {
                 Label = "Android",
                 TooltipText = "Include an Android Project",
-                State = CheckBoxState.On
+                State = GetCheckBoxState("IncludeAndroid")
             };
 
             UITestCheckBox = new CheckBox()
             {
                 Label = "UI Tests",
                 TooltipText = "Include a UI Test Project",
-                State = CheckBoxState.Off
+                State = GetCheckBoxState("IncludeUITest")
             };
 
             containerList = new ComboBox();
             containerList.Items.Add("Autofac");
             containerList.Items.Add("DryIoc");
             containerList.Items.Add("Unity");
-            containerList.SelectedItem = Parameters["Container"] = "DryIoc";
+            containerList.SelectedItem = this.Parameters["Container"] = "DryIoc";
             containerList.TooltipText = "Selects the DI Container to use for your Prism Application";
 
             minAndroidSDKList = new ComboBox();
@@ -103,35 +102,35 @@ namespace Prism.QuickStart.TemplatePack.Widgets
                 {
                     Label = "Empty Project",
                     TooltipText = "Creates the project without sample views",
-                    State = CheckBoxState.Off
+                    State = GetCheckBoxState("Empty")
                 };
 
                 barcodeServiceCheckBox = new CheckBox()
                 {
                     Label = "Include Barcode Scanner",
                     TooltipText = "Includes Barcode Scanning as a Service with ZXing.Net.Mobile",
-                    State = CheckBoxState.Off
+                    State = GetCheckBoxState("IncludeBarcodeService")
                 };
 
                 localizationCheckBox = new CheckBox()
                 {
                     Label = "Localization Support",
                     TooltipText = "Includes Resx and XAML Translation extension for Localizing Strings",
-                    State = CheckBoxState.On
+                    State = GetCheckBoxState("Localization")
                 };
 
                 mvvmHelpersCheckBox = new CheckBox()
                 {
                     Label = "MVVM Helpers",
                     TooltipText = "Adds MVVM Helpers by James Montemagno",
-                    State = CheckBoxState.On
+                    State = GetCheckBoxState("UseMvvmHelpers")
                 };
 
                 acrDialogsCheckBox = new CheckBox()
                 {
                     Label = "Acr.UserDialogs",
                     TooltipText = "Adds Acr.UserDialogs",
-                    State = CheckBoxState.Off
+                    State = GetCheckBoxState("UseAcrDialogs")
                 };
 
                 dataProviderList = new ComboBox();
@@ -307,5 +306,8 @@ namespace Prism.QuickStart.TemplatePack.Widgets
                 containerList = null;
             }
         }
+
+        CheckBoxState GetCheckBoxState(string key) =>
+            bool.Parse(Parameters[key]) ? CheckBoxState.On : CheckBoxState.Off;
     }
 }
