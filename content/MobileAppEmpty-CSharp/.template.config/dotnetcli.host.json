@@ -25,6 +25,9 @@
       "longName": "include-fody",
       "shortName": "fody"
     },
+    "IncludeSolutionFile": {
+      "isHidden": true
+    },
     "ConnectedApp": {
       "isHidden": true
     },
@@ -39,37 +42,9 @@
     "GitInitialize": {
       "isHidden": true
     },
-    "UseAppCenter": {
-      "longName": "use-appCenter",
-      "shortName": "ac"
-    },
-    "AppCenter-iOS": {
-      "longName": "appcenter-ios-secret",
-      "shortName": "ios-secret"
-    },
-    "AppCenter-Android": {
-      "longName": "appcenter-android-secret",
-      "shortName": "android-secret"
-    },
-    "AppCenter-UWP": {
-      "longName": "appcenter-uwp-secret",
-      "shortName": "uwp-secret"
-    },
-    "UseMvvmHelpers": {
-      "longName": "use-mvvmhelpers",
-      "sortName": "mvvmhelp"
-    },
     "Localization": {
       "longName": "use-localization",
       "shortName": "localization"
-    },
-    "DataProvider": {
-      "longName": "data-provider",
-      "shortName": "data"
-    },
-    "AuthenticationClientId": {
-      "longName": "auth-client-id",
-      "shortName": "client-id"
     },
     "skipRestore": {
       "isHidden": true

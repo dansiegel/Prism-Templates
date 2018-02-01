@@ -77,6 +77,9 @@
       "longName": "auth-client-id",
       "shortName": "client-id"
     },
+    "IncludeSolutionFile": {
+      "isHidden": true
+    },
     "PolicySignUpSignIn": {
       "longName": "signup-signin-policy",
       "shortName": "susi"

@@ -26,6 +26,12 @@
     {
       "modifiers": [
         {
+          "condition": "(!IncludeSolutionFile)",
+          "exclude": [
+            "*.sln"
+          ]
+        },
+        {
           "condition": "(!IncludeiOS)",
           "exclude": [
             "src/Company.MobileApp.iOS/**"
@@ -100,6 +106,11 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Include PropertyChanged.Fody weaver"
+    },
+    "IncludeSolutionFile": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true"
     },
     "MinimumAndroidTarget": {
       "type": "parameter",

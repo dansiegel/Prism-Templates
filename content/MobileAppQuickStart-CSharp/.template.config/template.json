@@ -19,21 +19,29 @@
     "22222222-2222-2222-2222-222222222222", // UI Test Project Id
     "33333333-3333-3333-3333-333333333333", // PCL Project Id
     "44444444-4444-4444-4444-444444444444", // Src Folder 
-    "55555555-5555-5555-5555-555555555555" // Tests Folder
+    "55555555-5555-5555-5555-555555555555"  // Tests Folder
   ],
   "sources": [
     {
       "modifiers": [
         {
+          "condition": "(!IncludeSolutionFile)",
+          "exclude": [
+            "*.sln"
+          ]
+        },
+        {
           "condition": "(!IncludeiOS)",
           "exclude": [
-            "src/Company.MobileApp.iOS/**"
+            "src/Company.MobileApp.iOS/**",
+            "build/BuildTemplateInfo.plist"
           ]
         },
         {
           "condition": "(!IncludeAndroid)",
           "exclude": [
-            "src/Company.MobileApp.Droid/**"
+            "src/Company.MobileApp.Droid/**",
+            "build/AndroidTemplateManifest.xml"
           ]
         },
         {
@@ -112,6 +120,11 @@
     }
   ],
   "symbols":{
+    "IncludeSolutionFile": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true"
+    },
     "AppId": {
       "type": "parameter",
       "dataType": "text",
@@ -420,6 +433,12 @@
   },
   "primaryOutputs": [ 
         {
+          "path": "ReadMe.md" 
+        },
+        {
+          "path": "GettingStarted.txt" 
+        },
+        {
           "path": "src/Company.MobileApp/Company.MobileApp.csproj" 
         },
         {
@@ -427,8 +446,16 @@
           "path": "src/Company.MobileApp.Droid/Company.MobileApp.Droid.csproj"
         },
         {
+          "condition": "(IncludeAndroid)",
+          "path": "build/AndroidTemplateManifest.xml"
+        },
+        {
           "condition": "(IncludeiOS)",
           "path": "src/Company.MobileApp.iOS/Company.MobileApp.iOS.csproj" 
+        },
+        {
+          "condition": "(IncludeiOS)",
+          "path": "build/BuildTemplateInfo.plist" 
         },
         {
           "condition": "(IncludeUWP)",
