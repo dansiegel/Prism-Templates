@@ -29,29 +29,8 @@
 
     <Target Name="_GeneratedNuGetVersion"
             AfterTargets="GenerateNuspec">
-        <Copy SourceFiles="Prism.Forms.QuickstartTemplates.$(NuSpecPackageVersion).nupkg"
+        <Copy SourceFiles="$(PackageOutputPath)/Prism.Forms.QuickstartTemplates.$(NuSpecPackageVersion).nupkg"
               DestinationFiles="TemplatePack-Mac/Prism.QuickStart.TemplatePack/Prism.Forms.QuickstartTemplates.nupkg" />
         <!-- <Exec Command="echo '$(NuSpecPackageVersion)' | tee TemplatePack-Mac/generatedVersion" /> -->
     </Target>
-
-    <!-- <ItemGroup>
-        <None Include="**\*.cs" Pack="true" PackagePath="." />
-        <None Include="**\*.csproj" Pack="true" PackagePath="." />
-        <None Include="**\*.xaml" Pack="true" PackagePath="." />
-        <None Include="**\*.json" Pack="true" PackagePath="." />
-        <None Include="**\*.sln" Pack="true" PackagePath="." />
-        <None Include="**\*.xml" Pack="true" PackagePath="." />
-        <None Include="**\*.png" Pack="true" PackagePath="." />
-        <None Include="**\*.axml" Pack="true" PackagePath="." />
-        <None Include="**\*.storyboard" Pack="true" PackagePath="." />
-        <None Include="**\*.resx" Pack="true" PackagePath="." />
-        <None Include="**\*.ignore" Pack="true" PackagePath="." />
-        <None Include="**\*.props" Pack="true" PackagePath="." />
-        <None Include="**\*.targets" Pack="true" PackagePath="." />
-        <None Include="**\*.config" Pack="true" PackagePath="." />
-        <None Include="**\*.txt" Pack="true" PackagePath="." />
-        <None Include="**\*.appxmanifest" Pack="true" PackagePath="." />
-        <None Remove="version.json" />
-        <None Remove="build.csproj" />
-    </ItemGroup> -->
 </Project>
