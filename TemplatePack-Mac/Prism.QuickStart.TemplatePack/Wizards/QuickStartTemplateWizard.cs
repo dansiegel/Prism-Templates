@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MonoDevelop.Ide.Templates;
 using MonoDevelop.Projects;
+using Prism.QuickStart.TemplatePack.Helpers;
 
 namespace Prism.QuickStart.TemplatePack.Wizards
 {
@@ -22,7 +22,9 @@ namespace Prism.QuickStart.TemplatePack.Wizards
             }
         }
 
-        public override int TotalPages => Parameters["TemplateName"].Contains("QuickStart") ? 3 : 1;
+        private bool IsQuickStart => Parameters["TemplateName"].Contains("QuickStart");
+
+        public override int TotalPages => IsQuickStart ? 3 : 1;
 
         public override void ItemsCreated(IEnumerable<IWorkspaceFileObject> items)
         {
@@ -38,6 +40,17 @@ namespace Prism.QuickStart.TemplatePack.Wizards
 
                 FixDotNetTemplateEngineBug(iOSProject);
             }
+
+            var appBase = Parameters["AppId"].Split('.').ToList();
+            if (appBase.Count() > 2)
+            {
+                appBase.Remove(appBase.Last());
+                UserSettings.Current.AppIdBase = string.Join(".", appBase);
+            }
+            UserSettings.Current.CreateEmptyQuickStart = bool.Parse(Parameters["Empty"]);
+            UserSettings.Current.DIContainer = Parameters["Container"];
+            UserSettings.Current.MinDroidSDK = int.Parse(Parameters["MinimumAndroidTarget"]);
+            UserSettings.Current.UseMvvmHelpersLibrary = bool.Parse(Parameters["UseMvvmHelpers"]);
         }
 
         private void FixDotNetTemplateEngineBug(IWorkspaceFileObject item)

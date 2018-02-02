@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoDevelop.Ide.Templates;
 using MonoDevelop.Projects;
+using Prism.QuickStart.TemplatePack.Helpers;
 using Xwt;
 using static Prism.QuickStart.TemplatePack.Widgets.WidgetHelpers;
 
@@ -59,6 +60,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             appIdTextBox = new TextEntry()
             {
                 PlaceholderText = "com.contoso.awesomeapp",
+                Text = UserSettings.Current.AppIdBase,
                 TooltipText = "Sets the iOS 'CFBundleIdentifier' and Android manifest package name",
                 MinWidth = 250
             };
@@ -102,7 +104,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             containerList.Items.Add("Autofac");
             containerList.Items.Add("DryIoc");
             containerList.Items.Add("Unity");
-            containerList.SelectedItem = _wizard.Parameters["Container"];
+            containerList.SelectedItem = _wizard.Parameters["Container"] = UserSettings.Current.DIContainer;
             containerList.TooltipText = "Selects the DI Container to use for your Prism Application";
 
             minAndroidSDKList = new ComboBox();
@@ -113,11 +115,13 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             minAndroidSDKList.Items.Add(21);
             minAndroidSDKList.Items.Add(22);
             minAndroidSDKList.Items.Add(23);
-            minAndroidSDKList.SelectedItem = 21;
+            minAndroidSDKList.SelectedItem = UserSettings.Current.MinDroidSDK;
+            _wizard.Parameters["MinimumAndroidTarget"] = $"{UserSettings.Current.MinDroidSDK}";
             minAndroidSDKList.TooltipText = "Sets the Minimum Android SDK Version";
 
             if (quickStart)
             {
+                SetParameter("Empty", UserSettings.Current.CreateEmptyQuickStart);
                 emptyProjectCheckBox = new CheckBox()
                 {
                     Label = "Empty Project",
@@ -139,6 +143,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
                     State = GetCheckBoxState("Localization")
                 };
 
+                SetParameter("useMvvmHelpers", UserSettings.Current.UseMvvmHelpersLibrary);
                 mvvmHelpersCheckBox = new CheckBox()
                 {
                     Label = "MVVM Helpers",
