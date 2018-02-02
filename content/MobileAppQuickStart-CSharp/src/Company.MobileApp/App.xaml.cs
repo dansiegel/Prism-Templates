@@ -201,7 +201,7 @@ namespace Company.MobileApp
             // Handle when your app starts
             if (await Analytics.IsEnabledAsync())
             {
-                System.Diagnostics.Debug.WriteLine("Analaytics is enabled");
+                System.Diagnostics.Debug.WriteLine("Analytics is enabled");
                 FFImageLoading.ImageService.Instance.Config.Logger = (IMiniLogger)Container.Resolve<ILoggerFacade>();
             }
             else
