@@ -120,8 +120,10 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="iOSInitializer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <None Condition=" '$(IncludeFody)' " Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\AppIcon@1x.png" />
