@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MonoDevelop.Ide.Templates;
 using Xwt;
 using Xwt.Drawing;
 
@@ -11,9 +12,13 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         CheckBox useAppCenter;
         TextEntry iOSSecretEntry;
         TextEntry AndroidSecretEntry;
+        TextEntry UWPSecretEntry;
+        TextEntry MacOSSecretEntry;
+        TemplateWizard _wizard;
 
-        public AppCenterSettingsWidget()
+        public AppCenterSettingsWidget(TemplateWizard wizard)
         {
+            _wizard = wizard;
             PackStart(new VBox() { HeightRequest = 100 });
 
             var assembly = GetType().Assembly;
@@ -36,9 +41,33 @@ namespace Prism.QuickStart.TemplatePack.Widgets
                 TooltipText = "Adds AppCenter SDK to the project, including an implmentation of ILoggerFacade that logs to AppCenter Analytics",
                 State = CheckBoxState.Off
             };
+            useAppCenter.Clicked += OnUseAppCenterChanged;
 
-            AndroidSecretEntry = new TextEntry();
-            iOSSecretEntry = new TextEntry();
+            AndroidSecretEntry = new TextEntry()
+            {
+                MinWidth = 250,
+                Sensitive = false
+            };
+            iOSSecretEntry = new TextEntry()
+            {
+                MinWidth = 250,
+                Sensitive = false
+            };
+            UWPSecretEntry = new TextEntry()
+            {
+                MinWidth = 250,
+                Sensitive = false
+            };
+            MacOSSecretEntry = new TextEntry()
+            {
+                MinWidth = 250,
+                Sensitive = false
+            };
+
+            AndroidSecretEntry.TextInput += OnAndroidSecretChanged;
+            iOSSecretEntry.TextInput += OniOSSecretChanged;
+            UWPSecretEntry.TextInput += OnUWPSecretChanged;
+            MacOSSecretEntry.TextInput += OnMacOSSecretChanged;
 
             optionsColumn.PackStart(useAppCenter);
             optionsColumn.PackStart(new HSeparator());
@@ -50,10 +79,29 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             //PackStart(new HSeparator() { MarginLeft = 60, MarginRight = 60 });
 
             var table = new Table();
-            table.Add(new Label { Text = "Android Secret" }, 0, 0);
-            table.Add(AndroidSecretEntry, 1, 0);
-            table.Add(new Label { Text = "iOS Secret" }, 0, 1);
-            table.Add(iOSSecretEntry, 1, 1);
+            if (GetBool("IncludeAndroid"))
+            {
+                table.Add(new Label { Text = "Android Secret" }, 0, 0);
+                table.Add(AndroidSecretEntry, 1, 0);
+            }
+
+            if (GetBool("IncludeiOS"))
+            {
+                table.Add(new Label { Text = "iOS Secret" }, 0, 1);
+                table.Add(iOSSecretEntry, 1, 1);
+            }
+
+            if (GetBool("IncludeUWP"))
+            {
+                table.Add(new Label { Text = "UWP Secret" }, 0, 2);
+                table.Add(UWPSecretEntry, 1, 2);
+            }
+
+            if (GetBool("IncludeMacOS"))
+            {
+                table.Add(new Label { Text = "macOS Secret" }, 0, 3);
+                table.Add(MacOSSecretEntry, 1, 3);
+            }
 
             optionsColumn.PackStart(table);
             optionsRow.PackStart(optionsColumn);
@@ -84,6 +132,28 @@ namespace Prism.QuickStart.TemplatePack.Widgets
 
         }
 
+        private void OnUseAppCenterChanged(object sender, EventArgs e)
+        {
+            var enable = useAppCenter.State == CheckBoxState.On;
+            _wizard.Parameters["UseAppCenter"] = $"{enable}";
+            AndroidSecretEntry.Sensitive = iOSSecretEntry.Sensitive =
+                UWPSecretEntry.Sensitive = MacOSSecretEntry.Sensitive = enable;
+        }
+
+        private void OnAndroidSecretChanged(object sender, TextInputEventArgs e) =>
+            _wizard.Parameters["AppCenter-Android"] = AndroidSecretEntry.Text;
+
+        private void OniOSSecretChanged(object sender, TextInputEventArgs e) =>
+            _wizard.Parameters["AppCenter-iOS"] = iOSSecretEntry.Text;
+
+        private void OnUWPSecretChanged(object sender, TextInputEventArgs e) =>
+            _wizard.Parameters["AppCenter-UWP"] = UWPSecretEntry.Text;
+
+        private void OnMacOSSecretChanged(object sender, TextInputEventArgs e) =>
+            _wizard.Parameters["AppCenter-macOS"] = MacOSSecretEntry.Text;
+
         public VBox GetSideSpacer() => new VBox() { WidthRequest = 60 };
+
+        bool GetBool(string key) => bool.Parse(_wizard.Parameters[key]);
     }
 }

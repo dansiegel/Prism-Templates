@@ -22,8 +22,8 @@
             icon="prism-project-xamarin-forms"
             imageId="prism-project-xamarin-forms"
             wizard="Prism.QuickStart.ProjectTemplateWizard"
-            defaultParameters="IncludeSolutionFile=false"
-            supportedParameters="AppId;IncludeiOS;IncludeAndroid;IncludeUITest;MinimumAndroidTarget;Container"
+            defaultParameters="IncludeSolutionFile=false;Container=DryIoc;IncludeUWP=false;IncludeMacOS=false"
+            supportedParameters="AppId;IncludeiOS;IncludeAndroid;IncludeUWP;IncludeMacOS;IncludeUITest;MinimumAndroidTarget;Container"
         />
         <Template
             id="PrismLibrary.Xamarin.Forms.QuickStart.CSharp"
@@ -34,8 +34,8 @@
             icon="prism-project-xamarin-forms"
             imageId="prism-project-xamarin-forms" 
             wizard="Prism.QuickStart.ProjectTemplateWizard"
-            defaultParameters="IncludeSolutionFile=false"
-            supportedParameters="AppId;IncludeiOS;IncludeAndroid;IncludeUITest;Localization;UseMvvmHelpers;UseAcrDialogs;UseAppCenter;AppCenter-iOS;AppCenter-Android;MinimumAndroidTarget;Container;DataProvider;AuthenticationSource;AuthenticationClientId;PolicySignUpSignIn;PolicyEditProfile;PolicyResetPassword;IncludeBarcodeService;Empty"
+            defaultParameters="IncludeSolutionFile=false;Container=DryIoc;IncludeUWP=false;IncludeMacOS=false"
+            supportedParameters="AppId;IncludeiOS;IncludeAndroid;IncludeUWP;IncludeMacOS;IncludeUITest;Localization;UseMvvmHelpers;UseAcrDialogs;UseAppCenter;AppCenter-iOS;AppCenter-Android;MinimumAndroidTarget;Container;DataProvider;AuthenticationSource;AuthenticationClientId;PolicySignUpSignIn;PolicyEditProfile;PolicyResetPassword;IncludeBarcodeService;Empty"
         />
         <Template
             id="Prism.Forms.Module.CSharp"

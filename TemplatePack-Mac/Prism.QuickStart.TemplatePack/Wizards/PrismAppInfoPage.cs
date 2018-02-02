@@ -30,7 +30,7 @@ namespace Prism.QuickStart.TemplatePack.Wizards
 
         protected override object CreateNativeWidget<T>()
         {
-            var view = new Widgets.BasicAppInfoWidget(_wizard.Parameters, _quickStart);
+            var view = new Widgets.BasicAppInfoWidget(_wizard, _quickStart);
             return Toolkit.CurrentEngine.GetNativeWidget(view);
         }
     }

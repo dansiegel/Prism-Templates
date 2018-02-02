@@ -18,7 +18,7 @@ namespace Prism.QuickStart.TemplatePack.Wizards
 
         protected override object CreateNativeWidget<T>()
         {
-            var widget = new AppCenterSettingsWidget();
+            var widget = new AppCenterSettingsWidget(_wizard);
             return Toolkit.CurrentEngine.GetNativeWidget(widget);
         }
     }

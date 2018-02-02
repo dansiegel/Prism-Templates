@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MonoDevelop.Ide.Templates;
 using MonoDevelop.Projects;
 using Xwt;
+using static Prism.QuickStart.TemplatePack.Widgets.WidgetHelpers;
 
 namespace Prism.QuickStart.TemplatePack.Widgets
 {
@@ -12,6 +14,8 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         TextEntry appIdTextBox;
         CheckBox iOSCheckBox;
         CheckBox AndroidCheckBox;
+        CheckBox UWPCheckBox;
+        CheckBox macOSCheckBox;
         CheckBox UITestCheckBox;
         ComboBox containerList;
         CheckBox emptyProjectCheckBox;
@@ -22,13 +26,13 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         ComboBox minAndroidSDKList;
         ComboBox dataProviderList;
 
-        ProjectCreateParameters Parameters { get; }
+        TemplateWizard _wizard { get; }
 
-        public BasicAppInfoWidget(ProjectCreateParameters parameters, bool quickStart)
+        public BasicAppInfoWidget(TemplateWizard wizard, bool quickStart)
         {
-            Parameters = parameters;
-            Parameters["Empty"] = $"{true}";
-            Parameters["IncludeUITest"] = $"{false}";
+            _wizard = wizard;
+            //_wizard.Parameters["Empty"] = $"{true}";
+            //_wizard.Parameters["IncludeUITest"] = $"{false}";
 
             SetupUIElements(quickStart);
             AttachEventHandlers(quickStart);
@@ -47,28 +51,44 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         {
             projectNameTextBox = new TextEntry()
             {
-                PlaceholderText = "Contoso.AwesomeApp",
-                MinWidth = 120
+                PlaceholderText = "Awesome App",
+                MinWidth = 250,
+                TooltipText = "The Application Name that will be displayed on the User's Device. This is not the same as the Project/Solution Name."
             };
 
             appIdTextBox = new TextEntry()
             {
                 PlaceholderText = "com.contoso.awesomeapp",
-                TooltipText = "Sets the iOS 'CFBundleIdentifier' and Android manifest package name"
+                TooltipText = "Sets the iOS 'CFBundleIdentifier' and Android manifest package name",
+                MinWidth = 250
             };
 
             iOSCheckBox = new CheckBox()
             {
                 Label = "iOS",
-                TooltipText = "Include an iOS Project",
+                TooltipText = "Create an iOS Project",
                 State = GetCheckBoxState("IncludeiOS")
             };
 
             AndroidCheckBox = new CheckBox()
             {
                 Label = "Android",
-                TooltipText = "Include an Android Project",
+                TooltipText = "Create an Android Project",
                 State = GetCheckBoxState("IncludeAndroid")
+            };
+
+            UWPCheckBox = new CheckBox
+            {
+                Label = "UWP",
+                TooltipText = "Create a UWP Project. NOTE: This will not build or update in Visual Studio Mac",
+                State = GetCheckBoxState("IncludeUWP")
+            };
+
+            macOSCheckBox = new CheckBox()
+            {
+                Label = "macOS",
+                TooltipText = "Create an macOS Project",
+                State = GetCheckBoxState("IncludeMacOS")
             };
 
             UITestCheckBox = new CheckBox()
@@ -82,7 +102,7 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             containerList.Items.Add("Autofac");
             containerList.Items.Add("DryIoc");
             containerList.Items.Add("Unity");
-            containerList.SelectedItem = this.Parameters["Container"] = "DryIoc";
+            containerList.SelectedItem = _wizard.Parameters["Container"];
             containerList.TooltipText = "Selects the DI Container to use for your Prism Application";
 
             minAndroidSDKList = new ComboBox();
@@ -147,20 +167,22 @@ namespace Prism.QuickStart.TemplatePack.Widgets
         {
             //projectNameTextBox.Changed += OnProjectNameChanged;
             appIdTextBox.Changed += OnAppIdChanged;
-            iOSCheckBox.Toggled += OnIncludeiOSChanged;
-            AndroidCheckBox.Toggled += OnIncludeAndroidChanged;
-            UITestCheckBox.Toggled += OnIncludeUITestChanged;
+            AndroidCheckBox.Clicked += OnIncludeAndroidChanged;
+            iOSCheckBox.Clicked += OnIncludeiOSChanged;
+            UWPCheckBox.Clicked += OnIncludeUWPChanged;
+            macOSCheckBox.Clicked += OnIncludeMacOSChanged;
+            UITestCheckBox.Clicked += OnIncludeUITestChanged;
             containerList.SelectionChanged += OnDIContainerChanged;
-            //minAndroidSDKList;
+            minAndroidSDKList.SelectionChanged += OnMinAndroidSDKChanged;
 
             if (quickStart)
             {
-                //emptyProjectCheckBox
-                //barcodeServiceCheckBox;
-                //localizationCheckBox;
-                //mvvmHelpersCheckBox;
-                //acrDialogsCheckBox;
-                //dataProviderList
+                emptyProjectCheckBox.Clicked += OnEmptyProjectChanged;
+                barcodeServiceCheckBox.Clicked += OnBarcodeServiceChanged;
+                localizationCheckBox.Clicked += OnLocalizationChanged;
+                mvvmHelpersCheckBox.Clicked += OnMvvmHelpersChanged;
+                acrDialogsCheckBox.Clicked += OnAcrDialogsChanged;
+                dataProviderList.SelectionChanged += OnDataProviderChanged;
             }
         }
 
@@ -194,6 +216,8 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             var hBox = new HBox();
             hBox.PackStart(AndroidCheckBox);
             hBox.PackStart(iOSCheckBox);
+            //hBox.PackStart(UWPCheckBox);
+            //hBox.PackStart(macOSCheckBox);
             hBox.PackStart(UITestCheckBox);
 
             Add(new Label { Text = "Include Projects:" }, 1, 6);
@@ -236,78 +260,91 @@ namespace Prism.QuickStart.TemplatePack.Widgets
             }
         }
 
+        private void OnDataProviderChanged(object sender, EventArgs e) =>
+            SetParameter("DataProvider", dataProviderList.SelectedItem);
+
+        private void OnAcrDialogsChanged(object sender, EventArgs e) =>
+            SetParameter("UseAcrDialogs", acrDialogsCheckBox);
+
+        private void OnMvvmHelpersChanged(object sender, EventArgs e) =>
+            SetParameter("UseMvvmHelpers", mvvmHelpersCheckBox);
+
+        private void OnLocalizationChanged(object sender, EventArgs e) =>
+            SetParameter("Localization", localizationCheckBox);
+
+        private void OnBarcodeServiceChanged(object sender, EventArgs e) =>
+            SetParameter("IncludeBarcodeService", barcodeServiceCheckBox);
+
+        private void OnEmptyProjectChanged(object sender, EventArgs e) =>
+            SetParameter("Empty", emptyProjectCheckBox);
+
+        private void OnMinAndroidSDKChanged(object sender, EventArgs e) =>
+            SetParameter("MinimumAndroidTarget", minAndroidSDKList.SelectedItem);
+
+        //private void OnProjectNameChanged(object sender, EventArgs e) =>
+        //ProjectName = projectNameTextBox.Text.Trim();
+
+        private void OnAppIdChanged(object sender, EventArgs e) =>
+            SetParameter("AppId", appIdTextBox.Text.Trim().ToLower());
+
+        private void OnIncludeiOSChanged(object sender, EventArgs e) =>
+            SetParameter("IncludeiOS", iOSCheckBox);
+
+        private void OnIncludeAndroidChanged(object sender, EventArgs e)
+        {
+            SetParameter("IncludeAndroid", AndroidCheckBox);
+            minAndroidSDKList.Sensitive = AndroidCheckBox.State == CheckBoxState.On;
+        }
+
+        private void OnIncludeUWPChanged(object sender, EventArgs e) =>
+            SetParameter("IncludeUWP", UWPCheckBox);
+
+        private void OnIncludeMacOSChanged(object sender, EventArgs e) =>
+            SetParameter("IncludeMacOS", macOSCheckBox);
+
+        private void OnIncludeUITestChanged(object sender, EventArgs e) =>
+            SetParameter("IncludeUITest", UITestCheckBox);
+
+        private void OnDIContainerChanged(object sender, EventArgs e) =>
+            SetParameter("Container", containerList.SelectedItem);
+
+        protected override void Dispose(bool disposing)
+        {
+            //DisposeElement(ref projectNameTextBox, OnProjectNameChanged)
+            DisposeElement(ref appIdTextBox, OnAppIdChanged);
+            DisposeElement(ref AndroidCheckBox, OnIncludeAndroidChanged);
+            DisposeElement(ref iOSCheckBox, OnIncludeiOSChanged);
+            DisposeElement(ref UWPCheckBox, OnIncludeUWPChanged);
+            DisposeElement(ref macOSCheckBox, OnIncludeMacOSChanged);
+            DisposeElement(ref UITestCheckBox, OnIncludeUITestChanged);
+            DisposeElement(ref containerList, OnDIContainerChanged);
+            DisposeElement(ref minAndroidSDKList, OnMinAndroidSDKChanged);
+            DisposeElement(ref emptyProjectCheckBox, OnEmptyProjectChanged);
+            DisposeElement(ref barcodeServiceCheckBox, OnBarcodeServiceChanged);
+            DisposeElement(ref localizationCheckBox, OnLocalizationChanged);
+            DisposeElement(ref mvvmHelpersCheckBox, OnMvvmHelpersChanged);
+            DisposeElement(ref acrDialogsCheckBox, OnAcrDialogsChanged);
+            DisposeElement(ref dataProviderList, OnDataProviderChanged);
+
+            base.Dispose(disposing);
+        }
+
         Box GetSpacerBox() => new HBox()
         {
             HeightRequest = 100,
             WidthRequest = 60
         };
 
-        //private void OnProjectNameChanged(object sender, EventArgs e) =>
-        //ProjectName = projectNameTextBox.Text.Trim();
+        void SetParameter(string key, CheckBox cb) =>
+            SetParameter(key, cb.State == CheckBoxState.On);
 
-        private void OnAppIdChanged(object sender, EventArgs e) =>
-            Parameters["AppId"] = appIdTextBox.Text.Trim().ToLower();
+        void SetParameter(string key, object value) =>
+            _wizard.Parameters[key] = $"{value}";
 
-        private void OnIncludeiOSChanged(object sender, EventArgs e) =>
-            Parameters["IncludeiOS"] = $"{iOSCheckBox.State == CheckBoxState.On}";
-
-        private void OnIncludeAndroidChanged(object sender, EventArgs e) =>
-            Parameters["IncludeAndroid"] = $"{AndroidCheckBox.State == CheckBoxState.On}";
-
-        private void OnIncludeUITestChanged(object sender, EventArgs e) =>
-            Parameters["IncludeUITest"] = $"{UITestCheckBox.State == CheckBoxState.On}";
-
-        private void OnDIContainerChanged(object sender, EventArgs e) =>
-            Parameters["Container"] = $"{containerList.SelectedItem}";
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (projectNameTextBox != null)
-            {
-                //projectNameTextBox.Changed -= OnProjectNameChanged;
-                projectNameTextBox.Dispose();
-                projectNameTextBox = null;
-            }
-
-            if (appIdTextBox != null)
-            {
-                appIdTextBox.Changed -= OnAppIdChanged;
-                appIdTextBox.Dispose();
-                appIdTextBox = null;
-            }
-
-            if (iOSCheckBox != null)
-            {
-                iOSCheckBox.Toggled -= OnIncludeiOSChanged;
-                iOSCheckBox.Dispose();
-                iOSCheckBox = null;
-            }
-
-            if (AndroidCheckBox != null)
-            {
-                AndroidCheckBox.Toggled -= OnIncludeAndroidChanged;
-                AndroidCheckBox.Dispose();
-                AndroidCheckBox = null;
-            }
-
-            if (UITestCheckBox != null)
-            {
-                UITestCheckBox.Toggled -= OnIncludeUITestChanged;
-                UITestCheckBox.Dispose();
-                UITestCheckBox = null;
-            }
-
-            if (containerList != null)
-            {
-                containerList.SelectionChanged -= OnDIContainerChanged;
-                containerList.Dispose();
-                containerList = null;
-            }
-        }
+        bool GetBool(string key) =>
+            bool.Parse(_wizard.Parameters[key]);
 
         CheckBoxState GetCheckBoxState(string key) =>
-            bool.Parse(Parameters[key]) ? CheckBoxState.On : CheckBoxState.Off;
+            bool.Parse(_wizard.Parameters[key]) ? CheckBoxState.On : CheckBoxState.Off;
     }
 }
