@@ -52,7 +52,7 @@
         {
           "condition": "(!IncludeUITest)",
           "exclude": [
-            "tests/Company.MobileApp.UITests/**"
+            "tests/**"
           ]
         },
         {
