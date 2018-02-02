@@ -127,7 +127,7 @@ namespace Company.MobileApp
             containerRegistry.RegisterSingleton(typeof(ICloudSyncTable<>), typeof(AzureCloudSyncTable<>));
     #if (NoAuth)
             containerRegistry.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.AppServiceEndpoint));
-    #else
+    #endif
     #if (AADAuth || AADB2CAuth)
             containerRegistry.RegisterInstance<IPublicClientApplication>(
                 new PublicClientApplication(Secrets.AuthClientId, AppConstants.Authority)
